@@ -34,9 +34,11 @@ it
 
 We recommend to create a Test S3 Bucket and configure it for Everyone READ permission, so you are generating an Alert inside Lacework during the next compliance check that you can use to test the Auto Remediation.
 
-## Import the Maps
+## Import the Map
 
 Inside your new created project you can Import the Map
+
+## Configuration of the 
 
 ## Build an example curl Webhook
 
@@ -44,15 +46,17 @@ There is no need to wait for Lacework sending the Webhook Alert again if you pla
 
 As soon as you got an event we recommend using the Event Information to create an example webhook trigger inside your terminal using the following environment variables. Please make sure to update it with the information from the Event you did generate.#
 
-* export EVENTTITLE="New Violations"
-* export EVENTTYPE=Compliance
-* export EVENTTIMESTAMP="27 Jan 2021 16:00 GMT"
-* export EVENTSOURCE=AWSCompliance
-* export EVENTID=11
-* export EVENTSEVERITY=2
-* export WEBHOOKURL=https://mykaholoinstance.kaholo.io/webhook/lacework/alert
-* export LACEWORKINSTANCE=mylaceworkinstance
-* export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : LW_S3_1 Ensure the S3 bucket ACL does not grant 'Everyone' READ permission [list S3 objects]"
+```
+export EVENTTITLE="New Violations"
+export EVENTTYPE=Compliance
+export EVENTTIMESTAMP="27 Jan 2021 16:00 GMT"
+export EVENTSOURCE=AWSCompliance
+export EVENTID=11
+export EVENTSEVERITY=2
+export WEBHOOKURL=https://mykaholoinstance.kaholo.io/webhook/lacework/alert
+export LACEWORKINSTANCE=mylaceworkinstance
+export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : LW_S3_1 Ensure the S3 bucket ACL does not grant 'Everyone' READ permission [list S3 objects]"
+```
 
 With that you can trigger the webhook inside kaholo by using the following curl command:
 
