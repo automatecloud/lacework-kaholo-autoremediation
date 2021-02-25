@@ -60,7 +60,7 @@ With that configuration you make sure that this Map is only triggered if within 
 ### Configuration within the Map
 
 Make sure you configure the following configruations inside the LaceworkConfig:
-1. eventuuid: Please make sure that the UUID used here is the UUID of the "Get event details". For that you can go to the Design, open the
+1. eventuuid: Please make sure that the UUID used here is the UUID of the "Get event details". For that you can go to the Design, open the "Get Events" building block.
 ![Get Event](geteventdetails.png "Get Event")
 ![Get Event Details](geteventdetails2.png "Get Event Details")
 
