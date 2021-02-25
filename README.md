@@ -46,7 +46,33 @@ First of all you need to have a Lacework and Kaholo instance. For Lacework pleas
 
 ## Which Maps are already available?
 
-This repository is a community project. Everyone interested can contribute and update existing and creating new maps.
+This repository is a community project. Everyone interested can contribute and update existing and creating new maps. Currently the following Maps are available
+
+### Compliance
+#### AWS
+##### LW_S3_1
+[Release Notes](maps/compliance/aws/LW_S3_1/ReleaseNotes.md)
+##### LW_S3_2
+##### LW_S3_3
+##### LW_S3_4
+##### LW_S3_5
+##### LW_S3_6
+##### LW_S3_7
+##### LW_S3_8
+##### LW_S3_9
+##### LW_S3_10
+##### LW_S3_11
+##### LW_S3_12
+##### LW_S3_13
+##### LW_S3_14
+##### LW_S3_15
+##### LW_S3_16
+##### LW_S3_17
+##### LW_S3_18
+##### LW_S3_19
+##### LW_S3_20
+##### LW_S3_21
+
 
 The current updates and releases are tracked inside the [Release Notes](ReleaseNotes.md) document.
 
