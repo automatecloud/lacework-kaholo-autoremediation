@@ -51,7 +51,7 @@ This repository is a community project. Everyone interested can contribute and u
 ### Compliance
 #### AWS
 ##### LW_S3_1
-[Release Notes](maps/compliance/aws/LW_S3_1/ReleaseNotes.md)
+[Release Notes](maps/compliance/aws/LW_S3_1/README.md)
 ##### LW_S3_2
 ##### LW_S3_3
 ##### LW_S3_4
