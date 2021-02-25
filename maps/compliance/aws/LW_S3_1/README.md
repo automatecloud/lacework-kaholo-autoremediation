@@ -43,6 +43,11 @@ The LW_S3_1 map currently looks like the following:
 
 ![LW_S3_1 Map](LW_S3_1.png "LW_S3_1 Map")
 
+* It will start with "Get the Event Details" from the EventID send by the Webhook payload
+* It will print out all the S3 Buckets that will be remediated, which is a list of S3 Buckets from the Event minus the S3 buckets ignored inside the LaceworkConfig.bucketIgnoreList list.
+* It will remediate all the S3 Buckets back to no longer grant 'Everyone' READ permission.
+* It will send out a slack message to the Webhook you configured in Slack.
+
 ### Map trigger
 
 Make sure that the Map Trigger is configured with the following configuration:
@@ -64,11 +69,6 @@ Make sure you configure the following configruations inside the LaceworkConfig:
 
 ![Get Event](geteventdetails.png "Get Event")
 ![Get Event Details](geteventdetails2.png "Get Event Details")
-
-* It will start with "Get the Event Details" from the EventID send by the Webhook payload
-* It will print out all the S3 Buckets that will be remediated, which is a list of S3 Buckets from the Event minus the S3 buckets ignored inside the LaceworkConfig.bucketIgnoreList list.
-* It will remediate all the S3 Buckets back to no longer grant 'Everyone' READ permission.
-* It will send out a slack message to the Webhook you configured in Slack.
 
 2. (Optional). You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 buckets that should be ignored within the bucketIgnoreList of the LaceworkConfig.
 
