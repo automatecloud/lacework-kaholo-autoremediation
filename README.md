@@ -50,29 +50,69 @@ This repository is a community project. Everyone interested can contribute and u
 
 ### Compliance
 #### AWS
-##### LW_S3_1 
+##### LW_S3_1
 Ensure the S3 bucket ACL does not grant 'Everyone' READ permission [list S3 objects]
-[Release Notes](maps/compliance/aws/LW_S3_1/README.md)
+[ReadMe](maps/compliance/aws/LW_S3_1/README.md)
 ##### LW_S3_2
+Ensure the S3 bucket ACL does not grant 'Everyone' WRITE permission [create, overwrite, and delete S3 objects]
+[ReadMe](maps/compliance/aws/LW_S3_2/README.md)
 ##### LW_S3_3
+Ensure the S3 bucket ACL does not grant 'Everyone' READ_ACP permission [read bucket ACL]
+[ReadMe](maps/compliance/aws/LW_S3_3/README.md)
 ##### LW_S3_4
+Ensure the S3 bucket ACL does not grant 'Everyone' WRITE_ACP permission [modify bucket ACL]
+[ReadMe](maps/compliance/aws/LW_S3_4/README.md)
 ##### LW_S3_5
+Ensure the S3 bucket ACL does not grant 'Everyone' FULL_CONTROL [READ, WRITE, READ_ACP, WRITE_ACP]
+[ReadMe](maps/compliance/aws/LW_S3_5/README.md)
 ##### LW_S3_6
+Ensure the S3 bucket ACL does not grant AWS users READ permission [list S3 objects]
+[ReadMe](maps/compliance/aws/LW_S3_6/README.md)
 ##### LW_S3_7
+Ensure the S3 bucket ACL does not grant AWS users WRITE permission [create, overwrite, and delete S3 objects]
+[ReadMe](maps/compliance/aws/LW_S3_7/README.md)
 ##### LW_S3_8
+Ensure the S3 bucket ACL does not grant AWS users READ_ACP permission [read bucket ACL]
+[ReadMe](maps/compliance/aws/LW_S3_8/README.md)
 ##### LW_S3_9
+Ensure the S3 bucket ACL does not grant AWS users WRITE_ACP permission [modify bucket ACL]
+[ReadMe](maps/compliance/aws/LW_S3_9/README.md)
 ##### LW_S3_10
+Ensure the S3 bucket ACL does not grant AWS users FULL_CONTROL [READ, WRITE, READ_ACP, WRITE_ACP]
+[ReadMe](maps/compliance/aws/LW_S3_10/README.md)
 ##### LW_S3_11
+Ensure the attached S3 bucket policy does not grant 'Allow' permission to everyone
+[ReadMe](maps/compliance/aws/LW_S3_11/README.md)
 ##### LW_S3_12
+Ensure the S3 bucket requires MFA to delete objects
+[ReadMe](maps/compliance/aws/LW_S3_12/README.md)
 ##### LW_S3_13
+Ensure the S3 bucket has access logging enabled
+[ReadMe](maps/compliance/aws/LW_S3_13/README.md)
 ##### LW_S3_14
+Ensure all data stored in the S3 bucket is securely encrypted at rest
+[ReadMe](maps/compliance/aws/LW_S3_14/README.md)
 ##### LW_S3_15
+Ensure all data is transported from the S3 bucket securely
+[ReadMe](maps/compliance/aws/LW_S3_15/README.md)
 ##### LW_S3_16
+Ensure the S3 bucket has versioning enabled
+[ReadMe](maps/compliance/aws/LW_S3_16/README.md)
 ##### LW_S3_17
+Ensure the S3 bucket access is restricted to a whitelist of IP networks.
+[ReadMe](maps/compliance/aws/LW_S3_17/README.md)
 ##### LW_S3_18
+Ensure the attached S3 bucket policy does not grant global 'Get' permission.
+[ReadMe](maps/compliance/aws/LW_S3_18/README.md)
 ##### LW_S3_19
+Ensure the attached S3 bucket policy does not grant global 'Delete' permission.
+[ReadMe](maps/compliance/aws/LW_S3_19/README.md)
 ##### LW_S3_20
+Ensure the attached S3 bucket policy does not grant global 'List' permission.
+[ReadMe](maps/compliance/aws/LW_S3_20/README.md)
 ##### LW_S3_21
+Ensure the attached S3 bucket policy does not grant global 'Put' permission.
+[ReadMe](maps/compliance/aws/LW_S3_21/README.md)
 
 
 The current updates and releases are tracked inside the [Release Notes](ReleaseNotes.md) document.
