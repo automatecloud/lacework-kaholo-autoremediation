@@ -68,6 +68,7 @@ Make sure you configure the following configruations inside the LaceworkConfig:
 1. eventuuid: Please make sure that the UUID used here is the UUID of the "Get event details". For that you can go to the Design, open the "Get Events" building block.
 
 ![Get Event](geteventdetails.png "Get Event")
+Inside the configuration of the Get Event building block you will find the UUID.
 ![Get Event Details](geteventdetails2.png "Get Event Details")
 
 2. **Note** By default the setting dotheremediation is configured to false, so it will not by accident start to remediate S3 buckets. We recommend before you configure this to true, to make sure that only the right buckets will be remediated and the map is working as expected.
@@ -86,14 +87,15 @@ Make sure you configure the following configruations inside the LaceworkConfig:
     ]
 }
 ```
-
-
-
 ### Configuration of Slack Messages
 
 For the Slack building block you can configure a Slack Webhook Url that you have to implement inside the Kaholo Vault before able to select.
 
 If you don't have slack or don't need slack messages feel free to simply remove this building block.
+
+### Configuration of the Remediation block
+
+**NEEDS TO BE DESCRIBED**
 
 ## Build an example curl webhook
 
