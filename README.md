@@ -42,15 +42,25 @@ First of all you need to have a Lacework and Kaholo instance. For Lacework pleas
 * [Lacework Secret Key](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens) (Saved inside the Kaholo Vault)
 * Lacework Instance in format https://MYINSTANCE.lacework.net
 4. Create a new Project inside Kaholo (example Lacework - AutoRemediation) as collection for the different auto remediation maps.
-5. Start to implement the necessary maps.
+5. Start to import the necessary maps.
 
 ## Which Maps are already available?
 
 This repository is a community project. Everyone interested can contribute and update existing and creating new maps.
 
-
+The current updates and releases are tracked inside the [Release Notes](ReleaseNotes.md) document.
 
 ## Roadmap
 
+The current target Roadmap is to build the following example Maps:
 
-Least Privilege
+1. Auto Remediation Maps for all the Lacework AWS Compliance checks
+2. Auto Remediation Maps for all the Lacework Azure Compliance checks
+3. Auto Remediation Maps for all the Lacework GCP Compliance checks
+4. Auto Remediation Maps for all the Lacework AWS User Activity events.
+5. Auto Remediation Maps for all the Lacework Azure User Activity events.
+6. Auto Remediation Maps for all the Lacework Application and Workload events.
+
+## Least Privilege
+
+As part of the example Maps we also plan to create and document Least Privilege roles, so the automation scripts can only change what the roles and permissions allow them to change.
