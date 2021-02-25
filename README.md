@@ -20,11 +20,18 @@ Lacework itself is using Data ware house technology (Snowflake) and Machine Lear
 Kaholo is an easy and intuitive workflow engine that makes it easy to create almost any automation processes, including advanced ones. On top of that you get central visibility into all automation processes. Instead of simply triggering a single CLI command or single API calls and serverless functions it allows the creation of complex workflows that might be necessary for specific auto remediation steps.
 
 ## How does it work?
-The integration between Lacework and Kaholo is done by using the Alert Webhook channel. https://support.lacework.com/hc/en-us/articles/360034367393-Webhook.
+The integration between Lacework and Kaholo is using the Alert [Webhook channel](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook).
 
 ![Lacework and Kaholo Integration](images/integration.png "Lacework and Kaholo integration")
 
+1. The Lacework Platform is collecting the necessary Cloud and Workload Data.
+2. The Lacework Machine Learning algorithms learn the normal behaviour of cloud user and workload activity by using the Polygraph technology and comparing cloud resources against compliance frameworks.
+3. In case of an Alert Lacework sends the necessary event details via the [Webhook channel](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook).
+4. The Kaholo [Lacework Trigger](https://github.com/Kaholo/kaholo-trigger-lacework/tree/ilanyaniv-patch-1) is reading out the event_source and event_description of the event. Every Kaholo Map is configured to check the event_source and the description if it includes specific information that is relevant to trigger the specific Kaholo Map.
+5. The Kaholo Map triggered is reading out the specific Event Data  and Context by using the [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework)
+6. The Kaholo Map is doing all the necessary auto remediation steps.
 
-The Webhook Alert sends all the necessary information to the Kaholo Lacework Webhook
+
+
 
 Least Privilege
