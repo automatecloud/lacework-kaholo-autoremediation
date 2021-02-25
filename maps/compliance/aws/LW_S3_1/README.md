@@ -70,12 +70,15 @@ Make sure you configure the following configruations inside the LaceworkConfig:
 ![Get Event](geteventdetails.png "Get Event")
 ![Get Event Details](geteventdetails2.png "Get Event Details")
 
-2. (Optional). You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 buckets that should be ignored within the bucketIgnoreList of the LaceworkConfig.
+2. **Note** By default the setting dotheremediation is configured to false, so it will not by accident start to remediate S3 buckets. We recommend before you configure this to true, to make sure that only the right buckets will be remediated and the map is working as expected.
+
+3. (Optional). You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 buckets that should be ignored within the bucketIgnoreList of the LaceworkConfig.
 
 ```
 {
     "name": "LaceworkConfiguration",
     "eventuuid": "1f34062d-2299-4417-ade7-69d3ce1e3c0a",
+    "dotheremediation": "false",
     "bucketIgnoreList":[
         "arn:aws:s3:::myS3bucket1",
         "arn:aws:s3:::myimportantBucket",
@@ -83,6 +86,9 @@ Make sure you configure the following configruations inside the LaceworkConfig:
     ]
 }
 ```
+
+
+
 ### Configuration of Slack Messages
 
 For the Slack building block you can configure a Slack Webhook Url that you have to implement inside the Kaholo Vault before able to select.
