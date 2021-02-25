@@ -49,8 +49,34 @@ Make sure that the Map Trigger is configured with the following configuration:
 
 ![LW_S3_1 Trigger](LW_S3_1_Trigger.png "LW_S3_1 Trigger")
 
-## Configuration of the
+1. The Configuration needs to be configured with "LaceworkConfig"
+2. The Plugin needs to be configured with Lacework-Trigger
+3. The Method "Alert from Lacework" needs to be selected
+4. The Variable **Event type** needs to be configured with Value **Compliance**
+5. The Variable **Issue ID** needs to be configured with Value LW_S3_1.
 
+With that configuration you make sure that this Map is only triggered if within the payload of the Webhook an alarm related to LW_S3_1 Control ID is send.
+
+### Configuration within the Map
+
+Make sure you configure the following configruations inside the LaceworkConfig:
+1. eventuuid: Please make sure that the UUID used here is the UUID of the "Get event details". For that you can go to the Design, open the
+![Get Event](geteventdetails.png "Get Event")
+![Get Event Details](geteventdetails2.png "Get Event Details")
+
+2. (Optional). You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 buckets that should be ignored within the bucketIgnoreList of the LaceworkConfig.
+
+```
+{
+    "name": "LaceworkConfiguration",
+    "eventuuid": "1f34062d-2299-4417-ade7-69d3ce1e3c0a",
+    "bucketIgnoreList":[
+        "arn:aws:s3:::myS3bucket1",
+        "arn:aws:s3:::myimportantBucket",
+        "arn:aws:s3:::myproductionbucket"
+    ]
+}
+```
 ## Build an example curl webhook
 
 There is no need to wait for Lacework sending the Webhook Alert again if you plan to test it immediately. You can trigger the map by using a simple curl command that will send the necessary information.
