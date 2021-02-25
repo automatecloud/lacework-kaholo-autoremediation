@@ -22,6 +22,9 @@ Kaholo is an easy and intuitive workflow engine that makes it easy to create alm
 ## How does it work?
 The integration between Lacework and Kaholo is done by using the Alert Webhook channel. https://support.lacework.com/hc/en-us/articles/360034367393-Webhook.
 
-The Webhook Alert sends all the necessary information to the Kaholo Lacework Webhook 
+![Lacework and Kaholo Integration](images/integration.png "Lacework and Kaholo integration")
+
+
+The Webhook Alert sends all the necessary information to the Kaholo Lacework Webhook
 
 Least Privilege
