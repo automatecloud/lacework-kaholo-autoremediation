@@ -36,11 +36,22 @@ We recommend to create a Test S3 Bucket and configure it for Everyone READ permi
 
 ## Import the Map
 
-Inside your new created project you can Import the Map
+Inside your new created project you can Import the Map.
 
-## Configuration of the 
+### Map Design and workflow
+The LW_S3_1 map currently looks like the following:
 
-## Build an example curl Webhook
+![LW_S3_1 Map](LW_S3_1.png "LW_S3_1 Map")
+
+### Map trigger
+
+Make sure that the Map Trigger is configured with the following configuration:
+
+![LW_S3_1 Trigger](LW_S3_1_Trigger.png "LW_S3_1 Trigger")
+
+## Configuration of the
+
+## Build an example curl webhook
 
 There is no need to wait for Lacework sending the Webhook Alert again if you plan to test it immediately. You can trigger the map by using a simple curl command that will send the necessary information.
 
