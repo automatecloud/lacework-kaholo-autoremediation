@@ -50,7 +50,8 @@ This repository is a community project. Everyone interested can contribute and u
 
 ### Compliance
 #### AWS
-##### LW_S3_1
+##### LW_S3_1 
+Ensure the S3 bucket ACL does not grant 'Everyone' READ permission [list S3 objects]
 [Release Notes](maps/compliance/aws/LW_S3_1/README.md)
 ##### LW_S3_2
 ##### LW_S3_3
