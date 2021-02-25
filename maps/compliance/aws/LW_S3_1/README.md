@@ -65,6 +65,11 @@ Make sure you configure the following configruations inside the LaceworkConfig:
 ![Get Event](geteventdetails.png "Get Event")
 ![Get Event Details](geteventdetails2.png "Get Event Details")
 
+* It will start with "Get the Event Details" from the EventID send by the Webhook payload
+* It will print out all the S3 Buckets that will be remediated, which is a list of S3 Buckets from the Event minus the S3 buckets ignored inside the LaceworkConfig.bucketIgnoreList list.
+* It will remediate all the S3 Buckets back to no longer grant 'Everyone' READ permission.
+* It will send out a slack message to the Webhook you configured in Slack.
+
 2. (Optional). You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 buckets that should be ignored within the bucketIgnoreList of the LaceworkConfig.
 
 ```
@@ -78,6 +83,12 @@ Make sure you configure the following configruations inside the LaceworkConfig:
     ]
 }
 ```
+### Configuration of Slack Messages
+
+For the Slack building block you can configure a Slack Webhook Url that you have to implement inside the Kaholo Vault before able to select.
+
+If you don't have slack or don't need slack messages feel free to simply remove this building block.
+
 ## Build an example curl webhook
 
 There is no need to wait for Lacework sending the Webhook Alert again if you plan to test it immediately. You can trigger the map by using a simple curl command that will send the necessary information.
@@ -101,3 +112,4 @@ With that you can trigger the webhook inside kaholo by using the following curl 
 ```
 curl -X POST -H 'Content-type: application/json' --data '{"event_title": "'"$EVENTTITLE"'", "event_link": "https://'"$LACEWORKINSTANCE"'.lacework.net/ui/investigation/recents/EventDossier-'"$EVENTID"'", "lacework_account": "'"$LACEWORKINSTANCE"'", "event_source": "'"$EVENTSOURCE"'", "event_description":"'"$EVENTDESCRIPTION"'", "event_timestamp":"'"$EVENTTIMESTAMP"'", "event_type": "Compliance", "event_id": "'"$EVENTID"'", "event_severity": "'"$EVENTSEVERITY"'"}' $WEBHOOKURL
 ```
+We recommend to check the Execution Results when you give it a try, to make sure it will remediate the right buckets.
