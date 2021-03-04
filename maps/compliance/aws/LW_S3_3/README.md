@@ -47,7 +47,7 @@ Inside your new created project (for example Lacework - AutoRemediation) you can
 ### Map Design and workflow
 The LW_S3_3 map currently looks like the following:
 
-![LW_S3_3 Map](LW_S3_3.png "LW_S3_3 Map")
+![LW_S3_3 Map](LW_S3_3.png "LW_S3_3 Map"| width=100)
 
 * It will start with "Get the Event Details" from the EventID send by the Webhook payload
 * It will print out all the S3 Buckets that will be remediated, which is a list of S3 Buckets from the Event minus the S3 buckets ignored inside the LaceworkConfig.bucketIgnoreList list.
@@ -132,7 +132,7 @@ export EVENTID=11
 export EVENTSEVERITY=2
 export WEBHOOKURL=https://mykaholoinstance.kaholo.io/webhook/lacework/alert
 export LACEWORKINSTANCE=mylaceworkinstance
-export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : LW_S3_3 Ensure the S3 bucket ACL does not grant  'Everyone' READ_ACP permission [read bucket ACL]"
+export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : LW_S3_3 Ensure the S3 bucket ACL does not grant 'Everyone' READ_ACP permission [read bucket ACL]"
 ```
 You need to replace the following before you apply the environment variables:
 1. **EVENTID** with the EventID that was generated inside the Lacework environment.
