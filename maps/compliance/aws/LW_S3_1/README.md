@@ -43,7 +43,7 @@ aws s3api put-bucket-acl --bucket <YOURBUCKETNAME> --acl public-read
 
 ## Import the Map
 
-Inside your new created project you can Import the Map.
+Inside your new created project (for example Lacework - AutoRemediation) you can Import the Map.
 
 ### Map Design and workflow
 The LW_S3_1 map currently looks like the following:
@@ -70,16 +70,18 @@ Make sure that the Map Trigger is configured with the following configuration:
 
 With that configuration you make sure that this Map is only triggered if within the payload of the Webhook an alarm related to LW_S3_1 Control ID is send.
 
-### Configuration within the Map
+### Configuration of the Map
 
 Make sure you configure the following configruations inside the LaceworkConfig:
-1. eventuuid: Please make sure that the UUID used here is the UUID of the "Get event details". Due to the reimport of the Map the UUID of the event object could have changed. For that you can go to the Design, open the "Get Events" building block.
+1. **eventuuid:** Please make sure that the UUID used here is the UUID of the "Get event details". Due to the reimport of the Map the UUID of the event object could have changed. For that you can go to the Design, open the "Get Events" building block.
 
 ![Get Event](geteventdetails.png "Get Event")
-Inside the configuration of the Get Event building block you will find the UUID.
+
+Inside the configuration of the Get Event building block you will find the UUID:
+
 ![Get Event Details](geteventdetails2.png "Get Event Details")
 
-2. **Note** By default the setting dotheremediation is configured to false, so it will not by accident start to remediate S3 buckets. We recommend to make sure that only the right buckets will be remediated and the map is working as expected before you configure this setting to true.
+2. **Note** By default the setting **dotheremediation** is configured to **false**, so it will not by accident start to remediate S3 buckets. We recommend to make sure that only the right buckets will be remediated and the map is working as expected before you configure this setting to true.
 
 3. (Optional). You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 buckets that should be ignored within the bucketIgnoreList of the LaceworkConfig.
 
@@ -95,6 +97,9 @@ Inside the configuration of the Get Event building block you will find the UUID.
     ]
 }
 ```
+
+4. Make sure you select an Agent for the Map that has the AWS CLI installed and configured, so it can be used for the Auto Remediation steps.
+
 ### Configuration of Slack Messages
 
 For the Slack building block you can configure a Slack Webhook Url that you have to implement inside the Kaholo Vault before you can select it.
@@ -115,6 +120,8 @@ The Remediation block will only be triggered if the configuration dotheremediati
 
 There is no need to wait for Lacework sending the Webhook Alert again if you plan to test it immediately. You can trigger the map by using a simple curl command that will send the necessary information.
 
+Before you can trigger the webhook you need to have an event generated within your Lacework instance.
+
 As soon as you got an event we recommend using the Event Information to create an example webhook trigger inside your terminal using the following environment variables. Please make sure to update it with the information from the Event you did generate.#
 
 ```
@@ -128,6 +135,11 @@ export WEBHOOKURL=https://mykaholoinstance.kaholo.io/webhook/lacework/alert
 export LACEWORKINSTANCE=mylaceworkinstance
 export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : LW_S3_1 Ensure the S3 bucket ACL does not grant 'Everyone' READ permission [list S3 objects]"
 ```
+You need to replace the following before you apply the environment variables:
+1. **EVENTID** with the EventID that was generated inside the Lacework environment.
+2. **WEBHOOKURL** with your Kaholo Webhook Url. Normally kaholo is listening on port 3000 and the URL path for the webhook alerting is /webhook/lacework/alert.
+3. **LACEWORKINSTANCE** your Lacework instance where you created that event.
+4. **EVENTDESCRIPTION** replace the AWS Account with your environment specific AWS Account ID.
 
 With that you can trigger the webhook inside kaholo by using the following curl command:
 
