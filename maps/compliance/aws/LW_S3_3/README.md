@@ -47,7 +47,7 @@ Inside your new created project (for example Lacework - AutoRemediation) you can
 ### Map Design and workflow
 The LW_S3_3 map currently looks like the following:
 
-![LW_S3_3 Map](LW_S3_3.png "LW_S3_3 Map"| width=100)
+![LW_S3_3 Map](LW_S3_3.png "LW_S3_3 Map" {width=40px height=400px})
 
 * It will start with "Get the Event Details" from the EventID send by the Webhook payload
 * It will print out all the S3 Buckets that will be remediated, which is a list of S3 Buckets from the Event minus the S3 buckets ignored inside the LaceworkConfig.bucketIgnoreList list.
