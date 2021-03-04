@@ -48,7 +48,7 @@ Inside your new created project (for example Lacework - AutoRemediation) you can
 ### Map Design and workflow
 The LW_S3_1 map currently looks like the following:
 
-![LW_S3_1 Map](LW_S3_1.png "LW_S3_1 Map")
+<img src="LW_S3_1.png" width="457" height="278">
 
 * It will start with "Get the Event Details" from the EventID send by the Webhook payload
 * It will print out all the S3 Buckets that will be remediated, which is a list of S3 Buckets from the Event minus the S3 buckets ignored inside the LaceworkConfig.bucketIgnoreList list.
@@ -59,7 +59,7 @@ The LW_S3_1 map currently looks like the following:
 
 Make sure that the Map Trigger is configured with the following configuration:
 
-![LW_S3_1 Trigger](LW_S3_1_Trigger.png "LW_S3_1 Trigger")
+<img src="LW_S3_3_Trigger.png" width="395" height="791">
 
 1. The Configuration needs to be configured with **LaceworkConfig**
 2. The Plugin needs to be configured with Lacework-Trigger
@@ -79,7 +79,7 @@ Make sure you configure the following configurations inside the LaceworkConfig:
 
 Inside the configuration of the Get Event building block you will find the UUID:
 
-![Get Event Details](geteventdetails2.png "Get Event Details")
+<img src="geteventdetails2.png" width="287" height="229">
 
 2. **Note** By default the setting **dotheremediation** is configured to **false**, so it will not by accident start to remediate S3 buckets. We recommend to make sure that only the right buckets will be remediated and the map is working as expected before you configure this setting to true.
 
