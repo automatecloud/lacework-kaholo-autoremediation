@@ -39,7 +39,7 @@ You can use the following AWS CLI command to configure an existing S3 test bucke
 ```
 aws s3api put-bucket-acl --bucket <YOURBUCKETNAME> --acl public-read
 ```
-**Note:** Make sure you configure the <YOURBUCKETNAME> with the name of the S3 test bucket you would like to use for tests.
+**Note:** Make sure you configure the <YOURBUCKETNAME> with the name of the S3 test bucket you would like to use for tests. Please don't use any S3 bucket with important data! This if for testing of the map only.
 
 ## Import the Map
 
