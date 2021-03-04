@@ -34,6 +34,13 @@ it
 
 We recommend to create a Test S3 Bucket and configure it for Everyone READ permission, so you are generating an Alert inside Lacework during the next compliance check that you can use to test the Auto Remediation.
 
+You can use the following AWS CLI command to configure an existing S3 test bucket with everyone READ permission:
+
+```
+aws s3api put-bucket-acl --bucket <YOURBUCKETNAME> --acl public-read
+```
+**Note:** Make sure you configure the <YOURBUCKETNAME> with the name of the S3 test bucket you would like to use for tests.
+
 ## Import the Map
 
 Inside your new created project you can Import the Map.
@@ -54,24 +61,25 @@ Make sure that the Map Trigger is configured with the following configuration:
 
 ![LW_S3_1 Trigger](LW_S3_1_Trigger.png "LW_S3_1 Trigger")
 
-1. The Configuration needs to be configured with "LaceworkConfig"
+1. The Configuration needs to be configured with **LaceworkConfig**
 2. The Plugin needs to be configured with Lacework-Trigger
 3. The Method "Alert from Lacework" needs to be selected
 4. The Variable **Event type** needs to be configured with Value **Compliance**
-5. The Variable **Issue ID** needs to be configured with Value LW_S3_1.
+5. The Variable **Issue ID** needs to be configured with Value **LW_S3_1**.
+6. The Variable **Event Severity** needs to be configured with the Value **Any** or **High**
 
 With that configuration you make sure that this Map is only triggered if within the payload of the Webhook an alarm related to LW_S3_1 Control ID is send.
 
 ### Configuration within the Map
 
 Make sure you configure the following configruations inside the LaceworkConfig:
-1. eventuuid: Please make sure that the UUID used here is the UUID of the "Get event details". For that you can go to the Design, open the "Get Events" building block.
+1. eventuuid: Please make sure that the UUID used here is the UUID of the "Get event details". Due to the reimport of the Map the UUID of the event object could have changed. For that you can go to the Design, open the "Get Events" building block.
 
 ![Get Event](geteventdetails.png "Get Event")
 Inside the configuration of the Get Event building block you will find the UUID.
 ![Get Event Details](geteventdetails2.png "Get Event Details")
 
-2. **Note** By default the setting dotheremediation is configured to false, so it will not by accident start to remediate S3 buckets. We recommend before you configure this to true, to make sure that only the right buckets will be remediated and the map is working as expected.
+2. **Note** By default the setting dotheremediation is configured to false, so it will not by accident start to remediate S3 buckets. We recommend to make sure that only the right buckets will be remediated and the map is working as expected before you configure this setting to true.
 
 3. (Optional). You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 buckets that should be ignored within the bucketIgnoreList of the LaceworkConfig.
 
@@ -81,21 +89,27 @@ Inside the configuration of the Get Event building block you will find the UUID.
     "eventuuid": "1f34062d-2299-4417-ade7-69d3ce1e3c0a",
     "dotheremediation": "false",
     "bucketIgnoreList":[
-        "arn:aws:s3:::myS3bucket1",
-        "arn:aws:s3:::myimportantBucket",
-        "arn:aws:s3:::myproductionbucket"
+        "arn:aws:s3:::mybucket01",
+        "arn:aws:s3:::mybucket02",
+        "arn:aws:s3:::mybucket03"
     ]
 }
 ```
 ### Configuration of Slack Messages
 
-For the Slack building block you can configure a Slack Webhook Url that you have to implement inside the Kaholo Vault before able to select.
+For the Slack building block you can configure a Slack Webhook Url that you have to implement inside the Kaholo Vault before you can select it.
+
+It will send out a slack message to the configured Webhook. We recommend to configure it similar to the Webhook you use within Lacework as alert channel.
 
 If you don't have slack or don't need slack messages feel free to simply remove this building block.
 
 ### Configuration of the Remediation block
 
-**NEEDS TO BE DESCRIBED**
+The Remediation block will only be triggered if the configuration dotheremediation of the LaceworkConfig is configured with true. Before enabling this we recommend the following:
+
+1. Create a test S3 bucket that is violating the compliance rule for LW_S3_1
+2. Make sure that you put all the S3 buckets that should not be auto remediated into the bucketIgnoreList of the LaceworkConfig.
+3. To be even more sure we recommend to configure a suppression setting for the LW_S3_1 compliance check within the Lacework platform to ignore the S3 bucket. Otherwise the ignored Buckets will create additional Events and Alerts within Lacework.
 
 ## Build an example curl webhook
 

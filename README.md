@@ -29,7 +29,7 @@ The integration between Lacework and Kaholo is using the Alert [Webhook channel]
 3. In case of an Alert Lacework sends the necessary event details via the [Webhook channel](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook).
 4. The Kaholo [Lacework Trigger](https://github.com/Kaholo/kaholo-trigger-lacework) is reading out the **event_source** and **event_description** of the event. Every Kaholo Map is configured to check the event_source and the description if it includes specific information that is relevant to trigger the specific Kaholo Map.
 5. The Kaholo Map triggered is reading out the specific Event Data  and Context by using the [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework)
-6. The Kaholo Map is doing all the necessary auto remediation steps.
+6. The Kaholo Map is doing all the necessary auto remediation steps by using the CLI commands of the cloud providers.
 
 ## How to start?
 
