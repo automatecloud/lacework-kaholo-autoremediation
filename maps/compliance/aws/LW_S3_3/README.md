@@ -60,8 +60,6 @@ Make sure that the Map Trigger is configured with the following configuration:
 
 <img src="LW_S3_3_Trigger.png" width="386" height="791">
 
-772 × 1582
-
 1. The Configuration needs to be configured with **LaceworkConfig**
 2. The Plugin needs to be configured with Lacework-Trigger
 3. The Method "Alert from Lacework" needs to be selected
@@ -80,7 +78,7 @@ Make sure you configure the following configurations inside the LaceworkConfig:
 
 Inside the configuration of the Get Event building block you will find the UUID:
 
-![Get Event Details](geteventdetails2.png "Get Event Details")
+<img src="geteventdetails2.png" width="383" height="291">
 
 2. **Note** By default the setting **dotheremediation** is configured to **false**, so it will not by accident start to remediate S3 buckets. We recommend to make sure that only the right buckets will be remediated and the map is working as expected before you configure this setting to true.
 
