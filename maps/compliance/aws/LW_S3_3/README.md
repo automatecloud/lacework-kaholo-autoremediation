@@ -58,7 +58,9 @@ The LW_S3_3 map currently looks like the following:
 
 Make sure that the Map Trigger is configured with the following configuration:
 
-![LW_S3_3 Trigger](LW_S3_3_Trigger.png "LW_S3_3 Trigger")
+<img src="LW_S3_3_Trigger.png" width="386" height="791">
+
+772 × 1582
 
 1. The Configuration needs to be configured with **LaceworkConfig**
 2. The Plugin needs to be configured with Lacework-Trigger
