@@ -103,9 +103,49 @@ LW_AWS_IAM_3 | AWS | Ensure public ssh keys are rotated every 30 days or less | 
 LW_AWS_IAM_4 | AWS | Ensure public ssh keys are rotated every 45 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_4/README.md) | no | no
 LW_AWS_IAM_5 | AWS | Ensure public ssh keys are rotated every 90 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_5/README.md) | no | no
 LW_AWS_IAM_6 | AWS | Ensure active access keys are used every 90 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_6/README.md) | no | no
-
-
-
+LW_AWS_IAM_7 | AWS | Iam user should not be inactive from last 30 days or more | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_7/README.md) | no | no
+LW_AWS_IAM_8 | AWS | Ensure IAM configuration has valid Identity Providers configuration | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_8/README.md) | no | no
+LW_AWS_IAM_9 | AWS | Ensure IAM Role restrict access to a list of whitelist of IP networks | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_9/README.md) | no | no
+LW_AWS_IAM_10 | AWS | Ensure IAM User restrict access to a list of whitelist of IP networks | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_10/README.md) | no | no
+LW_AWS_IAM_11 | AWS | Ensure non-root user exists in the account | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_11/README.md) | no | no
+LW_AWS_IAM_12 | AWS | Ensure access keys are rotated every 350 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_12/README.md) | no | no
+LW_AWS_IAM_13 | AWS | Ensure access keys are rotated every 180 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_13/README.md) | no | no
+LW_AWS_IAM_14 | AWS | No IAM users with password-based console access should exist | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_14/README.md) | no | no
+AWS_CIS_2_1 | AWS | Ensure CloudTrail is enabled in all regions | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_1/README.md) | no | no
+AWS_CIS_2_2 | AWS | Ensure CloudTrail log file validation is enabled | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_2/README.md) | no | no
+AWS_CIS_2_3 | AWS | Ensure S3 bucket CloudTrail logs is not publicly accessible | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_2/README.md) | no | no
+AWS_CIS_2_4 | AWS | Ensure CloudTrail is integrated with CloudWatch Logs | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_4/README.md) | no | no
+AWS_CIS_2_5 | AWS | Ensure AWS Config is enabled in all regions | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_5/README.md) | no | no
+AWS_CIS_2_6 | AWS | Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_6/README.md) | no | no
+AWS_CIS_2_7 | AWS | Ensure CloudTrail logs are encrypted at rest using KMS CMKs | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_7/README.md) | no | no
+AWS_CIS_2_8 | AWS | Ensure rotation for customer created CMKs is enabled | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_8/README.md) | no | no
+AWS_CIS_2_9 | AWS | Ensure Flow Logging for VPC is enabled and active | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_9/README.md) | no | no
+AWS_CIS_3_2 | AWS | Ensure a log metric filter and alarm exist for Management Console sign-in without MFA | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_2/README.md) | no | no
+AWS_CIS_3_3 | AWS | Ensure a log metric filter and alarm exist for usage of "root" account | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_2/README.md) | no | no
+AWS_CIS_3_4 | AWS | Ensure a log metric filter and alarm exist for IAM policy changes | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_4/README.md) | no | no
+AWS_CIS_3_5 | AWS | Ensure a log metric filter and alarm exist for CloudTrail configuration changes | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_5/README.md) | no | no
+AWS_CIS_3_6 | AWS | Ensure a log metric filter and alarm exist for AWS Management Console authentication failures | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_6/README.md) | no | no
+AWS_CIS_3_7 | AWS | Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer created CMKs | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_7/README.md) | no | no
+AWS_CIS_3_8 | AWS | Ensure a log metric filter and alarm exist for S3 bucket policy changes | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_8/README.md) | no | no
+AWS_CIS_3_9 | AWS | Ensure a log metric filter and alarm exist for AWS Config configuration changes | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_9/README.md) | no | no
+AWS_CIS_3_10 | AWS | Ensure a log metric filter and alarm exist for security group changes | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_10/README.md) | no | no
+AWS_CIS_3_11 | AWS | Ensure a log metric filter and alarm exist for changes to Network Access Control Lists (NACL) | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_11/README.md) | no | no
+AWS_CIS_3_12 | AWS | Ensure a log metric filter and alarm exist for changes to network gateways | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_12/README.md) | no | no
+AWS_CIS_3_13 | AWS | Ensure a log metric filter and alarm exist for route table changes | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_13/README.md) | no | no
+AWS_CIS_3_14 | AWS | Ensure a log metric filter and alarm exist for VPC changes | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_14/README.md) | no | no
+AWS_CIS_3_15 | AWS | Ensure appropriate subscribers to each SNS topic | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_15/README.md) | no | no
+AWS_CIS_4_1 | AWS | Ensure no security groups allow ingress from 0.0.0.0/0 to port 22 | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_4_1/README.md) | no | no
+AWS_CIS_4_2 | AWS | Ensure no security groups allow ingress from 0.0.0.0/0 to port 3389 | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_4_2/README.md) | no | no
+AWS_CIS_4_4 | AWS | Ensure the default security group of every VPC restricts all traffic | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_4_4/README.md) | no | no
+AWS_CIS_4_5 | AWS | Ensure routing tables for VPC peering are "least access" | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_4_5/README.md) | no | no
+LW_AWS_MONGODB_1 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 27017 (MongoDB) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_MONGODB_1/README.md) | no | no
+LW_AWS_MONGODB_2 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 27018 (MongoDB) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_MONGODB_2/README.md) | no | no
+LW_AWS_MONGODB_3 | AWS | Security group attached to Elastic Load Balancer instance should not allow inbound traffic from all to TCP port 27017 (MongoDB) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_MONGODB_3/README.md) | no | no
+LW_AWS_MONGODB_4 | AWS | Security group attached to Elastic Load Balancer instance should not allow inbound traffic from all to TCP port 27018 (MongoDB) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_MONGODB_4/README.md) | no | no
+LW_AWS_MONGODB_5 | AWS | Security group attached to Application Load Balancer instance should not allow inbound traffic from all to TCP port 27017 (MongoDB) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_MONGODB_5/README.md) | no | no
+LW_AWS_MONGODB_6 | AWS | Security group attached to Application Load Balancer instance should not allow inbound traffic from all to TCP port 27018 (MongoDB) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_MONGODB_6/README.md) | no | no
+LW_AWS_NETWORKING_1 | AWS | Security groups are not attached to the EC2 instance | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_1/README.md) | no | no
+LW_AWS_NETWORKING_2 | AWS | Network ACLs do not allow unrestricted inbound traffic | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_2/README.md) | no | no
 
 
 The current updates and releases are tracked inside the [Release Notes](ReleaseNotes.md) document.
