@@ -215,7 +215,67 @@ LW_AWS_ELASTICSEARCH_4| AWS | Elastic Search Domain should not have Encryption u
 #### Azure
 Map ID | Cloud | Description | Status | Documentation | CLI Remediation | Plugin Remediation
 --- | --- | --- | --- | --- | --- | ---
-LW_S3_1 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' READ permission [list S3 objects] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_1/README.md) | yes | no
+Azure_CIS_1_1 | Azure | Ensure that multi-factor authentication is enabled for all privileged users | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_1_1/README.md) | no | no
+Azure_CIS_1_2 | Azure | Ensure that multi-factor authentication is enabled for all non-privileged users | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_1_2/README.md) | no | no
+Azure_CIS_1_23 | Azure | Ensure that no custom subscription owner roles are created | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_1_23/README.md) | no | no
+Azure_CIS_2_1 | Azure | Ensure that standard pricing tier is selected | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_1/README.md) | no | no
+Azure_CIS_2_3 | Azure | Ensure that 'System updates' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_3/README.md) | no | no
+Azure_CIS_2_5 | Azure | Ensure that 'Endpoint protection' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_5/README.md) | no | no
+Azure_CIS_2_6 | Azure | Ensure that 'Disk encryption' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_6/README.md) | no | no
+Azure_CIS_2_7 | Azure | Ensure that 'Network security groups' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_7/README.md) | no | no
+Azure_CIS_2_8 | Azure | Ensure that 'Web application firewall' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_8/README.md) | no | no
+Azure_CIS_2_9 | Azure | Ensure that 'Next generation firewall' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_9/README.md) | no | no
+Azure_CIS_2_10 | Azure | Ensure that 'Vulnerability assessment' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_10/README.md) | no | no
+Azure_CIS_2_11 | Azure | Ensure that 'Storage Encryption' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_11/README.md) | no | no
+Azure_CIS_2_12 | Azure | Ensure that 'JIT Network Access' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_12/README.md) | no | no
+Azure_CIS_2_13 | Azure | Ensure that 'Adaptive Application Controls' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_13/README.md) | no | no
+Azure_CIS_2_14 | Azure | Ensure that 'SQL auditing & Threat detection' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_14/README.md) | no | no
+Azure_CIS_2_15 | Azure | Ensure that 'SQL Encryption' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_15/README.md) | no | no
+Azure_CIS_2_16 | Azure | Ensure that 'Security contact emails' is set | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_16/README.md) | no | no
+Azure_CIS_2_17 | Azure | Ensure that security contact 'Phone number' is set | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_17/README.md) | no | no
+Azure_CIS_2_18 | Azure | Ensure that 'Send me emails about alerts' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_18/README.md) | no | no
+Azure_CIS_2_19 | Azure | Ensure that 'Send email also to subscription owners' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_2_19/README.md) | no | no
+Azure_CIS_3_1 | Azure | Ensure that 'Secure transfer required' is set to 'Enabled' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_3_1/README.md) | no | no
+Azure_CIS_3_2 | Azure | Ensure that 'Storage service encryption' is set to Enabled for Blob Service | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_3_2/README.md) | no | no
+Azure_CIS_3_3 | Azure | Ensure that storage account access keys are periodically regenerated | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_3_3/README.md) | no | no
+Azure_CIS_3_4 | Azure | Ensure that shared access signature tokens expire within an hour | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_3_4/README.md) | no | no
+Azure_CIS_3_5 | Azure | Ensure that shared access signature tokens are allowed only over https | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_3_5/README.md) | no | no
+Azure_CIS_3_6 | Azure | Ensure that 'Storage service encryption' is set to Enabled for File Service | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_3_6/README.md) | no | no
+Azure_CIS_3_7 | Azure | Ensure that 'Public access level' is set to Private for blob containers | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_3_7/README.md) | no | no
+Azure_CIS_4_1_1 | Azure | Ensure that 'Auditing' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_4_1_1/README.md) | no | no
+Azure_CIS_4_1_2 | Azure | Ensure that 'Threat Detection' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_4_1_2/README.md) | no | no
+Azure_CIS_4_1_3 | Azure | Ensure that 'Threat Detection types' is set to 'All' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_4_1_3/README.md) | no | no
+Azure_CIS_4_1_4 | Azure | Ensure that 'Send alerts to' is set | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_4_1_4/README.md) | no | no
+Azure_CIS_4_1_5 | Azure | Ensure that 'Email service and co-administrators' is 'Enabled' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_4_1_5/README.md) | no | no
+Azure_CIS_4_1_6 | Azure | Ensure that 'Auditing' Retention is 'greater than 90 days' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_4_1_6/README.md) | no | no
+Azure_CIS_4_1_7 | Azure | Ensure that 'Threat Detection' Retention is 'greater than 90 days' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_4_1_7/README.md) | no | no
+Azure_CIS_4_1_8 | Azure | Ensure that Azure Active Directory Admin is configured | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_4_1_8/README.md) | no | no
+Azure_CIS_4_2_1 | Azure | Ensure that 'Auditing' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_4_2_1/README.md) | no | no
+Azure_CIS_4_2_2 | Azure | Ensure that 'Threat Detection' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_4_2_2/README.md) | no | no
+Azure_CIS_4_2_3 | Azure | Ensure that 'Threat Detection types' is set to 'All' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_4_2_3/README.md) | no | no
+Azure_CIS_4_2_4 | Azure | Ensure that 'Send alerts to' is set | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_4_2_4/README.md) | no | no
+Azure_CIS_4_2_5 | Azure | Ensure that 'Email service and co-administrators' is 'Enabled' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_4_2_5/README.md) | no | no
+Azure_CIS_4_2_6 | Azure | Ensure that 'Data encryption' is set to 'On' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_4_2_6/README.md) | no | no
+Azure_CIS_4_2_7 | Azure | Ensure that 'Auditing' Retention is 'greater than 90 days' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_4_2_7/README.md) | no | no
+Azure_CIS_4_2_8 | Azure | Ensure that 'Threat' Retention is 'greater than 90 days' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_4_2_8/README.md) | no | no
+Azure_CIS_5_1 | Azure | Ensure that a Log Profile exists | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_5_1/README.md) | no | no
+Azure_CIS_5_2 | Azure | Ensure that Activity Log Retention is set 365 days or greater | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_5_2/README.md) | no | no
+Azure_CIS_5_13 | Azure | Ensure that logging for Azure KeyVault is 'Enabled' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_5_13/README.md) | no | no
+Azure_CIS_6_1 | Azure | Ensure that RDP access is restricted from the internet | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_6_1/README.md) | no | no
+Azure_CIS_6_2 | Azure | Ensure that SSH access is restricted from the internet | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_6_2/README.md) | no | no
+Azure_CIS_6_3 | Azure | Ensure that SQL server access is restricted from the internet | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_6_3/README.md) | no | no
+Azure_CIS_6_4 | Azure | Ensure that Network Security Group Flow Log retention period is 'greater than 90 days' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_6_4/README.md) | no | no
+Azure_CIS_6_5 | Azure | Ensure that Network Watcher is 'Enabled' | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_6_5/README.md) | no | no
+Azure_CIS_7_2 | Azure | Ensure that 'OS disk' are encrypted | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_7_2/README.md) | no | no
+Azure_CIS_7_3 | Azure | Ensure that 'Data disks' are encrypted | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_7_3/README.md) | no | no
+Azure_CIS_7_4 | Azure | Ensure that only approved extensions are installed | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_7_4/README.md) | no | no
+Azure_CIS_7_5 | Azure | Ensure that the latest OS Patches for all Virtual Machines are applied | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_7_5/README.md) | no | no
+Azure_CIS_7_6 | Azure | Ensure that the endpoint protection for all Virtual Machines is installed | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_7_6/README.md) | no | no
+Azure_CIS_8_1 | Azure | Ensure that the expiry date is set on all Keys | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_8_1/README.md) | no | no
+Azure_CIS_8_2 | Azure | Ensure that the expiry date is set on all Secrets | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_8_2/README.md) | no | no
+Azure_CIS_8_3 | Azure | Ensure that Resource Locks are set for mission critical Azure resources | not implemented | [ReadMe](maps/compliance/aws/Azure_CIS_8_3/README.md) | no | no
+
+
 
 The current updates and releases are tracked inside the [Release Notes](ReleaseNotes.md) document.
 
