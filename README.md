@@ -75,6 +75,35 @@ LW_S3_19 | AWS | Ensure the attached S3 bucket policy does not grant global 'Del
 LW_S3_20 | AWS | Ensure the attached S3 bucket policy does not grant global 'List' permission. | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_20/README.md) | no | no
 LW_S3_21 | AWS | Ensure the attached S3 bucket policy does not grant global 'Put' permission. | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_21/README.md) | no | no
 AWS_CIS_1_1 | AWS | Avoid the use of the "root" account | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_1/README.md) | no | no
+AWS_CIS_1_2 | AWS | Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_2/README.md) | no | no
+AWS_CIS_1_3 | AWS | Ensure credentials unused for 90 days or greater are disabled | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_3/README.md) | no | no
+AWS_CIS_1_4 | AWS | Ensure access keys are rotated every 90 days or less | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_4/README.md) | no | no
+AWS_CIS_1_5 | AWS | Ensure IAM password policy requires at least one uppercase letter | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_5/README.md) | no | no
+AWS_CIS_1_6 | AWS | Ensure IAM password policy require at least one lowercase letter | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_6/README.md) | no | no
+AWS_CIS_1_7 | AWS | Ensure IAM password policy require at least one symbol | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_7/README.md) | no | no
+AWS_CIS_1_8 | AWS | Ensure IAM password policy require at least one number | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_8/README.md) | no | no
+AWS_CIS_1_9 | AWS | Ensure IAM password policy requires minimum length of 14 or greater | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_9/README.md) | no | no
+AWS_CIS_1_10 | AWS | Ensure IAM password policy prevents password reuse | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_10/README.md) | no | no
+AWS_CIS_1_11 | AWS | Ensure IAM password policy expires passwords within 90 days or less | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_11/README.md) | no | no
+AWS_CIS_1_12 | AWS | Ensure no root account access key exists | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_12/README.md) | no | no
+AWS_CIS_1_13 | AWS | Ensure MFA is enabled for the "root" account | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_13/README.md) | no | no
+AWS_CIS_1_14 | AWS | Ensure hardware MFA is enabled for the "root" account | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_14/README.md) | no | no
+AWS_CIS_1_15 | AWS | Ensure security questions are registered in the AWS account | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_15/README.md) | no | no
+AWS_CIS_1_16 | AWS | Ensure IAM policies are attached only to groups or roles | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_16/README.md) | no | no
+AWS_CIS_1_17 | AWS | Enable detailed billing | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_17/README.md) | no | no
+AWS_CIS_1_19 | AWS | Maintain current contact details | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_19/README.md) | no | no
+AWS_CIS_1_20 | AWS | Ensure security contact information is registered | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_20/README.md) | no | no
+AWS_CIS_1_21 | AWS | Ensure IAM instance roles are used for AWS resource access from instances | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_21/README.md) | no | no
+AWS_CIS_1_22 | AWS | Ensure a support role has been created to manage incidents with AWS Support | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_22/README.md) | no | no
+AWS_CIS_1_23 | AWS | Do not setup access keys during initial user setup for all IAM users that have a console password | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_23/README.md) | no | no
+AWS_CIS_1_24 | AWS | Ensure IAM policies that allow full "*:*" administrative privileges are not created | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_24/README.md) | no | no
+LW_AWS_IAM_1 | AWS | Ensure access keys are rotated every 30 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_1/README.md) | no | no
+LW_AWS_IAM_2 | AWS | Ensure access keys are rotated every 45 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_2/README.md) | no | no
+LW_AWS_IAM_3 | AWS | Ensure public ssh keys are rotated every 30 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_3/README.md) | no | no
+LW_AWS_IAM_4 | AWS | Ensure public ssh keys are rotated every 45 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_4/README.md) | no | no
+LW_AWS_IAM_5 | AWS | Ensure public ssh keys are rotated every 90 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_5/README.md) | no | no
+LW_AWS_IAM_6 | AWS | Ensure active access keys are used every 90 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_6/README.md) | no | no
+
 
 
 
