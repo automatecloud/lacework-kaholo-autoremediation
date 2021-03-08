@@ -49,6 +49,12 @@ First of all you need to have a Lacework and Kaholo instance. For Lacework pleas
 This repository is a community project. Everyone interested can contribute and update existing and creating new maps. Currently the following Maps are available
 
 ### Compliance
+
+Markdown | Less | Pretty
+--- | --- | ---
+*Still* | `renders` | **nicely**
+1 | 2 | 3
+
 #### AWS
 ##### LW_S3_1
 Ensure the S3 bucket ACL does not grant 'Everyone' READ permission [list S3 objects]
