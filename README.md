@@ -55,13 +55,13 @@ Map ID | Cloud | Description | Status | Readme| CLI Remediation | Plugin Remedia
 --- | --- | --- | --- | --- | --- | ---
 LW_S3_1 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' READ permission [list S3 objects] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_1/README.md) | yes | no
 LW_S3_2 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' WRITE permission [create, overwrite, and delete S3 objects] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_2/README.md) | yes | no
+LW_S3_3 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' READ_ACP permission [read bucket ACL] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_3/README.md) | yes | no
+LW_S3_4 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' WRITE_ACP permission [modify bucket ACL] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_4/README.md) | yes | no
 
 
-##### LW_S3_3
-Ensure the S3 bucket ACL does not grant 'Everyone' READ_ACP permission [read bucket ACL]
-[ReadMe](maps/compliance/aws/LW_S3_3/README.md)
+
 ##### LW_S3_4
-Ensure the S3 bucket ACL does not grant 'Everyone' WRITE_ACP permission [modify bucket ACL]
+
 [ReadMe](maps/compliance/aws/LW_S3_4/README.md)
 ##### LW_S3_5
 Ensure the S3 bucket ACL does not grant 'Everyone' FULL_CONTROL [READ, WRITE, READ_ACP, WRITE_ACP]
