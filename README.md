@@ -193,6 +193,29 @@ LW_AWS_NETWORKING_46 | AWS | No Default VPC should be present in an AWS account 
 LW_AWS_NETWORKING_47 | AWS | EC2 instances should not have a Public IP address attached | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_47/README.md) | no | no
 LW_AWS_NETWORKING_48 | AWS | Attached VPC CIDR block(s) should be in whitelist | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_48/README.md) | no | no
 LW_AWS_NETWORKING_49 | AWS | Load Balancers should have Access Logs enabled | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_49/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_1 | AWS | Ec2 instance does not have any tags | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_1/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_2 | AWS | Ensure EBS Volumes are Encrypted | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_2/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_3 | AWS | Ensure No Public EBS Snapshots | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_3/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_4 | AWS | Ensure RDS database is encrypted with customer managed KMS key | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_4/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_5 | AWS | Ensure Redshift Cluster is encrypted | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_5/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_6 | AWS | Ensure no server certificate has been uploaded before Heartbleed vulnerability | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_6/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_7 | AWS | Ensure ELB has latest Secure Cipher policies Configured for Session Encryption | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_7/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_7 | AWS | Ensure ELB is not affected by POODLE Vulnerability (CVE-2014-3566) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_7/README.md) | no | no
+LW_AWS_RDS_1 | AWS | RDS should not have a Public Interface | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_RDS_1/README.md) | no | no
+LW_AWS_SERVERLESS_1 | AWS | Lambda Function should not have Admin Privileges | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_SERVERLESS_1/README.md) | no | no
+LW_AWS_SERVERLESS_2 | AWS | Lambda Function should not have Cross Account Access | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_SERVERLESS_2/README.md) | no | no
+LW_AWS_SERVERLESS_3 | AWS | Lambda Function should not have Same IAM Role for more than one lambda function | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_SERVERLESS_3/README.md) | no | no
+LW_AWS_SERVERLESS_4 | AWS | Lambda Function should have tracing enabled | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_SERVERLESS_4/README.md) | no | no
+LW_AWS_SERVERLESS_5| AWS | Lambda Function should not have VPC access | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_SERVERLESS_5/README.md) | no | no
+LW_AWS_ELASTICSEARCH_1| AWS | Elastic Search Domain should not be exposed | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_ELASTICSEARCH_1/README.md) | no | no
+LW_AWS_ELASTICSEARCH_2| AWS | Elastic Search Domain should be in a VPC | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_ELASTICSEARCH_2/README.md) | no | no
+LW_AWS_ELASTICSEARCH_3| AWS | Elastic Search Domain should not have EncryptionAtRest disabled | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_ELASTICSEARCH_3/README.md) | no | no
+LW_AWS_ELASTICSEARCH_4| AWS | Elastic Search Domain should not have Encryption using AWS Managed Keys | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_ELASTICSEARCH_4/README.md) | no | no
+
+#### Azure
+Map ID | Cloud | Description | Status | Documentation | CLI Remediation | Plugin Remediation
+--- | --- | --- | --- | --- | --- | ---
+LW_S3_1 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' READ permission [list S3 objects] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_1/README.md) | yes | no
 
 The current updates and releases are tracked inside the [Release Notes](ReleaseNotes.md) document.
 
