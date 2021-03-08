@@ -146,7 +146,53 @@ LW_AWS_MONGODB_5 | AWS | Security group attached to Application Load Balancer in
 LW_AWS_MONGODB_6 | AWS | Security group attached to Application Load Balancer instance should not allow inbound traffic from all to TCP port 27018 (MongoDB) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_MONGODB_6/README.md) | no | no
 LW_AWS_NETWORKING_1 | AWS | Security groups are not attached to the EC2 instance | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_1/README.md) | no | no
 LW_AWS_NETWORKING_2 | AWS | Network ACLs do not allow unrestricted inbound traffic | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_2/README.md) | no | no
-
+LW_AWS_NETWORKING_3 | AWS | Network ACLs do not allow unrestricted outbound traffic | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_3/README.md) | no | no
+LW_AWS_NETWORKING_4 | AWS | AWS VPC endpoints should not be exposed | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_4/README.md) | no | no
+LW_AWS_NETWORKING_5 | AWS | Security Group should not be open to all(unrestricted) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_5/README.md) | no | no
+LW_AWS_NETWORKING_6 | AWS | Security Group should not accept traffic other than 80 and 443 | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_6/README.md) | no | no
+LW_AWS_NETWORKING_7 | AWS | Unrestricted Security Group should not be attached to EC2 instance | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_7/README.md) | no | no
+LW_AWS_NETWORKING_8 | AWS | Unrestricted Security Group should not be attached to RDS database | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_8/README.md) | no | no
+LW_AWS_NETWORKING_9 | AWS | Unrestricted Security Group should not be attached to Network Interface | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_9/README.md) | no | no
+LW_AWS_NETWORKING_10 | AWS | Unrestricted Security Group should not be attached to Classical Load Balancer | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_10/README.md) | no | no
+LW_AWS_NETWORKING_11 | AWS | Unrestricted Security Group should not be attached to Application Load Balancer | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_11/README.md) | no | no
+LW_AWS_NETWORKING_12 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 9300 (Elasticsearch) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_12/README.md) | no | no
+LW_AWS_NETWORKING_13 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 5601 (Kibana) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_13/README.md) | no | no
+LW_AWS_NETWORKING_14 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 6379 (Redis) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_14/README.md) | no | no
+LW_AWS_NETWORKING_15 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 2379 (etcd) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_15/README.md) | no | no
+LW_AWS_NETWORKING_16 | AWS | ELB SSL Certificate expires in 5 Days | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_16/README.md) | no | no
+LW_AWS_NETWORKING_17 | AWS | ELB SSL Certificate expires in 45 Days | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_17/README.md) | no | no
+LW_AWS_NETWORKING_18 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 23 (Telnet) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_18/README.md) | no | no
+LW_AWS_NETWORKING_19 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 135 (Windows RPC) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_19/README.md) | no | no
+LW_AWS_NETWORKING_20 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 445 (Windows SMB) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_20/README.md) | no | no
+LW_AWS_NETWORKING_21 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 3306 (MySQL) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_21/README.md) | no | no
+LW_AWS_NETWORKING_22 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 5432 (PostgreSQL) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_22/README.md) | no | no
+LW_AWS_NETWORKING_23 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 1433 (SQLServer) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_23/README.md) | no | no
+LW_AWS_NETWORKING_24 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to UDP port 1434 (SQLServer) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_24/README.md) | no | no
+LW_AWS_NETWORKING_25 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 4333 (MSQL) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_25/README.md) | no | no
+LW_AWS_NETWORKING_26 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 5500 (VNC Listener) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_26/README.md) | no | no
+LW_AWS_NETWORKING_27 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 5900 (VNC Server) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_27/README.md) | no | no
+LW_AWS_NETWORKING_28 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to UDP port 137 (NetBIOS) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_28/README.md) | no | no
+LW_AWS_NETWORKING_29 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to UDP port 138 (NetBIOS) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_29/README.md) | no | no
+LW_AWS_NETWORKING_30 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to UDP port 445 (CIFS) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_30/README.md) | no | no
+LW_AWS_NETWORKING_31 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 21 (FTP) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_31/README.md) | no | no
+LW_AWS_NETWORKING_32 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 20 (FTP-Data) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_32/README.md) | no | no
+LW_AWS_NETWORKING_33 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 25 (SMTP) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_33/README.md) | no | no
+LW_AWS_NETWORKING_34 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 53 (DNS) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_34/README.md) | no | no
+LW_AWS_NETWORKING_35 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to UDP port 53 (DNS) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_35/README.md) | no | no
+LW_AWS_NETWORKING_36 | AWS | Security group attached to EC2 instance should not allow inbound traffic from all to All Ports | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_36/README.md) | no | no
+LW_AWS_NETWORKING_37 | AWS | Redshift Cluster should not be Publicly Accessible | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_37/README.md) | no | no
+LW_AWS_NETWORKING_38 | AWS | ELB Security Group should have Outbound Rules attached to it | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_38/README.md) | no | no
+LW_AWS_NETWORKING_39 | AWS | ELB should not use insecure Cipher(s) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_39/README.md) | no | no
+LW_AWS_NETWORKING_40 | AWS | EC2 instance should be deployed in EC2-VPC platform | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_40/README.md) | no | no
+LW_AWS_NETWORKING_41 | AWS | CloudFront Origin Protocol Policy should use https-only | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_41/README.md) | no | no
+LW_AWS_NETWORKING_42 | AWS | CloudFront Origin SSL Protocols should not use insecure Cipher(s) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_42/README.md) | no | no
+LW_AWS_NETWORKING_43 | AWS | Security group should not allow inbound traffic from all to all ICMP | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_43/README.md) | no | no
+LW_AWS_NETWORKING_44 | AWS | ELB should have VPC ingress security group | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_44/README.md) | no | no
+LW_AWS_NETWORKING_45 | AWS | ELB should have valid and secure security group | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_45/README.md) | no | no
+LW_AWS_NETWORKING_46 | AWS | No Default VPC should be present in an AWS account | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_46/README.md) | no | no
+LW_AWS_NETWORKING_47 | AWS | EC2 instances should not have a Public IP address attached | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_47/README.md) | no | no
+LW_AWS_NETWORKING_48 | AWS | Attached VPC CIDR block(s) should be in whitelist | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_48/README.md) | no | no
+LW_AWS_NETWORKING_49 | AWS | Load Balancers should have Access Logs enabled | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_49/README.md) | no | no
 
 The current updates and releases are tracked inside the [Release Notes](ReleaseNotes.md) document.
 
