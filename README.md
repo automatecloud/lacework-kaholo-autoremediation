@@ -57,15 +57,11 @@ LW_S3_1 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' READ permissi
 LW_S3_2 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' WRITE permission [create, overwrite, and delete S3 objects] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_2/README.md) | yes | no
 LW_S3_3 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' READ_ACP permission [read bucket ACL] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_3/README.md) | yes | no
 LW_S3_4 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' WRITE_ACP permission [modify bucket ACL] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_4/README.md) | yes | no
+LW_S3_5 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' FULL_CONTROL [READ, WRITE, READ_ACP, WRITE_ACP] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_5/README.md) | yes | no
+LW_S3_6 | AWS | Ensure the S3 bucket ACL does not grant AWS users READ permission [list S3 objects] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_6/README.md) | no | no
 
 
 
-##### LW_S3_4
-
-[ReadMe](maps/compliance/aws/LW_S3_4/README.md)
-##### LW_S3_5
-Ensure the S3 bucket ACL does not grant 'Everyone' FULL_CONTROL [READ, WRITE, READ_ACP, WRITE_ACP]
-[ReadMe](maps/compliance/aws/LW_S3_5/README.md)
 ##### LW_S3_6
 Ensure the S3 bucket ACL does not grant AWS users READ permission [list S3 objects]
 [ReadMe](maps/compliance/aws/LW_S3_6/README.md)
@@ -127,7 +123,8 @@ The current target Roadmap is to build the following example Maps:
 3. Auto Remediation Maps for all the Lacework GCP Compliance checks
 4. Auto Remediation Maps for all the Lacework AWS User Activity events.
 5. Auto Remediation Maps for all the Lacework Azure User Activity events.
-6. Auto Remediation Maps for all the Lacework Application and Workload events.
+6. Auto Remediation Maps for all the Lacework GCP User Activity events.
+7. Auto Remediation Maps for all the Lacework Application and Workload events.
 
 ## Least Privilege
 
