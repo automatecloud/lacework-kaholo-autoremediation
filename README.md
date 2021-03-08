@@ -51,7 +51,7 @@ This repository is a community project. Everyone interested can contribute and u
 ### Compliance
 
 #### AWS
-Map ID | Cloud | Description | Status | Readme| CLI Remediation | Plugin Remediation
+Map ID | Cloud | Description | Status | Documentation | CLI Remediation | Plugin Remediation
 --- | --- | --- | --- | --- | --- | ---
 LW_S3_1 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' READ permission [list S3 objects] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_1/README.md) | yes | no
 LW_S3_2 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' WRITE permission [create, overwrite, and delete S3 objects] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_2/README.md) | yes | no
