@@ -51,7 +51,7 @@ The LW_S3_3 map currently looks like the following:
 
 * It will start with "Get the Event Details" from the EventID send by the Webhook payload
 * It will print out all the S3 Buckets that will be remediated, which is a list of S3 Buckets from the Event minus the S3 buckets ignored inside the LaceworkConfig.bucketIgnoreList list.
-* It will remediate all the S3 Buckets back to no longer grant 'Everyone' WRITE permission.
+* It will remediate all the S3 Buckets back to no longer grant 'Everyone' READ_ACL permission.
 * It will send out a slack message to the Webhook you configured in Slack.
 
 ### Map trigger
@@ -65,7 +65,7 @@ Make sure that the Map Trigger is configured with the following configuration:
 3. The Method "Alert from Lacework" needs to be selected
 4. The Variable **Event type** needs to be configured with Value **Compliance**
 5. The Variable **Issue ID** needs to be configured with Value **LW_S3_3**.
-6. The Variable **Event Severity** needs to be configured with the Value **Any** or **High**
+6. The Variable **Event Severity** needs to be configured with the Value **Any** or **Critical**
 
 With that configuration you make sure that this Map is only triggered if within the payload of the Webhook an alarm related to LW_S3_3 Control ID is send.
 
