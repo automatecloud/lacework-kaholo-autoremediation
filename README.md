@@ -58,22 +58,26 @@ LW_S3_2 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' WRITE permiss
 LW_S3_3 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' READ_ACP permission [read bucket ACL] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_3/README.md) | yes | no
 LW_S3_4 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' WRITE_ACP permission [modify bucket ACL] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_4/README.md) | yes | no
 LW_S3_5 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' FULL_CONTROL [READ, WRITE, READ_ACP, WRITE_ACP] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_5/README.md) | yes | no
-LW_S3_6 | AWS | Ensure the S3 bucket ACL does not grant AWS users READ permission [list S3 objects] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_6/README.md) | no | no
-LW_S3_7 | AWS | Ensure the S3 bucket ACL does not grant AWS users WRITE permission [create, overwrite, and delete S3 objects] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_7/README.md) | no | no
-LW_S3_8 | AWS | Ensure the S3 bucket ACL does not grant AWS users READ_ACP permission [read bucket ACL] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_8/README.md) | no | no
-LW_S3_9 | AWS | Ensure the S3 bucket ACL does not grant AWS users WRITE_ACP permission [modify bucket ACL] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_9/README.md) | no | no
-LW_S3_10 | AWS | Ensure the S3 bucket ACL does not grant AWS users FULL_CONTROL [READ, WRITE, READ_ACP, WRITE_ACP] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_10/README.md) | no | no
-LW_S3_11 | AWS | Ensure the attached S3 bucket policy does not grant 'Allow' permission to everyone | Prototype | [ReadMe](maps/compliance/aws/LW_S3_11/README.md) | no | no
-LW_S3_12 | AWS | Ensure the S3 bucket requires MFA to delete objects | Prototype | [ReadMe](maps/compliance/aws/LW_S3_12/README.md) | no | no
-LW_S3_13 | AWS | Ensure the S3 bucket has access logging enabled | Prototype | [ReadMe](maps/compliance/aws/LW_S3_13/README.md) | no | no
-LW_S3_14 | AWS | Ensure all data stored in the S3 bucket is securely encrypted at rest | Prototype | [ReadMe](maps/compliance/aws/LW_S3_14/README.md) | no | no
-LW_S3_15 | AWS | Ensure all data is transported from the S3 bucket securely | Prototype | [ReadMe](maps/compliance/aws/LW_S3_15/README.md) | no | no
-LW_S3_16 | AWS | Ensure the S3 bucket has versioning enabled | Prototype | [ReadMe](maps/compliance/aws/LW_S3_16/README.md) | no | no
-LW_S3_17 | AWS | Ensure the S3 bucket access is restricted to a whitelist of IP networks. | Prototype | [ReadMe](maps/compliance/aws/LW_S3_17/README.md) | no | no
-LW_S3_18 | AWS | Ensure the attached S3 bucket policy does not grant global 'Get' permission. | Prototype | [ReadMe](maps/compliance/aws/LW_S3_18/README.md) | no | no
-LW_S3_19 | AWS | Ensure the attached S3 bucket policy does not grant global 'Delete' permission. | Prototype | [ReadMe](maps/compliance/aws/LW_S3_19/README.md) | no | no
-LW_S3_20 | AWS | Ensure the attached S3 bucket policy does not grant global 'List' permission. | Prototype | [ReadMe](maps/compliance/aws/LW_S3_20/README.md) | no | no
-LW_S3_21 | AWS | Ensure the attached S3 bucket policy does not grant global 'Put' permission. | Prototype | [ReadMe](maps/compliance/aws/LW_S3_21/README.md) | no | no
+LW_S3_6 | AWS | Ensure the S3 bucket ACL does not grant AWS users READ permission [list S3 objects] | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_6/README.md) | no | no
+LW_S3_7 | AWS | Ensure the S3 bucket ACL does not grant AWS users WRITE permission [create, overwrite, and delete S3 objects] | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_7/README.md) | no | no
+LW_S3_8 | AWS | Ensure the S3 bucket ACL does not grant AWS users READ_ACP permission [read bucket ACL] | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_8/README.md) | no | no
+LW_S3_9 | AWS | Ensure the S3 bucket ACL does not grant AWS users WRITE_ACP permission [modify bucket ACL] | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_9/README.md) | no | no
+LW_S3_10 | AWS | Ensure the S3 bucket ACL does not grant AWS users FULL_CONTROL [READ, WRITE, READ_ACP, WRITE_ACP] | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_10/README.md) | no | no
+LW_S3_11 | AWS | Ensure the attached S3 bucket policy does not grant 'Allow' permission to everyone | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_11/README.md) | no | no
+LW_S3_12 | AWS | Ensure the S3 bucket requires MFA to delete objects | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_12/README.md) | no | no
+LW_S3_13 | AWS | Ensure the S3 bucket has access logging enabled | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_13/README.md) | no | no
+LW_S3_14 | AWS | Ensure all data stored in the S3 bucket is securely encrypted at rest | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_14/README.md) | no | no
+LW_S3_15 | AWS | Ensure all data is transported from the S3 bucket securely | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_15/README.md) | no | no
+LW_S3_16 | AWS | Ensure the S3 bucket has versioning enabled | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_16/README.md) | no | no
+LW_S3_17 | AWS | Ensure the S3 bucket access is restricted to a whitelist of IP networks. | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_17/README.md) | no | no
+LW_S3_18 | AWS | Ensure the attached S3 bucket policy does not grant global 'Get' permission. | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_18/README.md) | no | no
+LW_S3_19 | AWS | Ensure the attached S3 bucket policy does not grant global 'Delete' permission. | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_19/README.md) | no | no
+LW_S3_20 | AWS | Ensure the attached S3 bucket policy does not grant global 'List' permission. | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_20/README.md) | no | no
+LW_S3_21 | AWS | Ensure the attached S3 bucket policy does not grant global 'Put' permission. | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_21/README.md) | no | no
+AWS_CIS_1_1 | AWS | Avoid the use of the "root" account | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_1/README.md) | no | no
+
+
+
 
 The current updates and releases are tracked inside the [Release Notes](ReleaseNotes.md) document.
 
