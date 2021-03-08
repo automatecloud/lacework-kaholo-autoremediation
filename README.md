@@ -291,56 +291,55 @@ GCP_CIS_1_11 | GCP | Ensure API keys are restricted to use by only specified Hos
 GCP_CIS_1_12 | GCP | Ensure API keys are restricted to only APIs that application needs access | not implemented | [ReadMe](maps/compliance/aws/GCP_CIS_1_12/README.md) | no | no
 GCP_CIS_1_13 | GCP | Ensure API keys are rotated every 90 days | not implemented | [ReadMe](maps/compliance/aws/GCP_CIS_1_13/README.md) | no | no
 GCP_CIS_2_1 | GCP | Ensure that Cloud Audit Logging is configured properly across all services and all users from a project | not implemented | [ReadMe](maps/compliance/aws/GCP_CIS_2_1/README.md) | no | no
-GCP_CIS_2_2 | GCP | Ensure that sinks are configured for all Log entries | [ReadMe](maps/compliance/aws/GCP_CIS_2_2/README.md) | no | no
-GCP_CIS_2_3 | GCP | Ensure that object versioning is enabled on log-buckets | [ReadMe](maps/compliance/aws/GCP_CIS_2_3/README.md) | no | no
-GCP_CIS_2_4 | GCP | Ensure log metric filter and alerts exists for Project Ownership assignments/changes | [ReadMe](maps/compliance/aws/GCP_CIS_2_4/README.md) | no | no
-GCP_CIS_2_5 | GCP | Ensure log metric filter and alerts exists for Audit Configuration Changes | [ReadMe](maps/compliance/aws/GCP_CIS_2_5/README.md) | no | no
-GCP_CIS_2_6 | GCP | Ensure log metric filter and alerts exists for Custom Role changes | [ReadMe](maps/compliance/aws/GCP_CIS_2_6/README.md) | no | no
-GCP_CIS_2_7 | GCP | Ensure log metric filter and alerts exists for VPC Network Firewall rule changes | [ReadMe](maps/compliance/aws/GCP_CIS_2_7/README.md) | no | no
-GCP_CIS_2_8 | GCP | Ensure log metric filter and alerts exists for VPC network route changes | [ReadMe](maps/compliance/aws/GCP_CIS_2_8/README.md) | no | no
-GCP_CIS_2_9 | GCP | Ensure log metric filter and alerts exists for VPC network changes | [ReadMe](maps/compliance/aws/GCP_CIS_2_9/README.md) | no | no
-GCP_CIS_2_10 | GCP | Ensure log metric filter and alerts exists for Cloud Storage IAM permission changes | [ReadMe](maps/compliance/aws/GCP_CIS_2_10/README.md) | no | no
-GCP_CIS_2_11 | GCP | Ensure log metric filter and alerts exists for SQL instance configuration changes | [ReadMe](maps/compliance/aws/GCP_CIS_2_11/README.md) | no | no
-GCP_CIS_3_1 | GCP | Ensure the default network does not exist in a project | [ReadMe](maps/compliance/aws/GCP_CIS_3_1/README.md) | no | no
-GCP_CIS_3_2 | GCP | Ensure legacy networks does not exists for a project | [ReadMe](maps/compliance/aws/GCP_CIS_3_2/README.md) | no | no
-GCP_CIS_3_3 | GCP | Ensure that DNSSEC is enabled for Cloud DNS | [ReadMe](maps/compliance/aws/GCP_CIS_3_3/README.md) | no | no
-GCP_CIS_3_4 | GCP | Ensure that RSASHA1 is not used for key-signing key in Cloud DNS DNSSEC | [ReadMe](maps/compliance/aws/GCP_CIS_3_4/README.md) | no | no
-GCP_CIS_3_5 | GCP | Ensure that RSASHA1 is not used for zone-signing key in Cloud DNS DNSSEC | [ReadMe](maps/compliance/aws/GCP_CIS_3_5/README.md) | no | no
-GCP_CIS_3_6 | GCP | Ensure that SSH access is restricted from the internet | [ReadMe](maps/compliance/aws/GCP_CIS_3_6/README.md) | no | no
-GCP_CIS_3_7 | GCP | Ensure that RDP access is restricted from the internet | [ReadMe](maps/compliance/aws/GCP_CIS_3_7/README.md) | no | no
-GCP_CIS_3_8 | GCP | Ensure Private Google Access is enabled for all subnetwork in VPC Network | [ReadMe](maps/compliance/aws/GCP_CIS_3_8/README.md) | no | no
-GCP_CIS_4_1 | GCP | Ensure that instances are not configured to use the default service account with full access to all Cloud APIs | [ReadMe](maps/compliance/aws/GCP_CIS_4_1/README.md) | no | no
-GCP_CIS_4_2 | GCP | Ensure 'Block Project-wide SSH keys' enabled for VM instances | [ReadMe](maps/compliance/aws/GCP_CIS_4_2/README.md) | no | no
-GCP_CIS_4_3 | GCP | Ensure oslogin is enabled for a Project | [ReadMe](maps/compliance/aws/GCP_CIS_4_3/README.md) | no | no
-GCP_CIS_4_4 | GCP | Ensure 'Enable connecting to serial ports' is not enabled for VM Instance | [ReadMe](maps/compliance/aws/GCP_CIS_4_4/README.md) | no | no
-GCP_CIS_4_5 | GCP | Ensure that IP forwarding is not enabled on Instances | [ReadMe](maps/compliance/aws/GCP_CIS_4_5/README.md) | no | no
-GCP_CIS_4_6 | GCP | Ensure VM disks for critical VMs are encrypted with Customer-Supplied Encryption Keys | [ReadMe](maps/compliance/aws/GCP_CIS_4_6/README.md) | no | no
-GCP_CIS_5_1 | GCP | Ensure that Cloud Storage bucket is not anonymously or publicly accessible | [ReadMe](maps/compliance/aws/GCP_CIS_5_1/README.md) | no | no
-GCP_CIS_5_2 | GCP | Ensure that there are no publicly accessible objects in storage buckets | [ReadMe](maps/compliance/aws/GCP_CIS_5_2/README.md) | no | no
-GCP_CIS_5_3 | GCP | Ensure that logging is enabled for Cloud storage buckets | [ReadMe](maps/compliance/aws/GCP_CIS_5_3/README.md) | no | no
-GCP_CIS_6_1 | GCP | Ensure that Cloud SQL database instance requires all incoming connections to use SSL | [ReadMe](maps/compliance/aws/GCP_CIS_6_1/README.md) | no | no
+GCP_CIS_2_2 | GCP | Ensure that sinks are configured for all Log entries | [ReadMe](maps/compliance/aws/GCP_CIS_2_2/README.md) | not implemented | no | no
+GCP_CIS_2_3 | GCP | Ensure that object versioning is enabled on log-buckets | [ReadMe](maps/compliance/aws/GCP_CIS_2_3/README.md) | not implemented | no | no
+GCP_CIS_2_4 | GCP | Ensure log metric filter and alerts exists for Project Ownership assignments/changes | [ReadMe](maps/compliance/aws/GCP_CIS_2_4/README.md) | not implemented | no | no
+GCP_CIS_2_5 | GCP | Ensure log metric filter and alerts exists for Audit Configuration Changes | [ReadMe](maps/compliance/aws/GCP_CIS_2_5/README.md) | not implemented | no | no
+GCP_CIS_2_6 | GCP | Ensure log metric filter and alerts exists for Custom Role changes | [ReadMe](maps/compliance/aws/GCP_CIS_2_6/README.md) | not implemented | no | no
+GCP_CIS_2_7 | GCP | Ensure log metric filter and alerts exists for VPC Network Firewall rule changes | [ReadMe](maps/compliance/aws/GCP_CIS_2_7/README.md) | not implemented | no | no
+GCP_CIS_2_8 | GCP | Ensure log metric filter and alerts exists for VPC network route changes | [ReadMe](maps/compliance/aws/GCP_CIS_2_8/README.md) | not implemented | no | no
+GCP_CIS_2_9 | GCP | Ensure log metric filter and alerts exists for VPC network changes | [ReadMe](maps/compliance/aws/GCP_CIS_2_9/README.md) | not implemented | no | no
+GCP_CIS_2_10 | GCP | Ensure log metric filter and alerts exists for Cloud Storage IAM permission changes | [ReadMe](maps/compliance/aws/GCP_CIS_2_10/README.md) | not implemented | no | no
+GCP_CIS_2_11 | GCP | Ensure log metric filter and alerts exists for SQL instance configuration changes | [ReadMe](maps/compliance/aws/GCP_CIS_2_11/README.md) | not implemented | no | no
+GCP_CIS_3_1 | GCP | Ensure the default network does not exist in a project | [ReadMe](maps/compliance/aws/GCP_CIS_3_1/README.md) | not implemented | no | no
+GCP_CIS_3_2 | GCP | Ensure legacy networks does not exists for a project | [ReadMe](maps/compliance/aws/GCP_CIS_3_2/README.md) | not implemented | no | no
+GCP_CIS_3_3 | GCP | Ensure that DNSSEC is enabled for Cloud DNS | [ReadMe](maps/compliance/aws/GCP_CIS_3_3/README.md) | not implemented | no | no
+GCP_CIS_3_4 | GCP | Ensure that RSASHA1 is not used for key-signing key in Cloud DNS DNSSEC | [ReadMe](maps/compliance/aws/GCP_CIS_3_4/README.md) | not implemented | no | no
+GCP_CIS_3_5 | GCP | Ensure that RSASHA1 is not used for zone-signing key in Cloud DNS DNSSEC | [ReadMe](maps/compliance/aws/GCP_CIS_3_5/README.md) | not implemented | no | no
+GCP_CIS_3_6 | GCP | Ensure that SSH access is restricted from the internet | [ReadMe](maps/compliance/aws/GCP_CIS_3_6/README.md) | not implemented | no | no
+GCP_CIS_3_7 | GCP | Ensure that RDP access is restricted from the internet | [ReadMe](maps/compliance/aws/GCP_CIS_3_7/README.md) | not implemented | no | no
+GCP_CIS_3_8 | GCP | Ensure Private Google Access is enabled for all subnetwork in VPC Network | [ReadMe](maps/compliance/aws/GCP_CIS_3_8/README.md) | not implemented | no | no
+GCP_CIS_4_1 | GCP | Ensure that instances are not configured to use the default service account with full access to all Cloud APIs | [ReadMe](maps/compliance/aws/GCP_CIS_4_1/README.md) | not implemented | no | no
+GCP_CIS_4_2 | GCP | Ensure 'Block Project-wide SSH keys' enabled for VM instances | [ReadMe](maps/compliance/aws/GCP_CIS_4_2/README.md) | not implemented | no | no
+GCP_CIS_4_3 | GCP | Ensure oslogin is enabled for a Project | [ReadMe](maps/compliance/aws/GCP_CIS_4_3/README.md) | not implemented | no | no
+GCP_CIS_4_4 | GCP | Ensure 'Enable connecting to serial ports' is not enabled for VM Instance | [ReadMe](maps/compliance/aws/GCP_CIS_4_4/README.md) | not implemented | no | no
+GCP_CIS_4_5 | GCP | Ensure that IP forwarding is not enabled on Instances | [ReadMe](maps/compliance/aws/GCP_CIS_4_5/README.md) | not implemented | no | no
+GCP_CIS_4_6 | GCP | Ensure VM disks for critical VMs are encrypted with Customer-Supplied Encryption Keys | [ReadMe](maps/compliance/aws/GCP_CIS_4_6/README.md) | not implemented | no | no
+GCP_CIS_5_1 | GCP | Ensure that Cloud Storage bucket is not anonymously or publicly accessible | [ReadMe](maps/compliance/aws/GCP_CIS_5_1/README.md) | not implemented | no | no
+GCP_CIS_5_2 | GCP | Ensure that there are no publicly accessible objects in storage buckets | [ReadMe](maps/compliance/aws/GCP_CIS_5_2/README.md) | not implemented | no | no
+GCP_CIS_5_3 | GCP | Ensure that logging is enabled for Cloud storage buckets | [ReadMe](maps/compliance/aws/GCP_CIS_5_3/README.md) | not implemented | no | no
+GCP_CIS_6_1 | GCP | Ensure that Cloud SQL database instance requires all incoming connections to use SSL | [ReadMe](maps/compliance/aws/GCP_CIS_6_1/README.md) | not implemented | no | no
 GCP_CIS_6_2 | GCP | Ensure that Cloud SQL database Instances are not open to the world | [ReadMe](maps/compliance/aws/GCP_CIS_6_2/README.md) | no | no
-GCP_CIS_6_3 | GCP | Ensure that MySql database instance does not allow anyone to connect with administrative privileges | [ReadMe](maps/compliance/aws/GCP_CIS_6_3/README.md) | no | no
-GCP_CIS_6_4 | GCP | Ensure that MySQL Database Instance does not allows root login from any Host | [ReadMe](maps/compliance/aws/GCP_CIS_6_4/README.md) | no | no
-GCP_CIS_7_1 | GCP | Ensure Stackdriver Logging is set to Enabled on Kubernetes Engine Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_1/README.md) | no | no
-GCP_CIS_7_2 | GCP | Ensure Stackdriver Monitoring is set to Enabled on Kubernetes Engine Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_2/README.md) | no | no
-GCP_CIS_7_3 | GCP | Ensure Legacy Authorization is set to Disabled on Kubernetes Engine Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_3/README.md) | no | no
-GCP_CIS_7_4 | GCP | Ensure Master authorized networks is set to Enabled on Kubernetes Engine Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_4/README.md) | no | no
-GCP_CIS_7_5 | GCP | Ensure Kubernetes Clusters are configured with Labels | [ReadMe](maps/compliance/aws/GCP_CIS_7_5/README.md) | no | no
-GCP_CIS_7_6 | GCP | Ensure Kubernetes web UI / Dashboard is disabled | [ReadMe](maps/compliance/aws/GCP_CIS_7_6/README.md) | no | no
-GCP_CIS_7_7 | GCP | Ensure Automatic node repair is enabled for Kubernetes Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_7/README.md) | no | no
-GCP_CIS_7_8 | GCP | Ensure Automatic node upgrades is enabled on Kubernetes Engine Clusters nodes | [ReadMe](maps/compliance/aws/GCP_CIS_7_8/README.md) | no | no
-GCP_CIS_7_9 | GCP | Ensure Container-Optimized OS (cos) is used for Kubernetes Engine Clusters Node image | [ReadMe](maps/compliance/aws/GCP_CIS_7_9/README.md) | no | no
-GCP_CIS_7_10 | GCP | Ensure Basic Authentication is disabled on Kubernetes Engine Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_10/README.md) | no | no
-GCP_CIS_7_11 | GCP | Ensure Network policy is enabled on Kubernetes Engine Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_11/README.md) | no | no
-GCP_CIS_7_12 | GCP | Ensure Kubernetes Cluster is created with Client Certificate enabled | [ReadMe](maps/compliance/aws/GCP_CIS_7_12/README.md) | no | no
-GCP_CIS_7_13 | GCP | Ensure Kubernetes Cluster is created with Alias IP ranges enabled | [ReadMe](maps/compliance/aws/GCP_CIS_7_13/README.md) | no | no
-GCP_CIS_7_14 | GCP | Ensure PodSecurityPolicy controller is enabled on the Kubernetes Engine Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_14/README.md) | no | no
-GCP_CIS_7_15 | GCP | Ensure Kubernetes Cluster is created with Private cluster enabled | [ReadMe](maps/compliance/aws/GCP_CIS_7_15/README.md) | no | no
-GCP_CIS_7_16 | GCP | Ensure Private Google Access is set on Kubernetes Engine Cluster Subnets | [ReadMe](maps/compliance/aws/GCP_CIS_7_16/README.md) | no | no
-GCP_CIS_7_17 | GCP | Ensure default Service account is not used for Project access in Kubernetes Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_17/README.md) | no | no
-GCP_CIS_7_18 | GCP | Ensure Kubernetes Clusters created with limited service account Access scopes for Project access | [ReadMe](maps/compliance/aws/GCP_CIS_7_18/README.md) | no | no
-
+GCP_CIS_6_3 | GCP | Ensure that MySql database instance does not allow anyone to connect with administrative privileges | [ReadMe](maps/compliance/aws/GCP_CIS_6_3/README.md) | not implemented | no | no
+GCP_CIS_6_4 | GCP | Ensure that MySQL Database Instance does not allows root login from any Host | [ReadMe](maps/compliance/aws/GCP_CIS_6_4/README.md) | not implemented | no | no
+GCP_CIS_7_1 | GCP | Ensure Stackdriver Logging is set to Enabled on Kubernetes Engine Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_1/README.md) | not implemented | no | no
+GCP_CIS_7_2 | GCP | Ensure Stackdriver Monitoring is set to Enabled on Kubernetes Engine Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_2/README.md) | not implemented | no | no
+GCP_CIS_7_3 | GCP | Ensure Legacy Authorization is set to Disabled on Kubernetes Engine Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_3/README.md) | not implemented | no | no
+GCP_CIS_7_4 | GCP | Ensure Master authorized networks is set to Enabled on Kubernetes Engine Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_4/README.md) | not implemented | no | no
+GCP_CIS_7_5 | GCP | Ensure Kubernetes Clusters are configured with Labels | [ReadMe](maps/compliance/aws/GCP_CIS_7_5/README.md) | not implemented | no | no
+GCP_CIS_7_6 | GCP | Ensure Kubernetes web UI / Dashboard is disabled | [ReadMe](maps/compliance/aws/GCP_CIS_7_6/README.md) | not implemented | no | no
+GCP_CIS_7_7 | GCP | Ensure Automatic node repair is enabled for Kubernetes Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_7/README.md) | not implemented | no | no
+GCP_CIS_7_8 | GCP | Ensure Automatic node upgrades is enabled on Kubernetes Engine Clusters nodes | [ReadMe](maps/compliance/aws/GCP_CIS_7_8/README.md) | not implemented | no | no
+GCP_CIS_7_9 | GCP | Ensure Container-Optimized OS (cos) is used for Kubernetes Engine Clusters Node image | [ReadMe](maps/compliance/aws/GCP_CIS_7_9/README.md) | not implemented | no | no
+GCP_CIS_7_10 | GCP | Ensure Basic Authentication is disabled on Kubernetes Engine Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_10/README.md) | not implemented | no | no
+GCP_CIS_7_11 | GCP | Ensure Network policy is enabled on Kubernetes Engine Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_11/README.md) | not implemented | no | no
+GCP_CIS_7_12 | GCP | Ensure Kubernetes Cluster is created with Client Certificate enabled | [ReadMe](maps/compliance/aws/GCP_CIS_7_12/README.md) | not implemented | no | no
+GCP_CIS_7_13 | GCP | Ensure Kubernetes Cluster is created with Alias IP ranges enabled | [ReadMe](maps/compliance/aws/GCP_CIS_7_13/README.md) | not implemented | no | no
+GCP_CIS_7_14 | GCP | Ensure PodSecurityPolicy controller is enabled on the Kubernetes Engine Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_14/README.md) | not implemented | no | no
+GCP_CIS_7_15 | GCP | Ensure Kubernetes Cluster is created with Private cluster enabled | [ReadMe](maps/compliance/aws/GCP_CIS_7_15/README.md) | not implemented | no | no
+GCP_CIS_7_16 | GCP | Ensure Private Google Access is set on Kubernetes Engine Cluster Subnets | [ReadMe](maps/compliance/aws/GCP_CIS_7_16/README.md) | not implemented | no | no
+GCP_CIS_7_17 | GCP | Ensure default Service account is not used for Project access in Kubernetes Clusters | [ReadMe](maps/compliance/aws/GCP_CIS_7_17/README.md) | not implemented | no | no
+GCP_CIS_7_18 | GCP | Ensure Kubernetes Clusters created with limited service account Access scopes for Project access | [ReadMe](maps/compliance/aws/GCP_CIS_7_18/README.md) | not implemented | no | no
 
 The current updates and releases are tracked inside the [Release Notes](ReleaseNotes.md) document.
 
