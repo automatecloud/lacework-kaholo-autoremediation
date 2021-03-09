@@ -52,10 +52,10 @@ The LW_S3_7 map currently looks like the following:
 
 <img src="LW_S3_7.png" width="495" height="292">
 
-* It will start with "Get the Event Details" from the EventID send by the Webhook payload.
-* If you enabled the AutoRemediation via the CLI inside the LaceworkConfig of the Map **dotheremediationviacli": "false"** it will print out all the S3 Buckets that will remediate all buckets by using the AWS CLI.
-* If you enabled the AutoRemediation via the Object inside the LaceworkConfig of the Map **"dotheremediationviaobject": "true"** it will remediate all buckets by using the Kaholo S3 object.
-* It will send out a slack message for each bucket that will be remediated to the Webhook you configured in Slack.
+* It will start with **"Get the Event details"** from the EventID send by the Webhook payload to get all the event specific data.
+* If you enabled the AutoRemediation via the CLI inside the LaceworkConfig of the Map via **"dotheremediationviacli": "false"** it will print out all the S3 Buckets that will remediate all buckets by using the AWS CLI.
+* If you enabled the AutoRemediation via the Object inside the LaceworkConfig of the Map via **"dotheremediationviaobject": "true"** it will remediate all buckets by using the Kaholo S3 bucket object from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3).
+* It will send out a Slack message for each bucket that will be remediated to the Webhook you configured in Slack.
 * If you enabled the configuration to send out slack messages for ignored S3 buckets inside the LaceworkConfig of the Map **"sendslackmessagesforignored": "true"** it will send out a slack message for each bucket that is violating the policy and ignored to the Webhook you configured in Slack.
 
 ### Map trigger
