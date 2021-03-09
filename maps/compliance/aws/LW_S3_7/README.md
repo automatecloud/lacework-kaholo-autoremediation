@@ -24,7 +24,7 @@ LW_S3_7
 Perform the following to revoke WRITE permission for all AWS users:
 1. Sign in to the AWS Management Console
 2. Open the S3 Service - https://console.aws.amazon.com/s3/
-3. From the list of S3 buckets, select S3 bucket you want to change
+3. From the list of S3 buckets, select the S3 bucket you want to change
 4. Navigate to the permissions tab
 5. Select Access Control List from the permissions tab
 6. Under Public access, Select the Group ‘Any AWS user’ by clicking the circular button in front
@@ -37,12 +37,12 @@ of it
 
 We recommend to create an S3 test bucket and configure it to give all authenticated AWS users WRITE permission. This will generate an event and alert inside Lacework during the next compliance check. This Event can then be used to test the Auto Remediation of this Map.
 
-You can use the following AWS CLI command to configure an existing S3 test bucket to give all authenticated AWS users WRITE permission permission:
+You can use the following AWS CLI command to configure an existing S3 test bucket to give all authenticated AWS users WRITE permission:
 
 ```
 aws s3api put-bucket-acl --bucket <YOURBUCKETNAME>  --grant-write uri=http://acs.amazonaws.com/groups/global/AuthenticatedUsers
 ```
-**Note:** Make sure you configure **YOURBUCKETNAME** with the name of the S3 test bucket you would like to use for tests. Don't use any S3 bucket with important data! This if for testing of this map only and it should not have any important data.
+**Note:** Make sure you configure the **YOURBUCKETNAME** with the name of the S3 test bucket you would like to use for tests. Don't use any S3 bucket with important data! This if for testing of this map only and it should not have any important data.
 
 ## Import the Map
 
@@ -53,7 +53,7 @@ The **LW_S3_7** map currently has the following map design:
 
 <img src="LW_S3_7.png" width="495" height="292">
 
-* It will start with **Get the Event details**. This Object will use the EventID send by the webhook payload to get all the event specific data.
+* The map starts with **Get the Event details** object. It will use the EventID send by the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) to get all the event specific data.
 * If you enabled the Auto Remediation via the CLI inside the LaceworkConfig of the Map via **"dotheremediationviacli": "true"** it will print out all the S3 Buckets that will remediate all buckets by using the AWS CLI.
 * If you enabled the Auto Remediation via the Object inside the LaceworkConfig of the Map via **"dotheremediationviaobject": "true"** it will remediate all buckets by using the Kaholo S3 bucket object from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3).
 * It will send out a Slack message for each S3 bucket that will be remediated to the Webhook you configured in Slack.
