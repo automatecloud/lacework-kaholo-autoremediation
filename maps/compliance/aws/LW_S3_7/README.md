@@ -2,7 +2,7 @@
 
 ## Description
 Ensure the bucket ACL does not grant AWS users WRITE permission [create, overwrite,
-and delete S3 objects]
+and delete S3 objects].
 
 The S3 bucket ACL gives any authenticated AWS user permission to create, write and delete
 objects in the bucket. It is best practice to restrict WRITE permission to only principals who
@@ -33,16 +33,16 @@ of it
 8. Click ‘Save’ to remove the permission for ‘Any AWS user’
 9. Repeat steps 3-8 for every bucket for which you want to change permissions
 
-## How can i use this Map?
+## How can i use this Map for Auto Remediation?
 
-We recommend to create a Test S3 Bucket and configure it for Everyone READ permission, so you are generating an Alert inside Lacework during the next compliance check that you can use to test the Auto Remediation.
+We recommend to create an S3 test bucket and configure it to give all authenticated AWS users WRITE permission. This will generate an event and alert inside Lacework during the next compliance check. This Event can then be used to test the Auto Remediation.
 
-You can use the following AWS CLI command to configure an existing S3 test bucket with every AWS authenticated Users WRITE permission:
+You can use the following AWS CLI command to configure an existing S3 test bucket to give all authenticated AWS users WRITE permission permission:
 
 ```
 aws s3api put-bucket-acl --bucket <YOURBUCKETNAME>  --grant-write uri=http://acs.amazonaws.com/groups/global/AuthenticatedUsers
 ```
-**Note:** Make sure you configure the <YOURBUCKETNAME> with the name of the S3 test bucket you would like to use for tests. Don't use any S3 bucket with important data! This if for testing of the map only.
+**Note:** Make sure you configure **YOURBUCKETNAME** with the name of the S3 test bucket you would like to use for tests. Don't use any S3 bucket with important data! This if for testing of this map only and it should not have any important data.
 
 ## Import the Map
 
