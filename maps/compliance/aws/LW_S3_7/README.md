@@ -35,7 +35,7 @@ of it
 
 ## How can i use this Map for Auto Remediation?
 
-We recommend to create an S3 test bucket and configure it to give all authenticated AWS users WRITE permission. This will generate an event and alert inside Lacework during the next compliance check. This Event can then be used to test the Auto Remediation.
+We recommend to create an S3 test bucket and configure it to give all authenticated AWS users WRITE permission. This will generate an event and alert inside Lacework during the next compliance check. This Event can then be used to test the Auto Remediation of this Map.
 
 You can use the following AWS CLI command to configure an existing S3 test bucket to give all authenticated AWS users WRITE permission permission:
 
@@ -46,16 +46,16 @@ aws s3api put-bucket-acl --bucket <YOURBUCKETNAME>  --grant-write uri=http://acs
 
 ## Import the Map
 
-Inside your new created project (for example Lacework - AutoRemediation) you can Import the Map.
+The Map needs to be imported inside an existing or new Kaholo Project.
 
 ### Map Design and workflow
-The LW_S3_7 map currently looks like the following:
+The **LW_S3_7** map currently has the following map design:
 
 <img src="LW_S3_7.png" width="495" height="292">
 
-* It will start with **"Get the Event details"** from the EventID send by the Webhook payload to get all the event specific data.
-* If you enabled the AutoRemediation via the CLI inside the LaceworkConfig of the Map via **"dotheremediationviacli": "false"** it will print out all the S3 Buckets that will remediate all buckets by using the AWS CLI.
-* If you enabled the AutoRemediation via the Object inside the LaceworkConfig of the Map via **"dotheremediationviaobject": "true"** it will remediate all buckets by using the Kaholo S3 bucket object from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3).
+* It will start with **Get the Event details**. This Object will use the EventID send by the webhook payload to get all the event specific data.
+* If you enabled the Auto Remediation via the CLI inside the LaceworkConfig of the Map via **"dotheremediationviacli": "true"** it will print out all the S3 Buckets that will remediate all buckets by using the AWS CLI.
+* If you enabled the Auto Remediation via the Object inside the LaceworkConfig of the Map via **"dotheremediationviaobject": "true"** it will remediate all buckets by using the Kaholo S3 bucket object from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3).
 * It will send out a Slack message for each S3 bucket that will be remediated to the Webhook you configured in Slack.
 * If you enabled the configuration to send out slack messages for ignored S3 buckets inside the LaceworkConfig of the Map **"sendslackmessagesforignored": "true"** it will send out a slack message for each bucket that is violating the policy and ignored to the Webhook you configured in Slack.
 
