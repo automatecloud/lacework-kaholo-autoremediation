@@ -67,7 +67,7 @@ Make sure that the Map Trigger is configured with the following configuration:
 3. The Method "Alert from Lacework" needs to be selected
 4. The Variable **Event type** needs to be configured with Value **Compliance**
 5. The Variable **Issue ID** needs to be configured with Value **LW_S3_4**.
-6. The Variable **Event Severity** needs to be configured with the Value **Any** or **Critical**
+6. The Variable **Event Severity** needs to be configured with the Value **Any** or **High**
 
 With that configuration you make sure that this Map is only triggered if within the payload of the Webhook an alarm related to LW_S3_4 Control ID is send.
 
