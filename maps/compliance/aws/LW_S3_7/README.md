@@ -7,7 +7,8 @@ and delete S3 objects]
 The S3 bucket ACL gives any authenticated AWS user permission to create, write and delete
 objects in the bucket. It is best practice to restrict WRITE permission to only principals who
 require it.
-Rationale:
+
+**Rationale:**
 Granting all AWS users WRITE permission allows any authenticated AWS user to create, write and
 delete bucket objects. Malicious users can create temporary AWS accounts and exploit this
 permission to alter data, delete data and misuse your resources.
