@@ -44,6 +44,36 @@ First of all you need to have a Lacework and Kaholo instance. For Lacework pleas
 4. Create a new Project inside Kaholo (example Lacework - AutoRemediation) as collection for the different auto remediation maps.
 5. Start to import the necessary maps.
 
+### Creating your Kaholo Agent with Cloud Provider CLIs included.
+
+To be able to execute the Cloud Provider AutoRemediation CLI commands you need to create a new agent container image that can be used to connect to your central Kaholo instance and trigger the playbooks.
+
+1. We recommend to clone the current Kaholo Agent repository available at https://github.com/Kaholo/kaholo-agent
+2. You need to update the Dockerfile by adding the installation instructions to install the Cloud Provider specific CLI. Currently we do focus on AWS, but we will add the other cloud provider APIs shortly
+
+Dockerfile
+```
+FROM node:14.15.2-buster
+
+# Create app directory
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install --production
+
+# Bundle app source
+COPY . .
+
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip awscliv2.zip && ./aws/install
+
+EXPOSE 8090
+
+CMD [ "npm", "start" ]
+```
+
+3. Make sure that you map the necessary credentials, environment files and configuration into the Agent container. The Kaholo customer success team will help you to map the necessary config files similar to the following approach described at https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-docker.html.
+
 ## Which Maps are already available?
 
 This repository is a community project. Everyone interested can contribute and update existing and creating new maps. Currently the following Maps are available
