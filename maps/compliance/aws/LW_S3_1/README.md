@@ -116,6 +116,14 @@ The Remediation block will only be triggered if the configuration dotheremediati
 2. Make sure that you put all the S3 buckets that should not be auto remediated into the bucketIgnoreList of the LaceworkConfig.
 3. To be even more sure we recommend to configure a suppression setting for the LW_S3_1 compliance check within the Lacework platform to ignore the S3 bucket. Otherwise the ignored Buckets will create additional Events and Alerts within Lacework.
 
+The Remediation block will Auto Remediate by using the following AWS CLI command that will put the ACL back into private mode, which means only the owner will be able to list and write on Objects and read and write on the Bucket ACL:
+
+```
+aws s3api put-bucket-acl --bucket <YOURBUCKETNAME> --acl private
+```
+
+If you want to know more about the aws s3api put-bucket-acl command or want to replace it with a different option for auto remediation we recommend to take a look at the official documentation available [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/put-bucket-acl.html).
+
 ## Build an example curl webhook
 
 There is no need to wait for Lacework sending the Webhook Alert again if you plan to test it immediately. You can trigger the map by using a simple curl command that will send the necessary information.
