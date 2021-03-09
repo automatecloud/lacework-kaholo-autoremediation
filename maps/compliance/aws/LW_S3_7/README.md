@@ -53,11 +53,11 @@ The **LW_S3_7** map currently has the following map design:
 
 <img src="LW_S3_7.png" width="495" height="292">
 
-* The map starts with **Get the Event details** object. It will use the EventID send by the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) to get all the event specific data.
-* If you enabled the Auto Remediation via the CLI inside the LaceworkConfig of the Map via **"dotheremediationviacli": "true"** it will print out all the S3 Buckets that will remediate all buckets by using the AWS CLI.
-* If you enabled the Auto Remediation via the Object inside the LaceworkConfig of the Map via **"dotheremediationviaobject": "true"** it will remediate all buckets by using the Kaholo S3 bucket object from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3).
-* It will send out a Slack message for each S3 bucket that will be remediated to the Webhook you configured in Slack.
-* If you enabled the configuration to send out slack messages for ignored S3 buckets inside the LaceworkConfig of the Map **"sendslackmessagesforignored": "true"** it will send out a slack message for each bucket that is violating the policy and ignored to the Webhook you configured in Slack.
+* The map starts with **Get the Event details** object. It will use the **event_id** send by the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook), using the Lacework API Access Key and  Lacework Secret Key to create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the Lacework API via the API call **/api/v1/external/events/GetEventDetails** of the configure Lacework instance.
+* The map will trigger the **Remediate via CLI** CommandLine object If you enabled the Auto Remediation via the CLI inside the LaceworkConfig of the map by using the **"dotheremediationviacli": "true"** setting. It will print out the name of the S3 buckets that will be remediated and uses the AWS CLI to remediate the S3 buckets.
+* The map will trigger the **Remediate via Object** Amazon-aws-s3 object if you enabled the Auto Remediation via the Object inside the LaceworkConfig of the map by using the **"dotheremediationviaobject": "true"** setting. it will remediate all S3 buckets by using the Method **apply canned ACL to Bucket** from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3).
+* The map will send out a Slack message for each S3 bucket that will be remediated to the Webhook you configured for the **Remediated** Slack object.
+* If you enabled the configuration to send out slack messages for ignored S3 buckets inside the LaceworkConfig of the Map **"sendslackmessagesforignored": "true"** it will send out a slack message for each bucket that is violating the policy and ignored to the Webhook you configured for the **Ignored** Slack object.
 
 ### Map trigger
 
@@ -66,17 +66,17 @@ Make sure that the Map Trigger is configured with the following configuration:
 <img src="LW_S3_7_Trigger.png" width="269" height="608">
 
 1. The Configuration needs to be configured with **LaceworkConfig**
-2. The Plugin needs to be configured with Lacework-Trigger
-3. The Method "Alert from Lacework" needs to be selected
+2. The Plugin needs to be configured with the **kaholo-trigger-lacework**
+3. The Method **Lacework Alert** needs to be selected
 4. The Variable **Event type** needs to be configured with Value **Compliance**
-5. The Variable **Issue ID** needs to be configured with Value **LW_S3_7**.
+5. The Variable **Event ID** needs to be configured with Value **LW_S3_7**.
 6. The Variable **Event Severity** needs to be configured with the Value **Any** or **High**
 
-With that configuration you make sure that this Map is only triggered if within the payload of the Webhook an alarm related to **LW_S3_7** Control ID is send.
+This configuration will make sure that this map is only triggered if the **event_description** of the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) includes the **LW_S3_7** Event ID.
 
 ### Configuration of the Map
 
-Make sure you configure the following configurations inside the LaceworkConfig:
+Make sure you configure the following configurations inside the **LaceworkConfig** Configuration of the map:
 1. **eventuuid:** Please make sure that the UUID used here is the UUID of the "Get event details". Due to the reimport of the Map the UUID of the event object could have changed. For that you can go to the Design, open the "Get Events" building block.
 
 ![Get Event](geteventdetails.png "Get Event")
