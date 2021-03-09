@@ -41,7 +41,7 @@ You can use the following AWS CLI command to configure an existing S3 test bucke
 ```
 aws s3api put-bucket-acl --bucket <YOURBUCKETNAME>  --grant-write uri=http://acs.amazonaws.com/groups/global/AuthenticatedUsers
 ```
-**Note:** Make sure you configure the <YOURBUCKETNAME> with the name of the S3 test bucket you would like to use for tests. Please don't use any S3 bucket with important data! This if for testing of the map only.
+**Note:** Make sure you configure the <YOURBUCKETNAME> with the name of the S3 test bucket you would like to use for tests. Don't use any S3 bucket with important data! This if for testing of the map only.
 
 ## Import the Map
 
@@ -55,7 +55,7 @@ The LW_S3_7 map currently looks like the following:
 * It will start with **"Get the Event details"** from the EventID send by the Webhook payload to get all the event specific data.
 * If you enabled the AutoRemediation via the CLI inside the LaceworkConfig of the Map via **"dotheremediationviacli": "false"** it will print out all the S3 Buckets that will remediate all buckets by using the AWS CLI.
 * If you enabled the AutoRemediation via the Object inside the LaceworkConfig of the Map via **"dotheremediationviaobject": "true"** it will remediate all buckets by using the Kaholo S3 bucket object from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3).
-* It will send out a Slack message for each bucket that will be remediated to the Webhook you configured in Slack.
+* It will send out a Slack message for each S3 bucket that will be remediated to the Webhook you configured in Slack.
 * If you enabled the configuration to send out slack messages for ignored S3 buckets inside the LaceworkConfig of the Map **"sendslackmessagesforignored": "true"** it will send out a slack message for each bucket that is violating the policy and ignored to the Webhook you configured in Slack.
 
 ### Map trigger
@@ -71,7 +71,7 @@ Make sure that the Map Trigger is configured with the following configuration:
 5. The Variable **Issue ID** needs to be configured with Value **LW_S3_7**.
 6. The Variable **Event Severity** needs to be configured with the Value **Any** or **High**
 
-With that configuration you make sure that this Map is only triggered if within the payload of the Webhook an alarm related to LW_S3_7 Control ID is send.
+With that configuration you make sure that this Map is only triggered if within the payload of the Webhook an alarm related to **LW_S3_7** Control ID is send.
 
 ### Configuration of the Map
 
@@ -84,7 +84,7 @@ Inside the configuration of the Get Event building block you will find the UUID:
 
 <img src="geteventdetails2.png" width="233" height="179">
 
-2. **Note** you can decide to  do the AutoRemediation via the CLI **"dotheremediationviacli": "true"** or using the Kaholo S3 bucket object **"dotheremediationviaobject": "true"**. By default both settings are configured to **false**, so it will not by accident start to remediate S3 buckets. We recommend to make sure that only the right buckets will be remediated and the map is working as expected before you configure this setting to true. Please do not configure **dotheremediationviacli"** and **dotheremediationviaobject"** both to **true**. The Map will check that at the beginning and not execute. Only one of each can be enabled and used for the AutoRemediation.
+2. **Note:** you can decide to  do the AutoRemediation via the CLI **"dotheremediationviacli": "true"** or using the Kaholo S3 bucket object **"dotheremediationviaobject": "true"**. By default both settings are configured to **false**, so it will not by accident start to remediate S3 buckets. We recommend to make sure that only the right buckets will be remediated and the map is working as expected before you configure this setting to true. Do not configure **dotheremediationviacli"** and **dotheremediationviaobject"** both to **true**. The Map will check that at the beginning and not execute. Only one of each can be enabled and used for the AutoRemediation.
 
 3. (Optional). You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 buckets that should be ignored within the bucketIgnoreList of the LaceworkConfig.
 
@@ -119,9 +119,9 @@ Optional you can disable via **"sendslackmessagesforignored": "false"** to not s
 
 ### Configuration of the Remediation
 
-The AutoRemediation is disabled if you import the map. It will only be triggered if the configuration **dotheremediationviacli** or **dotheremediationviaobject** of the LaceworkConfig is configured with true. Before enabling this we recommend the following:
+The AutoRemediation is disabled if you import the map. It will only be triggered if the configuration **dotheremediationviacli** or **dotheremediationviaobject** of the LaceworkConfig is configured with **true**. Before enabling this we recommend the following:
 
-1. Create a test S3 bucket that is violating the compliance rule for LW_S3_7
+1. Create a test S3 bucket that is violating the compliance rule for **LW_S3_7** via the CLI command described in the section ["How can i use the Map?"](https://github.com/automatecloud/lacework-kaholo-autoremediation/tree/main/maps/compliance/aws/LW_S3_7#how-can-i-use-this-map)
 2. Make sure that you put all the S3 buckets that should not be auto remediated into the bucketIgnoreList of the LaceworkConfig.
 3. To be even more sure we recommend to configure a suppression setting for the LW_S3_6 compliance check within the Lacework platform to ignore the S3 bucket. Otherwise the ignored Buckets will create additional Events and Alerts within Lacework.
 
@@ -141,7 +141,7 @@ There is no need to wait for Lacework sending the Webhook Alert all the time whe
 
 Before you can trigger the webhook you need to have an event generated within your Lacework instance.
 
-As soon as you got an event we recommend using the Event Information to create an example webhook trigger inside your terminal using the following environment variables. Please make sure to update it with the information from the Event you did generate.#
+As soon as you got an event we recommend using the Event Information to create an example webhook trigger inside your terminal using the following environment variables. Make sure to update it with the information from the Event you did generate.#
 
 ```
 export EVENTTITLE="New Violations"
