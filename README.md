@@ -89,7 +89,7 @@ LW_S3_3 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' READ_ACP perm
 LW_S3_4 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' WRITE_ACP permission [modify bucket ACL] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_4/README.md) | yes | no
 LW_S3_5 | AWS | Ensure the S3 bucket ACL does not grant 'Everyone' FULL_CONTROL [READ, WRITE, READ_ACP, WRITE_ACP] | Prototype | [ReadMe](maps/compliance/aws/LW_S3_5/README.md) | yes | no
 LW_S3_6 | AWS | Ensure the S3 bucket ACL does not grant AWS users READ permission [list S3 objects] | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_6/README.md) | yes | no
-LW_S3_7 | AWS | Ensure the S3 bucket ACL does not grant AWS users WRITE permission [create, overwrite, and delete S3 objects] | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_7/README.md) | no | no
+LW_S3_7 | AWS | Ensure the S3 bucket ACL does not grant AWS users WRITE permission [create, overwrite, and delete S3 objects] | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_7/README.md) | yes | no
 LW_S3_8 | AWS | Ensure the S3 bucket ACL does not grant AWS users READ_ACP permission [read bucket ACL] | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_8/README.md) | no | no
 LW_S3_9 | AWS | Ensure the S3 bucket ACL does not grant AWS users WRITE_ACP permission [modify bucket ACL] | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_9/README.md) | no | no
 LW_S3_10 | AWS | Ensure the S3 bucket ACL does not grant AWS users FULL_CONTROL [READ, WRITE, READ_ACP, WRITE_ACP] | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_10/README.md) | no | no
