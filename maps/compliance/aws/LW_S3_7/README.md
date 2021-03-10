@@ -86,7 +86,7 @@ Inside the configuration of the **Get event details** building block you will fi
 
 <img src="geteventdetails2.png" width="233" height="179">
 
-2. **Note:** you can choose to do the Auto Remediation via the CLI **"dotheremediationviacli": "true"** or by using the Kaholo S3 bucket object **"dotheremediationviaobject": "true"**. By default both settings are configured to **false**, so it will not by accident start to remediate misconfigured S3 buckets. We recommend to make sure that only the right buckets will be remediated and the map is working as expected before you configure any of both settings to true. Do not configure **dotheremediationviacli"** and **dotheremediationviaobject"** both at the same time to **true**. The map will check that possible misconfiguraiton at the beginning of the map and not execute. Only one of both can be enabled and used for the Auto Remediation.
+2. **Note:** you can choose to do the Auto Remediation via the CLI **"dotheremediationviacli": "true"** or by using the Kaholo S3 bucket object **"dotheremediationviaobject": "true"**. By default both settings are configured to **false**, so it will not by accident start to remediate misconfigured S3 buckets. We recommend to make sure that only the right buckets will be remediated and the map is working as expected before you configure any of both settings to true. Do not configure **dotheremediationviacli** and **dotheremediationviaobject** both at the same time to **true**. The map will check that possible misconfiguraiton at the beginning of the map and not execute. Only one of both can be enabled and used for the Auto Remediation.
 
 3. If you are using the AutoRemediation via CLI, make sure you select an Agent for the Map that has the AWS CLI installed and configured.
 
