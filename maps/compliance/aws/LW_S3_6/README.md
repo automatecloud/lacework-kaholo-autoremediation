@@ -6,7 +6,8 @@ Ensure the bucket ACL does not grant AWS users READ permission [list S3 objects]
 The S3 bucket ACL gives any authenticated AWS user permission to list objects, which allows any
 authenticated AWS user to list the bucket contents. It is best practice to restrict READ permission
 to only principals who require it.
-Rationale:
+
+**Rationale:**
 Granting all AWS uses READ permission allows any authenticated AWS user to list all bucket
 objects. Malicious users can create temporary AWS accounts and use this permission to identify
 and exploit objects with misconfigured ACL permissions.

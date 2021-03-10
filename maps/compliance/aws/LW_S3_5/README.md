@@ -6,7 +6,8 @@ READ_ACP, WRITE_ACP]
 
 The S3 bucket ACL gives 'Everyone' total control of the bucket and the bucket ACL. It is best
 practice to restrict FULL_CONTROL.
-Rationale:
+
+**Rationale:**
 Granting ‘Everyone’ FULL_CONTROL gives anyone, including anonymous users from the Internet,
 total control of the bucket. Malicious users can exploit this permission to read, delete or steal
 your data and/or misuse the resources in your account.
@@ -48,9 +49,9 @@ aws s3api put-bucket-acl --bucket <YOURBUCKETNAME> --grant-full-control uri=http
 The Map needs to be imported inside an existing or new Kaholo Project.
 
 ### Map Design and workflow
-The **LW_S3_6** map currently has the following map design:
+The **LW_S3_5** map currently has the following map design:
 
-<img src="LW_S3_6.png" width="495" height="292">
+<img src="LW_S3_5.png" width="495" height="292">
 
 * The map starts with **Get the Event details** object. It will use the **event_id** send by the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook), using the **Lacework API Access Key** and  **Lacework Secret Key** from the Kaholo vault that you configured the Lacework Plugin with. to create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the Lacework API via the API call **/api/v1/external/events/GetEventDetails** of the configured Lacework instance. The return value of this API call is the complete Event Payload you can use within the Map.
 * The map will trigger the **Remediate via CLI** CommandLine object If you enabled the Auto Remediation via the CLI inside the LaceworkConfig of the map by using the **"dotheremediationviacli": "true"** setting. It will print out the name of the S3 buckets that will be remediated and uses the AWS CLI to remediate the S3 buckets.
@@ -62,16 +63,16 @@ The **LW_S3_6** map currently has the following map design:
 
 Make sure that the Map Webhook Trigger is configured with the following configuration:
 
-<img src="LW_S3_6_Trigger.png" width="269" height="608">
+<img src="LW_S3_5_Trigger.png" width="269" height="608">
 
 1. The Configuration needs to be configured with **LaceworkConfig** to make sure the Configuration LaceworkConfig is used when the map is triggered.
 2. The Plugin setting needs to be configured with the Lacework Webhook Plugin **kaholo-trigger-lacework**
 3. The Method **Lacework Alert** needs to be selected
 4. The Variable **Event type** needs to be configured with Value **Compliance**
-5. The Variable **Event ID** needs to be configured with Value **LW_S3_6**.
+5. The Variable **Event ID** needs to be configured with Value **LW_S3_5**.
 6. The Variable **Event Severity** needs to be configured with the Value **Any** or **High**
 
-This configuration will make sure that this map is only triggered if the **event_description** of the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) includes the **LW_S3_6** Event ID.
+This configuration will make sure that this map is only triggered if the **event_description** of the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) includes the **LW_S3_5** Event ID.
 
 ### Configuration of the Map
 
@@ -82,9 +83,9 @@ By default the map has the following configurations:
 ```
 {
     "name": "LaceworkConfiguration",
-    "policyID": "LW_S3_6",
-    "violationdescription": "Ensure the S3 bucket ACL does not grant every authenticated AWS User READ permission",
-    "eventuuid": "b373819a-a378-423c-b2e3-db3141ec6ae6",
+    "policyID": "LW_S3_5",
+    "violationdescription": "Ensure the S3 bucket ACL does not grant Everyone FULL_CONTROL permission",
+    "eventuuid": "8a8292ec-afc7-4283-ba62-2d59c39a772e",
     "dotheremediationviacli": "false",
     "dotheremediationviaobject": "false",
     "sendslackmessagesforignored": "true",
@@ -115,9 +116,9 @@ For the Auto Remediation you need to decide if you would like to Auto Remediate 
 
 The Auto Remediation is disabled if you import the map. It will only be triggered if the configuration **dotheremediationviacli** or **dotheremediationviaobject** of the LaceworkConfig is configured with **true**. Before enabling this we recommend the following:
 
-1. Create a test S3 bucket that is violating the compliance rule for **LW_S3_6** via the CLI command described in the section [How can i use the Map?](https://github.com/automatecloud/lacework-kaholo-autoremediation/tree/main/maps/compliance/aws/LW_S3_6#how-can-i-use-this-map-for-auto-remediation)
+1. Create a test S3 bucket that is violating the compliance rule for **LW_S3_5** via the CLI command described in the section [How can i use the Map?](https://github.com/automatecloud/lacework-kaholo-autoremediation/tree/main/maps/compliance/aws/LW_S3_5#how-can-i-use-this-map-for-auto-remediation)
 2. When you got the Event created in Lacework you need to make sure that you put all the S3 bucket names that should not be Auto Remediated into the bucketIgnoreList of the LaceworkConfig.
-3. To be even more sure we recommend to configure a suppression setting for the **LW_S3_6** compliance check within the Lacework platform to ignore the S3 bucket. Otherwise the ignored Buckets will create additional Events and Alerts within Lacework. Future versions of this Map will enable the auto creation of AWS Tags.
+3. To be even more sure we recommend to configure a suppression setting for the **LW_S3_5** compliance check within the Lacework platform to ignore the S3 bucket. Otherwise the ignored Buckets will create additional Events and Alerts within Lacework. Future versions of this Map will enable the auto creation of AWS Tags.
 4. After that you can enable the Auto Remediation via CLI or via the Kaholo S3 Bucket Object.
 
 **Note:** you can choose to do the Auto Remediation via the CLI **"dotheremediationviacli": "true"** or by using the Kaholo S3 bucket object **"dotheremediationviaobject": "true"**. By default both settings are configured to **false**, so it will not by accident start to remediate misconfigured S3 buckets. We recommend to make sure that only the right buckets will be remediated and the map is working as expected before you configure any of both settings to true. Do not configure **dotheremediationviacli** and **dotheremediationviaobject** both at the same time to **true**. The map will check that possible misconfiguration at the beginning of the map and not execute. Only one of both can be enabled and used for the Auto Remediation.
@@ -164,7 +165,7 @@ export EVENTID=11
 export EVENTSEVERITY=1
 export WEBHOOKURL=https://mykaholoinstance.kaholo.io/webhook/lacework/alert
 export LACEWORKINSTANCE=mylaceworkinstance
-export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : LW_S3_6 Ensure the S3 bucket ACL does not grant AWS users READ permission [create, overwrite, and delete S3 objects]"
+export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : LW_S3_5 Ensure the S3 bucket ACL does not grant Everyone FULL_CONTROL permission [create, overwrite, and delete S3 objects]"
 ```
 You need to replace the following before you apply the environment variables:
 1. **EVENTID** with the EventID that was generated inside the Lacework environment.
