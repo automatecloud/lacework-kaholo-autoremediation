@@ -61,11 +61,11 @@ The **LW_S3_7** map currently has the following map design:
 
 ### Map trigger
 
-Make sure that the Map Trigger is configured with the following configuration:
+Make sure that the Map Webhook Trigger is configured with the following configuration:
 
 <img src="LW_S3_7_Trigger.png" width="269" height="608">
 
-1. The Configuration needs to be configured with **LaceworkConfig**
+1. The Configuration needs to be configured with **LaceworkConfig** to make sure the Configuration LaceworkConfig is used when the map is triggered.
 2. The Plugin needs to be configured with the Plugin **kaholo-trigger-lacework**
 3. The Method **Lacework Alert** needs to be selected
 4. The Variable **Event type** needs to be configured with Value **Compliance**
