@@ -35,7 +35,7 @@ of it
 
 ## How can i use this Map for Auto Remediation?
 
-We recommend to create an S3 test bucket and configure it to give all authenticated AWS users WRITE permission. This will generate an event and alert inside Lacework during the next compliance check. By default the compliance check is done once per 24 hours. You can force to create a compliance check for CIS Benchmarks via the GUI or the API. Out of the compliance check an Event will be generated can then be used to test the Auto Remediation of this Map.
+We recommend to create an S3 test bucket and configure it to give all authenticated AWS users WRITE permission. This will generate an event and alert inside Lacework during the next compliance check. By default the compliance check is done once per day (every 24 hours). You can force to create a compliance check for CIS Benchmarks via the GUI or the API. Out of the compliance check an Event will be generated can then be used to test the Auto Remediation of this Map.
 
 You can use the following AWS CLI command to configure an existing S3 test bucket to give all authenticated AWS users WRITE permission:
 
