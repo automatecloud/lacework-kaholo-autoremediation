@@ -83,7 +83,7 @@ By default the map has the following configurations:
     "name": "LaceworkConfiguration",
     "policyID": "LW_S3_2",
     "violationdescription": "Ensure the S3 bucket ACL does not grant Everyone READ_ACP permission",
-    "eventuuid": "7e4ae132-a4e4-49dd-8aaa-9e672b3abd17",
+    "eventuuid": "84fd0632-7213-4017-a923-7e87a116fab0",
     "dotheremediationviacli": "false",
     "dotheremediationviaobject": "false",
     "sendslackmessagesforignored": "true",
