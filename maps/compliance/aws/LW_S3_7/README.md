@@ -167,6 +167,7 @@ export WEBHOOKURL=https://mykaholoinstance.kaholo.io/webhook/lacework/alert
 export LACEWORKINSTANCE=mylaceworkinstance
 export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : LW_S3_7 Ensure the S3 bucket ACL does not grant AWS users WRITE permission [create, overwrite, and delete S3 objects]"
 ```
+
 You need to replace the following before you apply the environment variables:
 1. **EVENTID** with the EventID that was generated inside the Lacework environment.
 2. **WEBHOOKURL** with your Kaholo Webhook Url. Normally kaholo is listening on port 3000 and the URL path for the webhook alerting is /webhook/lacework/alert.

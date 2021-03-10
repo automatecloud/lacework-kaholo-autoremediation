@@ -96,6 +96,7 @@ By default the map has the following configurations:
     ]
 }
 ```
+
 Make sure you configure the following configurations inside the **LaceworkConfig** Configuration of the map
 
 #### General Settings
