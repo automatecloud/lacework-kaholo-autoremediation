@@ -76,21 +76,9 @@ This configuration will make sure that this map is only triggered if the **event
 
 ### Configuration of the Map
 
-Make sure you configure the following configurations inside the **LaceworkConfig** Configuration of the map
+By default the map is using the **LaceworkConfig** configurations that are imported as part of the map.
 
-1. **eventuuid:** Make sure that the **UUID** used here is the UUID of the **Get event details** object inside the map. Due to the reimport of the Map the **UUID** of the event object could have changed. To check the UUID you can go to the Design of the map, open the **Get event details** building block.
-
-![Get Event](geteventdetails.png "Get Event")
-
-Inside the configuration of the **Get event details** building block you will find the **UUID**:
-
-<img src="geteventdetails2.png" width="233" height="179">
-
-2. **Note:** you can choose to do the Auto Remediation via the CLI **"dotheremediationviacli": "true"** or by using the Kaholo S3 bucket object **"dotheremediationviaobject": "true"**. By default both settings are configured to **false**, so it will not by accident start to remediate misconfigured S3 buckets. We recommend to make sure that only the right buckets will be remediated and the map is working as expected before you configure any of both settings to true. Do not configure **dotheremediationviacli** and **dotheremediationviaobject** both at the same time to **true**. The map will check that possible misconfiguration at the beginning of the map and not execute. Only one of both can be enabled and used for the Auto Remediation.
-
-3. If you are using the AutoRemediation via CLI, make sure you select an Agent for the Map that has the AWS CLI installed and configured.
-
-3. **(Optional)**. You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 buckets that should be ignored within the bucketIgnoreList of the LaceworkConfig.
+By default the map has the following configurations:
 
 ```
 {
@@ -108,6 +96,21 @@ Inside the configuration of the **Get event details** building block you will fi
     ]
 }
 ```
+Make sure you configure the following configurations inside the **LaceworkConfig** Configuration of the map
+
+1. **eventuuid:** Make sure that the **UUID** used here is the UUID of the **Get event details** object inside the map. Due to the reimport of the Map the **UUID** of the event object could have changed. To check the UUID you can go to the Design of the map, open the **Get event details** building block.
+
+![Get Event](geteventdetails.png "Get Event")
+
+Inside the configuration of the **Get event details** building block you will find the **UUID**:
+
+<img src="geteventdetails2.png" width="233" height="179">
+
+2. **Note:** you can choose to do the Auto Remediation via the CLI **"dotheremediationviacli": "true"** or by using the Kaholo S3 bucket object **"dotheremediationviaobject": "true"**. By default both settings are configured to **false**, so it will not by accident start to remediate misconfigured S3 buckets. We recommend to make sure that only the right buckets will be remediated and the map is working as expected before you configure any of both settings to true. Do not configure **dotheremediationviacli** and **dotheremediationviaobject** both at the same time to **true**. The map will check that possible misconfiguration at the beginning of the map and not execute. Only one of both can be enabled and used for the Auto Remediation.
+
+3. If you are using the Auto Remediation via CLI, make sure you select an Agent for the Map that has the AWS CLI installed and configured.
+
+3. **(Optional)**. You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 buckets that should be ignored within the bucketIgnoreList of the LaceworkConfig.
 
 ### Configuration of Slack Messages
 
