@@ -133,25 +133,26 @@ If you want to know more about the aws s3api put-bucket-acl command or want to r
 
 6. If you configure the **dotheremediationviacli** to **true** the Remediation via Object block will Auto Remediate by using the Kaholo S3 bucket plugin. For this you need to make sure that the **remediateviaobject** action has the correct configured AWS access key, AWS secret key and the correct AWS region. the S3 bucket name will be created by using the **remediateviaobject** function, and the Canned ACL Type is configured to **Private**
 
-### Configuration of Slack Messages
+#### Configuration of Slack Messages
 
 
-3. **policyID:** This shouldn't be changed. The Policy ID will be shown as part of the slack output messages.
+1. **policyID:** This shouldn't be changed. The Policy ID will be shown as part of the slack output messages.
 
-For the Slack building blocks **Remediated** and **Ignored** you can configure a Slack Webhook URL that you have to implement inside the Kaholo Vault before you can select it.
+2. **violationdescription:** This setting is used to send details about the event inside the slack output message. Feel free to change it for your needs.
+
+3. For the Slack building blocks **Remediated** and **Ignored** you can configure a Slack Webhook URL that you have to implement inside the Kaholo Vault before you can select it.
 
 It will send out a slack message to the configured Webhook. We recommend to configure it similar to the Webhook you use within Lacework as an alert channel so you can see the Auto Remediation effect right after the alert was send by Lacework.
 
 If you don't have Slack or don't need Slack messages feel free to simply remove both Slack objects from your map.
 
-**Optional:** you can disable within the LaceworkConfig via **"sendslackmessagesforignored": "false"** to not send out Slack messages for S3 buckets that are violating the policy but are ignored via the **bucketIgnoreList**. By default this is configured to **true**. Reason behind is that it is best practice to suppress S3 buckets that should not be Auto Remediated by using Tags within AWS so you can configure a Suppress rule within Lacework to simply ignore them and not create events and alerts.
-
+4. **sendslackmessagesforignored (Optional):** you can disable within the LaceworkConfig via **"sendslackmessagesforignored": "false"** to not send out Slack messages for S3 buckets that are violating the policy but are ignored via the **bucketIgnoreList**. By default this is configured to **true**. Reason behind is that it is best practice to suppress S3 buckets that should not be Auto Remediated by using Tags within AWS so you can configure a Suppress rule within Lacework to simply ignore them and not create events and alerts.
 
 ## Build an example curl webhook
 
-There is no need to wait for Lacework sending the Webhook Alert all the time when you want to test the map. If you plan to test it immediately, you can trigger the map by using a simple curl command that will send the necessary information.
+There is no need to wait for Lacework sending the Webhook Alert for the generated Event when you want to test the map. If you plan to test it immediately, you can trigger the map by using a simple curl command that will send the necessary information.
 
-Before you can trigger the webhook you need to have an event generated within your Lacework instance.
+Before you can trigger the webhook you need to have an event generated within your Lacework instance. Please make sure you run a compliance report right after you created a test S3 bucket that is violating this policy.
 
 As soon as you got an event we recommend using the Event Information to create an example webhook trigger inside your terminal using the following environment variables. Make sure to update it with the information from the Event you did generate.#
 
