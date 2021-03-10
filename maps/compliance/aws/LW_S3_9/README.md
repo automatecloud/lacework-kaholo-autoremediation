@@ -40,7 +40,7 @@ We recommend to create an S3 test bucket and configure it to give all authentica
 You can use the following AWS CLI command to configure an existing S3 test bucket to give all authenticated AWS users WRITE_ACP permission:
 
 ```
-aws s3api put-bucket-acl --bucket <YOURBUCKETNAME>  --grant-write uri=http://acs.amazonaws.com/groups/global/AuthenticatedUsers
+aws s3api put-bucket-acl --bucket <YOURBUCKETNAME>  --grant-write-acp uri=http://acs.amazonaws.com/groups/global/AuthenticatedUsers
 ```
 **Note:** Make sure you configure the **YOURBUCKETNAME** with the name of the S3 test bucket you would like to use for tests. Don't use any S3 bucket with important data! This if for testing of this map only and it should not have any important data.
 
