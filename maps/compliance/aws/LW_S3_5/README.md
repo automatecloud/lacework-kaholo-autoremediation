@@ -165,7 +165,7 @@ export EVENTID=11
 export EVENTSEVERITY=1
 export WEBHOOKURL=https://mykaholoinstance.kaholo.io/webhook/lacework/alert
 export LACEWORKINSTANCE=mylaceworkinstance
-export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : LW_S3_5 Ensure the S3 bucket ACL does not grant Everyone FULL_CONTROL permission [create, overwrite, and delete S3 objects]"
+export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : LW_S3_5 Ensure the S3 bucket ACL does not grant 'Everyone' FULL_CONTROL [READ, WRITE, READ_ACP, WRITE_ACP]"
 ```
 You need to replace the following before you apply the environment variables:
 1. **EVENTID** with the EventID that was generated inside the Lacework environment.
