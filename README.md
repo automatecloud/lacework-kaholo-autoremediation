@@ -93,7 +93,7 @@ LW_S3_7 | AWS | Ensure the S3 bucket ACL does not grant AWS users WRITE permissi
 LW_S3_8 | AWS | Ensure the S3 bucket ACL does not grant AWS users READ_ACP permission [read bucket ACL] | Implemented | [ReadMe](maps/compliance/aws/LW_S3_8/README.md) | yes | yes
 LW_S3_9 | AWS | Ensure the S3 bucket ACL does not grant AWS users WRITE_ACP permission [modify bucket ACL] | Implemented | [ReadMe](maps/compliance/aws/LW_S3_9/README.md) | yes | yes
 LW_S3_10 | AWS | Ensure the S3 bucket ACL does not grant AWS users FULL_CONTROL [READ, WRITE, READ_ACP, WRITE_ACP] | Implemented | [ReadMe](maps/compliance/aws/LW_S3_10/README.md) | yes | yes
-LW_S3_11 | AWS | Ensure the attached S3 bucket policy does not grant 'Allow' permission to everyone | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_11/README.md) | no | no
+LW_S3_11 | AWS | Ensure the attached S3 bucket policy does not grant 'Allow' permission to everyone | Prototype | [ReadMe](maps/compliance/aws/LW_S3_11/README.md) | yes | no
 LW_S3_12 | AWS | Ensure the S3 bucket requires MFA to delete objects | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_12/README.md) | no | no
 LW_S3_13 | AWS | Ensure the S3 bucket has access logging enabled | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_13/README.md) | no | no
 LW_S3_14 | AWS | Ensure all data stored in the S3 bucket is securely encrypted at rest | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_14/README.md) | no | no
