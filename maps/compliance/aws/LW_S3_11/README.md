@@ -108,11 +108,28 @@ By default the map has the following configurations:
     "dothereplacebucketpolicyremediationviacli": "false",
     "dothereplacebucketpolicyremediationviaobject": "false",
     "sendslackmessagesforignored": "true",
-    "bucketIgnoreList":[
+    "bucketIgnoreList": [
         "arn:aws:s3:::mybucket01",
         "arn:aws:s3:::mybucket02",
         "arn:aws:s3:::mybucket03"
-    ]
+    ],
+    "createbackup": "true",
+    "inputfolder": "/usr/src/app/scripts/input/",
+    "backupfolder": "/usr/src/app/scripts/output/",
+    "bucketpolicy": {
+        "Statement": [
+            {
+                "Action": "s3:*",
+                "Effect": "Allow",
+                "Resource": "<MYBUCKET>",
+                "Principal": {
+                    "AWS": [
+                        "arn:aws:iam::<ACCOUNTID>:user/<YOURUSER>"
+                    ]
+                }
+            }
+        ]
+    }
 }
 ```
 Make sure you configure the following configurations inside the **LaceworkConfig** Configuration of the map
