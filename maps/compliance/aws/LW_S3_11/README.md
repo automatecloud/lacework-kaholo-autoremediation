@@ -39,7 +39,7 @@ We recommend to create an S3 test bucket and configure it to grant Allow permiss
 You can use the following AWS CLI command to configure an existing S3 test bucket to grant Allow permission to everyone via the Bucket Policy:
 
 ```
-aws s3api put-bucket-policy --bucket <YOURBUCKETNAME> --policy file://granteveryoneallowpermission.json
+aws s3api put-bucket-policy --bucket YOURBUCKETNAME --policy file://granteveryoneallowpermission.json
 ```
 
 You need to create the following JSON file **granteveryoneallowpermission.json** before using the command.
@@ -51,7 +51,7 @@ You need to create the following JSON file **granteveryoneallowpermission.json**
             "Effect": "Allow",
             "Principal": "*",
             "Action": "s3:*",
-            "Resource": "arn:aws:s3:::<YOURBUCKETNAME>"
+            "Resource": "arn:aws:s3:::YOURBUCKETNAME"
         }
     ]
 }
@@ -159,23 +159,51 @@ The Auto Remediation is disabled if you import the map. It will only be triggere
 
 **Note:** you can choose to do the Auto Remediation via the CLI or by using the Kaholo S3 bucket object. By default all four Auto Remediation settings are configured to **false**, so it will not by accident start to remediate misconfigured S3 buckets. We recommend to make sure that only the right buckets will be remediated and the map is working as expected before you configure any of both settings to true. Do not configure more then one of the auto remediations available at the same time to **true**. The map will check that possible misconfiguration at the beginning of the map and not execute. Only one of both can be enabled and used for the Auto Remediation.
 
-5. If you configure the **dothedeletebucketpolicyremediationviacli** settings to **true** to enable the Auto Remediation via CLI, make sure you select an Agent for the Map that has the AWS CLI installed and configured. The Remediation via CLI block will Auto Remediate by using the following AWS CLI command that will put the ACL back into private mode, which means only the owner will be able to list and write on Objects and read and write on the Bucket ACL:
+5. If you configure the **dothedeletebucketpolicyremediationviacli** settings to **true** to enable the Auto Remediation via CLI, make sure you select an Agent for the Map that has the AWS CLI installed and configured. The Remediation via CLI block will Auto Remediate by first doing a backup of the current bucket policy if you configured the **createbucket** to **true**. It will use the following CLI command:
+
+```
+aws s3api get-bucket-policy --bucket <YOURBUCKETNAME>
+```
+
+If you want to know more about the aws s3api get-bucket-policy command or want to replace it with a different option for auto remediation we recommend to take a look at the official documentation available [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/get-bucket-policy.html).
+
+The backup will be created within the folder you configured within **backupfolder**.
+
+After doing the backup it is using the following AWS CLI command that will delete the current bucket policy:
 
 ```
 aws s3api delete-bucket-policy --bucket <YOURBUCKETNAME>
 ```
 
-If you want to know more about the aws s3api put-bucket-acl command or want to replace it with a different option for auto remediation we recommend to take a look at the official documentation available [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/put-bucket-acl.html).
+If you want to know more about the aws s3api delete-bucket-policy command or want to replace it with a different option for auto remediation we recommend to take a look at the official documentation available [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/delete-bucket-policy.html).
 
-6. If you configure the **dothedeletebucketpolicyremediationviaobject** to **true** the Remediation via Object block will Auto Remediate by using the Kaholo S3 bucket plugin. For this you need to make sure that the **remediateviaobject** action has the correct configured AWS access key, AWS secret key and the correct AWS region. the S3 bucket name will be created by using the **remediateviaobject** function, and the Canned ACL Type is configured to **Private**
+6. If you configure the **dothedeletebucketpolicyremediationviaobject** to **true** the Remediation via Object block will Auto Remediate by using the Kaholo S3 bucket plugin. **THIS IS CURRENTLY NOT IMPLEMENTED**
 
-7. If you configure the **dothereplacebucketpolicyremediationviacli** to **true** (NEEDS TO BE IMPLEMENTED AND DESCRIBED)
+7. If you configure the **dothereplacebucketpolicyremediationviacli** to **true** to enable the Auto Remediation via CLI, make sure you select an Agent for the Map that has the AWS CLI installed and configured. The Remediation via CLI block will Auto Remediate by first doing a backup of the current bucket policy if you configured the **createbucket** to **true**. It will use the following CLI command:
 
-8. If you configure the **dothereplacebucketpolicyremediationviaobject** to **true** (NEEDS TO BE IMPLEMENTED AND DESCRIBED)
+```
+aws s3api get-bucket-policy --bucket <YOURBUCKETNAME>
+```
+
+If you want to know more about the aws s3api get-bucket-policy command or want to replace it with a different option for auto remediation we recommend to take a look at the official documentation available [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/get-bucket-policy.html).
+
+The backup will be created within the folder you configured within **backupfolder**. Please make sure that this folder can be accessed by the Agent you use to run the map.
+
+After that the map will use the TextEditor object to create a new bucket policy file based on the content you put inside the **bucketpolicy** inside the folder you configured within **inputfolder**. Please make sure that this folder can be accessed by the Agent you use to run the map.
+
+As a last step the map is using the following AWS CLI command that will overwrite the current bucket policy with the new policy of the JSON file:
+
+```
+aws s3api put-bucket-policy --bucket <YOURBUCKETNAME> --policy file://mynewpolicy.json
+```
+
+If you want to know more about the aws s3api get-bucket-policy command or want to replace it with a different option for auto remediation we recommend to take a look at the official documentation available [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/put-bucket-policy.html).
+
+8. If you configure the **dothereplacebucketpolicyremediationviaobject** to **true** the Remediation via the Object block will Auto Remediate by using the Kaholo S3 bucket plugin. **THIS IS CURRENTLY NOT IMPLEMENTED**
 
 #### Configuration of Slack Messages
 
-1. **policyID:** This shouldn't be changed. The Policy ID will be shown as part of the slack output messages.
+1. **policyID:** This shouldn't be changed. The Policy ID will be shown as part of the slack output messages. And it will be used as part of the name of the JSON Backups and Input files for the S3 buckets.
 
 2. **violationdescription:** This setting is used to send details about the event inside the slack output message. Feel free to change it for your needs.
 
