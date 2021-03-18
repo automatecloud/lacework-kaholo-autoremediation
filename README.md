@@ -100,10 +100,10 @@ LW_S3_14 | AWS | Ensure all data stored in the S3 bucket is securely encrypted a
 LW_S3_15 | AWS | Ensure all data is transported from the S3 bucket securely | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_15/README.md) | no | no
 LW_S3_16 | AWS | Ensure the S3 bucket has versioning enabled | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_16/README.md) | no | no
 LW_S3_17 | AWS | Ensure the S3 bucket access is restricted to a whitelist of IP networks. | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_17/README.md) | no | no
-LW_S3_18 | AWS | Ensure the attached S3 bucket policy does not grant global 'Get' permission. | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_18/README.md) | no | no
-LW_S3_19 | AWS | Ensure the attached S3 bucket policy does not grant global 'Delete' permission. | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_19/README.md) | no | no
-LW_S3_20 | AWS | Ensure the attached S3 bucket policy does not grant global 'List' permission. | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_20/README.md) | no | no
-LW_S3_21 | AWS | Ensure the attached S3 bucket policy does not grant global 'Put' permission. | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_21/README.md) | no | no
+LW_S3_18 | AWS | Ensure the attached S3 bucket policy does not grant global 'Get' permission. | Prototype | [ReadMe](maps/compliance/aws/LW_S3_18/README.md) |yes | no
+LW_S3_19 | AWS | Ensure the attached S3 bucket policy does not grant global 'Delete' permission. | Prototype | [ReadMe](maps/compliance/aws/LW_S3_19/README.md) | yes | no
+LW_S3_20 | AWS | Ensure the attached S3 bucket policy does not grant global 'List' permission. | Prototype | [ReadMe](maps/compliance/aws/LW_S3_20/README.md) | yes | no
+LW_S3_21 | AWS | Ensure the attached S3 bucket policy does not grant global 'Put' permission. | Prototype | [ReadMe](maps/compliance/aws/LW_S3_21/README.md) | yes | no
 AWS_CIS_1_1 | AWS | Avoid the use of the "root" account | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_1/README.md) | no | no
 AWS_CIS_1_2 | AWS | Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_2/README.md) | no | no
 AWS_CIS_1_3 | AWS | Ensure credentials unused for 90 days or greater are disabled | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_3/README.md) | no | no
