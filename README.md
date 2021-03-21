@@ -99,7 +99,7 @@ LW_S3_13 | AWS | Ensure the S3 bucket has access logging enabled | Skeleton | [R
 LW_S3_14 | AWS | Ensure all data stored in the S3 bucket is securely encrypted at rest | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_14/README.md) | no | no
 LW_S3_15 | AWS | Ensure all data is transported from the S3 bucket securely | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_15/README.md) | no | no
 LW_S3_16 | AWS | Ensure the S3 bucket has versioning enabled | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_16/README.md) | no | no
-LW_S3_17 | AWS | Ensure the S3 bucket access is restricted to a whitelist of IP networks. | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_17/README.md) | no | no
+LW_S3_17 | AWS | Ensure the S3 bucket access is restricted to a whitelist of IP networks. | Prototype | [ReadMe](maps/compliance/aws/LW_S3_17/README.md) | yes | yes
 LW_S3_18 | AWS | Ensure the attached S3 bucket policy does not grant global 'Get' permission. | Implemented | [ReadMe](maps/compliance/aws/LW_S3_18/README.md) |yes | yes
 LW_S3_19 | AWS | Ensure the attached S3 bucket policy does not grant global 'Delete' permission. | Implemented | [ReadMe](maps/compliance/aws/LW_S3_19/README.md) | yes | yes
 LW_S3_20 | AWS | Ensure the attached S3 bucket policy does not grant global 'List' permission. | Implemented | [ReadMe](maps/compliance/aws/LW_S3_20/README.md) | yes | yes

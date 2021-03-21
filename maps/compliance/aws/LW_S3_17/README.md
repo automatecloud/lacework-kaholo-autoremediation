@@ -57,24 +57,29 @@ LW_S3_17
 
 We recommend to create an S3 test bucket and configure it to grant Allow permission to everyone via the Bucket Policy. This will generate an event and alert inside Lacework during the next compliance check. By default the compliance check is done once per day (every 24 hours). You can force to create a compliance check for CIS Benchmarks via the Lacework GUI or the API. Out of the compliance check an Event will be generated can then be used to test the Auto Remediation of this Map.
 
-You can use the following AWS CLI command to configure an existing S3 test bucket to grant Allow permission to everyone via the Bucket Policy:
+You can use the following AWS CLI command to configure an existing S3 test bucket to grant Allow permission to everyone IP address via the Bucket Policy:
 
 ```
-aws s3api put-bucket-policy --bucket YOURBUCKETNAME --policy file://granteveryoneallowpermission.json
+aws s3api put-bucket-policy --bucket YOURBUCKETNAME --policy file://granteveryipallowpermission.json
 ```
 
-You need to create the following JSON file **granteveryoneallowpermission.json** before using the command.
+You need to create the following JSON file **granteveryipallowpermission.json** before using the command.
 
 ```
 {
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Principal": "*",
-            "Action": "s3:*",
-            "Resource": "arn:aws:s3:::YOURBUCKETNAME"
+  "Statement": [
+    {
+      "Action": "s3:*",
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::YOURBUCKETNAME",
+      "Condition": {
+        "IpAddress": {
+          "aws:SourceIp": "0.0.0.0/0"
         }
-    ]
+      },
+      "Principal": "*"
+    }
+  ]
 }
 ```
 
@@ -85,15 +90,15 @@ You need to create the following JSON file **granteveryoneallowpermission.json**
 The Map needs to be imported inside an existing or new Kaholo Project.
 
 ### Map Design and workflow
-The **LW_S3_21** map currently has the following map design:
+The **LW_S3_17** map currently has the following map design:
 
-<img src="LW_S3_21.png" width="898" height="645">
+<img src="LW_S3_17.png" width="678" height="477">
 
 * The map starts with **Get the Event details** object. It will use the **event_id** send by the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook), using the **Lacework API Access Key** and  **Lacework Secret Key** from the Kaholo vault that you configured the Lacework Plugin with. to create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the Lacework API via the API call **/api/v1/external/events/GetEventDetails** of the configured Lacework instance. The return value of this API call is the complete Event Payload you can use within the Map.
 * The map will trigger the **Delete Bucket Policy via CIA** CommandLine object If you enabled the Auto Remediation inside the LaceworkConfig of the map by using the **"dothedeletebucketpolicyremediationviacli": "true"** setting. It will print out the name of the S3 buckets that will be remediated, creates a backup of the current bucket policy of each S3 bucket inside the folder **backupfolder** of the LaceworkConfig and uses the AWS CLI to delete the Bucket Policy of the S3 buckets affected.
 * The map will trigger the **Replace Bucket Policy via CIA** CommandLine object If you enabled the Auto Remediation inside the LaceworkConfig of the map by using the **"dothereplacebucketpolicyremediationviacli": "true"** setting. It will print out the name of the S3 buckets that will be remediated, creates a backup of the current bucket policy of each S3 bucket inside the folder **backupfolder** of the LaceworkConfig, uses the Kaholo TextEditor Object to create a new Bucket Policy inside the **inputfolder** of the LaceworkConfig and uses the AWS CLI to put the new bucket policy of the JSON file to the S3 buckets affected.
-* The map will trigger the **Delete Bucket Policy via Object** Amazon-aws-s3 object If you enabled the Auto Remediation inside the LaceworkConfig of the map by using the **"dothedeletebucketpolicyremediationviaobject": "true"** setting. It will remediate all S3 buckets by using the Method **NEEDS TO BE CREATED** from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3).
-* The map will trigger the **Delete Bucket Policy via Object** Amazon-aws-s3 object If you enabled the Auto Remediation inside the LaceworkConfig of the map by using the **"dothereplacebucketpolicyremediationviaobject": "true"** setting. It will remediate all S3 buckets by using the Method **NEEDS TO BE CREATED** from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3).
+* The map will trigger the **Delete Bucket Policy via Object option** Amazon-aws-s3 object If you enabled the Auto Remediation inside the LaceworkConfig of the map by using the **"dothedeletebucketpolicyremediationviaobject": "true"** setting. It will remediate all S3 buckets by first creating a Backup of the Bucket Policy using the Method **"Get Bucket Policy"** from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3). After that it will delete the bucket policy of the S3 bucket by using the Method **"Delete Bucket Policy"** from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3).
+* The map will trigger the **Replace Bucket Policy via Object option** Amazon-aws-s3 object If you enabled the Auto Remediation inside the LaceworkConfig of the map by using the **"dothereplacebucketpolicyremediationviaobject": "true"** setting. It will remediate all S3 buckets by first creating a Backup of the Bucket Policy using the Method **"Get Bucket Policy"** from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3). After that it will create a new Bucket Policy JOSN file for documentation by using the [Text Editor plugin](https://github.com/Kaholo/kaholo-plugin-textEditor) The last object will delete the bucket policy of the S3 bucket by using the Method **"Delete Bucket Policy"** from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3).
 * The map will send out a Slack message for each S3 bucket that will be remediated to the Webhook you configured for the **Remediated** Slack object.
 * If you enabled the configuration to send out slack messages for ignored S3 buckets inside the LaceworkConfig of the map to **"sendslackmessagesforignored": "true"** it will send out a slack message for each bucket that is violating the policy and ignored by the configuration to the Webhook you configured for the **Ignored** Slack object.
 
@@ -101,16 +106,16 @@ The **LW_S3_21** map currently has the following map design:
 
 Make sure that the Map Webhook Trigger is configured with the following configuration:
 
-<img src="LW_S3_21_Trigger.png" width="327" height="712">
+<img src="LW_S3_17_Trigger.png" width="361" height="810">
 
 1. The Configuration needs to be configured with **LaceworkConfig** to make sure the Configuration LaceworkConfig is used when the map is triggered.
 2. The Plugin setting needs to be configured with the Lacework Webhook Plugin **kaholo-trigger-lacework**
 3. The Method **Lacework Alert** needs to be selected
 4. The Variable **Event type** needs to be configured with Value **Compliance**
-5. The Variable **Event ID** needs to be configured with Value **LW_S3_21**.
+5. The Variable **Event ID** needs to be configured with Value **LW_S3_17**.
 6. The Variable **Event Severity** needs to be configured with the Value **Any** or **High**
 
-This configuration will make sure that this map is only triggered if the **event_description** of the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) includes the **LW_S3_21** Event ID.
+This configuration will make sure that this map is only triggered if the **event_description** of the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) includes the **LW_S3_17** Event ID.
 
 ### Configuration of the Map
 
@@ -121,9 +126,9 @@ By default the map has the following configurations:
 ```
 {
     "name": "LaceworkConfiguration",
-    "policyID": "LW_S3_21",
-    "violationdescription": "Ensure the attached S3 bucket policy does not grant List permission to everyone",
-    "eventuuid": "e111926e-8e1c-4e5d-b46a-ff1c06271183",
+    "policyID": "LW_S3_17",
+    "violationdescription": "Ensure the S3 bucket access is restricted to a whitelist of IP networks.",
+    "eventuuid": "edb32ef5-243a-4b7f-bac8-e764823911e2",
     "dothedeletebucketpolicyremediationviacli": "false",
     "dothedeletebucketpolicyremediationviaobject": "false",
     "dothereplacebucketpolicyremediationviacli": "false",
@@ -138,15 +143,31 @@ By default the map has the following configurations:
     "inputfolder": "/usr/src/app/scripts/input/",
     "backupfolder": "/usr/src/app/scripts/output/",
     "bucketpolicy": {
+        "Version": "2012-10-17",
+        "Id": "VPCe and SourceIP",
         "Statement": [
             {
+                "Sid": "VPCe and SourceIP",
+                "Effect": "Deny",
+                "Principal": "*",
                 "Action": "s3:*",
-                "Effect": "Allow",
-                "Resource": "<MYBUCKET>",
-                "Principal": {
-                    "AWS": [
-                        "arn:aws:iam::<ACCOUNTID>:user/<YOURUSER>"
-                    ]
+                "Resource": [
+                    "arn:aws:s3:::YOURBUCKET",
+                    "arn:aws:s3:::YOURBUCKET/*"
+                ],
+                "Condition": {
+                    "StringNotLike": {
+                        "aws:sourceVpce": [
+                            "vpce-YOURVPC1",
+                            "vpce-YOURVPC2"
+                        ]
+                    },
+                    "NotIpAddress": {
+                        "aws:SourceIp": [
+                            "11.11.11.11/32",
+                            "22.22.22.22/32"
+                        ]
+                    }
                 }
             }
         ]
@@ -163,7 +184,7 @@ Make sure you configure the following configurations inside the **LaceworkConfig
 
 Inside the configuration of the **Get event details** building block you will find the **UUID**:
 
-<img src="geteventdetails2.png" width="282" height="225">
+<img src="geteventdetails2.png" width="233" height="179">
 
 2. **bucketIgnoreList(Optional):** You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 bucket names that should be ignored within the bucketIgnoreList of the LaceworkConfig.
 
@@ -173,9 +194,9 @@ For the Auto Remediation you need to decide if you would like to Auto Remediate 
 
 The Auto Remediation is disabled if you import the map. It will only be triggered if the configuration **dothedeletebucketpolicyremediationviacli**,**dothedeletebucketpolicyremediationviaobject**, **dothereplacebucketpolicyremediationviacli**  or **dothereplacebucketpolicyremediationviaobject** of the LaceworkConfig is configured with **true**. Before enabling this we recommend the following:
 
-1. Create a test S3 bucket that is violating the compliance rule for **LW_S3_21** via the CLI command described in the section [How can i use the Map?](https://github.com/automatecloud/lacework-kaholo-autoremediation/tree/main/maps/compliance/aws/LW_S3_21#how-can-i-use-this-map-for-auto-remediation)
+1. Create a test S3 bucket that is violating the compliance rule for **LW_S3_17** via the CLI command described in the section [How can i use the Map?](https://github.com/automatecloud/lacework-kaholo-autoremediation/tree/main/maps/compliance/aws/LW_S3_17#how-can-i-use-this-map-for-auto-remediation)
 2. When you got the Event created in Lacework you need to make sure that you put all the S3 bucket names that should not be Auto Remediated into the bucketIgnoreList of the LaceworkConfig.
-3. To be even more sure we recommend to configure a suppression setting for the **LW_S3_21** compliance check within the Lacework platform to ignore the S3 bucket. Otherwise the ignored Buckets will create additional Events and Alerts within Lacework. Future versions of this Map will enable the auto creation of AWS Tags.
+3. To be even more sure we recommend to configure a suppression setting for the **LW_S3_17** compliance check within the Lacework platform to ignore the S3 bucket. Otherwise the ignored Buckets will create additional Events and Alerts within Lacework. Future versions of this Map will enable the auto creation of AWS Tags.
 4. After that you can enable the Auto Remediation via CLI or via the Kaholo S3 Bucket Object.
 
 **Note:** you can choose to do the Auto Remediation via the CLI or by using the Kaholo S3 bucket object. By default all four Auto Remediation settings are configured to **false**, so it will not by accident start to remediate misconfigured S3 buckets. We recommend to make sure that only the right buckets will be remediated and the map is working as expected before you configure any of both settings to true. Do not configure more then one of the auto remediations available at the same time to **true**. The map will check that possible misconfiguration at the beginning of the map and not execute. Only one of both can be enabled and used for the Auto Remediation.
@@ -198,7 +219,7 @@ aws s3api delete-bucket-policy --bucket <YOURBUCKETNAME>
 
 If you want to know more about the aws s3api delete-bucket-policy command or want to replace it with a different option for auto remediation we recommend to take a look at the official documentation available [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/delete-bucket-policy.html).
 
-6. If you configure the **dothedeletebucketpolicyremediationviaobject** to **true** the Remediation via Object block will Auto Remediate by using the Kaholo S3 bucket plugin. **THIS IS CURRENTLY NOT IMPLEMENTED**
+6. If you configure the **dothedeletebucketpolicyremediationviaobject** to **true** the Auto Remediation is done by using the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3) using the Methods **"Get Bucket Policy"** and **"Delete Bucket Policy"**
 
 7. If you configure the **dothereplacebucketpolicyremediationviacli** to **true** to enable the Auto Remediation via CLI, make sure you select an Agent for the Map that has the AWS CLI installed and configured. The Remediation via CLI block will Auto Remediate by first doing a backup of the current bucket policy if you configured the **createbucket** to **true**. It will use the following CLI command:
 
@@ -220,7 +241,9 @@ aws s3api put-bucket-policy --bucket <YOURBUCKETNAME> --policy file://mynewpolic
 
 If you want to know more about the aws s3api get-bucket-policy command or want to replace it with a different option for auto remediation we recommend to take a look at the official documentation available [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/put-bucket-policy.html).
 
-8. If you configure the **dothereplacebucketpolicyremediationviaobject** to **true** the Remediation via the Object block will Auto Remediate by using the Kaholo S3 bucket plugin. **THIS IS CURRENTLY NOT IMPLEMENTED**
+Please make sure that whatever you define within the **bucketpolicy** setting that you are not disabling the access for yourself. Make sure that the IP of your admin/root account can always access the bucketpolicy.
+
+8. If you configure the **dothereplacebucketpolicyremediationviaobject** to **true** the Auto Remediation is done by using the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3) using the Methods **"Get Bucket Policy"** and **"Apply Bucket Policy"**. For documentation reasons it also creates a JSON file of the bucket policy that will be used to replace by using the [Text Editor plugin](https://github.com/Kaholo/kaholo-plugin-textEditor). Please make sure that whatever you define within the **bucketpolicy** setting that you are not disabling the access for yourself. Make sure that the IP of your admin/root account can always access the bucketpolicy.
 
 #### Configuration of Slack Messages
 
@@ -253,7 +276,7 @@ export EVENTID=11
 export EVENTSEVERITY=1
 export WEBHOOKURL=https://mykaholoinstance.kaholo.io/webhook/lacework/alert
 export LACEWORKINSTANCE=mylaceworkinstance
-export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : LW_S3_21 Ensure the attached S3 bucket policy does not grant 'List' permission to everyone"
+export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : LW_S3_17 Ensure the S3 bucket access is restricted to a whitelist of IP networks"
 ```
 
 You need to replace the following before you apply the environment variables:
