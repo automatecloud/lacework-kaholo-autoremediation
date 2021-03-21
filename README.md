@@ -81,166 +81,166 @@ This repository is a community project. Everyone interested can contribute and u
 ### Compliance
 
 #### AWS
-Map ID | Description | Status | Documentation | CLI Remediation | Plugin Remediation
---- | --- | --- | --- | --- | ---
-LW_S3_1 | Ensure the S3 bucket ACL does not grant 'Everyone' READ permission [list S3 objects] | Implemented | [ReadMe](maps/compliance/aws/LW_S3_1/README.md) | yes | yes
-LW_S3_2 | Ensure the S3 bucket ACL does not grant 'Everyone' WRITE permission [create, overwrite, and delete S3 objects] | Implemented | [ReadMe](maps/compliance/aws/LW_S3_2/README.md) | yes | yes
-LW_S3_3 | Ensure the S3 bucket ACL does not grant 'Everyone' READ_ACP permission [read bucket ACL] | Implemented | [ReadMe](maps/compliance/aws/LW_S3_3/README.md) | yes | yes
-LW_S3_4 | Ensure the S3 bucket ACL does not grant 'Everyone' WRITE_ACP permission [modify bucket ACL] | Implemented | [ReadMe](maps/compliance/aws/LW_S3_4/README.md) | yes | yes
-LW_S3_5 | Ensure the S3 bucket ACL does not grant 'Everyone' FULL_CONTROL [READ, WRITE, READ_ACP, WRITE_ACP] | Implemented | [ReadMe](maps/compliance/aws/LW_S3_5/README.md) | yes | yes
-LW_S3_6 | Ensure the S3 bucket ACL does not grant AWS users READ permission [list S3 objects] | Implemented | [ReadMe](maps/compliance/aws/LW_S3_6/README.md) | yes | yes
-LW_S3_7 | Ensure the S3 bucket ACL does not grant AWS users WRITE permission [create, overwrite, and delete S3 objects] | Implemented | [ReadMe](maps/compliance/aws/LW_S3_7/README.md) | yes | yes
-LW_S3_8 | Ensure the S3 bucket ACL does not grant AWS users READ_ACP permission [read bucket ACL] | Implemented | [ReadMe](maps/compliance/aws/LW_S3_8/README.md) | yes | yes
-LW_S3_9 | Ensure the S3 bucket ACL does not grant AWS users WRITE_ACP permission [modify bucket ACL] | Implemented | [ReadMe](maps/compliance/aws/LW_S3_9/README.md) | yes | yes
-LW_S3_10 | Ensure the S3 bucket ACL does not grant AWS users FULL_CONTROL [READ, WRITE, READ_ACP, WRITE_ACP] | Implemented | [ReadMe](maps/compliance/aws/LW_S3_10/README.md) | yes | yes
-LW_S3_11 | Ensure the attached S3 bucket policy does not grant 'Allow' permission to everyone | Implemented | [ReadMe](maps/compliance/aws/LW_S3_11/README.md) | yes | yes
-LW_S3_12 | Ensure the S3 bucket requires MFA to delete objects | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_12/README.md) | no | no
-LW_S3_13 | Ensure the S3 bucket has access logging enabled | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_13/README.md) | no | no
-LW_S3_14 | Ensure all data stored in the S3 bucket is securely encrypted at rest | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_14/README.md) | no | no
-LW_S3_15 | Ensure all data is transported from the S3 bucket securely | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_15/README.md) | no | no
-LW_S3_16 | Ensure the S3 bucket has versioning enabled | Skeleton | [ReadMe](maps/compliance/aws/LW_S3_16/README.md) | no | no
-LW_S3_17 | Ensure the S3 bucket access is restricted to a whitelist of IP networks. | Prototype | [ReadMe](maps/compliance/aws/LW_S3_17/README.md) | yes | yes
-LW_S3_18 | Ensure the attached S3 bucket policy does not grant global 'Get' permission. | Implemented | [ReadMe](maps/compliance/aws/LW_S3_18/README.md) |yes | yes
-LW_S3_19 | Ensure the attached S3 bucket policy does not grant global 'Delete' permission. | Implemented | [ReadMe](maps/compliance/aws/LW_S3_19/README.md) | yes | yes
-LW_S3_20 | Ensure the attached S3 bucket policy does not grant global 'List' permission. | Implemented | [ReadMe](maps/compliance/aws/LW_S3_20/README.md) | yes | yes
-LW_S3_21 | Ensure the attached S3 bucket policy does not grant global 'Put' permission. | Implemented | [ReadMe](maps/compliance/aws/LW_S3_21/README.md) | yes | yes
-AWS_CIS_1_1 | Avoid the use of the "root" account | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_1/README.md) | no | no
-AWS_CIS_1_2 | Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_2/README.md) | no | no
-AWS_CIS_1_3 | Ensure credentials unused for 90 days or greater are disabled | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_3/README.md) | no | no
-AWS_CIS_1_4 | Ensure access keys are rotated every 90 days or less | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_4/README.md) | no | no
-AWS_CIS_1_5 | Ensure IAM password policy requires at least one uppercase letter | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_5/README.md) | no | no
-AWS_CIS_1_6 | Ensure IAM password policy require at least one lowercase letter | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_6/README.md) | no | no
-AWS_CIS_1_7 | Ensure IAM password policy require at least one symbol | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_7/README.md) | no | no
-AWS_CIS_1_8 | Ensure IAM password policy require at least one number | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_8/README.md) | no | no
-AWS_CIS_1_9 | Ensure IAM password policy requires minimum length of 14 or greater | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_9/README.md) | no | no
-AWS_CIS_1_10 | Ensure IAM password policy prevents password reuse | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_10/README.md) | no | no
-AWS_CIS_1_11 | Ensure IAM password policy expires passwords within 90 days or less | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_11/README.md) | no | no
-AWS_CIS_1_12 | Ensure no root account access key exists | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_12/README.md) | no | no
-AWS_CIS_1_13 | Ensure MFA is enabled for the "root" account | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_13/README.md) | no | no
-AWS_CIS_1_14 | Ensure hardware MFA is enabled for the "root" account | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_14/README.md) | no | no
-AWS_CIS_1_15 | Ensure security questions are registered in the AWS account | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_15/README.md) | no | no
-AWS_CIS_1_16 | Ensure IAM policies are attached only to groups or roles | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_16/README.md) | no | no
-AWS_CIS_1_17 | Enable detailed billing | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_17/README.md) | no | no
-AWS_CIS_1_19 | Maintain current contact details | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_19/README.md) | no | no
-AWS_CIS_1_20 | Ensure security contact information is registered | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_20/README.md) | no | no
-AWS_CIS_1_21 | Ensure IAM instance roles are used for AWS resource access from instances | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_21/README.md) | no | no
-AWS_CIS_1_22 | Ensure a support role has been created to manage incidents with AWS Support | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_22/README.md) | no | no
-AWS_CIS_1_23 | Do not setup access keys during initial user setup for all IAM users that have a console password | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_23/README.md) | no | no
-AWS_CIS_1_24 | Ensure IAM policies that allow full "*:*" administrative privileges are not created | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_1_24/README.md) | no | no
-LW_AWS_IAM_1 | Ensure access keys are rotated every 30 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_1/README.md) | no | no
-LW_AWS_IAM_2 | Ensure access keys are rotated every 45 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_2/README.md) | no | no
-LW_AWS_IAM_3 | Ensure public ssh keys are rotated every 30 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_3/README.md) | no | no
-LW_AWS_IAM_4 | Ensure public ssh keys are rotated every 45 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_4/README.md) | no | no
-LW_AWS_IAM_5 | Ensure public ssh keys are rotated every 90 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_5/README.md) | no | no
-LW_AWS_IAM_6 | Ensure active access keys are used every 90 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_6/README.md) | no | no
-LW_AWS_IAM_7 | Iam user should not be inactive from last 30 days or more | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_7/README.md) | no | no
-LW_AWS_IAM_8 | Ensure IAM configuration has valid Identity Providers configuration | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_8/README.md) | no | no
-LW_AWS_IAM_9 | Ensure IAM Role restrict access to a list of whitelist of IP networks | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_9/README.md) | no | no
-LW_AWS_IAM_10 | Ensure IAM User restrict access to a list of whitelist of IP networks | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_10/README.md) | no | no
-LW_AWS_IAM_11 | Ensure non-root user exists in the account | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_11/README.md) | no | no
-LW_AWS_IAM_12 | Ensure access keys are rotated every 350 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_12/README.md) | no | no
-LW_AWS_IAM_13 | Ensure access keys are rotated every 180 days or less | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_13/README.md) | no | no
-LW_AWS_IAM_14 | No IAM users with password-based console access should exist | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_IAM_14/README.md) | no | no
-AWS_CIS_2_1 | Ensure CloudTrail is enabled in all regions | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_1/README.md) | no | no
-AWS_CIS_2_2 | Ensure CloudTrail log file validation is enabled | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_2/README.md) | no | no
-AWS_CIS_2_3 | Ensure S3 bucket CloudTrail logs is not publicly accessible | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_2/README.md) | no | no
-AWS_CIS_2_4 | Ensure CloudTrail is integrated with CloudWatch Logs | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_4/README.md) | no | no
-AWS_CIS_2_5 | Ensure AWS Config is enabled in all regions | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_5/README.md) | no | no
-AWS_CIS_2_6 | Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_6/README.md) | no | no
-AWS_CIS_2_7 | Ensure CloudTrail logs are encrypted at rest using KMS CMKs | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_7/README.md) | no | no
-AWS_CIS_2_8 | Ensure rotation for customer created CMKs is enabled | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_8/README.md) | no | no
-AWS_CIS_2_9 | Ensure Flow Logging for VPC is enabled and active | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_2_9/README.md) | no | no
-AWS_CIS_3_2 | Ensure a log metric filter and alarm exist for Management Console sign-in without MFA | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_2/README.md) | no | no
-AWS_CIS_3_3 | Ensure a log metric filter and alarm exist for usage of "root" account | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_2/README.md) | no | no
-AWS_CIS_3_4 | Ensure a log metric filter and alarm exist for IAM policy changes | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_4/README.md) | no | no
-AWS_CIS_3_5 | Ensure a log metric filter and alarm exist for CloudTrail configuration changes | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_5/README.md) | no | no
-AWS_CIS_3_6 | Ensure a log metric filter and alarm exist for AWS Management Console authentication failures | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_6/README.md) | no | no
-AWS_CIS_3_7 | Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer created CMKs | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_7/README.md) | no | no
-AWS_CIS_3_8 | Ensure a log metric filter and alarm exist for S3 bucket policy changes | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_8/README.md) | no | no
-AWS_CIS_3_9 | Ensure a log metric filter and alarm exist for AWS Config configuration changes | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_9/README.md) | no | no
-AWS_CIS_3_10 | Ensure a log metric filter and alarm exist for security group changes | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_10/README.md) | no | no
-AWS_CIS_3_11 | Ensure a log metric filter and alarm exist for changes to Network Access Control Lists (NACL) | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_11/README.md) | no | no
-AWS_CIS_3_12 | Ensure a log metric filter and alarm exist for changes to network gateways | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_12/README.md) | no | no
-AWS_CIS_3_13 | Ensure a log metric filter and alarm exist for route table changes | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_13/README.md) | no | no
-AWS_CIS_3_14 | Ensure a log metric filter and alarm exist for VPC changes | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_14/README.md) | no | no
-AWS_CIS_3_15 | Ensure appropriate subscribers to each SNS topic | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_3_15/README.md) | no | no
-AWS_CIS_4_1 | Ensure no security groups allow ingress from 0.0.0.0/0 to port 22 | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_4_1/README.md) | no | no
-AWS_CIS_4_2 | Ensure no security groups allow ingress from 0.0.0.0/0 to port 3389 | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_4_2/README.md) | no | no
-AWS_CIS_4_4 | Ensure the default security group of every VPC restricts all traffic | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_4_4/README.md) | no | no
-AWS_CIS_4_5 | Ensure routing tables for VPC peering are "least access" | not implemented | [ReadMe](maps/compliance/aws/AWS_CIS_4_5/README.md) | no | no
-LW_AWS_MONGODB_1 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 27017 (MongoDB) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_MONGODB_1/README.md) | no | no
-LW_AWS_MONGODB_2 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 27018 (MongoDB) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_MONGODB_2/README.md) | no | no
-LW_AWS_MONGODB_3 | Security group attached to Elastic Load Balancer instance should not allow inbound traffic from all to TCP port 27017 (MongoDB) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_MONGODB_3/README.md) | no | no
-LW_AWS_MONGODB_4 | Security group attached to Elastic Load Balancer instance should not allow inbound traffic from all to TCP port 27018 (MongoDB) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_MONGODB_4/README.md) | no | no
-LW_AWS_MONGODB_5 | Security group attached to Application Load Balancer instance should not allow inbound traffic from all to TCP port 27017 (MongoDB) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_MONGODB_5/README.md) | no | no
-LW_AWS_MONGODB_6 | Security group attached to Application Load Balancer instance should not allow inbound traffic from all to TCP port 27018 (MongoDB) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_MONGODB_6/README.md) | no | no
-LW_AWS_NETWORKING_1 | Security groups are not attached to the EC2 instance | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_1/README.md) | no | no
-LW_AWS_NETWORKING_2 | Network ACLs do not allow unrestricted inbound traffic | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_2/README.md) | no | no
-LW_AWS_NETWORKING_3 | Network ACLs do not allow unrestricted outbound traffic | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_3/README.md) | no | no
-LW_AWS_NETWORKING_4 | AWS VPC endpoints should not be exposed | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_4/README.md) | no | no
-LW_AWS_NETWORKING_5 | Security Group should not be open to all(unrestricted) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_5/README.md) | no | no
-LW_AWS_NETWORKING_6 | Security Group should not accept traffic other than 80 and 443 | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_6/README.md) | no | no
-LW_AWS_NETWORKING_7 | Unrestricted Security Group should not be attached to EC2 instance | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_7/README.md) | no | no
-LW_AWS_NETWORKING_8 | Unrestricted Security Group should not be attached to RDS database | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_8/README.md) | no | no
-LW_AWS_NETWORKING_9 | Unrestricted Security Group should not be attached to Network Interface | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_9/README.md) | no | no
-LW_AWS_NETWORKING_10 | Unrestricted Security Group should not be attached to Classical Load Balancer | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_10/README.md) | no | no
-LW_AWS_NETWORKING_11 | Unrestricted Security Group should not be attached to Application Load Balancer | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_11/README.md) | no | no
-LW_AWS_NETWORKING_12 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 9300 (Elasticsearch) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_12/README.md) | no | no
-LW_AWS_NETWORKING_13 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 5601 (Kibana) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_13/README.md) | no | no
-LW_AWS_NETWORKING_14 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 6379 (Redis) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_14/README.md) | no | no
-LW_AWS_NETWORKING_15 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 2379 (etcd) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_15/README.md) | no | no
-LW_AWS_NETWORKING_16 | ELB SSL Certificate expires in 5 Days | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_16/README.md) | no | no
-LW_AWS_NETWORKING_17 | ELB SSL Certificate expires in 45 Days | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_17/README.md) | no | no
-LW_AWS_NETWORKING_18 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 23 (Telnet) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_18/README.md) | no | no
-LW_AWS_NETWORKING_19 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 135 (Windows RPC) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_19/README.md) | no | no
-LW_AWS_NETWORKING_20 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 445 (Windows SMB) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_20/README.md) | no | no
-LW_AWS_NETWORKING_21 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 3306 (MySQL) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_21/README.md) | no | no
-LW_AWS_NETWORKING_22 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 5432 (PostgreSQL) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_22/README.md) | no | no
-LW_AWS_NETWORKING_23 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 1433 (SQLServer) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_23/README.md) | no | no
-LW_AWS_NETWORKING_24 | Security group attached to EC2 instance should not allow inbound traffic from all to UDP port 1434 (SQLServer) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_24/README.md) | no | no
-LW_AWS_NETWORKING_25 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 4333 (MSQL) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_25/README.md) | no | no
-LW_AWS_NETWORKING_26 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 5500 (VNC Listener) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_26/README.md) | no | no
-LW_AWS_NETWORKING_27 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 5900 (VNC Server) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_27/README.md) | no | no
-LW_AWS_NETWORKING_28 | Security group attached to EC2 instance should not allow inbound traffic from all to UDP port 137 (NetBIOS) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_28/README.md) | no | no
-LW_AWS_NETWORKING_29 | Security group attached to EC2 instance should not allow inbound traffic from all to UDP port 138 (NetBIOS) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_29/README.md) | no | no
-LW_AWS_NETWORKING_30 | Security group attached to EC2 instance should not allow inbound traffic from all to UDP port 445 (CIFS) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_30/README.md) | no | no
-LW_AWS_NETWORKING_31 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 21 (FTP) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_31/README.md) | no | no
-LW_AWS_NETWORKING_32 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 20 (FTP-Data) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_32/README.md) | no | no
-LW_AWS_NETWORKING_33 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 25 (SMTP) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_33/README.md) | no | no
-LW_AWS_NETWORKING_34 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 53 (DNS) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_34/README.md) | no | no
-LW_AWS_NETWORKING_35 | Security group attached to EC2 instance should not allow inbound traffic from all to UDP port 53 (DNS) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_35/README.md) | no | no
-LW_AWS_NETWORKING_36 | Security group attached to EC2 instance should not allow inbound traffic from all to All Ports | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_36/README.md) | no | no
-LW_AWS_NETWORKING_37 | Redshift Cluster should not be Publicly Accessible | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_37/README.md) | no | no
-LW_AWS_NETWORKING_38 | ELB Security Group should have Outbound Rules attached to it | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_38/README.md) | no | no
-LW_AWS_NETWORKING_39 | ELB should not use insecure Cipher(s) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_39/README.md) | no | no
-LW_AWS_NETWORKING_40 | EC2 instance should be deployed in EC2-VPC platform | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_40/README.md) | no | no
-LW_AWS_NETWORKING_41 | CloudFront Origin Protocol Policy should use https-only | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_41/README.md) | no | no
-LW_AWS_NETWORKING_42 | CloudFront Origin SSL Protocols should not use insecure Cipher(s) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_42/README.md) | no | no
-LW_AWS_NETWORKING_43 | Security group should not allow inbound traffic from all to all ICMP | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_43/README.md) | no | no
-LW_AWS_NETWORKING_44 | ELB should have VPC ingress security group | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_44/README.md) | no | no
-LW_AWS_NETWORKING_45 | ELB should have valid and secure security group | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_45/README.md) | no | no
-LW_AWS_NETWORKING_46 | No Default VPC should be present in an AWS account | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_46/README.md) | no | no
-LW_AWS_NETWORKING_47 | EC2 instances should not have a Public IP address attached | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_47/README.md) | no | no
-LW_AWS_NETWORKING_48 | Attached VPC CIDR block(s) should be in whitelist | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_48/README.md) | no | no
-LW_AWS_NETWORKING_49 | Load Balancers should have Access Logs enabled | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_NETWORKING_49/README.md) | no | no
-LW_AWS_GENERAL_SECURITY_1 | Ec2 instance does not have any tags | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_1/README.md) | no | no
-LW_AWS_GENERAL_SECURITY_2 | Ensure EBS Volumes are Encrypted | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_2/README.md) | no | no
-LW_AWS_GENERAL_SECURITY_3 | Ensure No Public EBS Snapshots | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_3/README.md) | no | no
-LW_AWS_GENERAL_SECURITY_4 | Ensure RDS database is encrypted with customer managed KMS key | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_4/README.md) | no | no
-LW_AWS_GENERAL_SECURITY_5 | Ensure Redshift Cluster is encrypted | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_5/README.md) | no | no
-LW_AWS_GENERAL_SECURITY_6 | Ensure no server certificate has been uploaded before Heartbleed vulnerability | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_6/README.md) | no | no
-LW_AWS_GENERAL_SECURITY_7 | Ensure ELB has latest Secure Cipher policies Configured for Session Encryption | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_7/README.md) | no | no
-LW_AWS_GENERAL_SECURITY_7 | Ensure ELB is not affected by POODLE Vulnerability (CVE-2014-3566) | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_7/README.md) | no | no
-LW_AWS_RDS_1 | RDS should not have a Public Interface | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_RDS_1/README.md) | no | no
-LW_AWS_SERVERLESS_1 | Lambda Function should not have Admin Privileges | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_SERVERLESS_1/README.md) | no | no
-LW_AWS_SERVERLESS_2 | Lambda Function should not have Cross Account Access | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_SERVERLESS_2/README.md) | no | no
-LW_AWS_SERVERLESS_3 | Lambda Function should not have Same IAM Role for more than one lambda function | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_SERVERLESS_3/README.md) | no | no
-LW_AWS_SERVERLESS_4 | Lambda Function should have tracing enabled | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_SERVERLESS_4/README.md) | no | no
-LW_AWS_SERVERLESS_5 | Lambda Function should not have VPC access | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_SERVERLESS_5/README.md) | no | no
-LW_AWS_ELASTICSEARCH_1 | Elastic Search Domain should not be exposed | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_ELASTICSEARCH_1/README.md) | no | no
-LW_AWS_ELASTICSEARCH_2 | Elastic Search Domain should be in a VPC | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_ELASTICSEARCH_2/README.md) | no | no
-LW_AWS_ELASTICSEARCH_3 | Elastic Search Domain should not have EncryptionAtRest disabled | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_ELASTICSEARCH_3/README.md) | no | no
-LW_AWS_ELASTICSEARCH_4 | Elastic Search Domain should not have Encryption using AWS Managed Keys | not implemented | [ReadMe](maps/compliance/aws/LW_AWS_ELASTICSEARCH_4/README.md) | no | no
+Map ID | Description | Status | CLI Remediation | Plugin Remediation
+--- | --- | --- | --- | ---
+LW_S3_1 | Ensure the S3 bucket ACL does not grant 'Everyone' READ permission [list S3 objects] | [Implemented](maps/compliance/aws/LW_S3_1/README.md) | yes | yes
+LW_S3_2 | Ensure the S3 bucket ACL does not grant 'Everyone' WRITE permission [create, overwrite, and delete S3 objects] | [Implemented](maps/compliance/aws/LW_S3_2/README.md) | yes | yes
+LW_S3_3 | Ensure the S3 bucket ACL does not grant 'Everyone' READ_ACP permission [read bucket ACL] | [Implemented](maps/compliance/aws/LW_S3_3/README.md) | yes | yes
+LW_S3_4 | Ensure the S3 bucket ACL does not grant 'Everyone' WRITE_ACP permission [modify bucket ACL] | [Implemented](maps/compliance/aws/LW_S3_4/README.md) | yes | yes
+LW_S3_5 | Ensure the S3 bucket ACL does not grant 'Everyone' FULL_CONTROL [READ, WRITE, READ_ACP, WRITE_ACP] | [Implemented](maps/compliance/aws/LW_S3_5/README.md) | yes | yes
+LW_S3_6 | Ensure the S3 bucket ACL does not grant AWS users READ permission [list S3 objects] | [Implemented](maps/compliance/aws/LW_S3_6/README.md) | yes | yes
+LW_S3_7 | Ensure the S3 bucket ACL does not grant AWS users WRITE permission [create, overwrite, and delete S3 objects] | [Implemented](maps/compliance/aws/LW_S3_7/README.md) | yes | yes
+LW_S3_8 | Ensure the S3 bucket ACL does not grant AWS users READ_ACP permission [read bucket ACL] | [Implemented](maps/compliance/aws/LW_S3_8/README.md) | yes | yes
+LW_S3_9 | Ensure the S3 bucket ACL does not grant AWS users WRITE_ACP permission [modify bucket ACL] | [Implemented](maps/compliance/aws/LW_S3_9/README.md) | yes | yes
+LW_S3_10 | Ensure the S3 bucket ACL does not grant AWS users FULL_CONTROL [READ, WRITE, READ_ACP, WRITE_ACP] | [Implemented](maps/compliance/aws/LW_S3_10/README.md) | yes | yes
+LW_S3_11 | Ensure the attached S3 bucket policy does not grant 'Allow' permission to everyone | [Implemented](maps/compliance/aws/LW_S3_11/README.md) | yes | yes
+LW_S3_12 | Ensure the S3 bucket requires MFA to delete objects | [Skeleton](maps/compliance/aws/LW_S3_12/README.md) | no | no
+LW_S3_13 | Ensure the S3 bucket has access logging enabled | [Skeleton](maps/compliance/aws/LW_S3_13/README.md) | no | no
+LW_S3_14 | Ensure all data stored in the S3 bucket is securely encrypted at rest | [Skeleton](maps/compliance/aws/LW_S3_14/README.md) | no | no
+LW_S3_15 | Ensure all data is transported from the S3 bucket securely | [Skeleton](maps/compliance/aws/LW_S3_15/README.md) | no | no
+LW_S3_16 | Ensure the S3 bucket has versioning enabled | [Skeleton](maps/compliance/aws/LW_S3_16/README.md) | no | no
+LW_S3_17 | Ensure the S3 bucket access is restricted to a whitelist of IP networks. | [Prototype](maps/compliance/aws/LW_S3_17/README.md) | yes | yes
+LW_S3_18 | Ensure the attached S3 bucket policy does not grant global 'Get' permission. | [Implemented](maps/compliance/aws/LW_S3_18/README.md) |yes | yes
+LW_S3_19 | Ensure the attached S3 bucket policy does not grant global 'Delete' permission. | [Implemented](maps/compliance/aws/LW_S3_19/README.md) | yes | yes
+LW_S3_20 | Ensure the attached S3 bucket policy does not grant global 'List' permission. | [Implemented](maps/compliance/aws/LW_S3_20/README.md) | yes | yes
+LW_S3_21 | Ensure the attached S3 bucket policy does not grant global 'Put' permission. | [Implemented](maps/compliance/aws/LW_S3_21/README.md) | yes | yes
+AWS_CIS_1_1 | Avoid the use of the "root" account | [not implemented](maps/compliance/aws/AWS_CIS_1_1/README.md) | no | no
+AWS_CIS_1_2 | Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password | [ReadMe](maps/compliance/aws/AWS_CIS_1_2/README.md) | no | no
+AWS_CIS_1_3 | Ensure credentials unused for 90 days or greater are disabled | [not implemented](maps/compliance/aws/AWS_CIS_1_3/README.md) | no | no
+AWS_CIS_1_4 | Ensure access keys are rotated every 90 days or less | [not implemented](maps/compliance/aws/AWS_CIS_1_4/README.md) | no | no
+AWS_CIS_1_5 | Ensure IAM password policy requires at least one uppercase letter | [not implemented](maps/compliance/aws/AWS_CIS_1_5/README.md) | no | no
+AWS_CIS_1_6 | Ensure IAM password policy require at least one lowercase letter | [not implemented](maps/compliance/aws/AWS_CIS_1_6/README.md) | no | no
+AWS_CIS_1_7 | Ensure IAM password policy require at least one symbol | [not implemented](maps/compliance/aws/AWS_CIS_1_7/README.md) | no | no
+AWS_CIS_1_8 | Ensure IAM password policy require at least one number | [not implemented](maps/compliance/aws/AWS_CIS_1_8/README.md) | no | no
+AWS_CIS_1_9 | Ensure IAM password policy requires minimum length of 14 or greater | [not implemented](maps/compliance/aws/AWS_CIS_1_9/README.md) | no | no
+AWS_CIS_1_10 | Ensure IAM password policy prevents password reuse | [not implemented](maps/compliance/aws/AWS_CIS_1_10/README.md) | no | no
+AWS_CIS_1_11 | Ensure IAM password policy expires passwords within 90 days or less | [not implemented](maps/compliance/aws/AWS_CIS_1_11/README.md) | no | no
+AWS_CIS_1_12 | Ensure no root account access key exists | [not implemented](maps/compliance/aws/AWS_CIS_1_12/README.md) | no | no
+AWS_CIS_1_13 | Ensure MFA is enabled for the "root" account | [not implemented](maps/compliance/aws/AWS_CIS_1_13/README.md) | no | no
+AWS_CIS_1_14 | Ensure hardware MFA is enabled for the "root" account | [not implemented](maps/compliance/aws/AWS_CIS_1_14/README.md) | no | no
+AWS_CIS_1_15 | Ensure security questions are registered in the AWS account | [not implemented](maps/compliance/aws/AWS_CIS_1_15/README.md) | no | no
+AWS_CIS_1_16 | Ensure IAM policies are attached only to groups or roles | [not implemented](maps/compliance/aws/AWS_CIS_1_16/README.md) | no | no
+AWS_CIS_1_17 | Enable detailed billing | [not implemented](maps/compliance/aws/AWS_CIS_1_17/README.md) | no | no
+AWS_CIS_1_19 | Maintain current contact details | [not implemented](maps/compliance/aws/AWS_CIS_1_19/README.md) | no | no
+AWS_CIS_1_20 | Ensure security contact information is registered | [not implemented](maps/compliance/aws/AWS_CIS_1_20/README.md) | no | no
+AWS_CIS_1_21 | Ensure IAM instance roles are used for AWS resource access from instances | [not implemented](maps/compliance/aws/AWS_CIS_1_21/README.md) | no | no
+AWS_CIS_1_22 | Ensure a support role has been created to manage incidents with AWS Support | [not implemented](maps/compliance/aws/AWS_CIS_1_22/README.md) | no | no
+AWS_CIS_1_23 | Do not setup access keys during initial user setup for all IAM users that have a console password | [not implemented](maps/compliance/aws/AWS_CIS_1_23/README.md) | no | no
+AWS_CIS_1_24 | Ensure IAM policies that allow full "*:*" administrative privileges are not created | [not implemented](maps/compliance/aws/AWS_CIS_1_24/README.md) | no | no
+LW_AWS_IAM_1 | Ensure access keys are rotated every 30 days or less | [not implemented](maps/compliance/aws/LW_AWS_IAM_1/README.md) | no | no
+LW_AWS_IAM_2 | Ensure access keys are rotated every 45 days or less | [not implemented](maps/compliance/aws/LW_AWS_IAM_2/README.md) | no | no
+LW_AWS_IAM_3 | Ensure public ssh keys are rotated every 30 days or less | [not implemented](maps/compliance/aws/LW_AWS_IAM_3/README.md) | no | no
+LW_AWS_IAM_4 | Ensure public ssh keys are rotated every 45 days or less | [not implemented](maps/compliance/aws/LW_AWS_IAM_4/README.md) | no | no
+LW_AWS_IAM_5 | Ensure public ssh keys are rotated every 90 days or less | [not implemented](maps/compliance/aws/LW_AWS_IAM_5/README.md) | no | no
+LW_AWS_IAM_6 | Ensure active access keys are used every 90 days or less | [not implemented](maps/compliance/aws/LW_AWS_IAM_6/README.md) | no | no
+LW_AWS_IAM_7 | Iam user should not be inactive from last 30 days or more | [not implemented](maps/compliance/aws/LW_AWS_IAM_7/README.md) | no | no
+LW_AWS_IAM_8 | Ensure IAM configuration has valid Identity Providers configuration | [not implemented](maps/compliance/aws/LW_AWS_IAM_8/README.md) | no | no
+LW_AWS_IAM_9 | Ensure IAM Role restrict access to a list of whitelist of IP networks | [not implemented](maps/compliance/aws/LW_AWS_IAM_9/README.md) | no | no
+LW_AWS_IAM_10 | Ensure IAM User restrict access to a list of whitelist of IP networks | [not implemented](maps/compliance/aws/LW_AWS_IAM_10/README.md) | no | no
+LW_AWS_IAM_11 | Ensure non-root user exists in the account | [not implemented](maps/compliance/aws/LW_AWS_IAM_11/README.md) | no | no
+LW_AWS_IAM_12 | Ensure access keys are rotated every 350 days or less | [not implemented](maps/compliance/aws/LW_AWS_IAM_12/README.md) | no | no
+LW_AWS_IAM_13 | Ensure access keys are rotated every 180 days or less | [not implemented](maps/compliance/aws/LW_AWS_IAM_13/README.md) | no | no
+LW_AWS_IAM_14 | No IAM users with password-based console access should exist | [not implemented](maps/compliance/aws/LW_AWS_IAM_14/README.md) | no | no
+AWS_CIS_2_1 | Ensure CloudTrail is enabled in all regions | [not implemented](maps/compliance/aws/AWS_CIS_2_1/README.md) | no | no
+AWS_CIS_2_2 | Ensure CloudTrail log file validation is enabled | [not implemented](maps/compliance/aws/AWS_CIS_2_2/README.md) | no | no
+AWS_CIS_2_3 | Ensure S3 bucket CloudTrail logs is not publicly accessible | [not implemented](maps/compliance/aws/AWS_CIS_2_2/README.md) | no | no
+AWS_CIS_2_4 | Ensure CloudTrail is integrated with CloudWatch Logs | [not implemented](maps/compliance/aws/AWS_CIS_2_4/README.md) | no | no
+AWS_CIS_2_5 | Ensure AWS Config is enabled in all regions | [not implemented](maps/compliance/aws/AWS_CIS_2_5/README.md) | no | no
+AWS_CIS_2_6 | Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket | [not implemented](maps/compliance/aws/AWS_CIS_2_6/README.md) | no | no
+AWS_CIS_2_7 | Ensure CloudTrail logs are encrypted at rest using KMS CMKs | [not implemented](maps/compliance/aws/AWS_CIS_2_7/README.md) | no | no
+AWS_CIS_2_8 | Ensure rotation for customer created CMKs is enabled | [not implemented](maps/compliance/aws/AWS_CIS_2_8/README.md) | no | no
+AWS_CIS_2_9 | Ensure Flow Logging for VPC is enabled and active | [not implemented](maps/compliance/aws/AWS_CIS_2_9/README.md) | no | no
+AWS_CIS_3_2 | Ensure a log metric filter and alarm exist for Management Console sign-in without MFA | [not implemented](maps/compliance/aws/AWS_CIS_3_2/README.md) | no | no
+AWS_CIS_3_3 | Ensure a log metric filter and alarm exist for usage of "root" account | [not implemented](maps/compliance/aws/AWS_CIS_3_2/README.md) | no | no
+AWS_CIS_3_4 | Ensure a log metric filter and alarm exist for IAM policy changes | [not implemented](maps/compliance/aws/AWS_CIS_3_4/README.md) | no | no
+AWS_CIS_3_5 | Ensure a log metric filter and alarm exist for CloudTrail configuration changes | [not implemented](maps/compliance/aws/AWS_CIS_3_5/README.md) | no | no
+AWS_CIS_3_6 | Ensure a log metric filter and alarm exist for AWS Management Console authentication failures | [not implemented](maps/compliance/aws/AWS_CIS_3_6/README.md) | no | no
+AWS_CIS_3_7 | Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer created CMKs | [not implemented](maps/compliance/aws/AWS_CIS_3_7/README.md) | no | no
+AWS_CIS_3_8 | Ensure a log metric filter and alarm exist for S3 bucket policy changes | [not implemented](maps/compliance/aws/AWS_CIS_3_8/README.md) | no | no
+AWS_CIS_3_9 | Ensure a log metric filter and alarm exist for AWS Config configuration changes | [not implemented](maps/compliance/aws/AWS_CIS_3_9/README.md) | no | no
+AWS_CIS_3_10 | Ensure a log metric filter and alarm exist for security group changes | [not implemented](maps/compliance/aws/AWS_CIS_3_10/README.md) | no | no
+AWS_CIS_3_11 | Ensure a log metric filter and alarm exist for changes to Network Access Control Lists (NACL) | [not implemented](maps/compliance/aws/AWS_CIS_3_11/README.md) | no | no
+AWS_CIS_3_12 | Ensure a log metric filter and alarm exist for changes to network gateways | [not implemented](maps/compliance/aws/AWS_CIS_3_12/README.md) | no | no
+AWS_CIS_3_13 | Ensure a log metric filter and alarm exist for route table changes | [not implemented](maps/compliance/aws/AWS_CIS_3_13/README.md) | no | no
+AWS_CIS_3_14 | Ensure a log metric filter and alarm exist for VPC changes | [not implemented](maps/compliance/aws/AWS_CIS_3_14/README.md) | no | no
+AWS_CIS_3_15 | Ensure appropriate subscribers to each SNS topic | [not implemented](maps/compliance/aws/AWS_CIS_3_15/README.md) | no | no
+AWS_CIS_4_1 | Ensure no security groups allow ingress from 0.0.0.0/0 to port 22 | [not implemented](maps/compliance/aws/AWS_CIS_4_1/README.md) | no | no
+AWS_CIS_4_2 | Ensure no security groups allow ingress from 0.0.0.0/0 to port 3389 | [not implemented](maps/compliance/aws/AWS_CIS_4_2/README.md) | no | no
+AWS_CIS_4_4 | Ensure the default security group of every VPC restricts all traffic | [not implemented](maps/compliance/aws/AWS_CIS_4_4/README.md) | no | no
+AWS_CIS_4_5 | Ensure routing tables for VPC peering are "least access" | [not implemented](maps/compliance/aws/AWS_CIS_4_5/README.md) | no | no
+LW_AWS_MONGODB_1 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 27017 (MongoDB) | [not implemented](maps/compliance/aws/LW_AWS_MONGODB_1/README.md) | no | no
+LW_AWS_MONGODB_2 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 27018 (MongoDB) | [not implemented](maps/compliance/aws/LW_AWS_MONGODB_2/README.md) | no | no
+LW_AWS_MONGODB_3 | Security group attached to Elastic Load Balancer instance should not allow inbound traffic from all to TCP port 27017 (MongoDB) | [not implemented](maps/compliance/aws/LW_AWS_MONGODB_3/README.md) | no | no
+LW_AWS_MONGODB_4 | Security group attached to Elastic Load Balancer instance should not allow inbound traffic from all to TCP port 27018 (MongoDB) | [not implemented](maps/compliance/aws/LW_AWS_MONGODB_4/README.md) | no | no
+LW_AWS_MONGODB_5 | Security group attached to Application Load Balancer instance should not allow inbound traffic from all to TCP port 27017 (MongoDB) | [not implemented](maps/compliance/aws/LW_AWS_MONGODB_5/README.md) | no | no
+LW_AWS_MONGODB_6 | Security group attached to Application Load Balancer instance should not allow inbound traffic from all to TCP port 27018 (MongoDB) | [not implemented](maps/compliance/aws/LW_AWS_MONGODB_6/README.md) | no | no
+LW_AWS_NETWORKING_1 | Security groups are not attached to the EC2 instance | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_1/README.md) | no | no
+LW_AWS_NETWORKING_2 | Network ACLs do not allow unrestricted inbound traffic | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_2/README.md) | no | no
+LW_AWS_NETWORKING_3 | Network ACLs do not allow unrestricted outbound traffic | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_3/README.md) | no | no
+LW_AWS_NETWORKING_4 | AWS VPC endpoints should not be exposed | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_4/README.md) | no | no
+LW_AWS_NETWORKING_5 | Security Group should not be open to all(unrestricted) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_5/README.md) | no | no
+LW_AWS_NETWORKING_6 | Security Group should not accept traffic other than 80 and 443 | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_6/README.md) | no | no
+LW_AWS_NETWORKING_7 | Unrestricted Security Group should not be attached to EC2 instance | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_7/README.md) | no | no
+LW_AWS_NETWORKING_8 | Unrestricted Security Group should not be attached to RDS database | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_8/README.md) | no | no
+LW_AWS_NETWORKING_9 | Unrestricted Security Group should not be attached to Network Interface | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_9/README.md) | no | no
+LW_AWS_NETWORKING_10 | Unrestricted Security Group should not be attached to Classical Load Balancer | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_10/README.md) | no | no
+LW_AWS_NETWORKING_11 | Unrestricted Security Group should not be attached to Application Load Balancer | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_11/README.md) | no | no
+LW_AWS_NETWORKING_12 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 9300 (Elasticsearch) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_12/README.md) | no | no
+LW_AWS_NETWORKING_13 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 5601 (Kibana) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_13/README.md) | no | no
+LW_AWS_NETWORKING_14 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 6379 (Redis) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_14/README.md) | no | no
+LW_AWS_NETWORKING_15 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 2379 (etcd) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_15/README.md) | no | no
+LW_AWS_NETWORKING_16 | ELB SSL Certificate expires in 5 Days | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_16/README.md) | no | no
+LW_AWS_NETWORKING_17 | ELB SSL Certificate expires in 45 Days | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_17/README.md) | no | no
+LW_AWS_NETWORKING_18 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 23 (Telnet) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_18/README.md) | no | no
+LW_AWS_NETWORKING_19 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 135 (Windows RPC) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_19/README.md) | no | no
+LW_AWS_NETWORKING_20 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 445 (Windows SMB) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_20/README.md) | no | no
+LW_AWS_NETWORKING_21 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 3306 (MySQL) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_21/README.md) | no | no
+LW_AWS_NETWORKING_22 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 5432 (PostgreSQL) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_22/README.md) | no | no
+LW_AWS_NETWORKING_23 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 1433 (SQLServer) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_23/README.md) | no | no
+LW_AWS_NETWORKING_24 | Security group attached to EC2 instance should not allow inbound traffic from all to UDP port 1434 (SQLServer) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_24/README.md) | no | no
+LW_AWS_NETWORKING_25 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 4333 (MSQL) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_25/README.md) | no | no
+LW_AWS_NETWORKING_26 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 5500 (VNC Listener) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_26/README.md) | no | no
+LW_AWS_NETWORKING_27 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 5900 (VNC Server) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_27/README.md) | no | no
+LW_AWS_NETWORKING_28 | Security group attached to EC2 instance should not allow inbound traffic from all to UDP port 137 (NetBIOS) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_28/README.md) | no | no
+LW_AWS_NETWORKING_29 | Security group attached to EC2 instance should not allow inbound traffic from all to UDP port 138 (NetBIOS) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_29/README.md) | no | no
+LW_AWS_NETWORKING_30 | Security group attached to EC2 instance should not allow inbound traffic from all to UDP port 445 (CIFS) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_30/README.md) | no | no
+LW_AWS_NETWORKING_31 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 21 (FTP) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_31/README.md) | no | no
+LW_AWS_NETWORKING_32 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 20 (FTP-Data) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_32/README.md) | no | no
+LW_AWS_NETWORKING_33 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 25 (SMTP) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_33/README.md) | no | no
+LW_AWS_NETWORKING_34 | Security group attached to EC2 instance should not allow inbound traffic from all to TCP port 53 (DNS) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_34/README.md) | no | no
+LW_AWS_NETWORKING_35 | Security group attached to EC2 instance should not allow inbound traffic from all to UDP port 53 (DNS) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_35/README.md) | no | no
+LW_AWS_NETWORKING_36 | Security group attached to EC2 instance should not allow inbound traffic from all to All Ports | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_36/README.md) | no | no
+LW_AWS_NETWORKING_37 | Redshift Cluster should not be Publicly Accessible | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_37/README.md) | no | no
+LW_AWS_NETWORKING_38 | ELB Security Group should have Outbound Rules attached to it | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_38/README.md) | no | no
+LW_AWS_NETWORKING_39 | ELB should not use insecure Cipher(s) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_39/README.md) | no | no
+LW_AWS_NETWORKING_40 | EC2 instance should be deployed in EC2-VPC platform | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_40/README.md) | no | no
+LW_AWS_NETWORKING_41 | CloudFront Origin Protocol Policy should use https-only | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_41/README.md) | no | no
+LW_AWS_NETWORKING_42 | CloudFront Origin SSL Protocols should not use insecure Cipher(s) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_42/README.md) | no | no
+LW_AWS_NETWORKING_43 | Security group should not allow inbound traffic from all to all ICMP | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_43/README.md) | no | no
+LW_AWS_NETWORKING_44 | ELB should have VPC ingress security group | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_44/README.md) | no | no
+LW_AWS_NETWORKING_45 | ELB should have valid and secure security group | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_45/README.md) | no | no
+LW_AWS_NETWORKING_46 | No Default VPC should be present in an AWS account | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_46/README.md) | no | no
+LW_AWS_NETWORKING_47 | EC2 instances should not have a Public IP address attached | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_47/README.md) | no | no
+LW_AWS_NETWORKING_48 | Attached VPC CIDR block(s) should be in whitelist | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_48/README.md) | no | no
+LW_AWS_NETWORKING_49 | Load Balancers should have Access Logs enabled | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_49/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_1 | Ec2 instance does not have any tags | [not implemented](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_1/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_2 | Ensure EBS Volumes are Encrypted | [not implemented](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_2/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_3 | Ensure No Public EBS Snapshots | [not implemented](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_3/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_4 | Ensure RDS database is encrypted with customer managed KMS key | [not implemented](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_4/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_5 | Ensure Redshift Cluster is encrypted | [not implemented](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_5/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_6 | Ensure no server certificate has been uploaded before Heartbleed vulnerability | [not implemented](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_6/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_7 | Ensure ELB has latest Secure Cipher policies Configured for Session Encryption | [not implemented](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_7/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_7 | Ensure ELB is not affected by POODLE Vulnerability (CVE-2014-3566) | [not implemented](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_7/README.md) | no | no
+LW_AWS_RDS_1 | RDS should not have a Public Interface | [not implemented](maps/compliance/aws/LW_AWS_RDS_1/README.md) | no | no
+LW_AWS_SERVERLESS_1 | Lambda Function should not have Admin Privileges | [not implemented](maps/compliance/aws/LW_AWS_SERVERLESS_1/README.md) | no | no
+LW_AWS_SERVERLESS_2 | Lambda Function should not have Cross Account Access | [not implemented](maps/compliance/aws/LW_AWS_SERVERLESS_2/README.md) | no | no
+LW_AWS_SERVERLESS_3 | Lambda Function should not have Same IAM Role for more than one lambda function | [ReadMe](maps/compliance/aws/LW_AWS_SERVERLESS_3/README.md) | no | no
+LW_AWS_SERVERLESS_4 | Lambda Function should have tracing enabled | [not implemented](maps/compliance/aws/LW_AWS_SERVERLESS_4/README.md) | no | no
+LW_AWS_SERVERLESS_5 | Lambda Function should not have VPC access | [not implemented](maps/compliance/aws/LW_AWS_SERVERLESS_5/README.md) | no | no
+LW_AWS_ELASTICSEARCH_1 | Elastic Search Domain should not be exposed | [not implemented](maps/compliance/aws/LW_AWS_ELASTICSEARCH_1/README.md) | no | no
+LW_AWS_ELASTICSEARCH_2 | Elastic Search Domain should be in a VPC | [not implemented](maps/compliance/aws/LW_AWS_ELASTICSEARCH_2/README.md) | no | no
+LW_AWS_ELASTICSEARCH_3 | Elastic Search Domain should not have EncryptionAtRest disabled | [not implemented](maps/compliance/aws/LW_AWS_ELASTICSEARCH_3/README.md) | no | no
+LW_AWS_ELASTICSEARCH_4 | Elastic Search Domain should not have Encryption using AWS Managed Keys | [not implemented](maps/compliance/aws/LW_AWS_ELASTICSEARCH_4/README.md) | no | no
 
 #### Azure
 Map ID | Description | Status | Documentation | CLI Remediation | Plugin Remediation
