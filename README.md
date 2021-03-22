@@ -98,7 +98,7 @@ LW_S3_12 | Ensure the S3 bucket requires MFA to delete objects | [Prototype](map
 LW_S3_13 | Ensure the S3 bucket has access logging enabled | [Skeleton](maps/compliance/aws/LW_S3_13/README.md) | no | no
 LW_S3_14 | Ensure all data stored in the S3 bucket is securely encrypted at rest | [Skeleton](maps/compliance/aws/LW_S3_14/README.md) | no | no
 LW_S3_15 | Ensure all data is transported from the S3 bucket securely | [Skeleton](maps/compliance/aws/LW_S3_15/README.md) | no | no
-LW_S3_16 | Ensure the S3 bucket has versioning enabled | [Skeleton](maps/compliance/aws/LW_S3_16/README.md) | no | no
+LW_S3_16 | Ensure the S3 bucket has versioning enabled | [Implemented](maps/compliance/aws/LW_S3_16/README.md) | yes | yes
 LW_S3_17 | Ensure the S3 bucket access is restricted to a whitelist of IP networks. | [Prototype](maps/compliance/aws/LW_S3_17/README.md) | yes | yes
 LW_S3_18 | Ensure the attached S3 bucket policy does not grant global 'Get' permission. | [Implemented](maps/compliance/aws/LW_S3_18/README.md) |yes | yes
 LW_S3_19 | Ensure the attached S3 bucket policy does not grant global 'Delete' permission. | [Implemented](maps/compliance/aws/LW_S3_19/README.md) | yes | yes

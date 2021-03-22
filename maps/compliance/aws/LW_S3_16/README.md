@@ -36,7 +36,7 @@ We recommend to create an S3 test bucket you can use for testing. By default eve
 You can use the following AWS CLI command to configure an existing S3 test bucket to make sure that versioning is disabled insight the versioning configuration:
 
 ```
-aws s3api put-bucket-versioning --bucket <YOURBUCKETNAME>  --versioning-configuration Status=Disabled
+aws s3api put-bucket-versioning --bucket <YOURBUCKETNAME>  --versioning-configuration Status=Suspended
 ```
 
 **Note:** Make sure you configure the **YOURBUCKETNAME** with the name of the S3 test bucket you would like to use for tests. Don't use any S3 bucket with important data! This if for testing of this map only and it should not have any important data.
