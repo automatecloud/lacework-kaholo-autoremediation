@@ -6,7 +6,8 @@ Ensure the S3 bucket requires MFA to delete objects
 Objects in the bucket are able to be deleted according to bucket ACL or policy. If objects in the
 bucket are considered ‘permanent’, MFA delete can help prevent accidental deletion by requiring
 a second factor.
-Rationale:
+
+**Rationale:**
 If objects are considered ‘permanent’, MFA helps prevent accidental deletion. Additionally, MFA
 adds an extra level of security by preventing malicious users from intentionally deleting objects.
 
@@ -132,7 +133,7 @@ aws s3api put-bucket-versioning --bucket <YOURBUCKETNAME> --versioning-configura
 
 If you want to know more about the aws s3api put-bucket-versioning command or want to replace it with a different option for auto remediation we recommend to take a look at the official documentation available [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/put-bucket-versioning.html).
 
-6. If you configure the **dotheremediationviacli** to **true** the Remediation via Object block will Auto Remediate by using the Kaholo S3 bucket plugin. For this you need to make sure that the **remediateviaobject** action has the correct configured AWS access key, AWS secret key and the correct AWS region. the S3 bucket name will be created by using the **remediateviaobject** function, and the Canned ACL Type is configured to **Private**
+6. If you configure the **dotheremediationviacli** to **true** the Remediation via Object block will Auto Remediate by using the Kaholo S3 bucket plugin. For this you need to make sure that the **remediateviaobject** action has the correct configured AWS access key, AWS secret key and the correct AWS region.
 
 #### Configuration of Slack Messages
 
