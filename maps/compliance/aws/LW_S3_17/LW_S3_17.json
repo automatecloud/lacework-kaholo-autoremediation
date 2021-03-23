@@ -1,1 +1,796 @@
-{"configurations":[{"_id":"60573490257f0800340321eb","name":"LaceworkConfig","value":"{\n    \"name\": \"LaceworkConfiguration\",\n    \"policyID\": \"LW_S3_17\",\n    \"violationdescription\": \"Ensure the S3 bucket access is restricted to a whitelist of IP networks.\",\n    \"eventuuid\": \"edb32ef5-243a-4b7f-bac8-e764823911e2\",\n    \"dothedeletebucketpolicyremediationviacli\": \"false\",\n    \"dothedeletebucketpolicyremediationviaobject\": \"false\",\n    \"dothereplacebucketpolicyremediationviacli\": \"false\",\n    \"dothereplacebucketpolicyremediationviaobject\": \"false\",\n    \"sendslackmessagesforignored\": \"true\",\n    \"bucketIgnoreList\": [\n        \"arn:aws:s3:::mybucket01\",\n        \"arn:aws:s3:::mybucket02\",\n        \"arn:aws:s3:::mybucket03\"\n    ],\n    \"createbackup\": \"true\",\n    \"inputfolder\": \"/usr/src/app/scripts/input/\",\n    \"backupfolder\": \"/usr/src/app/scripts/output/\",\n    \"bucketpolicy\": {\n        \"Version\": \"2012-10-17\",\n        \"Id\": \"VPCe and SourceIP\",\n        \"Statement\": [\n            {\n                \"Sid\": \"VPCe and SourceIP\",\n                \"Effect\": \"Deny\",\n                \"Principal\": \"*\",\n                \"Action\": \"s3:*\",\n                \"Resource\": [\n                    \"arn:aws:s3:::YOURBUCKET\",\n                    \"arn:aws:s3:::YOURBUCKET/*\"\n                ],\n                \"Condition\": {\n                    \"StringNotLike\": {\n                        \"aws:sourceVpce\": [\n                            \"vpce-YOURVPC1\",\n                            \"vpce-YOURVPC2\"\n                        ]\n                    },\n                    \"NotIpAddress\": {\n                        \"aws:SourceIp\": [\n                            \"11.11.11.11/32\",\n                            \"22.22.22.22/32\"\n                        ]\n                    }\n                }\n            }\n        ]\n    }\n}","mapRevision":"60573490257f08003403219c","__v":0}],"processes":[{"flowControl":"each","actionsExecution":"series","correlateAgents":null,"mandatory":null,"actions":[{"retries":0,"mandatory":null,"isEnabled":true,"params":[{"_id":"6053581a887b2000349b6558","code":true,"value":"geteventid()","param":"6036a2e807d26400341da678","name":"EVENT_ID"}],"name":"geteventid","timeout":null,"method":"GetEventDetails","numParallel":null}],"used_plugin":{"name":"lacework","version":"1.0.0"},"uuid":"edb32ef5-243a-4b7f-bac8-e764823911e2","numProcessParallel":null,"name":"Get event details","description":null,"condition":"checkconfiguration()","coordination":null,"filterAgents":null,"postRun":"createBucketList() ","preRun":null},{"flowControl":"each","actionsExecution":"series","correlateAgents":null,"mandatory":null,"actions":[{"retries":0,"mandatory":null,"isEnabled":true,"params":[{"_id":"6053581a887b2000349b655b","code":true,"value":"printBucketName()","param":"6036a2e807d26400341da67b","name":"COMMANDS"}],"name":"printBucketName","timeout":null,"method":"execute","numParallel":null},{"retries":0,"mandatory":null,"isEnabled":true,"params":[{"_id":"6053581a887b2000349b655d","code":true,"value":"createbackup()","param":null,"name":"COMMANDS"}],"name":"createbackup","timeout":null,"method":"execute","numParallel":null},{"retries":0,"mandatory":null,"isEnabled":true,"params":[{"_id":"6053581a887b2000349b655f","code":true,"value":"deleteviaawscli()","param":null,"name":"COMMANDS"}],"name":"deleteviaawscli","timeout":null,"method":"execute","numParallel":null}],"used_plugin":{"name":"CommandLine","version":"1.2.0"},"uuid":"6bc1844a-4f56-46f4-b742-f9000115cf90","coordination":"each","numProcessParallel":null,"name":"Delete Bucket Policy via CLI","description":"S3 buckets to remediate\n","condition":"checkdeleteremediationviacli()","filterAgents":null,"postRun":"indexRemediate++;","preRun":null},{"flowControl":"each","actionsExecution":"series","correlateAgents":null,"mandatory":null,"actions":[{"retries":0,"mandatory":null,"isEnabled":true,"params":[{"_id":"6053581a887b2000349b6562","code":null,"value":"Slack Webhook","param":"6037e47a07d264003420cb87","name":"webhookUrl"},{"_id":"6053581a887b2000349b6563","code":true,"value":"sendslackmessage()","param":"6037e47a07d264003420cb88","name":"message"}],"name":"informsecurity","timeout":null,"method":"sendIncomingWebhook","numParallel":null}],"used_plugin":{"name":"Slack","version":"1.1.0"},"uuid":"9f29c8df-ccbe-442f-a1e6-6e8b996d8916","coordination":"each","numProcessParallel":null,"name":"Remediated","description":null,"condition":"indexSlack < bucketArr.length","filterAgents":null,"postRun":"indexSlack++;","preRun":null},{"flowControl":"each","actionsExecution":"series","correlateAgents":null,"mandatory":null,"actions":[{"retries":0,"mandatory":null,"isEnabled":true,"params":[{"_id":"6057218e257f08003402ec85","code":true,"value":"printBucketName()","param":"6053581a887b2000349b6566","name":"COMMANDS"}],"name":"printBucketName","timeout":null,"method":"execute","numParallel":null},{"retries":0,"mandatory":null,"isEnabled":true,"params":[{"_id":"6057218e257f08003402ec87","code":true,"value":"createbackup()","param":"6053581a887b2000349b6568","name":"COMMANDS"}],"name":"createbackup","timeout":null,"method":"execute","numParallel":null}],"used_plugin":{"name":"CommandLine","version":"1.2.0"},"uuid":"c93f881a-3dcd-4c80-893a-91d63f16751f","coordination":"each","numProcessParallel":null,"name":"Create Backup via CLI","description":"S3 buckets to remediate\n","condition":"checkreplaceremediationviacli()","filterAgents":null,"postRun":"indexRemediate++;","preRun":null},{"flowControl":"each","actionsExecution":"series","correlateAgents":null,"mandatory":null,"actions":[{"retries":0,"mandatory":null,"isEnabled":true,"params":[{"_id":"6053581a887b2000349b656b","code":true,"value":"replacebucketpolicyviacli()","param":null,"name":"COMMANDS"}],"name":"remediateviacli","timeout":null,"method":"execute","numParallel":null}],"used_plugin":{"name":"CommandLine","version":"1.2.0"},"uuid":"71f2758e-a441-4a63-a6ce-a6d3ae94767e","coordination":"each","numProcessParallel":null,"name":"Replace Bucket Policy via CLI","description":null,"condition":"checkconditionforreplace()","filterAgents":null,"postRun":"indexRemediate2++;","preRun":null},{"flowControl":"each","actionsExecution":"series","correlateAgents":null,"mandatory":null,"actions":[{"retries":0,"mandatory":null,"isEnabled":true,"params":[{"_id":"6057231a257f08003402f3b0","code":null,"value":"AWS Access Key","param":null,"name":"AWS_ACCESS_KEY_ID"},{"_id":"6057231a257f08003402f3b1","code":null,"value":"AWS Secret Key","param":null,"name":"AWS_SECRET_ACCESS_KEY"},{"_id":"6057231a257f08003402f3b2","code":true,"value":"getbucketname()","param":null,"name":"bucketName"}],"name":"listbucketpolicy","timeout":null,"method":"getBucketPolicy","numParallel":null}],"used_plugin":{"name":"Amazon-aws-s3","version":"1.4.0"},"uuid":"23fd6698-db5a-4931-bc91-8cbb47609219","coordination":"each","numProcessParallel":null,"name":"Backup Bucket Policy via Object","description":null,"condition":"checkdeleteremediationviaobject()","filterAgents":null,"postRun":"indexRemediate++;","preRun":null},{"flowControl":"each","actionsExecution":"series","correlateAgents":null,"mandatory":null,"actions":[{"retries":0,"mandatory":null,"isEnabled":true,"params":[{"_id":"6057231a257f08003402f3b5","code":null,"value":"AWS Access Key","param":null,"name":"AWS_ACCESS_KEY_ID"},{"_id":"6057231a257f08003402f3b6","code":null,"value":"AWS Secret Key","param":null,"name":"AWS_SECRET_ACCESS_KEY"},{"_id":"6057231a257f08003402f3b7","code":true,"value":"getbucketname()","param":null,"name":"bucketName"}],"name":"getbucketpolicy","timeout":null,"method":"getBucketPolicy","numParallel":null}],"used_plugin":{"name":"Amazon-aws-s3","version":"1.4.0"},"uuid":"80b2519f-1ef4-47e6-8557-374c4b8ad0a6","coordination":"each","numProcessParallel":null,"name":"Backup Bucket Policy via Object","description":"S3 buckets to remediate\n","condition":"checkreplaceremediationviaobject()","filterAgents":null,"postRun":"indexRemediate++;","preRun":null},{"flowControl":"each","actionsExecution":"series","correlateAgents":null,"mandatory":null,"actions":[{"retries":0,"mandatory":null,"isEnabled":true,"params":[{"_id":"6053581a887b2000349b6578","code":null,"value":"Slack Webhook","param":null,"name":"webhookUrl"},{"_id":"6053581a887b2000349b6579","code":true,"value":"sendslackmessageforignored()","param":null,"name":"message"}],"name":"sendslackmessageforignored","timeout":null,"method":"sendIncomingWebhook","numParallel":null}],"used_plugin":{"name":"Slack","version":"1.1.0"},"uuid":"139dcaf6-9584-47f2-8219-d71c1da608db","coordination":"each","numProcessParallel":null,"name":"Ignored","description":null,"condition":"checkforignoredslack()","filterAgents":null,"postRun":"indexIgnored++;","preRun":null},{"flowControl":"each","actionsExecution":"series","correlateAgents":null,"mandatory":null,"actions":[{"retries":0,"mandatory":null,"isEnabled":true,"params":[{"_id":"6053581a887b2000349b657c","code":true,"value":"getfilepath()","param":null,"name":"PATH"},{"_id":"6053581a887b2000349b657d","code":true,"value":"getfilecontent()","param":null,"name":"CONTENT"}],"name":"createfile","timeout":null,"method":"createFile","numParallel":null}],"used_plugin":{"name":"TextEditor","version":"1.0.0"},"uuid":"fb18b790-e884-4308-b05f-e7d332128ca3","coordination":"each","numProcessParallel":null,"name":"Create the new JSON file","description":null,"condition":"checkconditionfilecreation()","filterAgents":null,"postRun":"indexFileCreation++;","preRun":null},{"flowControl":"each","actionsExecution":"series","correlateAgents":null,"mandatory":null,"actions":[{"retries":0,"mandatory":null,"isEnabled":true,"params":[{"_id":"6057231a257f08003402f3c2","code":null,"value":"AWS Access Key","param":null,"name":"AWS_ACCESS_KEY_ID"},{"_id":"6057231a257f08003402f3c3","code":null,"value":"AWS Secret Key","param":null,"name":"AWS_SECRET_ACCESS_KEY"},{"_id":"6057231a257f08003402f3c4","code":true,"value":"getbucketnameforremediation()","param":null,"name":"bucketName"}],"name":"deletebucketpolicy","timeout":null,"method":"deleteBucketPolicy","numParallel":null}],"used_plugin":{"name":"Amazon-aws-s3","version":"1.5.4"},"uuid":"ffb8cb43-2359-47b1-bf74-8ed195292804","coordination":"each","numProcessParallel":null,"name":"Delete Bucket Policy via Object","description":null,"condition":"checkconditionfordeletionviaobject()","filterAgents":null,"postRun":"indexRemediate2++;","preRun":null},{"flowControl":"each","actionsExecution":"series","correlateAgents":null,"mandatory":null,"actions":[{"retries":0,"mandatory":null,"isEnabled":true,"params":[{"_id":"60572589257f08003402fca0","code":true,"value":"getfilepath()","param":null,"name":"PATH"},{"_id":"60572589257f08003402fca1","code":true,"value":"getfilecontent()","param":null,"name":"CONTENT"}],"name":"createfile","timeout":null,"method":"createFile","numParallel":null}],"used_plugin":{"name":"TextEditor","version":"1.0.0"},"uuid":"0ec3f7ec-9ad2-41a1-8b40-752950395db4","coordination":"each","numProcessParallel":null,"name":"Create the new JSON file","description":null,"condition":"checkconditionfilecreation()","filterAgents":null,"postRun":"indexFileCreation++;","preRun":null},{"flowControl":"each","actionsExecution":"series","correlateAgents":false,"mandatory":false,"actions":[{"retries":0,"mandatory":null,"isEnabled":true,"params":[{"_id":"60572589257f08003402fca4","code":null,"value":"AWS Access Key","param":null,"name":"AWS_ACCESS_KEY_ID"},{"_id":"60572589257f08003402fca5","code":null,"value":"AWS Secret Key","param":null,"name":"AWS_SECRET_ACCESS_KEY"},{"_id":"60572589257f08003402fca6","code":true,"value":"getbucketnameforremediation()","param":null,"name":"bucketName"},{"_id":"60572589257f08003402fca7","code":true,"value":"createnewpolicyjson()","param":null,"name":"policy"}],"name":"replacebucketpolicy","timeout":null,"method":"putBucketPolicy","numParallel":null}],"used_plugin":{"name":"Amazon-aws-s3","version":"1.5.4"},"uuid":"490ce396-3ec7-4dea-8d7f-88ff7590eb68","coordination":"each","numProcessParallel":null,"name":"Replace Bucket Policy via Object","description":null,"condition":"checkconditionforreplace()","filterAgents":null,"postRun":"indexRemediate2++;","preRun":null}],"links":[{"uuid":"62ba9343-79dc-4a5d-ac0a-6d47123b41f2","sourceId":"6297d603-cd5f-4fca-b5f5-4d14847dcd94","targetId":"edb32ef5-243a-4b7f-bac8-e764823911e2"},{"uuid":"5e0ad33c-7098-40fe-8df8-6e014a66fc72","sourceId":"edb32ef5-243a-4b7f-bac8-e764823911e2","targetId":"6bc1844a-4f56-46f4-b742-f9000115cf90"},{"uuid":"808f6691-d549-4685-8209-581a8656c47b","sourceId":"6bc1844a-4f56-46f4-b742-f9000115cf90","targetId":"6bc1844a-4f56-46f4-b742-f9000115cf90"},{"uuid":"7ae6317d-2410-4e66-b938-988966239800","sourceId":"edb32ef5-243a-4b7f-bac8-e764823911e2","targetId":"9f29c8df-ccbe-442f-a1e6-6e8b996d8916"},{"uuid":"7d7011f4-f28f-48f5-9b9e-b5139a312cbd","sourceId":"9f29c8df-ccbe-442f-a1e6-6e8b996d8916","targetId":"9f29c8df-ccbe-442f-a1e6-6e8b996d8916"},{"uuid":"c738db2b-bfe0-4221-b3d2-3c37cf0385c2","sourceId":"edb32ef5-243a-4b7f-bac8-e764823911e2","targetId":"c93f881a-3dcd-4c80-893a-91d63f16751f"},{"uuid":"90810178-d23f-4157-8d69-3e27594d8307","sourceId":"c93f881a-3dcd-4c80-893a-91d63f16751f","targetId":"fb18b790-e884-4308-b05f-e7d332128ca3"},{"uuid":"fdf27188-3df3-407b-9e23-bc27bef6ad1f","sourceId":"fb18b790-e884-4308-b05f-e7d332128ca3","targetId":"71f2758e-a441-4a63-a6ce-a6d3ae94767e"},{"uuid":"60aa4462-dbe1-47af-af89-b3185c0bcb3e","sourceId":"edb32ef5-243a-4b7f-bac8-e764823911e2","targetId":"23fd6698-db5a-4931-bc91-8cbb47609219"},{"uuid":"0d8f2290-1aac-4a97-86cf-fbefd7e55247","sourceId":"edb32ef5-243a-4b7f-bac8-e764823911e2","targetId":"80b2519f-1ef4-47e6-8557-374c4b8ad0a6"},{"uuid":"af91db01-ef55-44ce-8050-367858dc3128","sourceId":"9f29c8df-ccbe-442f-a1e6-6e8b996d8916","targetId":"139dcaf6-9584-47f2-8219-d71c1da608db"},{"uuid":"a973fefa-1d2a-4c5f-9d77-b1178784c8f3","sourceId":"139dcaf6-9584-47f2-8219-d71c1da608db","targetId":"139dcaf6-9584-47f2-8219-d71c1da608db"},{"uuid":"a06bbab6-5e9a-4e8f-bd0a-7ffaf334fb9d","sourceId":"80b2519f-1ef4-47e6-8557-374c4b8ad0a6","targetId":"80b2519f-1ef4-47e6-8557-374c4b8ad0a6"},{"uuid":"8eae34b6-c8a9-40e5-ac14-ea7f3650501d","sourceId":"23fd6698-db5a-4931-bc91-8cbb47609219","targetId":"23fd6698-db5a-4931-bc91-8cbb47609219"},{"uuid":"9d8c9760-a792-4c58-822a-ded8b964292a","sourceId":"c93f881a-3dcd-4c80-893a-91d63f16751f","targetId":"c93f881a-3dcd-4c80-893a-91d63f16751f"},{"uuid":"9a0a2fd3-e450-43e3-b477-5331e6665070","sourceId":"fb18b790-e884-4308-b05f-e7d332128ca3","targetId":"fb18b790-e884-4308-b05f-e7d332128ca3"},{"uuid":"3afd4c32-3a12-4b1d-a4cf-02784ec7ad2d","sourceId":"71f2758e-a441-4a63-a6ce-a6d3ae94767e","targetId":"71f2758e-a441-4a63-a6ce-a6d3ae94767e"},{"uuid":"c87c96af-d3d8-452a-875e-6a6dc6acc056","sourceId":"23fd6698-db5a-4931-bc91-8cbb47609219","targetId":"ffb8cb43-2359-47b1-bf74-8ed195292804"},{"uuid":"e8c5b564-1bc8-4b34-9b96-824cba0620a8","sourceId":"ffb8cb43-2359-47b1-bf74-8ed195292804","targetId":"ffb8cb43-2359-47b1-bf74-8ed195292804"},{"uuid":"34334cd8-e453-4167-a198-a437615e342a","sourceId":"80b2519f-1ef4-47e6-8557-374c4b8ad0a6","targetId":"0ec3f7ec-9ad2-41a1-8b40-752950395db4"},{"uuid":"b98a1c2a-2044-47b8-a872-7b4c21bece34","sourceId":"0ec3f7ec-9ad2-41a1-8b40-752950395db4","targetId":"0ec3f7ec-9ad2-41a1-8b40-752950395db4"},{"uuid":"ddad6703-44fd-43cb-977b-16e75cd5ac60","sourceId":"0ec3f7ec-9ad2-41a1-8b40-752950395db4","targetId":"490ce396-3ec7-4dea-8d7f-88ff7590eb68"},{"uuid":"04dda782-38a2-494c-a20d-b8b572a987bd","sourceId":"490ce396-3ec7-4dea-8d7f-88ff7590eb68","targetId":"490ce396-3ec7-4dea-8d7f-88ff7590eb68"}],"content":"{\"cells\":[{\"type\":\"devs.PMStartPoint\",\"size\":{\"width\":40,\"height\":39},\"outPorts\":[\" \"],\"inPorts\":[],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\" \"}}}]},\"position\":{\"x\":41,\"y\":26},\"angle\":0,\"id\":\"6297d603-cd5f-4fca-b5f5-4d14847dcd94\",\"z\":1,\"attrs\":{\"rect\":{\"fill\":\"#2d3236\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":185,\"y\":12},\"angle\":0,\"id\":\"edb32ef5-243a-4b7f-bac8-e764823911e2\",\"z\":2,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Get event details\"},\".p_id\":{\"text\":\"6023b2e264b1160034fd9b9f\"},\"image\":{\"xlink:href\":\"/plugins/lacework/lacework.png\",\"ref-y\":50},\"text\":{\"text\":\"Get event details\"}}},{\"type\":\"link\",\"source\":{\"id\":\"6297d603-cd5f-4fca-b5f5-4d14847dcd94\",\"port\":\" \"},\"target\":{\"id\":\"edb32ef5-243a-4b7f-bac8-e764823911e2\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"62ba9343-79dc-4a5d-ac0a-6d47123b41f2\",\"z\":3,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":426,\"y\":-317},\"angle\":0,\"id\":\"6bc1844a-4f56-46f4-b742-f9000115cf90\",\"z\":4,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Delete Bucket Policy via CLI\"},\".p_id\":{\"text\":\"5f92a2f3da3961001ab1a0c4\"},\"image\":{\"xlink:href\":\"/plugins/CommandLine/CommandLine.png\",\"ref-y\":50},\"text\":{\"text\":\"Delete Bucket Policy via CLI\"}}},{\"type\":\"link\",\"source\":{\"id\":\"edb32ef5-243a-4b7f-bac8-e764823911e2\",\"port\":\"  \"},\"target\":{\"id\":\"6bc1844a-4f56-46f4-b742-f9000115cf90\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"5e0ad33c-7098-40fe-8df8-6e014a66fc72\",\"z\":5,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"6bc1844a-4f56-46f4-b742-f9000115cf90\",\"port\":\"  \"},\"target\":{\"id\":\"6bc1844a-4f56-46f4-b742-f9000115cf90\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"808f6691-d549-4685-8209-581a8656c47b\",\"z\":6,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":324,\"y\":387},\"angle\":0,\"id\":\"9f29c8df-ccbe-442f-a1e6-6e8b996d8916\",\"z\":7,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Remediated\"},\".p_id\":{\"text\":\"5f92a31fda3961001ab1a1a6\"},\"image\":{\"xlink:href\":\"/plugins/Slack/Slack_Icon.png\",\"ref-y\":50},\"text\":{\"text\":\"Remediated\"}}},{\"type\":\"link\",\"source\":{\"id\":\"edb32ef5-243a-4b7f-bac8-e764823911e2\",\"port\":\"  \"},\"target\":{\"id\":\"9f29c8df-ccbe-442f-a1e6-6e8b996d8916\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"7ae6317d-2410-4e66-b938-988966239800\",\"z\":8,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"9f29c8df-ccbe-442f-a1e6-6e8b996d8916\",\"port\":\"  \"},\"target\":{\"id\":\"9f29c8df-ccbe-442f-a1e6-6e8b996d8916\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"7d7011f4-f28f-48f5-9b9e-b5139a312cbd\",\"z\":9,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":484,\"y\":-158},\"angle\":0,\"id\":\"c93f881a-3dcd-4c80-893a-91d63f16751f\",\"z\":10,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Create Backup via CLI\"},\".p_id\":{\"text\":\"5f92a2f3da3961001ab1a0c4\"},\"image\":{\"xlink:href\":\"/plugins/CommandLine/CommandLine.png\",\"ref-y\":50},\"text\":{\"text\":\"Create Backup via CLI\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":932,\"y\":-163},\"angle\":0,\"id\":\"71f2758e-a441-4a63-a6ce-a6d3ae94767e\",\"z\":11,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Replace Bucket Policy via CLI\"},\".p_id\":{\"text\":\"5f92a2f3da3961001ab1a0c4\"},\"image\":{\"xlink:href\":\"/plugins/CommandLine/CommandLine.png\",\"ref-y\":50},\"text\":{\"text\":\"Replace Bucket Policy via CLI\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":490,\"y\":13},\"angle\":0,\"id\":\"23fd6698-db5a-4931-bc91-8cbb47609219\",\"z\":12,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Backup Bucket Policy via Object\"},\".p_id\":{\"text\":\"6047970a887b2000347ea8bd\"},\"image\":{\"xlink:href\":\"/plugins/Amazon-aws-s3/logo.png\",\"ref-y\":50},\"text\":{\"text\":\"Backup Bucket Policy via Object\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":453,\"y\":174},\"angle\":0,\"id\":\"80b2519f-1ef4-47e6-8557-374c4b8ad0a6\",\"z\":13,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Backup Bucket Policy via Object\"},\".p_id\":{\"text\":\"6047970a887b2000347ea8bd\"},\"image\":{\"xlink:href\":\"/plugins/Amazon-aws-s3/logo.png\",\"ref-y\":50},\"text\":{\"text\":\"Backup Bucket Policy via Object\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":557,\"y\":389},\"angle\":0,\"id\":\"139dcaf6-9584-47f2-8219-d71c1da608db\",\"z\":14,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Ignored\"},\".p_id\":{\"text\":\"5f92a31fda3961001ab1a1a6\"},\"image\":{\"xlink:href\":\"/plugins/Slack/Slack_Icon.png\",\"ref-y\":50},\"text\":{\"text\":\"Ignored\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":705,\"y\":-163},\"angle\":0,\"id\":\"fb18b790-e884-4308-b05f-e7d332128ca3\",\"z\":15,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Create the new JSON file\"},\".p_id\":{\"text\":\"5f92a324da3961001ab1a1bf\"},\"image\":{\"xlink:href\":\"/plugins/TextEditor/TextEditor.png\",\"ref-y\":50},\"text\":{\"text\":\"Create the new JSON file\"}}},{\"type\":\"link\",\"source\":{\"id\":\"edb32ef5-243a-4b7f-bac8-e764823911e2\",\"port\":\"  \"},\"target\":{\"id\":\"c93f881a-3dcd-4c80-893a-91d63f16751f\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"c738db2b-bfe0-4221-b3d2-3c37cf0385c2\",\"z\":16,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"c93f881a-3dcd-4c80-893a-91d63f16751f\",\"port\":\"  \"},\"target\":{\"id\":\"fb18b790-e884-4308-b05f-e7d332128ca3\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"90810178-d23f-4157-8d69-3e27594d8307\",\"z\":17,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"fb18b790-e884-4308-b05f-e7d332128ca3\",\"port\":\"  \"},\"target\":{\"id\":\"71f2758e-a441-4a63-a6ce-a6d3ae94767e\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"b1a61947-eac1-4a8c-963e-111247904b22\",\"z\":18,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"edb32ef5-243a-4b7f-bac8-e764823911e2\",\"port\":\"  \"},\"target\":{\"id\":\"23fd6698-db5a-4931-bc91-8cbb47609219\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"60aa4462-dbe1-47af-af89-b3185c0bcb3e\",\"z\":19,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"edb32ef5-243a-4b7f-bac8-e764823911e2\",\"port\":\"  \"},\"target\":{\"id\":\"80b2519f-1ef4-47e6-8557-374c4b8ad0a6\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"0d8f2290-1aac-4a97-86cf-fbefd7e55247\",\"z\":20,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"9f29c8df-ccbe-442f-a1e6-6e8b996d8916\",\"port\":\"  \"},\"target\":{\"id\":\"139dcaf6-9584-47f2-8219-d71c1da608db\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"af91db01-ef55-44ce-8050-367858dc3128\",\"z\":21,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"139dcaf6-9584-47f2-8219-d71c1da608db\",\"port\":\"  \"},\"target\":{\"id\":\"139dcaf6-9584-47f2-8219-d71c1da608db\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"a973fefa-1d2a-4c5f-9d77-b1178784c8f3\",\"z\":22,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"80b2519f-1ef4-47e6-8557-374c4b8ad0a6\",\"port\":\"  \"},\"target\":{\"id\":\"80b2519f-1ef4-47e6-8557-374c4b8ad0a6\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"a06bbab6-5e9a-4e8f-bd0a-7ffaf334fb9d\",\"z\":23,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"23fd6698-db5a-4931-bc91-8cbb47609219\",\"port\":\"  \"},\"target\":{\"id\":\"23fd6698-db5a-4931-bc91-8cbb47609219\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"8eae34b6-c8a9-40e5-ac14-ea7f3650501d\",\"z\":24,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"c93f881a-3dcd-4c80-893a-91d63f16751f\",\"port\":\"  \"},\"target\":{\"id\":\"c93f881a-3dcd-4c80-893a-91d63f16751f\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"9d8c9760-a792-4c58-822a-ded8b964292a\",\"z\":25,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"fb18b790-e884-4308-b05f-e7d332128ca3\",\"port\":\"  \"},\"target\":{\"id\":\"71f2758e-a441-4a63-a6ce-a6d3ae94767e\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"fdf27188-3df3-407b-9e23-bc27bef6ad1f\",\"z\":26,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"fb18b790-e884-4308-b05f-e7d332128ca3\",\"port\":\"  \"},\"target\":{\"id\":\"fb18b790-e884-4308-b05f-e7d332128ca3\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"9a0a2fd3-e450-43e3-b477-5331e6665070\",\"z\":27,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"71f2758e-a441-4a63-a6ce-a6d3ae94767e\",\"port\":\"  \"},\"target\":{\"id\":\"71f2758e-a441-4a63-a6ce-a6d3ae94767e\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"3afd4c32-3a12-4b1d-a4cf-02784ec7ad2d\",\"z\":28,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":717,\"y\":15},\"angle\":0,\"id\":\"ffb8cb43-2359-47b1-bf74-8ed195292804\",\"z\":29,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Delete Bucket Policy via Object\"},\".p_id\":{\"text\":\"6047970a887b2000347ea8bd\"},\"image\":{\"xlink:href\":\"/plugins/Amazon-aws-s3/logo.png\",\"ref-y\":50},\"text\":{\"text\":\"Delete Bucket Policy via Object\"}}},{\"type\":\"link\",\"source\":{\"id\":\"23fd6698-db5a-4931-bc91-8cbb47609219\",\"port\":\"  \"},\"target\":{\"id\":\"ffb8cb43-2359-47b1-bf74-8ed195292804\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"c87c96af-d3d8-452a-875e-6a6dc6acc056\",\"z\":30,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"ffb8cb43-2359-47b1-bf74-8ed195292804\",\"port\":\"  \"},\"target\":{\"id\":\"ffb8cb43-2359-47b1-bf74-8ed195292804\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"e8c5b564-1bc8-4b34-9b96-824cba0620a8\",\"z\":31,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":660,\"y\":173},\"angle\":0,\"id\":\"0ec3f7ec-9ad2-41a1-8b40-752950395db4\",\"z\":32,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Create the new JSON file\"},\".p_id\":{\"text\":\"5f92a324da3961001ab1a1bf\"},\"image\":{\"xlink:href\":\"/plugins/TextEditor/TextEditor.png\",\"ref-y\":50},\"text\":{\"text\":\"Create the new JSON file\"}}},{\"type\":\"link\",\"source\":{\"id\":\"80b2519f-1ef4-47e6-8557-374c4b8ad0a6\",\"port\":\"  \"},\"target\":{\"id\":\"0ec3f7ec-9ad2-41a1-8b40-752950395db4\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"34334cd8-e453-4167-a198-a437615e342a\",\"z\":33,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"0ec3f7ec-9ad2-41a1-8b40-752950395db4\",\"port\":\"  \"},\"target\":{\"id\":\"0ec3f7ec-9ad2-41a1-8b40-752950395db4\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"b98a1c2a-2044-47b8-a872-7b4c21bece34\",\"z\":34,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":867,\"y\":172},\"angle\":0,\"id\":\"490ce396-3ec7-4dea-8d7f-88ff7590eb68\",\"z\":35,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Replace Bucket Policy via Object\"},\".p_id\":{\"text\":\"6047970a887b2000347ea8bd\"},\"image\":{\"xlink:href\":\"/plugins/Amazon-aws-s3/logo.png\",\"ref-y\":50},\"text\":{\"text\":\"Replace Bucket Policy via Object\"}}},{\"type\":\"link\",\"source\":{\"id\":\"0ec3f7ec-9ad2-41a1-8b40-752950395db4\",\"port\":\"  \"},\"target\":{\"id\":\"490ce396-3ec7-4dea-8d7f-88ff7590eb68\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"ddad6703-44fd-43cb-977b-16e75cd5ac60\",\"z\":36,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"490ce396-3ec7-4dea-8d7f-88ff7590eb68\",\"port\":\"  \"},\"target\":{\"id\":\"490ce396-3ec7-4dea-8d7f-88ff7590eb68\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"04dda782-38a2-494c-a20d-b8b572a987bd\",\"z\":37,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}}]}","used_plugins":[{"name":"lacework","version":"1.0.0"},{"name":"CommandLine","version":"1.2.0"},{"name":"Slack","version":"1.1.0"},{"name":"CommandLine","version":"1.2.0"},{"name":"CommandLine","version":"1.2.0"},{"name":"Amazon-aws-s3","version":"1.4.0"},{"name":"Amazon-aws-s3","version":"1.4.0"},{"name":"Slack","version":"1.1.0"},{"name":"TextEditor","version":"1.0.0"},{"name":"Amazon-aws-s3","version":"1.5.4"},{"name":"TextEditor","version":"1.0.0"},{"name":"Amazon-aws-s3","version":"1.5.4"}],"__v":0,"code":"var bucketArr = []; // Array of S3 Buckets that will be filled with the resource information from the event.\nvar indexRemediate = 0; // Index for the S3 Bucket Remediate of the Map\nvar indexSlack = 0; // Index of the Slack Loop to send out information about the S3 Bucket remediation.\nvar bucketIgnoredArr = []; // Array of S3 Buckets that are violating but will be ignored.\nvar indexIgnored = 0; //Index of the S3 Buckets that are violating but will be ignored.\nvar indexFileCreation = 0; //Index for creation of the JSON files.\nvar indexRemediate2 = 0; //Index for a second CLI command used to replace the policy\n\nlet payload = trigger.payload; // The Payload that was send by the Webhook Trigger. Information about the Payload is available at https://support.lacework.com/hc/en-us/articles/360034367393-Webhook\n\nfunction checkconfiguration()  { // Function to check if two out of four Auto Remediation steps are enabled.\n    if (configuration.dothedeletebucketpolicyremediationviacli == \"true\" && configuration.dothereplacebucketpolicyremediationviacli == \"true\") {\n        return 0;\n    }\n    else if (configuration.dothedeletebucketpolicyremediationviacli == \"true\" && configuration.dothedeletebucketpolicyremediationviaobject == \"true\") {\n        return 0;\n    }\n    else if (configuration.dothedeletebucketpolicyremediationviacli == \"true\" && configuration.dothereplacebucketpolicyremediationviaobject == \"true\") {\n        return 0;\n    }\n    else if (configuration.dothereplacebucketpolicyremediationviacli == \"true\" && configuration.dothedeletebucketpolicyremediationviaobject == \"true\") {\n        return 0;\n    }\n    else if (configuration.dothereplacebucketpolicyremediationviacli == \"true\" && configuration.dothereplacebucketpolicyremediationviaobject == \"true\") {\n        return 0;\n    }\n    else if (configuration.dothereplacebucketpolicyremediationviaobject == \"true\" && configuration.dothedeletebucketpolicyremediationviaobject == \"true\") {\n        return 0;\n    }\n    else {\n        return 1;\n    }\n}\n\nfunction geteventid() { // Function to get the Event ID from the Webhook Payload.\n    return `${payload.event_id}`;\n}\n\nfunction createBucketList() { // Function to build the S3 Bucket List that will be used to Remediate.\n    let p = configuration.eventuuid;\n    let laceworkAPIResult = getAction(p);\n    let resourcesArr = laceworkAPIResult.result.result.data[0].ENTITY_MAP.Resource;\n    for (let i = 0; i < resourcesArr.length; i++) {\n        if (!configuration.bucketIgnoreList.includes(resourcesArr[i].VALUE)) { // The S3 Bucket of the Event will be checked against the configuration list of to ignore S3 buckets.\n            bucketArr.push (resourcesArr[i].VALUE); // If the bucket is not on the list it will be pushed into the array.\n        }\n        else {\n            bucketIgnoredArr.push (resourcesArr[i].VALUE); // If the bucket is on the list and violating the policy it will be pushed into the second bucket list.\n        }\n    }\n}\n\nfunction printBucketName() { // Function to print the S3 buckets that will be remediated.\n    let bucket = bucketArr[indexRemediate]\n    let arr = bucket.split(\":::\")\n    return `echo Compliance Violation ${configuration.policyID} for the S3 bucket ${arr[arr.length-1]}`;\n}\n\nfunction createbackup() { // Function to backup the S3 bucket policy before it is replaced.\n    if (configuration.createbackup == \"true\") {\n        let bucket = bucketArr[indexRemediate]\n        let arr = bucket.split(\":::\")\n        let currentdate = Date.now();\n        return `aws s3api get-bucket-policy --bucket ${arr[arr.length-1]} > ${configuration.backupfolder}${arr[arr.length-1]}-${currentdate}-${configuration.policyID}.json`; \n    }\n    else {\n        return `Creating backup inside the configuration is disabled. Skipping.`\n    }\n}\n\nfunction deleteviaawscli() { // Delete the Bucket Policy via CLI\n    let bucket = bucketArr[indexRemediate];\n    let arr = bucket.split(\":::\");\n    return `aws s3api delete-bucket-policy --bucket ${arr[arr.length-1]}`; // Using the delete-bucket-policy method. Feel free to replace it with whatever you think is the right aws cli command to trigger.\n}\n\nfunction createnewpolicyfile() { // Optional (Not in use): A way how you can create the JSON file on the command line.\n    let bucket = bucketArr[indexRemediate];\n    let arr = bucket.split(\":::\");\n    configuration.bucketpolicy.Statement[0].Resource = bucket;\n    const myjson = JSON.stringify(configuration.bucketpolicy)\n    let myoutput = myjson.replace(/\"/g, '\\\"');\n    return `echo \"${myoutput}\" > ${configuration.inputfolder}${arr[arr.length-1]}-${configuration.policyID}.json`;\n}\n\nfunction checkconditionfilecreation() { //Check condition of the file creation texteditor object if it can execute.\n    if (indexRemediate == bucketArr.length && indexFileCreation < bucketArr.length) return true\n    return false\n}\n\nfunction getfilepath() { //Getting the filepath and name for the file that will be created.\n    let bucket = bucketArr[indexFileCreation];\n    let arr = bucket.split(\":::\");\n    return `${configuration.inputfolder}${arr[arr.length-1]}-${configuration.policyID}.json`;\n}\n\nfunction getfilecontent() { //Getting the file content of what will be written into the file itself.\n    let bucket = bucketArr[indexFileCreation];\n    let arr = bucket.split(\":::\");\n    configuration.bucketpolicy.Statement[0].Resource = bucket;\n    const myjson = JSON.stringify(configuration.bucketpolicy);\n    return `${myjson}`;\n}\n\nfunction checkconditionforreplace() { //Check the condition for replace the current bucket policy via the CLI.\n    if (indexRemediate == bucketArr.length && indexFileCreation == bucketArr.length && indexRemediate2 < bucketArr.length) return true\n    return false\n}\n\nfunction replacebucketpolicyviacli() { // Replace the Bucket Policy via CLI\n    let bucket = bucketArr[indexRemediate2];\n    let arr = bucket.split(\":::\");\n    configuration.bucketpolicy.Statement[0].Resource = bucket;\n    let myoutput = JSON.stringify(configuration.bucketpolicy);\n    return `aws s3api put-bucket-policy --bucket ${arr[arr.length-1]} --policy file://${configuration.inputfolder}${arr[arr.length-1]}-${configuration.policyID}.json`; //Using the setting --acl private. Feel free to replace it with whatever you think is the right aws cli command to trigger.\n}\n\nfunction getbucketname() { // Function to print the S3 buckets that will be remediated.\n    let bucket = bucketArr[indexRemediate]\n    let arr = bucket.split(\":::\")\n    return `${arr[arr.length-1]}`;\n}\n\nfunction checkconditionfordeletionviaobject() {\n    if (indexRemediate == bucketArr.length && indexRemediate2 < bucketArr.length) return true\n    return false\n}\n\nfunction getbucketnameforremediation() {\n    let bucket = bucketArr[indexRemediate2]\n    let arr = bucket.split(\":::\")\n    return `${arr[arr.length-1]}`;\n}\n\nfunction createnewpolicyjson() { // Optional (Not in use): A way how you can create the JSON file on the command line.\n    let bucket = bucketArr[indexRemediate2];\n    let arr = bucket.split(\":::\");\n    configuration.bucketpolicy.Statement[0].Resource = bucket;\n    const myjson = JSON.stringify(configuration.bucketpolicy)\n    //let myoutput = myjson.replace(/\"/g, '\\\"');\n    return `${myjson}`;\n}\n\nfunction testprint () { // Test Print, not in use so far.\n   configuration.bucketpolicy.Statement[0].Resource = \"adflkasdfölkjasdf\"\n   let myoutput = JSON.stringify(configuration.bucketpolicy);\n   return `echo ${myoutput}`;\n}\n\nfunction remediateviaobject() { // Remediate the S3 buckets back to private acl.\n    let bucket = bucketArr[indexRemediate];\n    let arr = bucket.split(\":::\");\n    return `${arr[arr.length-1]}`; //Using the canned acl private.\n}\n\nfunction sendslackmessage() { // Function to send out a slack message for every S3 bucket that will be remediated.\n    let bucket = bucketArr[indexSlack];\n    let arr = bucket.split(\":::\");\n    let event_link = payload.event_link;\n    if (configuration.dothedeletebucketpolicyremediationviacli == \"true\") {\n        return `Compliance Violation ${configuration.policyID} The following S3 bucket is auto remediated back to ${configuration.violationdescription}: ${arr[arr.length-1]}. Executing CLI command aws s3api delete-bucket-policy --bucket ${arr[arr.length-1]}. More information about the event is available at ${event_link}`;\n    }\n    else if (configuration.dothereplacebucketpolicyremediationviacli == \"true\") {\n        return `Compliance Violation ${configuration.policyID} The following S3 bucket is auto remediated back to ${configuration.violationdescription}: ${arr[arr.length-1]}. Executing CLI command aws s3api put-bucket-policy --bucket ${arr[arr.length-1]} --policy file://${configuration.inputfolder}${arr[arr.length-1]}.json. More information about the event is available at ${event_link}`;\n    }\n    else if (configuration.dothedeletebucketpolicyremediationviaobject == \"true\") {\n        return `Compliance Violation ${configuration.policyID} The following S3 bucket is auto remediated back to ${configuration.violationdescription}: ${arr[arr.length-1]}. Using the Kaholo S3 object to do the delete of the bucket policy remediation. More information about the event is available at ${event_link}`;\n    }\n    else if (configuration.dothereplacebucketpolicyremediationviaobject == \"true\") {\n        return `Compliance Violation ${configuration.policyID} The following S3 bucket is auto remediated back to ${configuration.violationdescription}: ${arr[arr.length-1]}. Using the Kaholo S3 object to do the replace of the bucket policy remediation. More information about the event is available at ${event_link}`;\n    }\n    else {\n        return `Compliance Violation ${configuration.policyID}. Auto Remediation is diabled! The following S3 bucket would be auto remediated ${configuration.violationdescription}: ${arr[arr.length-1]}. More information about the event is available at ${event_link}`;   \n    }\n}\n\nfunction sendslackmessageforignored() { // Function to send out a slack message for every S3 bucket that will be ignored but is violating the policy.\n    let bucket = bucketIgnoredArr[indexIgnored];\n    let arr = bucket.split(\":::\");\n    let event_link = payload.event_link;\n    return `Compliance Violation ${configuration.policyID} The following S3 bucket is NOT remediated back to ${configuration.violationdescription}: ${arr[arr.length-1]}. It is ignored by the configuration of the Map. We recommend using tags in AWS to suppress this S3 bucket from triggering alerts in Lacework. More information about the event is available at ${event_link}`;    \n}\n\nfunction checkdeleteremediationviacli() //Check if the Delete Remedation should be done via the CLI?\n{\n    if (configuration.dothedeletebucketpolicyremediationviacli == \"true\") {\n        if (indexRemediate < bucketArr.length) {\n            return 1;\n        }\n        else {\n            return 0;\n        }\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction checkreplaceremediationviacli() //Check if the Replace Remedation should be done via the CLI?\n{\n    if (configuration.dothereplacebucketpolicyremediationviacli == \"true\") {\n        if (indexRemediate < bucketArr.length) {\n            return 1;\n        }\n        else {\n            return 0;\n        }\n    }\n    else {\n        return 0;\n    }\n}\n\n\nfunction checkdeleteremediationviaobject() //Check if the Delete Remedation should be done via the Object?\n{\n    if (configuration.dothedeletebucketpolicyremediationviaobject == \"true\") {\n        if (indexRemediate < bucketArr.length) {\n            return 1;\n        }\n        else {\n            return 0;\n        }\n    }\n    else {\n        return 0;\n    }\n}\nfunction checkreplaceremediationviaobject() //Check if the Replace Remedation should be done via the Object?\n{\n    if (configuration.dothereplacebucketpolicyremediationviaobject == \"true\") {\n        if (indexRemediate < bucketArr.length) {\n            return 1;\n        }\n        else {\n            return 0;\n        }\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction checkforignoredslack() { //Check if you want to also see the ignored buckets via the slack messages.\n    if (indexSlack == bucketArr.length && indexIgnored < bucketIgnoredArr.length && configuration.sendslackmessagesforignored == \"true\") {\n        return 1;\n    }\n    else {\n         return 0;\n    }\n}\n\nfunction getAction(pId) {  // Help function to get the return value of the event.\n   let p = getProcessById(pId)//Get the process. \n   if(!p ||!p.length)return; \n   p = p[p.length-1].actions; //Get all actions \n   let action = p[Object.keys(p)[0]];//get the needed action \n   return action \n}"}
+{
+    "configurations": [
+        {
+            "_id": "60573490257f0800340321eb",
+            "name": "LaceworkConfig",
+            "value": "{\n    \"name\": \"LaceworkConfiguration\",\n    \"policyID\": \"LW_S3_17\",\n    \"violationdescription\": \"Ensure the S3 bucket access is restricted to a whitelist of IP networks.\",\n    \"eventuuid\": \"edb32ef5-243a-4b7f-bac8-e764823911e2\",\n    \"dothedeletebucketpolicyremediationviacli\": \"false\",\n    \"dothedeletebucketpolicyremediationviaobject\": \"false\",\n    \"dothereplacebucketpolicyremediationviacli\": \"false\",\n    \"dothereplacebucketpolicyremediationviaobject\": \"false\",\n    \"sendslackmessagesforignored\": \"true\",\n    \"bucketIgnoreList\": [\n        \"arn:aws:s3:::mybucket01\",\n        \"arn:aws:s3:::mybucket02\",\n        \"arn:aws:s3:::mybucket03\"\n    ],\n    \"createbackup\": \"true\",\n    \"inputfolder\": \"/usr/src/app/scripts/input/\",\n    \"backupfolder\": \"/usr/src/app/scripts/output/\",\n    \"bucketpolicy\": {\n        \"Version\": \"2012-10-17\",\n        \"Id\": \"VPCe and SourceIP\",\n        \"Statement\": [\n            {\n                \"Sid\": \"VPCe and SourceIP\",\n                \"Effect\": \"Deny\",\n                \"Principal\": \"*\",\n                \"Action\": \"s3:*\",\n                \"Resource\": [\n                    \"arn:aws:s3:::YOURBUCKET\",\n                    \"arn:aws:s3:::YOURBUCKET/*\"\n                ],\n                \"Condition\": {\n                    \"StringNotLike\": {\n                        \"aws:sourceVpce\": [\n                            \"vpce-YOURVPC1\",\n                            \"vpce-YOURVPC2\"\n                        ]\n                    },\n                    \"NotIpAddress\": {\n                        \"aws:SourceIp\": [\n                            \"11.11.11.11/32\",\n                            \"22.22.22.22/32\"\n                        ]\n                    }\n                }\n            }\n        ]\n    }\n}",
+            "mapRevision": "60573490257f08003403219c",
+            "__v": 0
+        }
+    ],
+    "processes": [
+        {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": null,
+            "mandatory": null,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "6053581a887b2000349b6558",
+                            "code": true,
+                            "value": "geteventid()",
+                            "param": "6036a2e807d26400341da678",
+                            "name": "EVENT_ID"
+                        }
+                    ],
+                    "name": "geteventid",
+                    "timeout": null,
+                    "method": "GetEventDetails",
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "lacework",
+                "version": "1.0.0"
+            },
+            "uuid": "edb32ef5-243a-4b7f-bac8-e764823911e2",
+            "numProcessParallel": null,
+            "name": "Get event details",
+            "description": null,
+            "condition": "checkconfiguration()",
+            "coordination": null,
+            "filterAgents": null,
+            "postRun": "createBucketList() ",
+            "preRun": null
+        },
+        {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": null,
+            "mandatory": null,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "6053581a887b2000349b655b",
+                            "code": true,
+                            "value": "printBucketName()",
+                            "param": "6036a2e807d26400341da67b",
+                            "name": "COMMANDS"
+                        }
+                    ],
+                    "name": "printBucketName",
+                    "timeout": null,
+                    "method": "execute",
+                    "numParallel": null
+                },
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "6053581a887b2000349b655d",
+                            "code": true,
+                            "value": "createbackup()",
+                            "param": null,
+                            "name": "COMMANDS"
+                        }
+                    ],
+                    "name": "createbackup",
+                    "timeout": null,
+                    "method": "execute",
+                    "numParallel": null
+                },
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "6053581a887b2000349b655f",
+                            "code": true,
+                            "value": "deleteviaawscli()",
+                            "param": null,
+                            "name": "COMMANDS"
+                        }
+                    ],
+                    "name": "deleteviaawscli",
+                    "timeout": null,
+                    "method": "execute",
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "CommandLine",
+                "version": "1.2.0"
+            },
+            "uuid": "6bc1844a-4f56-46f4-b742-f9000115cf90",
+            "coordination": "each",
+            "numProcessParallel": null,
+            "name": "Delete Bucket Policy via CLI",
+            "description": "S3 buckets to remediate\n",
+            "condition": "checkdeleteremediationviacli()",
+            "filterAgents": null,
+            "postRun": "indexRemediate++;",
+            "preRun": null
+        },
+        {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": null,
+            "mandatory": null,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "6053581a887b2000349b6562",
+                            "code": null,
+                            "value": "Slack Webhook",
+                            "param": "6037e47a07d264003420cb87",
+                            "name": "webhookUrl"
+                        },
+                        {
+                            "_id": "6053581a887b2000349b6563",
+                            "code": true,
+                            "value": "sendslackmessage()",
+                            "param": "6037e47a07d264003420cb88",
+                            "name": "message"
+                        }
+                    ],
+                    "name": "informsecurity",
+                    "timeout": null,
+                    "method": "sendIncomingWebhook",
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "Slack",
+                "version": "1.1.0"
+            },
+            "uuid": "9f29c8df-ccbe-442f-a1e6-6e8b996d8916",
+            "coordination": "each",
+            "numProcessParallel": null,
+            "name": "Remediated",
+            "description": null,
+            "condition": "indexSlack < bucketArr.length",
+            "filterAgents": null,
+            "postRun": "indexSlack++;",
+            "preRun": null
+        },
+        {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": null,
+            "mandatory": null,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "6057218e257f08003402ec85",
+                            "code": true,
+                            "value": "printBucketName()",
+                            "param": "6053581a887b2000349b6566",
+                            "name": "COMMANDS"
+                        }
+                    ],
+                    "name": "printBucketName",
+                    "timeout": null,
+                    "method": "execute",
+                    "numParallel": null
+                },
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "6057218e257f08003402ec87",
+                            "code": true,
+                            "value": "createbackup()",
+                            "param": "6053581a887b2000349b6568",
+                            "name": "COMMANDS"
+                        }
+                    ],
+                    "name": "createbackup",
+                    "timeout": null,
+                    "method": "execute",
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "CommandLine",
+                "version": "1.2.0"
+            },
+            "uuid": "c93f881a-3dcd-4c80-893a-91d63f16751f",
+            "coordination": "each",
+            "numProcessParallel": null,
+            "name": "Create Backup via CLI",
+            "description": "S3 buckets to remediate\n",
+            "condition": "checkreplaceremediationviacli()",
+            "filterAgents": null,
+            "postRun": "indexRemediate++;",
+            "preRun": null
+        },
+        {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": null,
+            "mandatory": null,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "6053581a887b2000349b656b",
+                            "code": true,
+                            "value": "replacebucketpolicyviacli()",
+                            "param": null,
+                            "name": "COMMANDS"
+                        }
+                    ],
+                    "name": "remediateviacli",
+                    "timeout": null,
+                    "method": "execute",
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "CommandLine",
+                "version": "1.2.0"
+            },
+            "uuid": "71f2758e-a441-4a63-a6ce-a6d3ae94767e",
+            "coordination": "each",
+            "numProcessParallel": null,
+            "name": "Replace Bucket Policy via CLI",
+            "description": null,
+            "condition": "checkconditionforreplace()",
+            "filterAgents": null,
+            "postRun": "indexRemediate2++;",
+            "preRun": null
+        },
+        {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": null,
+            "mandatory": null,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "6057231a257f08003402f3b0",
+                            "code": null,
+                            "value": "AWS Access Key",
+                            "param": null,
+                            "name": "AWS_ACCESS_KEY_ID"
+                        },
+                        {
+                            "_id": "6057231a257f08003402f3b1",
+                            "code": null,
+                            "value": "AWS Secret Key",
+                            "param": null,
+                            "name": "AWS_SECRET_ACCESS_KEY"
+                        },
+                        {
+                            "_id": "6057231a257f08003402f3b2",
+                            "code": true,
+                            "value": "getbucketname()",
+                            "param": null,
+                            "name": "bucketName"
+                        }
+                    ],
+                    "name": "listbucketpolicy",
+                    "timeout": null,
+                    "method": "getBucketPolicy",
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "Amazon-aws-s3",
+                "version": "1.4.0"
+            },
+            "uuid": "23fd6698-db5a-4931-bc91-8cbb47609219",
+            "coordination": "each",
+            "numProcessParallel": null,
+            "name": "Backup Bucket Policy via Object",
+            "description": null,
+            "condition": "checkdeleteremediationviaobject()",
+            "filterAgents": null,
+            "postRun": "indexRemediate++;",
+            "preRun": null
+        },
+        {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": null,
+            "mandatory": null,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "6057231a257f08003402f3b5",
+                            "code": null,
+                            "value": "AWS Access Key",
+                            "param": null,
+                            "name": "AWS_ACCESS_KEY_ID"
+                        },
+                        {
+                            "_id": "6057231a257f08003402f3b6",
+                            "code": null,
+                            "value": "AWS Secret Key",
+                            "param": null,
+                            "name": "AWS_SECRET_ACCESS_KEY"
+                        },
+                        {
+                            "_id": "6057231a257f08003402f3b7",
+                            "code": true,
+                            "value": "getbucketname()",
+                            "param": null,
+                            "name": "bucketName"
+                        }
+                    ],
+                    "name": "getbucketpolicy",
+                    "timeout": null,
+                    "method": "getBucketPolicy",
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "Amazon-aws-s3",
+                "version": "1.4.0"
+            },
+            "uuid": "80b2519f-1ef4-47e6-8557-374c4b8ad0a6",
+            "coordination": "each",
+            "numProcessParallel": null,
+            "name": "Backup Bucket Policy via Object",
+            "description": "S3 buckets to remediate\n",
+            "condition": "checkreplaceremediationviaobject()",
+            "filterAgents": null,
+            "postRun": "indexRemediate++;",
+            "preRun": null
+        },
+        {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": null,
+            "mandatory": null,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "6053581a887b2000349b6578",
+                            "code": null,
+                            "value": "Slack Webhook",
+                            "param": null,
+                            "name": "webhookUrl"
+                        },
+                        {
+                            "_id": "6053581a887b2000349b6579",
+                            "code": true,
+                            "value": "sendslackmessageforignored()",
+                            "param": null,
+                            "name": "message"
+                        }
+                    ],
+                    "name": "sendslackmessageforignored",
+                    "timeout": null,
+                    "method": "sendIncomingWebhook",
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "Slack",
+                "version": "1.1.0"
+            },
+            "uuid": "139dcaf6-9584-47f2-8219-d71c1da608db",
+            "coordination": "each",
+            "numProcessParallel": null,
+            "name": "Ignored",
+            "description": null,
+            "condition": "checkforignoredslack()",
+            "filterAgents": null,
+            "postRun": "indexIgnored++;",
+            "preRun": null
+        },
+        {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": null,
+            "mandatory": null,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "6053581a887b2000349b657c",
+                            "code": true,
+                            "value": "getfilepath()",
+                            "param": null,
+                            "name": "PATH"
+                        },
+                        {
+                            "_id": "6053581a887b2000349b657d",
+                            "code": true,
+                            "value": "getfilecontent()",
+                            "param": null,
+                            "name": "CONTENT"
+                        }
+                    ],
+                    "name": "createfile",
+                    "timeout": null,
+                    "method": "createFile",
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "TextEditor",
+                "version": "1.0.0"
+            },
+            "uuid": "fb18b790-e884-4308-b05f-e7d332128ca3",
+            "coordination": "each",
+            "numProcessParallel": null,
+            "name": "Create the new JSON file",
+            "description": null,
+            "condition": "checkconditionfilecreation()",
+            "filterAgents": null,
+            "postRun": "indexFileCreation++;",
+            "preRun": null
+        },
+        {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": null,
+            "mandatory": null,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "6057231a257f08003402f3c2",
+                            "code": null,
+                            "value": "AWS Access Key",
+                            "param": null,
+                            "name": "AWS_ACCESS_KEY_ID"
+                        },
+                        {
+                            "_id": "6057231a257f08003402f3c3",
+                            "code": null,
+                            "value": "AWS Secret Key",
+                            "param": null,
+                            "name": "AWS_SECRET_ACCESS_KEY"
+                        },
+                        {
+                            "_id": "6057231a257f08003402f3c4",
+                            "code": true,
+                            "value": "getbucketnameforremediation()",
+                            "param": null,
+                            "name": "bucketName"
+                        }
+                    ],
+                    "name": "deletebucketpolicy",
+                    "timeout": null,
+                    "method": "deleteBucketPolicy",
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "Amazon-aws-s3",
+                "version": "1.5.4"
+            },
+            "uuid": "ffb8cb43-2359-47b1-bf74-8ed195292804",
+            "coordination": "each",
+            "numProcessParallel": null,
+            "name": "Delete Bucket Policy via Object",
+            "description": null,
+            "condition": "checkconditionfordeletionviaobject()",
+            "filterAgents": null,
+            "postRun": "indexRemediate2++;",
+            "preRun": null
+        },
+        {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": null,
+            "mandatory": null,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "60572589257f08003402fca0",
+                            "code": true,
+                            "value": "getfilepath()",
+                            "param": null,
+                            "name": "PATH"
+                        },
+                        {
+                            "_id": "60572589257f08003402fca1",
+                            "code": true,
+                            "value": "getfilecontent()",
+                            "param": null,
+                            "name": "CONTENT"
+                        }
+                    ],
+                    "name": "createfile",
+                    "timeout": null,
+                    "method": "createFile",
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "TextEditor",
+                "version": "1.0.0"
+            },
+            "uuid": "0ec3f7ec-9ad2-41a1-8b40-752950395db4",
+            "coordination": "each",
+            "numProcessParallel": null,
+            "name": "Create the new JSON file",
+            "description": null,
+            "condition": "checkconditionfilecreation()",
+            "filterAgents": null,
+            "postRun": "indexFileCreation++;",
+            "preRun": null
+        },
+        {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": false,
+            "mandatory": false,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "60572589257f08003402fca4",
+                            "code": null,
+                            "value": "AWS Access Key",
+                            "param": null,
+                            "name": "AWS_ACCESS_KEY_ID"
+                        },
+                        {
+                            "_id": "60572589257f08003402fca5",
+                            "code": null,
+                            "value": "AWS Secret Key",
+                            "param": null,
+                            "name": "AWS_SECRET_ACCESS_KEY"
+                        },
+                        {
+                            "_id": "60572589257f08003402fca6",
+                            "code": true,
+                            "value": "getbucketnameforremediation()",
+                            "param": null,
+                            "name": "bucketName"
+                        },
+                        {
+                            "_id": "60572589257f08003402fca7",
+                            "code": true,
+                            "value": "createnewpolicyjson()",
+                            "param": null,
+                            "name": "policy"
+                        }
+                    ],
+                    "name": "replacebucketpolicy",
+                    "timeout": null,
+                    "method": "putBucketPolicy",
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "Amazon-aws-s3",
+                "version": "1.5.4"
+            },
+            "uuid": "490ce396-3ec7-4dea-8d7f-88ff7590eb68",
+            "coordination": "each",
+            "numProcessParallel": null,
+            "name": "Replace Bucket Policy via Object",
+            "description": null,
+            "condition": "checkconditionforreplace()",
+            "filterAgents": null,
+            "postRun": "indexRemediate2++;",
+            "preRun": null
+        }
+    ],
+    "links": [
+        {
+            "uuid": "62ba9343-79dc-4a5d-ac0a-6d47123b41f2",
+            "sourceId": "6297d603-cd5f-4fca-b5f5-4d14847dcd94",
+            "targetId": "edb32ef5-243a-4b7f-bac8-e764823911e2"
+        },
+        {
+            "uuid": "5e0ad33c-7098-40fe-8df8-6e014a66fc72",
+            "sourceId": "edb32ef5-243a-4b7f-bac8-e764823911e2",
+            "targetId": "6bc1844a-4f56-46f4-b742-f9000115cf90"
+        },
+        {
+            "uuid": "808f6691-d549-4685-8209-581a8656c47b",
+            "sourceId": "6bc1844a-4f56-46f4-b742-f9000115cf90",
+            "targetId": "6bc1844a-4f56-46f4-b742-f9000115cf90"
+        },
+        {
+            "uuid": "7ae6317d-2410-4e66-b938-988966239800",
+            "sourceId": "edb32ef5-243a-4b7f-bac8-e764823911e2",
+            "targetId": "9f29c8df-ccbe-442f-a1e6-6e8b996d8916"
+        },
+        {
+            "uuid": "7d7011f4-f28f-48f5-9b9e-b5139a312cbd",
+            "sourceId": "9f29c8df-ccbe-442f-a1e6-6e8b996d8916",
+            "targetId": "9f29c8df-ccbe-442f-a1e6-6e8b996d8916"
+        },
+        {
+            "uuid": "c738db2b-bfe0-4221-b3d2-3c37cf0385c2",
+            "sourceId": "edb32ef5-243a-4b7f-bac8-e764823911e2",
+            "targetId": "c93f881a-3dcd-4c80-893a-91d63f16751f"
+        },
+        {
+            "uuid": "90810178-d23f-4157-8d69-3e27594d8307",
+            "sourceId": "c93f881a-3dcd-4c80-893a-91d63f16751f",
+            "targetId": "fb18b790-e884-4308-b05f-e7d332128ca3"
+        },
+        {
+            "uuid": "fdf27188-3df3-407b-9e23-bc27bef6ad1f",
+            "sourceId": "fb18b790-e884-4308-b05f-e7d332128ca3",
+            "targetId": "71f2758e-a441-4a63-a6ce-a6d3ae94767e"
+        },
+        {
+            "uuid": "60aa4462-dbe1-47af-af89-b3185c0bcb3e",
+            "sourceId": "edb32ef5-243a-4b7f-bac8-e764823911e2",
+            "targetId": "23fd6698-db5a-4931-bc91-8cbb47609219"
+        },
+        {
+            "uuid": "0d8f2290-1aac-4a97-86cf-fbefd7e55247",
+            "sourceId": "edb32ef5-243a-4b7f-bac8-e764823911e2",
+            "targetId": "80b2519f-1ef4-47e6-8557-374c4b8ad0a6"
+        },
+        {
+            "uuid": "af91db01-ef55-44ce-8050-367858dc3128",
+            "sourceId": "9f29c8df-ccbe-442f-a1e6-6e8b996d8916",
+            "targetId": "139dcaf6-9584-47f2-8219-d71c1da608db"
+        },
+        {
+            "uuid": "a973fefa-1d2a-4c5f-9d77-b1178784c8f3",
+            "sourceId": "139dcaf6-9584-47f2-8219-d71c1da608db",
+            "targetId": "139dcaf6-9584-47f2-8219-d71c1da608db"
+        },
+        {
+            "uuid": "a06bbab6-5e9a-4e8f-bd0a-7ffaf334fb9d",
+            "sourceId": "80b2519f-1ef4-47e6-8557-374c4b8ad0a6",
+            "targetId": "80b2519f-1ef4-47e6-8557-374c4b8ad0a6"
+        },
+        {
+            "uuid": "8eae34b6-c8a9-40e5-ac14-ea7f3650501d",
+            "sourceId": "23fd6698-db5a-4931-bc91-8cbb47609219",
+            "targetId": "23fd6698-db5a-4931-bc91-8cbb47609219"
+        },
+        {
+            "uuid": "9d8c9760-a792-4c58-822a-ded8b964292a",
+            "sourceId": "c93f881a-3dcd-4c80-893a-91d63f16751f",
+            "targetId": "c93f881a-3dcd-4c80-893a-91d63f16751f"
+        },
+        {
+            "uuid": "9a0a2fd3-e450-43e3-b477-5331e6665070",
+            "sourceId": "fb18b790-e884-4308-b05f-e7d332128ca3",
+            "targetId": "fb18b790-e884-4308-b05f-e7d332128ca3"
+        },
+        {
+            "uuid": "3afd4c32-3a12-4b1d-a4cf-02784ec7ad2d",
+            "sourceId": "71f2758e-a441-4a63-a6ce-a6d3ae94767e",
+            "targetId": "71f2758e-a441-4a63-a6ce-a6d3ae94767e"
+        },
+        {
+            "uuid": "c87c96af-d3d8-452a-875e-6a6dc6acc056",
+            "sourceId": "23fd6698-db5a-4931-bc91-8cbb47609219",
+            "targetId": "ffb8cb43-2359-47b1-bf74-8ed195292804"
+        },
+        {
+            "uuid": "e8c5b564-1bc8-4b34-9b96-824cba0620a8",
+            "sourceId": "ffb8cb43-2359-47b1-bf74-8ed195292804",
+            "targetId": "ffb8cb43-2359-47b1-bf74-8ed195292804"
+        },
+        {
+            "uuid": "34334cd8-e453-4167-a198-a437615e342a",
+            "sourceId": "80b2519f-1ef4-47e6-8557-374c4b8ad0a6",
+            "targetId": "0ec3f7ec-9ad2-41a1-8b40-752950395db4"
+        },
+        {
+            "uuid": "b98a1c2a-2044-47b8-a872-7b4c21bece34",
+            "sourceId": "0ec3f7ec-9ad2-41a1-8b40-752950395db4",
+            "targetId": "0ec3f7ec-9ad2-41a1-8b40-752950395db4"
+        },
+        {
+            "uuid": "ddad6703-44fd-43cb-977b-16e75cd5ac60",
+            "sourceId": "0ec3f7ec-9ad2-41a1-8b40-752950395db4",
+            "targetId": "490ce396-3ec7-4dea-8d7f-88ff7590eb68"
+        },
+        {
+            "uuid": "04dda782-38a2-494c-a20d-b8b572a987bd",
+            "sourceId": "490ce396-3ec7-4dea-8d7f-88ff7590eb68",
+            "targetId": "490ce396-3ec7-4dea-8d7f-88ff7590eb68"
+        }
+    ],
+    "content": "{\"cells\":[{\"type\":\"devs.PMStartPoint\",\"size\":{\"width\":40,\"height\":39},\"outPorts\":[\" \"],\"inPorts\":[],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\" \"}}}]},\"position\":{\"x\":41,\"y\":26},\"angle\":0,\"id\":\"6297d603-cd5f-4fca-b5f5-4d14847dcd94\",\"z\":1,\"attrs\":{\"rect\":{\"fill\":\"#2d3236\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":185,\"y\":12},\"angle\":0,\"id\":\"edb32ef5-243a-4b7f-bac8-e764823911e2\",\"z\":2,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Get event details\"},\".p_id\":{\"text\":\"6023b2e264b1160034fd9b9f\"},\"image\":{\"xlink:href\":\"/plugins/lacework/lacework.png\",\"ref-y\":50},\"text\":{\"text\":\"Get event details\"}}},{\"type\":\"link\",\"source\":{\"id\":\"6297d603-cd5f-4fca-b5f5-4d14847dcd94\",\"port\":\" \"},\"target\":{\"id\":\"edb32ef5-243a-4b7f-bac8-e764823911e2\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"62ba9343-79dc-4a5d-ac0a-6d47123b41f2\",\"z\":3,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":426,\"y\":-317},\"angle\":0,\"id\":\"6bc1844a-4f56-46f4-b742-f9000115cf90\",\"z\":4,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Delete Bucket Policy via CLI\"},\".p_id\":{\"text\":\"5f92a2f3da3961001ab1a0c4\"},\"image\":{\"xlink:href\":\"/plugins/CommandLine/CommandLine.png\",\"ref-y\":50},\"text\":{\"text\":\"Delete Bucket Policy via CLI\"}}},{\"type\":\"link\",\"source\":{\"id\":\"edb32ef5-243a-4b7f-bac8-e764823911e2\",\"port\":\"  \"},\"target\":{\"id\":\"6bc1844a-4f56-46f4-b742-f9000115cf90\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"5e0ad33c-7098-40fe-8df8-6e014a66fc72\",\"z\":5,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"6bc1844a-4f56-46f4-b742-f9000115cf90\",\"port\":\"  \"},\"target\":{\"id\":\"6bc1844a-4f56-46f4-b742-f9000115cf90\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"808f6691-d549-4685-8209-581a8656c47b\",\"z\":6,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":324,\"y\":387},\"angle\":0,\"id\":\"9f29c8df-ccbe-442f-a1e6-6e8b996d8916\",\"z\":7,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Remediated\"},\".p_id\":{\"text\":\"5f92a31fda3961001ab1a1a6\"},\"image\":{\"xlink:href\":\"/plugins/Slack/Slack_Icon.png\",\"ref-y\":50},\"text\":{\"text\":\"Remediated\"}}},{\"type\":\"link\",\"source\":{\"id\":\"edb32ef5-243a-4b7f-bac8-e764823911e2\",\"port\":\"  \"},\"target\":{\"id\":\"9f29c8df-ccbe-442f-a1e6-6e8b996d8916\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"7ae6317d-2410-4e66-b938-988966239800\",\"z\":8,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"9f29c8df-ccbe-442f-a1e6-6e8b996d8916\",\"port\":\"  \"},\"target\":{\"id\":\"9f29c8df-ccbe-442f-a1e6-6e8b996d8916\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"7d7011f4-f28f-48f5-9b9e-b5139a312cbd\",\"z\":9,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":484,\"y\":-158},\"angle\":0,\"id\":\"c93f881a-3dcd-4c80-893a-91d63f16751f\",\"z\":10,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Create Backup via CLI\"},\".p_id\":{\"text\":\"5f92a2f3da3961001ab1a0c4\"},\"image\":{\"xlink:href\":\"/plugins/CommandLine/CommandLine.png\",\"ref-y\":50},\"text\":{\"text\":\"Create Backup via CLI\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":932,\"y\":-163},\"angle\":0,\"id\":\"71f2758e-a441-4a63-a6ce-a6d3ae94767e\",\"z\":11,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Replace Bucket Policy via CLI\"},\".p_id\":{\"text\":\"5f92a2f3da3961001ab1a0c4\"},\"image\":{\"xlink:href\":\"/plugins/CommandLine/CommandLine.png\",\"ref-y\":50},\"text\":{\"text\":\"Replace Bucket Policy via CLI\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":490,\"y\":13},\"angle\":0,\"id\":\"23fd6698-db5a-4931-bc91-8cbb47609219\",\"z\":12,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Backup Bucket Policy via Object\"},\".p_id\":{\"text\":\"6047970a887b2000347ea8bd\"},\"image\":{\"xlink:href\":\"/plugins/Amazon-aws-s3/logo.png\",\"ref-y\":50},\"text\":{\"text\":\"Backup Bucket Policy via Object\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":453,\"y\":174},\"angle\":0,\"id\":\"80b2519f-1ef4-47e6-8557-374c4b8ad0a6\",\"z\":13,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Backup Bucket Policy via Object\"},\".p_id\":{\"text\":\"6047970a887b2000347ea8bd\"},\"image\":{\"xlink:href\":\"/plugins/Amazon-aws-s3/logo.png\",\"ref-y\":50},\"text\":{\"text\":\"Backup Bucket Policy via Object\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":557,\"y\":389},\"angle\":0,\"id\":\"139dcaf6-9584-47f2-8219-d71c1da608db\",\"z\":14,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Ignored\"},\".p_id\":{\"text\":\"5f92a31fda3961001ab1a1a6\"},\"image\":{\"xlink:href\":\"/plugins/Slack/Slack_Icon.png\",\"ref-y\":50},\"text\":{\"text\":\"Ignored\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":705,\"y\":-163},\"angle\":0,\"id\":\"fb18b790-e884-4308-b05f-e7d332128ca3\",\"z\":15,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Create the new JSON file\"},\".p_id\":{\"text\":\"5f92a324da3961001ab1a1bf\"},\"image\":{\"xlink:href\":\"/plugins/TextEditor/TextEditor.png\",\"ref-y\":50},\"text\":{\"text\":\"Create the new JSON file\"}}},{\"type\":\"link\",\"source\":{\"id\":\"edb32ef5-243a-4b7f-bac8-e764823911e2\",\"port\":\"  \"},\"target\":{\"id\":\"c93f881a-3dcd-4c80-893a-91d63f16751f\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"c738db2b-bfe0-4221-b3d2-3c37cf0385c2\",\"z\":16,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"c93f881a-3dcd-4c80-893a-91d63f16751f\",\"port\":\"  \"},\"target\":{\"id\":\"fb18b790-e884-4308-b05f-e7d332128ca3\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"90810178-d23f-4157-8d69-3e27594d8307\",\"z\":17,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"fb18b790-e884-4308-b05f-e7d332128ca3\",\"port\":\"  \"},\"target\":{\"id\":\"71f2758e-a441-4a63-a6ce-a6d3ae94767e\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"b1a61947-eac1-4a8c-963e-111247904b22\",\"z\":18,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"edb32ef5-243a-4b7f-bac8-e764823911e2\",\"port\":\"  \"},\"target\":{\"id\":\"23fd6698-db5a-4931-bc91-8cbb47609219\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"60aa4462-dbe1-47af-af89-b3185c0bcb3e\",\"z\":19,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"edb32ef5-243a-4b7f-bac8-e764823911e2\",\"port\":\"  \"},\"target\":{\"id\":\"80b2519f-1ef4-47e6-8557-374c4b8ad0a6\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"0d8f2290-1aac-4a97-86cf-fbefd7e55247\",\"z\":20,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"9f29c8df-ccbe-442f-a1e6-6e8b996d8916\",\"port\":\"  \"},\"target\":{\"id\":\"139dcaf6-9584-47f2-8219-d71c1da608db\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"af91db01-ef55-44ce-8050-367858dc3128\",\"z\":21,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"139dcaf6-9584-47f2-8219-d71c1da608db\",\"port\":\"  \"},\"target\":{\"id\":\"139dcaf6-9584-47f2-8219-d71c1da608db\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"a973fefa-1d2a-4c5f-9d77-b1178784c8f3\",\"z\":22,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"80b2519f-1ef4-47e6-8557-374c4b8ad0a6\",\"port\":\"  \"},\"target\":{\"id\":\"80b2519f-1ef4-47e6-8557-374c4b8ad0a6\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"a06bbab6-5e9a-4e8f-bd0a-7ffaf334fb9d\",\"z\":23,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"23fd6698-db5a-4931-bc91-8cbb47609219\",\"port\":\"  \"},\"target\":{\"id\":\"23fd6698-db5a-4931-bc91-8cbb47609219\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"8eae34b6-c8a9-40e5-ac14-ea7f3650501d\",\"z\":24,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"c93f881a-3dcd-4c80-893a-91d63f16751f\",\"port\":\"  \"},\"target\":{\"id\":\"c93f881a-3dcd-4c80-893a-91d63f16751f\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"9d8c9760-a792-4c58-822a-ded8b964292a\",\"z\":25,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"fb18b790-e884-4308-b05f-e7d332128ca3\",\"port\":\"  \"},\"target\":{\"id\":\"71f2758e-a441-4a63-a6ce-a6d3ae94767e\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"fdf27188-3df3-407b-9e23-bc27bef6ad1f\",\"z\":26,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"fb18b790-e884-4308-b05f-e7d332128ca3\",\"port\":\"  \"},\"target\":{\"id\":\"fb18b790-e884-4308-b05f-e7d332128ca3\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"9a0a2fd3-e450-43e3-b477-5331e6665070\",\"z\":27,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"71f2758e-a441-4a63-a6ce-a6d3ae94767e\",\"port\":\"  \"},\"target\":{\"id\":\"71f2758e-a441-4a63-a6ce-a6d3ae94767e\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"3afd4c32-3a12-4b1d-a4cf-02784ec7ad2d\",\"z\":28,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":717,\"y\":15},\"angle\":0,\"id\":\"ffb8cb43-2359-47b1-bf74-8ed195292804\",\"z\":29,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Delete Bucket Policy via Object\"},\".p_id\":{\"text\":\"6047970a887b2000347ea8bd\"},\"image\":{\"xlink:href\":\"/plugins/Amazon-aws-s3/logo.png\",\"ref-y\":50},\"text\":{\"text\":\"Delete Bucket Policy via Object\"}}},{\"type\":\"link\",\"source\":{\"id\":\"23fd6698-db5a-4931-bc91-8cbb47609219\",\"port\":\"  \"},\"target\":{\"id\":\"ffb8cb43-2359-47b1-bf74-8ed195292804\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"c87c96af-d3d8-452a-875e-6a6dc6acc056\",\"z\":30,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"ffb8cb43-2359-47b1-bf74-8ed195292804\",\"port\":\"  \"},\"target\":{\"id\":\"ffb8cb43-2359-47b1-bf74-8ed195292804\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"e8c5b564-1bc8-4b34-9b96-824cba0620a8\",\"z\":31,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":660,\"y\":173},\"angle\":0,\"id\":\"0ec3f7ec-9ad2-41a1-8b40-752950395db4\",\"z\":32,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Create the new JSON file\"},\".p_id\":{\"text\":\"5f92a324da3961001ab1a1bf\"},\"image\":{\"xlink:href\":\"/plugins/TextEditor/TextEditor.png\",\"ref-y\":50},\"text\":{\"text\":\"Create the new JSON file\"}}},{\"type\":\"link\",\"source\":{\"id\":\"80b2519f-1ef4-47e6-8557-374c4b8ad0a6\",\"port\":\"  \"},\"target\":{\"id\":\"0ec3f7ec-9ad2-41a1-8b40-752950395db4\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"34334cd8-e453-4167-a198-a437615e342a\",\"z\":33,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"0ec3f7ec-9ad2-41a1-8b40-752950395db4\",\"port\":\"  \"},\"target\":{\"id\":\"0ec3f7ec-9ad2-41a1-8b40-752950395db4\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"b98a1c2a-2044-47b8-a872-7b4c21bece34\",\"z\":34,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":867,\"y\":172},\"angle\":0,\"id\":\"490ce396-3ec7-4dea-8d7f-88ff7590eb68\",\"z\":35,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Replace Bucket Policy via Object\"},\".p_id\":{\"text\":\"6047970a887b2000347ea8bd\"},\"image\":{\"xlink:href\":\"/plugins/Amazon-aws-s3/logo.png\",\"ref-y\":50},\"text\":{\"text\":\"Replace Bucket Policy via Object\"}}},{\"type\":\"link\",\"source\":{\"id\":\"0ec3f7ec-9ad2-41a1-8b40-752950395db4\",\"port\":\"  \"},\"target\":{\"id\":\"490ce396-3ec7-4dea-8d7f-88ff7590eb68\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"ddad6703-44fd-43cb-977b-16e75cd5ac60\",\"z\":36,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"490ce396-3ec7-4dea-8d7f-88ff7590eb68\",\"port\":\"  \"},\"target\":{\"id\":\"490ce396-3ec7-4dea-8d7f-88ff7590eb68\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"04dda782-38a2-494c-a20d-b8b572a987bd\",\"z\":37,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}}]}",
+    "used_plugins": [
+        {
+            "name": "lacework",
+            "version": "1.0.0"
+        },
+        {
+            "name": "CommandLine",
+            "version": "1.2.0"
+        },
+        {
+            "name": "Slack",
+            "version": "1.1.0"
+        },
+        {
+            "name": "CommandLine",
+            "version": "1.2.0"
+        },
+        {
+            "name": "CommandLine",
+            "version": "1.2.0"
+        },
+        {
+            "name": "Amazon-aws-s3",
+            "version": "1.4.0"
+        },
+        {
+            "name": "Amazon-aws-s3",
+            "version": "1.4.0"
+        },
+        {
+            "name": "Slack",
+            "version": "1.1.0"
+        },
+        {
+            "name": "TextEditor",
+            "version": "1.0.0"
+        },
+        {
+            "name": "Amazon-aws-s3",
+            "version": "1.5.4"
+        },
+        {
+            "name": "TextEditor",
+            "version": "1.0.0"
+        },
+        {
+            "name": "Amazon-aws-s3",
+            "version": "1.5.4"
+        }
+    ],
+    "__v": 0,
+    "code": "var bucketArr = []; // Array of S3 Buckets that will be filled with the resource information from the event.\nvar indexRemediate = 0; // Index for the S3 Bucket Remediate of the Map\nvar indexSlack = 0; // Index of the Slack Loop to send out information about the S3 Bucket remediation.\nvar bucketIgnoredArr = []; // Array of S3 Buckets that are violating but will be ignored.\nvar indexIgnored = 0; //Index of the S3 Buckets that are violating but will be ignored.\nvar indexFileCreation = 0; //Index for creation of the JSON files.\nvar indexRemediate2 = 0; //Index for a second CLI command used to replace the policy\n\nlet payload = trigger.payload; // The Payload that was send by the Webhook Trigger. Information about the Payload is available at https://support.lacework.com/hc/en-us/articles/360034367393-Webhook\n\nfunction checkconfiguration()  { // Function to check if two out of four Auto Remediation steps are enabled.\n    if (configuration.dothedeletebucketpolicyremediationviacli == \"true\" && configuration.dothereplacebucketpolicyremediationviacli == \"true\") {\n        return 0;\n    }\n    else if (configuration.dothedeletebucketpolicyremediationviacli == \"true\" && configuration.dothedeletebucketpolicyremediationviaobject == \"true\") {\n        return 0;\n    }\n    else if (configuration.dothedeletebucketpolicyremediationviacli == \"true\" && configuration.dothereplacebucketpolicyremediationviaobject == \"true\") {\n        return 0;\n    }\n    else if (configuration.dothereplacebucketpolicyremediationviacli == \"true\" && configuration.dothedeletebucketpolicyremediationviaobject == \"true\") {\n        return 0;\n    }\n    else if (configuration.dothereplacebucketpolicyremediationviacli == \"true\" && configuration.dothereplacebucketpolicyremediationviaobject == \"true\") {\n        return 0;\n    }\n    else if (configuration.dothereplacebucketpolicyremediationviaobject == \"true\" && configuration.dothedeletebucketpolicyremediationviaobject == \"true\") {\n        return 0;\n    }\n    else {\n        return 1;\n    }\n}\n\nfunction geteventid() { // Function to get the Event ID from the Webhook Payload.\n    return `${payload.event_id}`;\n}\n\nfunction createBucketList() { // Function to build the S3 Bucket List that will be used to Remediate.\n    let p = configuration.eventuuid;\n    let laceworkAPIResult = getAction(p);\n    let resourcesArr = laceworkAPIResult.result.result.data[0].ENTITY_MAP.Resource;\n    for (let i = 0; i < resourcesArr.length; i++) {\n        if (!configuration.bucketIgnoreList.includes(resourcesArr[i].VALUE)) { // The S3 Bucket of the Event will be checked against the configuration list of to ignore S3 buckets.\n            bucketArr.push (resourcesArr[i].VALUE); // If the bucket is not on the list it will be pushed into the array.\n        }\n        else {\n            bucketIgnoredArr.push (resourcesArr[i].VALUE); // If the bucket is on the list and violating the policy it will be pushed into the second bucket list.\n        }\n    }\n}\n\nfunction printBucketName() { // Function to print the S3 buckets that will be remediated.\n    let bucket = bucketArr[indexRemediate]\n    let arr = bucket.split(\":::\")\n    return `echo Compliance Violation ${configuration.policyID} for the S3 bucket ${arr[arr.length-1]}`;\n}\n\nfunction createbackup() { // Function to backup the S3 bucket policy before it is replaced.\n    if (configuration.createbackup == \"true\") {\n        let bucket = bucketArr[indexRemediate]\n        let arr = bucket.split(\":::\")\n        let currentdate = Date.now();\n        return `aws s3api get-bucket-policy --bucket ${arr[arr.length-1]} > ${configuration.backupfolder}${arr[arr.length-1]}-${currentdate}-${configuration.policyID}.json`; \n    }\n    else {\n        return `Creating backup inside the configuration is disabled. Skipping.`\n    }\n}\n\nfunction deleteviaawscli() { // Delete the Bucket Policy via CLI\n    let bucket = bucketArr[indexRemediate];\n    let arr = bucket.split(\":::\");\n    return `aws s3api delete-bucket-policy --bucket ${arr[arr.length-1]}`; // Using the delete-bucket-policy method. Feel free to replace it with whatever you think is the right aws cli command to trigger.\n}\n\nfunction createnewpolicyfile() { // Optional (Not in use): A way how you can create the JSON file on the command line.\n    let bucket = bucketArr[indexRemediate];\n    let arr = bucket.split(\":::\");\n    configuration.bucketpolicy.Statement[0].Resource = bucket;\n    const myjson = JSON.stringify(configuration.bucketpolicy)\n    let myoutput = myjson.replace(/\"/g, '\\\"');\n    return `echo \"${myoutput}\" > ${configuration.inputfolder}${arr[arr.length-1]}-${configuration.policyID}.json`;\n}\n\nfunction checkconditionfilecreation() { //Check condition of the file creation texteditor object if it can execute.\n    if (indexRemediate == bucketArr.length && indexFileCreation < bucketArr.length) return true\n    return false\n}\n\nfunction getfilepath() { //Getting the filepath and name for the file that will be created.\n    let bucket = bucketArr[indexFileCreation];\n    let arr = bucket.split(\":::\");\n    return `${configuration.inputfolder}${arr[arr.length-1]}-${configuration.policyID}.json`;\n}\n\nfunction getfilecontent() { //Getting the file content of what will be written into the file itself.\n    let bucket = bucketArr[indexFileCreation];\n    let arr = bucket.split(\":::\");\n    configuration.bucketpolicy.Statement[0].Resource = bucket;\n    const myjson = JSON.stringify(configuration.bucketpolicy);\n    return `${myjson}`;\n}\n\nfunction checkconditionforreplace() { //Check the condition for replace the current bucket policy via the CLI.\n    if (indexRemediate == bucketArr.length && indexFileCreation == bucketArr.length && indexRemediate2 < bucketArr.length) return true\n    return false\n}\n\nfunction replacebucketpolicyviacli() { // Replace the Bucket Policy via CLI\n    let bucket = bucketArr[indexRemediate2];\n    let arr = bucket.split(\":::\");\n    configuration.bucketpolicy.Statement[0].Resource = bucket;\n    let myoutput = JSON.stringify(configuration.bucketpolicy);\n    return `aws s3api put-bucket-policy --bucket ${arr[arr.length-1]} --policy file://${configuration.inputfolder}${arr[arr.length-1]}-${configuration.policyID}.json`; //Using the setting --acl private. Feel free to replace it with whatever you think is the right aws cli command to trigger.\n}\n\nfunction getbucketname() { // Function to print the S3 buckets that will be remediated.\n    let bucket = bucketArr[indexRemediate]\n    let arr = bucket.split(\":::\")\n    return `${arr[arr.length-1]}`;\n}\n\nfunction checkconditionfordeletionviaobject() {\n    if (indexRemediate == bucketArr.length && indexRemediate2 < bucketArr.length) return true\n    return false\n}\n\nfunction getbucketnameforremediation() {\n    let bucket = bucketArr[indexRemediate2]\n    let arr = bucket.split(\":::\")\n    return `${arr[arr.length-1]}`;\n}\n\nfunction createnewpolicyjson() { // Optional (Not in use): A way how you can create the JSON file on the command line.\n    let bucket = bucketArr[indexRemediate2];\n    let arr = bucket.split(\":::\");\n    configuration.bucketpolicy.Statement[0].Resource = bucket;\n    const myjson = JSON.stringify(configuration.bucketpolicy)\n    //let myoutput = myjson.replace(/\"/g, '\\\"');\n    return `${myjson}`;\n}\n\nfunction testprint () { // Test Print, not in use so far.\n   configuration.bucketpolicy.Statement[0].Resource = \"adflkasdfölkjasdf\"\n   let myoutput = JSON.stringify(configuration.bucketpolicy);\n   return `echo ${myoutput}`;\n}\n\nfunction remediateviaobject() { // Remediate the S3 buckets back to private acl.\n    let bucket = bucketArr[indexRemediate];\n    let arr = bucket.split(\":::\");\n    return `${arr[arr.length-1]}`; //Using the canned acl private.\n}\n\nfunction sendslackmessage() { // Function to send out a slack message for every S3 bucket that will be remediated.\n    let bucket = bucketArr[indexSlack];\n    let arr = bucket.split(\":::\");\n    let event_link = payload.event_link;\n    if (configuration.dothedeletebucketpolicyremediationviacli == \"true\") {\n        return `Compliance Violation ${configuration.policyID} The following S3 bucket is auto remediated back to ${configuration.violationdescription}: ${arr[arr.length-1]}. Executing CLI command aws s3api delete-bucket-policy --bucket ${arr[arr.length-1]}. More information about the event is available at ${event_link}`;\n    }\n    else if (configuration.dothereplacebucketpolicyremediationviacli == \"true\") {\n        return `Compliance Violation ${configuration.policyID} The following S3 bucket is auto remediated back to ${configuration.violationdescription}: ${arr[arr.length-1]}. Executing CLI command aws s3api put-bucket-policy --bucket ${arr[arr.length-1]} --policy file://${configuration.inputfolder}${arr[arr.length-1]}.json. More information about the event is available at ${event_link}`;\n    }\n    else if (configuration.dothedeletebucketpolicyremediationviaobject == \"true\") {\n        return `Compliance Violation ${configuration.policyID} The following S3 bucket is auto remediated back to ${configuration.violationdescription}: ${arr[arr.length-1]}. Using the Kaholo S3 object to do the delete of the bucket policy remediation. More information about the event is available at ${event_link}`;\n    }\n    else if (configuration.dothereplacebucketpolicyremediationviaobject == \"true\") {\n        return `Compliance Violation ${configuration.policyID} The following S3 bucket is auto remediated back to ${configuration.violationdescription}: ${arr[arr.length-1]}. Using the Kaholo S3 object to do the replace of the bucket policy remediation. More information about the event is available at ${event_link}`;\n    }\n    else {\n        return `Compliance Violation ${configuration.policyID}. Auto Remediation is diabled! The following S3 bucket would be auto remediated ${configuration.violationdescription}: ${arr[arr.length-1]}. More information about the event is available at ${event_link}`;   \n    }\n}\n\nfunction sendslackmessageforignored() { // Function to send out a slack message for every S3 bucket that will be ignored but is violating the policy.\n    let bucket = bucketIgnoredArr[indexIgnored];\n    let arr = bucket.split(\":::\");\n    let event_link = payload.event_link;\n    return `Compliance Violation ${configuration.policyID} The following S3 bucket is NOT remediated back to ${configuration.violationdescription}: ${arr[arr.length-1]}. It is ignored by the configuration of the Map. We recommend using tags in AWS to suppress this S3 bucket from triggering alerts in Lacework. More information about the event is available at ${event_link}`;    \n}\n\nfunction checkdeleteremediationviacli() //Check if the Delete Remedation should be done via the CLI?\n{\n    if (configuration.dothedeletebucketpolicyremediationviacli == \"true\") {\n        if (indexRemediate < bucketArr.length) {\n            return 1;\n        }\n        else {\n            return 0;\n        }\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction checkreplaceremediationviacli() //Check if the Replace Remedation should be done via the CLI?\n{\n    if (configuration.dothereplacebucketpolicyremediationviacli == \"true\") {\n        if (indexRemediate < bucketArr.length) {\n            return 1;\n        }\n        else {\n            return 0;\n        }\n    }\n    else {\n        return 0;\n    }\n}\n\n\nfunction checkdeleteremediationviaobject() //Check if the Delete Remedation should be done via the Object?\n{\n    if (configuration.dothedeletebucketpolicyremediationviaobject == \"true\") {\n        if (indexRemediate < bucketArr.length) {\n            return 1;\n        }\n        else {\n            return 0;\n        }\n    }\n    else {\n        return 0;\n    }\n}\nfunction checkreplaceremediationviaobject() //Check if the Replace Remedation should be done via the Object?\n{\n    if (configuration.dothereplacebucketpolicyremediationviaobject == \"true\") {\n        if (indexRemediate < bucketArr.length) {\n            return 1;\n        }\n        else {\n            return 0;\n        }\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction checkforignoredslack() { //Check if you want to also see the ignored buckets via the slack messages.\n    if (indexSlack == bucketArr.length && indexIgnored < bucketIgnoredArr.length && configuration.sendslackmessagesforignored == \"true\") {\n        return 1;\n    }\n    else {\n         return 0;\n    }\n}\n\nfunction getAction(pId) {  // Help function to get the return value of the event.\n   let p = getProcessById(pId)//Get the process. \n   if(!p ||!p.length)return; \n   p = p[p.length-1].actions; //Get all actions \n   let action = p[Object.keys(p)[0]];//get the needed action \n   return action \n}"
+}
