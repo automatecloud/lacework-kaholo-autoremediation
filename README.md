@@ -96,7 +96,7 @@ LW_S3_10 | Ensure the S3 bucket ACL does not grant AWS users FULL_CONTROL [READ,
 LW_S3_11 | Ensure the attached S3 bucket policy does not grant 'Allow' permission to everyone | [Implemented](maps/compliance/aws/LW_S3_11/README.md) | yes | yes
 LW_S3_12 | Ensure the S3 bucket requires MFA to delete objects | [Prototype](maps/compliance/aws/LW_S3_12/README.md) | yes | yes
 LW_S3_13 | Ensure the S3 bucket has access logging enabled | [Implemented](maps/compliance/aws/LW_S3_13/README.md) | yes | yes
-LW_S3_14 | Ensure all data stored in the S3 bucket is securely encrypted at rest | [Skeleton](maps/compliance/aws/LW_S3_14/README.md) | no | no
+LW_S3_14 | Ensure all data stored in the S3 bucket is securely encrypted at rest | [Implemented](maps/compliance/aws/LW_S3_14/README.md) | yes | yes
 LW_S3_15 | Ensure all data is transported from the S3 bucket securely | [Skeleton](maps/compliance/aws/LW_S3_15/README.md) | no | no
 LW_S3_16 | Ensure the S3 bucket has versioning enabled | [Implemented](maps/compliance/aws/LW_S3_16/README.md) | yes | yes
 LW_S3_17 | Ensure the S3 bucket access is restricted to a whitelist of IP networks. | [Prototype](maps/compliance/aws/LW_S3_17/README.md) | yes | yes
