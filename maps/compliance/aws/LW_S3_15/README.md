@@ -58,7 +58,7 @@ The Map needs to be imported inside an existing or new Kaholo Project.
 ### Map Design and workflow
 The **LW_S3_15** map currently has the following map design:
 
-<img src="LW_S3_15.png" width="618" height="338">
+<img src="LW_S3_15.png" width="570" height="315">
 
 * The map starts with **Get the Event details** object. It will use the **event_id** send by the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook), using the **Lacework API Access Key** and  **Lacework Secret Key** from the Kaholo vault that you configured the Lacework Plugin with. to create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the Lacework API via the API call **/api/v1/external/events/GetEventDetails** of the configured Lacework instance. The return value of this API call is the complete Event Payload you can use within the Map.
 * The map will trigger the **Create Backup via CLI** CommandLine object If you enabled the Auto Remediation inside the LaceworkConfig of the map by using the **"enablebucketsecuretransportviacli": "true"** setting. It will first create a backup of the current bucket policy inside the folder **backupfolder**. After that it will create a new Bucket Policy with the configuration of **securetransportbucketpolicy** inside the folder **inputfolder**. It will apply the new Bucket Policy of the JSON file right after that.
@@ -132,7 +132,7 @@ Make sure you configure the following configurations inside the **LaceworkConfig
 
 Inside the configuration of the **Get event details** building block you will find the **UUID**:
 
-<img src="geteventdetails2.png" width="233" height="180">
+<img src="geteventdetails2.png" width="236" height="179">
 
 2. **bucketIgnoreList(Optional):** You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 bucket names that should be ignored within the bucketIgnoreList of the LaceworkConfig.
 
