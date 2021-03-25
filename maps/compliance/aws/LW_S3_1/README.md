@@ -111,7 +111,7 @@ Inside the configuration of the **Get event details** building block you will fi
 
 <img src="geteventdetails2.png" width="233" height="179">
 
-1. **reportuuid:** Make sure that the **UUID** used here is the UUID of the **Get report details** object inside the map. Due to the reimport of the Map the **UUID** of the event object could have changed. To check the UUID you can go to the Design of the map, open the **Get report details** building block.
+2. **reportuuid:** Make sure that the **UUID** used here is the UUID of the **Get report details** object inside the map. Due to the reimport of the Map the **UUID** of the event object could have changed. To check the UUID you can go to the Design of the map, open the **Get report details** building block.
 
 ![Get Event](getreportdetails.png "Get Event")
 
@@ -147,7 +147,7 @@ If you want to know more about the aws s3api put-bucket-acl command or want to r
 #### Configuration of Slack Messages
 
 
-1. **policyID:** This shouldn't be changed. The Policy ID will be shown as part of the slack output messages.
+1. **policyID:** This shouldn't be changed. The Policy ID will be shown as part of the slack output messages and to check if the report has S3 buckets violating this policy ID.
 
 2. **violationdescription:** This setting is used to send details about the event inside the slack output message. Feel free to change it for your needs.
 
