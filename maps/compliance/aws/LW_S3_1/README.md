@@ -5,7 +5,8 @@ Ensure the S3 bucket ACL does not grant 'Everyone' READ permission [list S3 obje
 
 The S3 bucket ACL gives 'Everyone' permission to list objects, which allows anyone to list the
 bucket contents. It is best practice to restrict READ permission to only principals who require it.
-Rationale:
+
+**Rationale:**
 Granting ‘Everyone’ READ permission allows anyone, including anonymous users from the
 Internet, to list all objects in a bucket. Malicious users can use this information to identify and
 exploit objects with misconfigured ACL permissions.
@@ -49,9 +50,10 @@ The Map needs to be imported inside an existing or new Kaholo Project.
 ### Map Design and workflow
 The **LW_S3_1** map currently has the following map design:
 
-<img src="LW_S3_1.png" width="495" height="292">
+<img src="LW_S3_1.png" width="647" height="510">
 
-* The map starts with **Get the Event details** object. It will use the **event_id** send by the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook), using the **Lacework API Access Key** and  **Lacework Secret Key** from the Kaholo vault that you configured the Lacework Plugin with. to create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the Lacework API via the API call **/api/v1/external/events/GetEventDetails** of the configured Lacework instance. The return value of this API call is the complete Event Payload you can use within the Map.
+* The map will start with the **Get event details** object when it was triggered by the [Lacework Trigger](https://github.com/Kaholo/kaholo-trigger-lacework). It will use the **event_id** send by the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook), using the **Lacework API Access Key** and  **Lacework Secret Key** from the Kaholo vault that you configured the Lacework Plugin with to create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the Lacework API via the API call **/api/v1/external/events/GetEventDetails** of the configured Lacework instance. The return value of this API call is the complete Event Payload you can use within the Map.
+* The map will start with the **Get report details** object when the map was manually started by the user. It will start using the **Lacework API Access Key** and  **Lacework Secret Key** from the Kaholo vault that you configured the Lacework Plugin with to create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the Lacework API via the API call **/api/v1/external/compliance/aws/GetLatestComplianceReport** using the configured **configuration.aws_account_id** of the LaceworkConfig.
 * The map will trigger the **Remediate via CLI** CommandLine object If you enabled the Auto Remediation via the CLI inside the LaceworkConfig of the map by using the **"dotheremediationviacli": "true"** setting. It will print out the name of the S3 buckets that will be remediated and uses the AWS CLI to remediate the S3 buckets.
 * The map will trigger the **Remediate via Object** Amazon-aws-s3 object if you enabled the Auto Remediation via the Object inside the LaceworkConfig of the map by using the **"dotheremediationviaobject": "true"** setting. it will remediate all S3 buckets by using the Method **apply canned ACL to Bucket** from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3).
 * The map will send out a Slack message for each S3 bucket that will be remediated to the Webhook you configured for the **Remediated** Slack object.
