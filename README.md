@@ -57,16 +57,16 @@ With that two plugins the following integration examples are possible.
 
 ## How to start?
 
-First of all you need to have a Lacework and Kaholo instance. For Lacework please contact us [here](https://info.lacework.com/contact) and the Kaholo team is available [here](https://kaholo.io/signup/). Lacework is a Saas offering only. Kaholo can be used On Premise or as Saas deployment.
+First of all you need to have a Lacework and Kaholo instance. For Lacework support please contact us [here](https://info.lacework.com/contact) and the Kaholo team is available [here](https://kaholo.io/signup/). Lacework is a Saas offering only. Kaholo can be used On Premise or as Saas deployment.
 
 1. First step is to setup the [Webhook channel](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) inside Lacework to forward Alerts to Kaholo.
 2. Inside the Kaholo instance you need to install the Kaholo [Lacework Trigger](https://github.com/Kaholo/kaholo-trigger-lacework/tree/ilanyaniv-patch-1) and the [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework).
 3. The Kaholo Plugin itself needs to be configured with:
 * [Lacework API Key](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens) (Saved inside the Kaholo Vault)
 * [Lacework Secret Key](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens) (Saved inside the Kaholo Vault)
-* Lacework Instance in format https://MYINSTANCE.lacework.net
+* Lacework Instance in format MYINSTANCE if your instance in Lacework is https://MYINSTANCE.lacework.net
 4. Create a new Project inside Kaholo (example Lacework - AutoRemediation) as collection for the different auto remediation maps.
-5. Start to import the necessary maps.
+5. Start to import the necessary maps from the [maps available](https://github.com/automatecloud/lacework-kaholo-autoremediation/tree/main/#Which Maps are already available?).
 
 ### Creating your Kaholo Agent with Cloud Provider CLIs included.
 
