@@ -17,16 +17,16 @@ Lacework and Kaholo is a perfect match!
 
 Lacework itself is using Data ware house technology (Snowflake) and Machine Learning technology to reduce the number of false positive events and create high quality alerts (events). These events, alerts and compliance reports from Lacework in general have a lot of high quality context information included that can be used to automate the necessary remediation steps.
 
-Kaholo is an easy and intuitive workflow engine that makes it easy to create almost any automation processes, including advanced ones. On top of that you get central visibility into all automation processes. Instead of simply triggering a single CLI command or single API calls and serverless functions it allows the creation of complex workflows that might be necessary for specific auto remediation steps.
+Kaholo is an easy and intuitive workflow engine that makes it easy to create almost any automation processes, including advanced ones. On top of that you get central visibility into all automation processes called Kaholo Maps. Instead of simply triggering a single CLI command or single API calls and serverless functions it allows the creation of complex workflows that might be necessary for specific auto remediation steps.
 
 ## How does it work?
-We did create two Kaholo Plugins to enable the Integration between Lacework:
+We did create two Kaholo Plugins to enable the Integration between Lacework and Kaholo:
 
-1. The [Lacework Trigger Plugin](https://github.com/Kaholo/kaholo-trigger-lacework) that enables Kaholo to listen to Lacework specific Webhook Alerts and doing the pre filtering and selection of what map needs to be triggered inside Kaholo based on the Information send by the [Lacework Webhook channel](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook). The Webhook configuration can be set in each map.
+1. The [Lacework Trigger Plugin](https://github.com/Kaholo/kaholo-trigger-lacework) that enables Kaholo to listen to Lacework specific Webhook Alerts and doing the pre filtering and selection of what map needs to be triggered inside Kaholo based on the Information send by the [Lacework Webhook channel](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook). The Webhook configuration that is important to decide for the plugin which map to trigger can be set in each map.
 
 2. The [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) that enables Kaholo users to Get Details about Events send by the [Lacework Webhook channel](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) and also enables Kaholo users to get Compliance Report details for remediation.
 
-With that two Plugins the following integration examples are possible.
+With that two plugins the following integration examples are possible.
 
 ### Auto Remediation via Webhook alerts
 
