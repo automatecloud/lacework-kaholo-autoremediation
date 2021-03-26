@@ -66,14 +66,14 @@ First of all you need to have a Lacework and Kaholo instance. For Lacework suppo
 * [Lacework Secret Key](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens) (Saved inside the Kaholo Vault)
 * Lacework Instance in format MYINSTANCE if your instance in Lacework is https://MYINSTANCE.lacework.net
 4. Create a new Project inside Kaholo (example Lacework - AutoRemediation) as collection for the different auto remediation maps.
-5. Start to import the necessary maps from the [maps available](https://github.com/automatecloud/lacework-kaholo-autoremediation/tree/main/#Which Maps are already available?).
+5. Start to import the necessary maps from the maps available.
 
 ### Creating your Kaholo Agent with Cloud Provider CLIs included.
 
 To be able to execute the Cloud Provider AutoRemediation CLI commands you need to create a new agent container image that can be used to connect to your central Kaholo instance and trigger the playbooks.
 
 1. We recommend to clone the current Kaholo Agent repository available at https://github.com/Kaholo/kaholo-agent
-2. You need to update the Dockerfile by adding the installation instructions to install the Cloud Provider specific CLI. Currently we do focus on AWS, but we will add the other cloud provider APIs shortly
+2. You need to update the Dockerfile by adding the installation instructions to install the Cloud Provider specific CLI. Currently we do focus on AWS, but we will add the other cloud provider CLIs in the future.
 
 Dockerfile
 ```
