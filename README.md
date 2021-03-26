@@ -20,16 +20,40 @@ Lacework itself is using Data ware house technology (Snowflake) and Machine Lear
 Kaholo is an easy and intuitive workflow engine that makes it easy to create almost any automation processes, including advanced ones. On top of that you get central visibility into all automation processes. Instead of simply triggering a single CLI command or single API calls and serverless functions it allows the creation of complex workflows that might be necessary for specific auto remediation steps.
 
 ## How does it work?
-The integration between Lacework and Kaholo is using the Alert [Webhook channel](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook).
+We did create two Kaholo Plugins to enable the Integration between Lacework:
 
-![Lacework and Kaholo Integration](images/integration.png "Lacework and Kaholo integration")
+1. The [Lacework Trigger Plugin](https://github.com/Kaholo/kaholo-trigger-lacework) that enables Kaholo to listen to Lacework specific Webhook Alerts and doing the pre filtering and selection of what map needs to be triggered inside Kaholo based on the Information send by the [Lacework Webhook channel](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook). The Webhook configuration can be set in each map.
+
+2. The [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) that enables Kaholo users to Get Details about Events send by the [Lacework Webhook channel](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) and also enables Kaholo users to get Compliance Report details for remediation.
+
+With that two Plugins the following integration examples are possible.
+
+### Auto Remediation via Webhook alerts
+
+![Integration via Webhook alerts](images/AutoRemediationviaWebhook.png "Auto Remediation via Webhook alerts")
 
 1. The Lacework Platform is collecting the necessary Cloud and Workload Data.
 2. The Lacework Machine Learning algorithms learn the normal behaviour of cloud user and workload activity by using the Polygraph technology and comparing cloud resources against compliance frameworks.
 3. In case of an Alert Lacework sends the necessary event details via the [Webhook channel](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook).
-4. The Kaholo [Lacework Trigger](https://github.com/Kaholo/kaholo-trigger-lacework) is reading out the **event_source** and **event_description** of the event. Every Kaholo Map is configured to check the event_source and the description if it includes specific information that is relevant to trigger the specific Kaholo Map.
-5. The Kaholo Map triggered is reading out the specific Event Data  and Context by using the [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework)
-6. The Kaholo Map is doing all the necessary auto remediation steps by using the CLI commands of the cloud providers.
+4. The Kaholo [Lacework Trigger](https://github.com/Kaholo/kaholo-trigger-lacework) is reading out the **event_source** and **event_description** of the event. Every Kaholo Map is configured to check the event_source and the description if it includes specific information that is relevant to trigger a specific Kaholo Map.
+5. The Kaholo Map triggered is reading out the specific Event Data and Context by using the Method **"Get event details"** of the [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework). This data can be used within the map triggered.
+6. The Kaholo Map is doing all the necessary Auto Remediation steps by using the CLI commands of the cloud providers and Kaholo objects.
+
+### Auto Remediation via Compliance reports
+
+![Integration via reports](images/AutoRemediationviaReport.png "Auto Remediation via Webhook alerts")
+
+1. The Lacework Platform is collecting the necessary Cloud and Workload Data.
+2. The Lacework Machine Learning algorithms learn the normal behaviour of cloud user and workload activity by using the Polygraph technology and comparing cloud resources against compliance frameworks.
+3. A Kaholo user can trigger any of the Kaholo Maps that is using the [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) at any time or scheduled within Kaholo.
+4. The Kaholo [Lacework Trigger](https://github.com/Kaholo/kaholo-trigger-lacework) is reading out the Report Data via the Method **GetLatestAWSComplianceReportDetails** that allows to collect the latest Compliance Report for a specific AWS account id. It supports to get all the details of the latest compliance reports for:
+* AWS NIST 800-171 Report
+* NIST_800-171_Rev2
+* AWS NIST 800-53 Report
+* AWS HIPAA Report
+* AWS SOC 2 Report
+* AWS PCI DSS Reportd
+5. The Kaholo Map is using the information about the compliance report doing all the necessary Auto Remediation steps for the specific map by using the CLI commands of the cloud providers and Kaholo objects.
 
 ## How to start?
 
