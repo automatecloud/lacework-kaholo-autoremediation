@@ -10,12 +10,12 @@ We live in a complex world of Multi Cloud Environments. Cloud itself isn't as ea
 
 Auto remediation means to automate the necessary steps of alert events detected by Lacework without any human interaction. Auto Remediation can partially or fully help to fix specific alerts.
 
-Simplified you can say: "The more is automated, the faster you can react to alerts and the more time you safe for doing any manual interactions". Time is money and in security it means a risk you take while the alert is not solved. The **MTTR** (**M**ean **T**ime **t**o **R**ecover/Restore) should be as fast as possible to not take any risks for a long time in case of an alert. A misconfiguration or bad behaviour of your application(s) can lead to outages, stolen customer data and a headline story of your company in the newspaper. 
+Simplified you can say: "The more is automated, the faster you can react to alerts and the more time you safe for doing any manual interactions". Time is money and in security it means a risk you take while the alert is not solved. The **MTTR** (**M**ean **T**ime **t**o **R**ecover or **R**estore) should be as fast as possible to not take any risks for a long time in case of an alert. A misconfiguration or bad behaviour of your application(s) can lead to outages, stolen customer data and a headline story of your company in the newspaper.
 
 ## Why Lacework and Kaholo?
 Lacework and Kaholo is a perfect match!
 
-Lacework itself is using Data ware house technology (Snowflake) and Machine Learning technology to reduce the number of false positive events and create high quality alerts (events). These Alerts from Lacework in general have a lot of high quality context information included that can be used to automate the necessary remediation steps.
+Lacework itself is using Data ware house technology (Snowflake) and Machine Learning technology to reduce the number of false positive events and create high quality alerts (events). These events, alerts and compliance reports from Lacework in general have a lot of high quality context information included that can be used to automate the necessary remediation steps.
 
 Kaholo is an easy and intuitive workflow engine that makes it easy to create almost any automation processes, including advanced ones. On top of that you get central visibility into all automation processes. Instead of simply triggering a single CLI command or single API calls and serverless functions it allows the creation of complex workflows that might be necessary for specific auto remediation steps.
 
