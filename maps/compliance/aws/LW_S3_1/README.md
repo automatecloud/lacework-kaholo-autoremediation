@@ -119,7 +119,7 @@ Inside the configuration of the **Get event details** building block you will fi
 
 ![Get Event](getreportdetails.png "Get Event")
 
-Inside the configuration of the **Get event details** building block you will find the **UUID**:
+Inside the configuration of the **Get report details** building block you will find the **UUID**:
 
 ![Get Report Details](getreportdetails2.png "Get Event")
 
