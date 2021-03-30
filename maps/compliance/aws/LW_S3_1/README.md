@@ -99,7 +99,8 @@ By default the map has the following configurations:
     "awsaccountid": "123456789012",
     "putbuckettagging": "false",
     "tagname": "LW_S3_1",
-    "tagvalue": "suppressed"
+    "tagvalue": "suppressed",
+    "autoremediationonlyfornewviolations": "false"
 }
 ```
 
@@ -154,7 +155,9 @@ aws s3api put-bucket-acl --bucket <YOURBUCKETNAME> --acl private
 
 If you want to know more about the aws s3api put-bucket-acl command or want to replace it with a different option for auto remediation we recommend to take a look at the official documentation available [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/put-bucket-acl.html).
 
-6. If you configure the **dotheremediationviacli** to **true** the Remediation via Object block will Auto Remediate by using the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3) to remediate the S3 bucket. For this you need to make sure that the **remediateviaobject** action has the correct configured AWS access key, AWS secret key and the correct AWS region. the S3 bucket name will be remediated by using the method **apply canned ACL to Bucket** and the Canned ACL Type is configured to **Private**.
+6. If you configure the **dotheremediationviacli** equals **true** the Remediation via Object block will Auto Remediate by using the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3) to remediate the S3 bucket. For this you need to make sure that the **remediateviaobject** action has the correct configured AWS access key, AWS secret key and the correct AWS region. the S3 bucket name will be remediated by using the method **apply canned ACL to Bucket** and the Canned ACL Type is configured to **Private**.
+
+7. If you configure the **autoremediationonlyfornewviolations** equals true the Auto Remediation will only be done for new Resource Violations on S3 buckets on Events. With that you avoid that the AutoRemedation is doing it for all (new and already existing violations) of S3 buckets. This doesn't have any effect if you do the AutoRemedation via Reports, as reports have no differences between new and already existing violating resources.
 
 #### Configuration of Slack Messages
 
