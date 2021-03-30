@@ -55,10 +55,10 @@ The **LW_S3_1** map currently has the following map design:
 * The map will start with the **Get event details** object when it was triggered by the [Lacework Trigger](https://github.com/Kaholo/kaholo-trigger-lacework). It will use the **event_id** send by the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook), using the **Lacework API Access Key** and  **Lacework Secret Key** from the Kaholo vault that you used to configure the [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) to connect to the API. The Method **Get event details** will create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the [Lacework API](https://lwcs.lacework.net/api/v1/external/docs) via the API call **/api/v1/external/events/GetEventDetails** of the configured [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) host instance. The return value of this API call is the complete Event Payload you can use within the Map.
 * The map will start with the **Get report details** object when the map was manually started by a user of the map. It will use the **Lacework API Access Key** and  **Lacework Secret Key** from the Kaholo vault that you used to configure the [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework). The Method **GetLatestAWSComplianceReportDetails** will create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the [Lacework API](https://lwcs.lacework.net/api/v1/external/docs) via the API call **/api/v1/external/compliance/aws/GetLatestComplianceReport** of the configured [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) host instance that is using the **aws_account_id** of the **LaceworkConfig** as a parameter.
 * The map will trigger the **Put Bucket Tags via CLI** object if you configured the **putbuckettagging** of the **LaceworkConfig** equals **true**. It will use the **tagname** and **tagvalue** to put these tags for every bucket that is in violation with the rule and ignored via the **bucketIgnoreList** of the **LaceworkConfig**.
-* The map will trigger the **Remediate via CLI** CommandLine object If you enabled the Auto Remediation via the CLI inside the LaceworkConfig of the map by using the **"dotheremediationviacli": "true"** setting. It will print out the name of the S3 buckets that will be remediated and uses the AWS CLI to remediate the S3 buckets.
-* The map will trigger the **Remediate via Object** Amazon-aws-s3 object if you enabled the Auto Remediation via the Object inside the LaceworkConfig of the map by using the **"dotheremediationviaobject": "true"** setting. it will remediate all S3 buckets by using the Method **apply canned ACL to Bucket** from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3).
-* The map will send out a Slack message for each S3 bucket that will be remediated to the Webhook you configured for the **Remediated** Slack object.
-* If you enabled the configuration to send out slack messages for ignored S3 buckets inside the LaceworkConfig of the map to **"sendslackmessagesforignored": "true"** it will send out a slack message for each bucket that is violating the policy and ignored by the configuration to the Webhook you configured for the **Ignored** Slack object.
+* The map will trigger the **Remediate via CLI** CommandLine object If you enabled the Auto Remediation via the CLI using the parameter **dotheremediationviacli** equals **true** inside the **LaceworkConfig** of the map. It will print out the name of the S3 buckets that will be remediated and uses the AWS CLI to remediate the S3 buckets.
+* The map will trigger the **Remediate via Object** Amazon-aws-s3 object if you enabled the Auto Remediation via the Object using the parameter **dotheremediationviaobject** equals **true** setting inside the LaceworkConfig of the map. It will remediate all S3 buckets by using the Method **apply canned ACL to Bucket** from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3).
+* The map will send out a Slack message for each S3 bucket that will be remediated to the Webhook you configured by using the **Remediated** Slack object.
+* If you enabled the configuration to send out slack messages for ignored S3 buckets inside the LaceworkConfig of the map to **sendslackmessagesforignored** equals **true** it will send out a slack message for each bucket that is violating the policy and ignored by the configuration to the Webhook you configured via the **Ignored** Slack object.
 
 ### Map trigger
 
@@ -66,9 +66,9 @@ Make sure that the Map Webhook Trigger is configured with the following configur
 
 <img src="LW_S3_1_Trigger.png" width="269" height="608">
 
-1. The Configuration needs to be configured with **LaceworkConfig** to make sure the Configuration LaceworkConfig is used when the map is triggered.
+1. The Configuration setting needs to be configured with **LaceworkConfig** to make sure the Configuration LaceworkConfig is used when the map is triggered.
 2. The Plugin setting needs to be configured with the Lacework Webhook Plugin **kaholo-trigger-lacework**
-3. The Method **Lacework Alert** needs to be selected
+3. For the Method setting you need to select **Lacework Alert**
 4. The Variable **Event type** needs to be configured with Value **Compliance**
 5. The Variable **Event ID** needs to be configured with Value **LW_S3_1**.
 6. The Variable **Event Severity** needs to be configured with the Value **Any** or **High**
@@ -113,7 +113,7 @@ Make sure you configure the following configurations inside the **LaceworkConfig
 
 Inside the configuration of the **Get event details** building block you will find the **UUID**:
 
-<img src="geteventdetails2.png" width="233" height="179">
+![Get Event Details](geteventdetails2.png "Get Event")
 
 2. **reportuuid:** Make sure that the **UUID** used here is the UUID of the **Get report details** object inside the map. Due to the reimport of the Map the **UUID** of the event object could have changed. To check the UUID you can go to the Design of the map, open the **Get report details** building block.
 
@@ -121,7 +121,7 @@ Inside the configuration of the **Get event details** building block you will fi
 
 Inside the configuration of the **Get event details** building block you will find the **UUID**:
 
-<img src="getreportdetails2.png" width="233" height="179">
+![Get Report Details](getreportdetails2.png "Get Event")
 
 3. **bucketIgnoreList(Optional):** You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 bucket names that should be ignored within the bucketIgnoreList of the LaceworkConfig.
 
