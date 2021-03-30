@@ -123,9 +123,9 @@ Inside the configuration of the **Get report details** building block you will f
 
 ![Get Report Details](getreportdetails2.png "Get Event")
 
-3. **bucketIgnoreList(Optional):** You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 bucket names that should be ignored within the bucketIgnoreList of the LaceworkConfig.
+3. **bucketIgnoreList(Optional):** You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 bucket names that should be ignored within the **bucketIgnoreList** of the **LaceworkConfig**.
 
-4. **putbuckettagging** will put the **tagname** and **tagvalue** for each S3 bucket that is ignored via the **bucketIngoreList**. This can be helpful to configure the policy to suppress every S3 bucket that is having this **tagname** and **tagvalue** configured.
+4. **putbuckettagging**: If you configure this settings to **true** it will add the **tagname** and **tagvalue** for each S3 bucket that is ignored via the **bucketIngoreList**. This can be helpful to configure the policy to suppress every S3 bucket that is having this **tagname** and **tagvalue** as advanced suppression configured.
 
 #### Auto Remediation
 
