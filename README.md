@@ -412,3 +412,25 @@ The current target Roadmap is to build the following example Maps:
 ## Least Privilege
 
 As part of the example Maps we also plan to create and document Least Privilege roles, so the automation scripts can only change what the roles and permissions allow them to change.
+
+## How can i contribute?
+
+### I found a bug?
+
+Simply open an Issue on the repository and let us know as detailed as possible what the bug is and how we can reproduce it. We will make sure that this is fixed on our side.
+
+### I want to share my own maps.
+
+For pull requests of new maps we have the following requirements:
+
+1. Make sure that the map can be used and configured for other users as well and it doesn't have hard coded variables. We highly recommend to place necessary configurations inside the **LaceworkConfig** of the map.
+
+2. Make sure your map is documented as for example like [this map](https://github.com/automatecloud/lacework-kaholo-autoremediation/blob/main/maps/compliance/aws/LW_S3_1/README.md). The Documentation should have instructions about how to create a policy violation and a high level description about the different features that you can enable/disable via configurations inside the **LaceworkConfig**.
+
+3. Make sure the code of the map is documented as well and you easily order your code by functions. For example we are using the following simple groups via comments:
+
+```
+// Object "Get report details" functions:
+```
+
+4. Send us the pull request and we will give your map a try before we merge it.
