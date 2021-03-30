@@ -258,7 +258,7 @@ LW_AWS_GENERAL_SECURITY_7 | Ensure ELB is not affected by POODLE Vulnerability (
 LW_AWS_RDS_1 | RDS should not have a Public Interface | [not implemented](maps/compliance/aws/LW_AWS_RDS_1/README.md) | no | no
 LW_AWS_SERVERLESS_1 | Lambda Function should not have Admin Privileges | [not implemented](maps/compliance/aws/LW_AWS_SERVERLESS_1/README.md) | no | no
 LW_AWS_SERVERLESS_2 | Lambda Function should not have Cross Account Access | [not implemented](maps/compliance/aws/LW_AWS_SERVERLESS_2/README.md) | no | no
-LW_AWS_SERVERLESS_3 | Lambda Function should not have Same IAM Role for more than one lambda function | [ReadMe](maps/compliance/aws/LW_AWS_SERVERLESS_3/README.md) | no | no
+LW_AWS_SERVERLESS_3 | Lambda Function should not have Same IAM Role for more than one lambda function | [not implemented](maps/compliance/aws/LW_AWS_SERVERLESS_3/README.md) | no | no
 LW_AWS_SERVERLESS_4 | Lambda Function should have tracing enabled | [not implemented](maps/compliance/aws/LW_AWS_SERVERLESS_4/README.md) | no | no
 LW_AWS_SERVERLESS_5 | Lambda Function should not have VPC access | [not implemented](maps/compliance/aws/LW_AWS_SERVERLESS_5/README.md) | no | no
 LW_AWS_ELASTICSEARCH_1 | Elastic Search Domain should not be exposed | [not implemented](maps/compliance/aws/LW_AWS_ELASTICSEARCH_1/README.md) | no | no
