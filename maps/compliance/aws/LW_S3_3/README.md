@@ -97,7 +97,7 @@ By default the map has the following configurations:
     ],
     "awsaccountid": "123456789012",
     "putbuckettagging": "false",
-    "tagname": "LW_S3_2",
+    "tagname": "LW_S3_3",
     "tagvalue": "suppressed",
     "autoremediationonlyfornewviolations": "false"
 }
@@ -142,7 +142,7 @@ The Auto Remediation is disabled if you import the map. It will only be triggere
 1. Create a test S3 bucket that is violating the compliance rule for **LW_S3_1
 2** via the CLI command described in the section [How can i use the Map?](https://github.com/automatecloud/lacework-kaholo-autoremediation/tree/main/maps/compliance/aws/LW_S3_1#how-can-i-use-this-map-for-auto-remediation)
 2. When you got the Event created in Lacework you need to make sure that you put all the S3 bucket names that should not be Auto Remediated into the **bucketIgnoreList** of the **LaceworkConfig**.
-3. To be even more sure we recommend to configure a suppression setting for the **LW_S3_2** compliance check within the Lacework platform to ignore the S3 bucket. Otherwise the ignored Buckets will create additional Events and Alerts within Lacework. Optional you can configure the **putbuckettagging** to add the **tagname** and **tagvalue** for each S3 bucket that is ignored. If you use the same tag for advanced auto suppression the S3 bucket will be suppressed after the next compliance run.
+3. To be even more sure we recommend to configure a suppression setting for the **LW_S3_3** compliance check within the Lacework platform to ignore the S3 bucket. Otherwise the ignored Buckets will create additional Events and Alerts within Lacework. Optional you can configure the **putbuckettagging** to add the **tagname** and **tagvalue** for each S3 bucket that is ignored. If you use the same tag for advanced auto suppression the S3 bucket will be suppressed after the next compliance run.
 4. After that you can enable the Auto Remediation via AWS CLI or via the Kaholo S3 Bucket Object.
 
 **Note:** you can choose to do the Auto Remediation via the CLI **"dotheremediationviacli": "true"** or by using the Kaholo S3 bucket object **"dotheremediationviaobject": "true"**. By default both settings are configured to **false**, so it will not by accident start to auto remediate misconfigured S3 buckets. We recommend to make sure that only the right buckets will be remediated and the map is working as expected before you configure any of both settings to true. Do not configure **dotheremediationviacli** and **dotheremediationviaobject** both at the same time to **true**. The map will check that possible misconfiguration at the beginning of the map and not execute. Only one of both can be enabled and used for the Auto Remediation.
