@@ -33,7 +33,7 @@ Perform the following to revoke WRITE permission for 'Everyone':
 
 ## How can i use this Map for Auto Remediation?
 
-We recommend to create a S3 test bucket and configure it to give everyone READ permission. This will generate an event and alert inside Lacework during the next compliance check. By default the compliance check is done once per day (every 24 hours). You can initiate to create a compliance check for CIS Benchmarks via the Lacework GUI or the API. When the compliance check is finished and a new violation of the policy was detected an Event will be generated that can then be used to test the Auto Remediation of this Map via Webhook triggers or alerts.
+We recommend to create a S3 test bucket and configure it to give everyone WRITE permission. This will generate an event and alert inside Lacework during the next compliance check. By default the compliance check is done once per day (every 24 hours). You can initiate to create a compliance check for CIS Benchmarks via the Lacework GUI or the API. When the compliance check is finished and a new violation of the policy was detected an Event will be generated that can then be used to test the Auto Remediation of this Map via Webhook triggers or alerts.
 
 You can use the following AWS CLI command to configure an existing S3 test bucket to give everyone WRITE permission:
 
