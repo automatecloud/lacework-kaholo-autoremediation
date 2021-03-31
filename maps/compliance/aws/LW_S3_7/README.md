@@ -49,9 +49,9 @@ aws s3api put-bucket-acl --bucket <YOURBUCKETNAME>  --grant-write uri=http://acs
 The Map needs to be imported inside an existing or new Kaholo Project.
 
 ### Map Design and workflow
-The **LW_S3_3** map currently has the following map design:
+The **LW_S3_7** map currently has the following map design:
 
-<img src="LW_S3_3.png">
+<img src="LW_S3_7.png">
 
 * The map will start with the **Get event details** object when it was triggered by the [Lacework Trigger](https://github.com/Kaholo/kaholo-trigger-lacework). It will use the **event_id** send by the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook), using the **Lacework API Access Key** and  **Lacework Secret Key** from the Kaholo vault that you used to configure the [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) to connect to the API. The Method **Get event details** will create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the [Lacework API](https://lwcs.lacework.net/api/v1/external/docs) via the API call **/api/v1/external/events/GetEventDetails** of the configured [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) host instance. The return value of this API call is the complete Event Payload you can use within the Map.
 * The map will start with the **Get report details** object when the map was manually started by a user of the map. It will use the **Lacework API Access Key** and  **Lacework Secret Key** from the Kaholo vault that you used to configure the [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework). The Method **GetLatestAWSComplianceReportDetails** will create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the [Lacework API](https://lwcs.lacework.net/api/v1/external/docs) via the API call **/api/v1/external/compliance/aws/GetLatestComplianceReport** of the configured [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) host instance that is using the **aws_account_id** of the **LaceworkConfig** as a parameter.
@@ -65,16 +65,16 @@ The **LW_S3_3** map currently has the following map design:
 
 Make sure that the Map Webhook Trigger is configured with the following configuration:
 
-<img src="LW_S3_3_Trigger.png" width="269" height="608">
+<img src="LW_S3_7_Trigger.png" width="269" height="608">
 
 1. The Configuration needs to be configured with **LaceworkConfig** to make sure the Configuration LaceworkConfig is used when the map is triggered.
 2. The Plugin setting needs to be configured with the Lacework Webhook Plugin **kaholo-trigger-lacework**
 3. The Method **Lacework Alert** needs to be selected
 4. The Variable **Event type** needs to be configured with Value **Compliance**
-5. The Variable **Event ID** needs to be configured with Value **LW_S3_3**.
+5. The Variable **Event ID** needs to be configured with Value **LW_S3_7**.
 6. The Variable **Event Severity** needs to be configured with the Value **Any** or **High**
 
-This configuration will make sure that this map is only triggered if the **event_description** of the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) includes the **LW_S3_3** Event ID.
+This configuration will make sure that this map is only triggered if the **event_description** of the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) includes the **LW_S3_7** Event ID.
 
 ### Configuration of the Map
 
@@ -140,9 +140,9 @@ For the Auto Remediation you need to decide if you would like to Auto Remediate 
 
 The Auto Remediation is disabled if you import the map. It will only be triggered if the configuration **dotheremediationviacli** or **dotheremediationviaobject** of the **LaceworkConfig** is configured with **true**. Before enabling this we recommend the following:
 
-1. Create a test S3 bucket that is violating the compliance rule for **LW_S3_3** via the CLI command described in the section [How can i use the Map?](https://github.com/automatecloud/lacework-kaholo-autoremediation/tree/main/maps/compliance/aws/LW_S3_3#how-can-i-use-this-map-for-auto-remediation)
+1. Create a test S3 bucket that is violating the compliance rule for **LW_S3_7** via the CLI command described in the section [How can i use the Map?](https://github.com/automatecloud/lacework-kaholo-autoremediation/tree/main/maps/compliance/aws/LW_S3_7#how-can-i-use-this-map-for-auto-remediation)
 2. When you got the Event created in Lacework you need to make sure that you put all the S3 bucket names that should not be Auto Remediated into the **bucketIgnoreList** of the **LaceworkConfig**.
-3. To be even more sure we recommend to configure a suppression setting for the **LW_S3_3** compliance check within the Lacework platform to ignore the S3 bucket. Otherwise the ignored Buckets will create additional Events and Alerts within Lacework. Optional you can configure the **putbuckettagging** to add the **tagname** and **tagvalue** for each S3 bucket that is ignored. If you use the same tag for advanced auto suppression the S3 bucket will be suppressed after the next compliance run.
+3. To be even more sure we recommend to configure a suppression setting for the **LW_S3_7** compliance check within the Lacework platform to ignore the S3 bucket. Otherwise the ignored Buckets will create additional Events and Alerts within Lacework. Optional you can configure the **putbuckettagging** to add the **tagname** and **tagvalue** for each S3 bucket that is ignored. If you use the same tag for advanced auto suppression the S3 bucket will be suppressed after the next compliance run.
 4. After that you can enable the Auto Remediation via AWS CLI or via the Kaholo S3 Bucket Object.
 
 **Note:** you can choose to do the Auto Remediation via the CLI **"dotheremediationviacli": "true"** or by using the Kaholo S3 bucket object **"dotheremediationviaobject": "true"**. By default both settings are configured to **false**, so it will not by accident start to auto remediate misconfigured S3 buckets. We recommend to make sure that only the right buckets will be remediated and the map is working as expected before you configure any of both settings to true. Do not configure **dotheremediationviacli** and **dotheremediationviaobject** both at the same time to **true**. The map will check that possible misconfiguration at the beginning of the map and not execute. Only one of both can be enabled and used for the Auto Remediation.
