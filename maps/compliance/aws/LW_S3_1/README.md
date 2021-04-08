@@ -219,7 +219,7 @@ And also the resource group tagging api to add the necessary tags to the S3 buck
 aws resourcegroupstaggingapi tag-resources --resource-arn-list <ARNOFYOURYOURBUCKETNAME> --tags <TAGNAME>=<TAGVALUE> --profile AWS-ACCOUNTID-FROM-EVENTORREPORT
 ```
 
-You need to define the following least privelege policy within AWS IAM for the user account used to do the auto remediation:
+You need to define the following least privelege policy inside your AWS IAM configuration for the service account used to do the auto remediation:
 
 ```
 {
