@@ -404,10 +404,10 @@ The current target Roadmap is to build the following example Maps:
 1. Auto Remediation Maps for all the Lacework [AWS Compliance checks](https://github.com/automatecloud/lacework-kaholo-autoremediation/milestone/1)
 2. Auto Remediation Maps for all the Lacework [Azure Compliance checks](https://github.com/automatecloud/lacework-kaholo-autoremediation/milestone/2)
 3. Auto Remediation Maps for all the Lacework [GCP Compliance checks](https://github.com/automatecloud/lacework-kaholo-autoremediation/milestone/3)
-4. Auto Remediation Maps for all the Lacework AWS User Activity events.
-5. Auto Remediation Maps for all the Lacework Azure User Activity events.
-6. Auto Remediation Maps for all the Lacework GCP User Activity events.
-7. Auto Remediation Maps for all the Lacework Application and Workload events.
+4. Auto Remediation Maps for all the Lacework [AWS User Activity events](https://github.com/automatecloud/lacework-kaholo-autoremediation/milestone/4)
+5. Auto Remediation Maps for all the Lacework [Azure User Activity events](https://github.com/automatecloud/lacework-kaholo-autoremediation/milestone/5)
+6. Auto Remediation Maps for all the Lacework [GCP User Activity events](https://github.com/automatecloud/lacework-kaholo-autoremediation/milestone/6)
+7. Auto Remediation Maps for all the Lacework [Application and Workload events](https://github.com/automatecloud/lacework-kaholo-autoremediation/milestone/7)
 
 ## Least Privilege
 
