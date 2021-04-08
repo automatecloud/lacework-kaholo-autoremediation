@@ -94,13 +94,15 @@ EXPOSE 8090
 CMD [ "npm", "start" ]
 ```
 
-3. Make sure that you map the necessary credentials, environment files and configuration into the Agent container. We need you to configure all your AWS Account IDs as a profile with the aws account id as name for the profile. For example if you have an AWS Account ID like 123456789012, please make sure the profile is saved with the same id by using the following command to configure the aws cli profile:
+3. **For AWS:** Make sure that you map the necessary credentials, environment files and configuration into the Agent container. We need you to configure all your AWS Account IDs as a profile with the aws account id as name for the profile. This will make sure that the AWS CLI integration will be used against the right AWS account id of the event or report. For example if you have an AWS Account ID like 123456789012, please make sure the profile is saved with the same id by using the following command to configure the aws cli profile:
 
 ```
 aws configure --profile 123456789012
 ```
 
-4. The Kaholo customer success team will help you to map the necessary config files similar to the following approach described at https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-docker.html.
+4. Each Map has a section that describes the necessary Permissions within the detailed description, to make sure you can fullfil the requirement of least privelege access rights of the service account used for the Auto Remediation. 
+
+5. The Kaholo customer success team will help you to map the necessary config files similar to the following approach described at https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-docker.html.
 
 ## Which Maps are already available?
 
