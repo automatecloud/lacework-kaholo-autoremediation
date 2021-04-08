@@ -17,7 +17,6 @@ Lacework and Kaholo is a perfect match!
 Lacework itself is using Data warehouse technology (Snowflake) and Machine Learning technology to reduce the number of false positive events and create high quality alerts (events). These events, alerts and compliance reports from Lacework in general have a lot of high quality context information included that can be used to automate the necessary remediation steps.
 Kaholo is an easy and intuitive workflow engine that makes it easy to create almost any automation processes, including advanced ones. On top of that you get central visibility into all automation processes with “Kaholo Maps”, A visual representation of the automation. Instead of simply triggering a single CLI command or single API calls and serverless functions it allows the creation of complex workflows that might be necessary for specific auto remediation steps.
 
-
 ## How does it work?
 We did create two Kaholo Plugins to enable the Integration between Lacework and Kaholo:
 
