@@ -100,7 +100,7 @@ CMD [ "npm", "start" ]
 aws configure --profile 123456789012
 ```
 
-4. Each Map has a section that describes the necessary Permissions within the detailed description, to make sure you can fullfil the requirement of least privelege access rights of the service account used for the Auto Remediation. 
+4. Each Map instructions has a section that describes the necessary permissions, policies and roles, to make sure you can fullfil the requirement of least privelege access rights of the service account used for the Auto Remediation. 
 
 5. The Kaholo customer success team will help you to map the necessary config files similar to the following approach described at https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-docker.html.
 
