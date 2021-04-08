@@ -130,7 +130,7 @@ Inside the configuration of the **Get report details** building block you will f
 
 If you enabled it the following AWS CLI command will be used to add the tag to the S3 bucket:
 ```
-aws resourcegroupstaggingapi tag-resources --resource-arn-list <ARNOFYOURYOURBUCKETNAME> --tags <TAGNAME>=<TAGVALUE>
+aws resourcegroupstaggingapi tag-resources --resource-arn-list <ARNOFYOURYOURBUCKETNAME> --tags <TAGNAME>=<TAGVALUE> --profile AWS-ACCOUNTID-FROM-EVENTORREPORT
 ```
 If you want to know more about the aws resourcegroupstaggingapi tag-resources command or want to replace it with a different option for auto remediation we recommend to take a look at the official documentation available [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/resourcegroupstaggingapi/tag-resources.html).
 
@@ -150,7 +150,7 @@ The Auto Remediation is disabled if you import the map. It will only be triggere
 5. If you configure the **dotheremediationviacli** settings to **true** to enable the Auto Remediation via CLI, make sure you select an Agent for the Map that has the AWS CLI installed and configured. The Remediation via CLI block will Auto Remediate by using the following AWS CLI command that will put the ACL back into private mode, which means only the owner will be able to list and write on Objects and read and write on the Bucket ACL:
 
 ```
-aws s3api put-bucket-acl --bucket <YOURBUCKETNAME> --acl private
+aws s3api put-bucket-acl --bucket <YOURBUCKETNAME> --acl private --profile AWS-ACCOUNTID-FROM-EVENTORREPORT
 ```
 
 If you want to know more about the aws s3api put-bucket-acl command or want to replace it with a different option for auto remediation we recommend to take a look at the official documentation available [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/put-bucket-acl.html).
@@ -207,12 +207,20 @@ We recommend to check the Execution Results when you give it a try. With that yo
 
 ## AWS permissions
 
-To be able to auto remediate via the API call put-bucket-acl to private:
+The Map is using the API call put-bucket-acl to put back the Bucket S3 ACL to private:
 
 ```
-aws s3api put-bucket-acl --bucket <YOURBUCKETNAME> --acl private
+aws s3api put-bucket-acl --bucket <YOURBUCKETNAME> --acl private --profile AWS-ACCOUNTID-FROM-EVENTORREPORT
 ```
-you need to define the following least privelege s3:PutBucketAcl policy within AWS IAM:
+
+And also the resource group tagging api to add the necessary tags to the S3 bucket:
+
+```
+aws resourcegroupstaggingapi tag-resources --resource-arn-list <ARNOFYOURYOURBUCKETNAME> --tags <TAGNAME>=<TAGVALUE> --profile AWS-ACCOUNTID-FROM-EVENTORREPORT
+```
+
+You need to define the following least privelege policy within AWS IAM for the user account used to do the auto remediation:
+
 ```
 {
     "Version": "2012-10-17",
@@ -220,7 +228,14 @@ you need to define the following least privelege s3:PutBucketAcl policy within A
         {
             "Sid": "VisualEditor0",
             "Effect": "Allow",
-            "Action": "s3:PutBucketAcl",
+            "Action": [
+                "s3:GetBucketTagging",
+                "s3:PutBucketTagging",
+                "tag:GetTagValues",
+                "s3:PutBucketAcl",
+                "tag:GetTagKeys",
+                "tag:TagResources"
+            ],
             "Resource": "*"
         }
     ]
