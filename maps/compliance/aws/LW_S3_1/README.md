@@ -204,3 +204,25 @@ With that you can trigger the webhook inside kaholo by using the following curl 
 curl -X POST -H 'Content-type: application/json' --data '{"event_title": "'"$EVENTTITLE"'", "event_link": "https://'"$LACEWORKINSTANCE"'.lacework.net/ui/investigation/recents/EventDossier-'"$EVENTID"'", "lacework_account": "'"$LACEWORKINSTANCE"'", "event_source": "'"$EVENTSOURCE"'", "event_description":"'"$EVENTDESCRIPTION"'", "event_timestamp":"'"$EVENTTIMESTAMP"'", "event_type": "Compliance", "event_id": "'"$EVENTID"'", "event_severity": "'"$EVENTSEVERITY"'"}' $WEBHOOKURL
 ```
 We recommend to check the Execution Results when you give it a try. With that you make sure it will remediate the right S3 buckets before you enable the auto remediation.
+
+## AWS permissions
+
+To be able to auto remediate via the API call put-bucket-acl to private:
+
+```
+aws s3api put-bucket-acl --bucket <YOURBUCKETNAME> --acl private
+```
+you need to define the following least privelege s3:PutBucketAcl policy within AWS IAM:
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": "s3:PutBucketAcl",
+            "Resource": "*"
+        }
+    ]
+}
+```
