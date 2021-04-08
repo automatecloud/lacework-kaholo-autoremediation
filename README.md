@@ -62,7 +62,7 @@ First of all you need to have a Lacework and Kaholo instance. For Lacework suppo
 3. The Kaholo Plugin itself needs to be configured with:
 * [Lacework API Key](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens) (Saved inside the Kaholo Vault)
 * [Lacework Secret Key](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens) (Saved inside the Kaholo Vault)
-* Lacework Instance in format MYINSTANCE if your instance in Lacework is https://MYINSTANCE.lacework.net
+* Lacework Instance (Host) in format MYINSTANCE if your instance in Lacework is https://MYINSTANCE.lacework.net
 4. Create a new Project inside Kaholo (example Lacework - AutoRemediation) as collection for the different auto remediation maps.
 5. Start to import the necessary maps from the maps available.
 
