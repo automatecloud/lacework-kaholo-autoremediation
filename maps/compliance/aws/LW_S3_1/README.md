@@ -205,7 +205,7 @@ curl -X POST -H 'Content-type: application/json' --data '{"event_title": "'"$EVE
 ```
 We recommend to check the Execution Results when you give it a try. With that you make sure it will remediate the right S3 buckets before you enable the auto remediation.
 
-## Necessary AWS permissions
+## Required AWS permissions
 
 The Map is using the API call put-bucket-acl to put back the Bucket S3 ACL to private:
 
