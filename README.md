@@ -3,28 +3,27 @@
 This repository is a collection of [Kaholo.io](https://www.kaholo.io) maps you can use as examples to automate the remediation of [Lacework](https://www.lacework.com/) events and compliance reports.
 
 ## What is Auto Remediation?
-Auto remediation is the idea to automate the responds to events and alerts with automated steps that are able to fix, or remediate underlying conditions and misconfigurations without the need of interaction from anyone. Auto remediation itself can  trigger a CLI command, a serverless function, a terraform run or an API call to remediate Alerts detected by Lacework. Automation of Remediation can be easy or complex depending on the alert and context correlated with the necessary remediation steps.
+Auto remediation is the concept to automate the response to events and alerts with automated steps that are able to fix or remediate underlying conditions and misconfigurations without the need of interaction from anyone. Auto Remediation itself can trigger a CLI command, serverless function, terraform run or an API call to remediate alerts detected by Lacework. Automation of Remediation can be easy or complex depending on the alert and context correlated with the necessary remediation steps.
 
 ## Why should i use auto remediation?
-We live in a complex world of Multi Cloud Environments. Cloud itself isn't as easy as it was sold to us. With the adoption of cloud and cloud native applications and using modern technology like Kubernetes, Container and Serverless applications you automatically adopt endless complexity with many potential security risks. All of the services need to fulfill your security and compliance regulations. Your personal target should be to secure as much and as best as possible, independent of the industry and compliance regulations you need to fulfill.
+We live in a complex world of multi cloud environments. The cloud itself isn't as easy as it was sold to us. With the adoption of cloud and cloud native applications and using modern technology like Kubernetes, Containers and Serverless applications you automatically adopt endless complexity with many potential security risks. All of the services need to fulfill your security and compliance regulations. Your personal target should be to secure as much and as best as possible, independent of the industry and compliance regulations you need to fulfill.
+Auto remediation means to automate the necessary steps of alert events detected by Lacework without any human interaction. Remediation can be partially or fully automated in order to help fix specific alerts.
+Simply said: "The more is automated, the faster you can react to alerts and the more time you safe for doing any manual interactions". Time is money and in security it means a risk you take while the alert is not solved. The **MTTR** (**M**ean **T**ime to **R**ecover or **R**estore) should be as fast as possible to not take any risks for a long time in case of an alert. A misconfiguration or bad behaviour of your application(s) can lead to outages, stolen customer data and a headline story of your company in the newspaper.
 
-Auto remediation means to automate the necessary steps of alert events detected by Lacework without any human interaction. Auto Remediation can partially or fully help to fix specific alerts.
-
-Simplified you can say: "The more is automated, the faster you can react to alerts and the more time you safe for doing any manual interactions". Time is money and in security it means a risk you take while the alert is not solved. The **MTTR** (**M**ean **T**ime **t**o **R**ecover or **R**estore) should be as fast as possible to not take any risks for a long time in case of an alert. A misconfiguration or bad behaviour of your application(s) can lead to outages, stolen customer data and a headline story of your company in the newspaper.
 
 ## Why Lacework and Kaholo?
 Lacework and Kaholo is a perfect match!
 
-Lacework itself is using Data ware house technology (Snowflake) and Machine Learning technology to reduce the number of false positive events and create high quality alerts (events). These events, alerts and compliance reports from Lacework in general have a lot of high quality context information included that can be used to automate the necessary remediation steps.
+Lacework itself is using Data warehouse technology (Snowflake) and Machine Learning technology to reduce the number of false positive events and create high quality alerts (events). These events, alerts and compliance reports from Lacework in general have a lot of high quality context information included that can be used to automate the necessary remediation steps.
+Kaholo is an easy and intuitive workflow engine that makes it easy to create almost any automation processes, including advanced ones. On top of that you get central visibility into all automation processes with “Kaholo Maps”, A visual representation of the automation. Instead of simply triggering a single CLI command or single API calls and serverless functions it allows the creation of complex workflows that might be necessary for specific auto remediation steps.
 
-Kaholo is an easy and intuitive workflow engine that makes it easy to create almost any automation processes, including advanced ones. On top of that you get central visibility into all automation processes called Kaholo Maps. Instead of simply triggering a single CLI command or single API calls and serverless functions it allows the creation of complex workflows that might be necessary for specific auto remediation steps.
 
 ## How does it work?
 We did create two Kaholo Plugins to enable the Integration between Lacework and Kaholo:
 
-1. The [Lacework Trigger Plugin](https://github.com/Kaholo/kaholo-trigger-lacework) that enables Kaholo to listen to Lacework specific Webhook Alerts and doing the pre filtering and selection of what map needs to be triggered inside Kaholo based on the Information send by the [Lacework Webhook channel](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook). The Webhook configuration that is important to decide for the plugin which map to trigger can be set in each map.
+1. The [Lacework Trigger Plugin](https://github.com/Kaholo/kaholo-trigger-lacework) enables Kaholo to listen for Lacework specific alerts. It then filters and selects which automation map needs to be started inside of Kaholo based on the information sent via the [Lacework Webhook channel](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook).
 
-2. The [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) that enables Kaholo users to Get Details about Events send by the [Lacework Webhook channel](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) and also enables Kaholo users to get Compliance Report details for remediation.
+2. The [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) enables Kaholo to Get Details about Events send by the [Lacework Webhook channel](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) and also enables Kaholo users to get Compliance Report details for remediation.
 
 With that two plugins the following integration examples are possible.
 
