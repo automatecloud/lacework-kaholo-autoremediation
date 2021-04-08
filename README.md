@@ -401,9 +401,9 @@ The current updates and releases are tracked inside the [Release Notes](ReleaseN
 
 The current target Roadmap is to build the following example Maps:
 
-1. Auto Remediation Maps for all the Lacework AWS Compliance checks
-2. Auto Remediation Maps for all the Lacework Azure Compliance checks
-3. Auto Remediation Maps for all the Lacework GCP Compliance checks
+1. Auto Remediation Maps for all the Lacework [AWS Compliance checks](https://github.com/automatecloud/lacework-kaholo-autoremediation/milestone/1)
+2. Auto Remediation Maps for all the Lacework [Azure Compliance checks](https://github.com/automatecloud/lacework-kaholo-autoremediation/milestone/2)
+3. Auto Remediation Maps for all the Lacework [GCP Compliance checks](https://github.com/automatecloud/lacework-kaholo-autoremediation/milestone/3)
 4. Auto Remediation Maps for all the Lacework AWS User Activity events.
 5. Auto Remediation Maps for all the Lacework Azure User Activity events.
 6. Auto Remediation Maps for all the Lacework GCP User Activity events.
