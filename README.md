@@ -254,7 +254,7 @@ LW_AWS_GENERAL_SECURITY_4 | Ensure RDS database is encrypted with customer manag
 LW_AWS_GENERAL_SECURITY_5 | Ensure Redshift Cluster is encrypted | [not implemented](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_5/README.md) | no | no
 LW_AWS_GENERAL_SECURITY_6 | Ensure no server certificate has been uploaded before Heartbleed vulnerability | [not implemented](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_6/README.md) | no | no
 LW_AWS_GENERAL_SECURITY_7 | Ensure ELB has latest Secure Cipher policies Configured for Session Encryption | [not implemented](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_7/README.md) | no | no
-LW_AWS_GENERAL_SECURITY_7 | Ensure ELB is not affected by POODLE Vulnerability (CVE-2014-3566) | [not implemented](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_7/README.md) | no | no
+LW_AWS_GENERAL_SECURITY_8 | Ensure ELB is not affected by POODLE Vulnerability (CVE-2014-3566) | [not implemented](maps/compliance/aws/LW_AWS_GENERAL_SECURITY_8/README.md) | no | no
 LW_AWS_RDS_1 | RDS should not have a Public Interface | [not implemented](maps/compliance/aws/LW_AWS_RDS_1/README.md) | no | no
 LW_AWS_SERVERLESS_1 | Lambda Function should not have Admin Privileges | [not implemented](maps/compliance/aws/LW_AWS_SERVERLESS_1/README.md) | no | no
 LW_AWS_SERVERLESS_2 | Lambda Function should not have Cross Account Access | [not implemented](maps/compliance/aws/LW_AWS_SERVERLESS_2/README.md) | no | no
