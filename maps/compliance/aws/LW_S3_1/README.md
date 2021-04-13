@@ -259,5 +259,5 @@ The Map Version 1.0 (13th of April 2021) supports the following:
 * Sending Slack messages via the [Kaholo Slack Plugin](https://github.com/Kaholo/kaholo-plugin-slack) for S3 Buckets that will be remediated.
 * Sending Slack messages via the [Kaholo Slack Plugin](https://github.com/Kaholo/kaholo-plugin-slack) for S3 Buckets that will be ignored.
 * Not sending Slack messages for S3 Buckets that will be ignored.
-* Support for multiple AWS account ids.
-* Using Least privelege permissions in AWS.
+* Support for multiple AWS account ids used for the AWS CLI and Kaholo Plugins.
+* Using least privilege permissions in AWS.
