@@ -52,8 +52,8 @@ The **LW_S3_1** map currently has the following map design:
 
 <img src="LW_S3_1.png">
 
-* The map will start with the **Get event details** object when it was triggered by the [Lacework Trigger](https://github.com/Kaholo/kaholo-trigger-lacework). It will use the **event_id** send by the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook), using the **Lacework API Access Key** and  **Lacework Secret Key** from the Kaholo vault that you used to configure the [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) to connect to the API. The Method **Get event details** will create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the [Lacework API](https://lwcs.lacework.net/api/v1/external/docs) via the API call **/api/v1/external/events/GetEventDetails** of the configured [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) host instance. The return value of this API call is the complete Event Payload you can use within the Map.
-* The map will start with the **Get report details** object when the map was manually started by a user of the map. It will use the **Lacework API Access Key** and  **Lacework Secret Key** from the Kaholo vault that you used to configure the [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework). The Method **GetLatestAWSComplianceReportDetails** will create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the [Lacework API](https://lwcs.lacework.net/api/v1/external/docs) via the API call **/api/v1/external/compliance/aws/GetLatestComplianceReport** of the configured [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) host instance that is using the **aws_account_id** of the **LaceworkConfig** as a parameter.
+* The map will start with the **Get event details** object when it was triggered by the [Lacework Trigger](https://github.com/Kaholo/kaholo-trigger-lacework). It will use the **event_id** send by the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook), using the **Lacework API Access Key(s)** and  **Lacework Secret Key(s)** from the Kaholo vault that you used to configure the [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) to connect to the API. The Method **Get event details** will create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the [Lacework API](https://lwcs.lacework.net/api/v1/external/docs) via the API call **/api/v1/external/events/GetEventDetails** of the configured [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) host instance. The return value of this API call is the complete Event Payload you can use within the Map.
+* The map will start with the **Get report details** object when the map was manually started by a user of the map. It will use the **Lacework API Access Key(s)** and  **Lacework Secret Key(s)** from the Kaholo vault that you used to configure the [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework). The Method **GetLatestAWSComplianceReportDetails** will create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the [Lacework API](https://lwcs.lacework.net/api/v1/external/docs) via the API call **/api/v1/external/compliance/aws/GetLatestComplianceReport** of the configured [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) host instance that is using the **aws_account_id** of the **LaceworkConfig** as a parameter.
 * The map will trigger the **Put Bucket Tags via CLI** object if you configured the **putbuckettaggingviacli** of the **LaceworkConfig** equals **true**. It will use the **tagname** and **tagvalue** to put these tags for every bucket that is in violation with the rule and ignored via the **bucketIgnoreList** of the **LaceworkConfig**.
 * The map will trigger the **Put Bucket Tags via Object** object if you configured the **putbuckettaggingviaobject** of the **LaceworkConfig** equals **true**. It will use the **tagname** and **tagvalue** to put these tags for every bucket that is in violation with the rule and ignored via the **bucketIgnoreList** of the **LaceworkConfig**.
 * The map will trigger the **Remediate via CLI** CommandLine object If you enabled the Auto Remediation via the CLI using the parameter **dotheremediationviacli** equals **true** inside the **LaceworkConfig** of the map. It will print out the name of the S3 buckets that will be remediated and uses the AWS CLI to remediate the S3 buckets.
@@ -98,6 +98,7 @@ By default the map has the following configurations:
         "arn:aws:s3:::mybucket03"
     ],
     "awsaccountid": "123456789012",
+    "reporttype": "AWS_CIS_S3",
     "putbuckettaggingviacli": "false",
     "putbuckettaggingviaobject": "false",
     "tagname": "LW_S3_1",
@@ -137,6 +138,8 @@ aws resourcegroupstaggingapi tag-resources --resource-arn-list <ARNOFYOURYOURBUC
 If you want to know more about the aws resourcegroupstaggingapi tag-resources command or want to replace it with a different option for auto remediation we recommend to take a look at the official documentation available [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/resourcegroupstaggingapi/tag-resources.html).
 
 5. **putbuckettaggingviaobject**: If you configure this settings to **true** it will add the **tagname** and **tagvalue** for each S3 bucket that is ignored via the **bucketIngoreList** by using the [Kaholo AWS Resource Groups tagging Plugin](https://github.com/Kaholo/kaholo-plugin-aws-resource-groups-tagging). This can be helpful to configure the policy to suppress every S3 bucket that is having this **tagname** and **tagvalue** as advanced suppression configured.
+
+6. **reporttype**: You can define the Report Type the Map should run against, you can choose between **AWS_CIS_S3**, **NIST_800-53_Rev4**, **NIST_800-171_Rev2**, **ISO_2700**, **HIPAA**, **SOC**, or **PCI**
 
 #### Auto Remediation
 
@@ -209,7 +212,14 @@ curl -X POST -H 'Content-type: application/json' --data '{"event_title": "'"$EVE
 ```
 We recommend to check the Execution Results when you give it a try. With that you make sure it will remediate the right S3 buckets before you enable the auto remediation.
 
-## Required AWS permissions (least privilege)
+## AWS accounts and required AWS permissions (least privilege)
+
+The Map supports multiple AWS accounts for Events send by Lacework. You need to make sure that you saved your AWS account access keys and the AWS secret access keys in the following format:
+
+* <AWS-ACCOUNT-ACCESS-KEY-ID>_aws_access_key_id: example 12345678912_aws_access_key_id
+* <AWS-ACCOUNT-SECRET-ACCESS-KEY-ID>_aws_secret_access_key_id: example 12345678912_aws_access_key_id
+
+We recommend to use the Map with the principals of least privilege to make sure the Auto Remediation account can only change the S3 Bucket ACL and the Resource Tags.
 
 The Map is using the API call put-bucket-acl to put back the Bucket S3 ACL to private:
 
@@ -223,7 +233,7 @@ And also the resource group tagging api to add the necessary tags to the S3 buck
 aws resourcegroupstaggingapi tag-resources --resource-arn-list <ARNOFYOURYOURBUCKETNAME> --tags <TAGNAME>=<TAGVALUE> --profile AWS-ACCOUNTID-FROM-EVENTORREPORT
 ```
 
-You need to define the following least privelege policy inside your AWS IAM configuration for the service account used to do the auto remediation:
+You need to define the following least privilege policy inside your AWS IAM configuration for the service account used to do the auto remediation:
 
 ```
 {
@@ -245,9 +255,10 @@ You need to define the following least privelege policy inside your AWS IAM conf
     ]
 }
 ```
+
 ## What features are supported with this Map? Release Notes
 
-The Map Version 1.0 (13th of April 2021) supports the following:
+The Map Version 1.0 (19th of April 2021) supports the following:
 * Auto Remediation via the [AWS Command Line Interface](https://aws.amazon.com/cli/)
 * Auto Remediation via the [Kaholo S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3)
 * Adding S3 Bucket Tags for Advanded Suppression via the [AWS Command Line Interface](https://aws.amazon.com/cli/)
@@ -260,4 +271,5 @@ The Map Version 1.0 (13th of April 2021) supports the following:
 * Sending Slack messages via the [Kaholo Slack Plugin](https://github.com/Kaholo/kaholo-plugin-slack) for S3 Buckets that will be ignored.
 * Not sending Slack messages for S3 Buckets that will be ignored.
 * Support for multiple AWS account ids used for the AWS CLI and Kaholo Plugins.
+* Define the report that it should run against.
 * Using least privilege permissions in AWS.
