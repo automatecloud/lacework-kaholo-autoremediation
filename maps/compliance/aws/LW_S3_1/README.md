@@ -216,8 +216,8 @@ We recommend to check the Execution Results when you give it a try. With that yo
 
 The Map supports multiple AWS accounts for Events send by Lacework. You need to make sure that you saved your AWS account access keys and the AWS secret access keys in the following format:
 
-* <AWS-ACCOUNT-ACCESS-KEY-ID>_aws_access_key_id: example 12345678912_aws_access_key_id
-* <AWS-ACCOUNT-SECRET-ACCESS-KEY-ID>_aws_secret_access_key_id: example 12345678912_aws_access_key_id
+* AWS-ACCOUNT-ACCESS-KEY-ID_aws_access_key_id: example 12345678912_aws_access_key_id
+* AWS-ACCOUNT-SECRET-ACCESS-KEY-ID_aws_secret_access_key_id: example 12345678912_aws_secret_access_key_id
 
 We recommend to use the Map with the principals of least privilege to make sure the Auto Remediation account can only change the S3 Bucket ACL and the Resource Tags.
 
