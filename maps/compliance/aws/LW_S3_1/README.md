@@ -137,6 +137,8 @@ aws resourcegroupstaggingapi tag-resources --resource-arn-list <ARNOFYOURYOURBUC
 ```
 If you want to know more about the aws resourcegroupstaggingapi tag-resources command or want to replace it with a different option for auto remediation we recommend to take a look at the official documentation available [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/resourcegroupstaggingapi/tag-resources.html).
 
+For the command to execute successful it is important that you add the AWS Account ID with the id of the account as a profile to your aws cli.
+
 5. **putbuckettaggingviaobject**: If you configure this settings to **true** it will add the **tagname** and **tagvalue** for each S3 bucket that is ignored via the **bucketIngoreList** by using the [Kaholo AWS Resource Groups tagging Plugin](https://github.com/Kaholo/kaholo-plugin-aws-resource-groups-tagging). This can be helpful to configure the policy to suppress every S3 bucket that is having this **tagname** and **tagvalue** as advanced suppression configured.
 
 6. **reporttype**: You can define the Report Type the Map should run against, you can choose between **AWS_CIS_S3**, **NIST_800-53_Rev4**, **NIST_800-171_Rev2**, **ISO_2700**, **HIPAA**, **SOC**, or **PCI**
@@ -161,6 +163,8 @@ aws s3api put-bucket-acl --bucket <YOURBUCKETNAME> --acl private --profile AWS-A
 ```
 
 If you want to know more about the aws s3api put-bucket-acl command or want to replace it with a different option for auto remediation we recommend to take a look at the official documentation available [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/put-bucket-acl.html).
+
+For the command to execute successful it is important that you add the AWS Account ID with the id of the account as a profile to your aws cli.
 
 6. If you configure the **dotheremediationviacli** equals **true** the Remediation via Object block will Auto Remediate by using the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3) to remediate the S3 bucket. For this you need to make sure that the **remediateviaobject** action has the correct configured AWS access key, AWS secret key and the correct AWS region. the S3 bucket name will be remediated by using the method **apply canned ACL to Bucket** and the Canned ACL Type is configured to **Private**.
 
