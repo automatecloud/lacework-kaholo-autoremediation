@@ -156,7 +156,7 @@ For the Auto Remediation you need to decide if you would like to Auto Remediate 
 
 The Auto Remediation is disabled if you import the map. It will only be triggered if the configuration **dotheremediationviacli** or **dotheremediationviaobject** of the **LaceworkConfig** is configured with **true**. Before enabling this we recommend the following:
 
-1. Create a test S3 bucket that is violating the compliance rule for **LW_S3_1** via the CLI command described in the section [How can i use the Map?](https://github.com/automatecloud/lacework-kaholo-autoremediation/tree/main/maps/compliance/aws/LW_S3_1#how-can-i-use-this-map-for-auto-remediation)
+1. Create an test S3 bucket that is violating the compliance rule for **LW_S3_1** via the CLI command described in the section [How can i use the Map?](https://github.com/automatecloud/lacework-kaholo-autoremediation/tree/main/maps/compliance/aws/LW_S3_1#how-can-i-use-this-map-for-auto-remediation)
 2. When you got the Event created in Lacework you need to make sure that you put all the S3 bucket names that should not be Auto Remediated into the **bucketIgnoreList** of the **LaceworkConfig**.
 3. To be even more sure we recommend to configure a suppression setting for the **LW_S3_1** compliance check within the Lacework platform to ignore the S3 bucket. Otherwise the ignored Buckets will create additional Events and Alerts within Lacework. Optional you can configure the **putbuckettagging** to add the **tagname** and **tagvalue** for each S3 bucket that is ignored. If you use the same tag for advanced auto suppression the S3 bucket will be suppressed after the next compliance run.
 4. After that you can enable the Auto Remediation via AWS CLI or via the Kaholo S3 Bucket Object.
@@ -173,7 +173,7 @@ If you want to know more about the aws s3api put-bucket-acl command or want to r
 
 For the command to execute successful it is important that you add the AWS Account ID with the id of the account as a profile to your aws cli.
 
-6. If you configure the **dotheremediationviacli** equals **true** the Remediation via Object block will Auto Remediate by using the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3) to remediate the S3 bucket. For this you need to make sure that the **remediateviaobject** action has the correct configured AWS access key, AWS secret key and the correct AWS region. the S3 bucket name will be remediated by using the method **apply canned ACL to Bucket** and the Canned ACL Type is configured to **Private**.
+6. If you configure the **dotheremediationviaobject** equals **true** the Remediation via Object block will Auto Remediate by using the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3) to remediate the S3 bucket. The S3 bucket name will be remediated by using the method **apply canned ACL to Bucket** and the Canned ACL Type is configured to **Private**.
 
 7. If you configure the **autoremediationonlyfornewviolations** equals true the Auto Remediation will only be done for new Resource Violations on S3 buckets within new Events. With that you avoid that the AutoRemedation is doing it for all (new and already existing violations) of S3 buckets. This doesn't have any effect if you do the AutoRemedation via Reports, as reports have no differences between new and already existing violating resources. By default this setting is configured equals **false**.
 
@@ -189,7 +189,7 @@ It will send out a slack message to the configured Webhook. We recommend to conf
 
 If you don't have Slack or don't need Slack messages feel free to simply remove both Slack objects from your map.
 
-4. **sendslackmessagesforignored (Optional):** you can disable within the **LaceworkConfig** via the setting **sendslackmessagesforignored** equals **false** to not send out Slack messages for S3 buckets that are violating the policy but are ignored via the **bucketIgnoreList**. By default this is configured to **true**. Reason behind is that it is best practice to suppress S3 buckets that should not be Auto Remediated by using Tags within AWS so you can configure a Suppress rule within Lacework to simply ignore them and not create events and alerts. You can use the setting **putbuckettagging** to add the **tagname** and **tagvalue** for each S3 bucket that is ignored.
+4. **sendslackmessagesforignored (Optional):** you can disable within the **LaceworkConfig** via the setting equals **false** to not send out Slack messages for S3 buckets that are violating the policy but are ignored via the **bucketIgnoreList**. By default this is configured to **true**. Reason behind is that it is best practice to suppress S3 buckets that should not be Auto Remediated by using Tags within AWS so you can configure a Suppress rule within Lacework to simply ignore them and not create events and alerts. You can use the setting **putbuckettaggingviacli** or **putbuckettaggingviaobject** to add the **tagname** and **tagvalue** for each S3 bucket that is ignored.
 
 ## Build an example curl webhook
 
@@ -197,7 +197,7 @@ There is no need to wait for Lacework sending the Webhook Alert for the generate
 
 Before you can trigger the webhook you need to have an event generated within your Lacework instance. Please make sure you run a compliance report right after you created a test S3 bucket that is violating this policy.
 
-As soon as you got an event we recommend using the Event Information to create an example webhook trigger inside your terminal using the following environment variables. Make sure to update it with the information from the Event you did generate.
+Events are generated every hour after the compliance report was finished. As soon as you got an event we recommend using the Event Information to create an example webhook trigger inside your terminal using the following environment variables. Make sure to update it with the information from the Event you did generate.
 
 ```
 export EVENTTITLE="New Violations"
@@ -225,10 +225,10 @@ We recommend to check the Execution Results when you give it a try. With that yo
 
 ## AWS accounts and required AWS permissions (least privilege)
 
-The Map supports multiple AWS accounts for Events send by Lacework. You need to make sure that you saved your AWS account access keys and the AWS secret access keys in the following format:
+The Map supports multiple AWS accounts for events send by Lacework. You need to make sure that you saved your AWS account access keys and the AWS secret access keys in the following format:
 
-* AWS-ACCOUNT-ACCESS-KEY-ID_aws_access_key_id: example 12345678912_aws_access_key_id
-* AWS-ACCOUNT-SECRET-ACCESS-KEY-ID_aws_secret_access_key_id: example 12345678912_aws_secret_access_key_id
+* **AWS-ACCOUNT-ACCESS-KEY-ID_aws_access_key_id**: example 12345678912_aws_access_key_id
+* **AWS-ACCOUNT-SECRET-ACCESS-KEY-ID_aws_secret_access_key_id**: example 12345678912_aws_secret_access_key_id
 
 We recommend to use the Map with the principals of least privilege to make sure the Auto Remediation account can only change the S3 Bucket ACL and the Resource Tags.
 
