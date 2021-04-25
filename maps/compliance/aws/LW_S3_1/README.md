@@ -142,13 +142,13 @@ For the command to execute successful it is important that you add the AWS Accou
 5. **putbuckettaggingviaobject**: If you configure this settings to **true** it will add the **tagname** and **tagvalue** for each S3 bucket that is ignored via the **bucketIngoreList** by using the [Kaholo AWS Resource Groups tagging Plugin](https://github.com/Kaholo/kaholo-plugin-aws-resource-groups-tagging). This can be helpful to configure the policy to suppress every S3 bucket that is having this **tagname** and **tagvalue** as advanced suppression configured.
 
 6. **reporttype**: You can define the Report Type the Map should run against, you can choose between:
-  * **AWS_CIS_S3 (AWS CIS Benchmark and S3 Report)**
-  * **NIST_800-53_Rev4 (AWS NIST 800-53 Report)**
-  * **NIST_800-171_Rev2 (AWS NIST 800-171 Report)**
-  * **ISO_2700 (AWS ISO27001:2013 Report)**
-  * **HIPAA (AWS HIPAA Report)**
-  * **SOC (AWS SOC2 Report)**
-  * **PCI (AWS PCI DSS Report)**
+  * **AWS_CIS_S3** (AWS CIS Benchmark and S3 Report)
+  * **NIST_800-53_Rev4** (AWS NIST 800-53 Report)
+  * **NIST_800-171_Rev2** (AWS NIST 800-171 Report)
+  * **ISO_2700** (AWS ISO27001:2013 Report)
+  * **HIPAA** (AWS HIPAA Report)
+  * **SOC** (AWS SOC2 Report)
+  * **PCI** (AWS PCI DSS Report)
 
 #### Auto Remediation
 
