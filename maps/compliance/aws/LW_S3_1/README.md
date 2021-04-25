@@ -269,7 +269,7 @@ You need to define the following least privilege policy inside your AWS IAM conf
 
 ## What features are supported with this Map? Release Notes
 
-The Map Version 1.0 (19th of April 2021) supports the following:
+The Map Version 1.0 (25th of April 2021) supports the following:
 * Auto Remediation via the [AWS Command Line Interface](https://aws.amazon.com/cli/)
 * Auto Remediation via the [Kaholo S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3)
 * Adding S3 Bucket Tags for Advanded Suppression via the [AWS Command Line Interface](https://aws.amazon.com/cli/)
@@ -284,3 +284,10 @@ The Map Version 1.0 (19th of April 2021) supports the following:
 * Support for multiple AWS account ids used for the AWS CLI and Kaholo Plugins.
 * Define the report that it should run against.
 * Using least privilege permissions in AWS.
+
+## Ideas for future releases
+
+* Adding Advanded Suppression inside Lacework (as soon as the API is available.)
+* Adding Auto Remediation example with Lambda functions
+* Adding Auto Remediation example with terraform
+* Adding Auto Remediation example with pulumi
