@@ -1,10 +1,10 @@
 {
     "configurations": [
         {
-            "_id": "604a239f887b20003484f272",
+            "_id": "6064a01df55a170034c08c5f",
             "name": "LaceworkConfig",
-            "value": "{\n    \"name\": \"LaceworkConfiguration\",\n    \"policyID\": \"LW_S3_7\",\n    \"violationdescription\": \"Ensure the S3 bucket ACL does not grant every authenticated AWS User WRITE permission\",\n    \"eventuuid\": \"a532664a-7a17-44fb-b4ee-efe647c102a2\",\n    \"reportuuid\": \"519fdb99-9a33-4cdf-bd56-32eef639c101\",\n    \"dotheremediationviacli\": \"false\",\n    \"dotheremediationviaobject\": \"false\",\n    \"sendslackmessagesforignored\": \"true\",\n      \"bucketIgnoreList\":[\n        \"arn:aws:s3:::mybucket01\",\n        \"arn:aws:s3:::mybucket02\",\n        \"arn:aws:s3:::mybucket03\"\n    ],\n    \"awsaccountid\": \"123456789012\",\n    \"putbuckettagging\": \"true\",\n    \"tagname\": \"LW_S3_7\",\n    \"tagvalue\": \"suppressed\",\n    \"autoremediationonlyfornewviolations\": \"false\"\n}",
-            "mapRevision": "604a239f887b20003484f251",
+            "value": "{\n    \"name\": \"LaceworkConfiguration\",\n    \"policyID\": \"LW_S3_7\",\n    \"violationdescription\": \"Ensure the S3 bucket ACL does not grant every authenticated AWS User WRITE permission\",\n    \"eventuuid\": \"a532664a-7a17-44fb-b4ee-efe647c102a2\",\n    \"reportuuid\": \"519fdb99-9a33-4cdf-bd56-32eef639c101\",\n    \"dotheremediationviacli\": \"false\",\n    \"dotheremediationviaobject\": \"false\",\n    \"sendslackmessagesforignored\": \"true\",\n      \"bucketIgnoreList\":[\n        \"arn:aws:s3:::mybucket01\",\n        \"arn:aws:s3:::mybucket02\",\n        \"arn:aws:s3:::mybucket03\"\n    ],\n    \"awsaccountid\": \"123456789012\",\n    \"reporttype\": \"AWS_CIS_S3\",\n    \"putbuckettaggingviacli\": \"false\",\n    \"putbuckettaggingviaobject\": \"false\",\n    \"tagname\": \"LW_S3_7\",\n    \"tagvalue\": \"suppressed\",\n    \"autoremediationonlyfornewviolations\": \"false\"\n}",
+            "mapRevision": "6064a01df55a170034c08c31",
             "__v": 0
         }
     ],
@@ -16,23 +16,21 @@
             "mandatory": null,
             "actions": [
                 {
-                    "name": "geteventid",
-                    "timeout": null,
                     "retries": 0,
-                    "method": "GetEventDetails",
                     "mandatory": null,
+                    "isEnabled": true,
                     "params": [
                         {
+                            "_id": "60645b43f55a170034bfe5a4",
                             "code": true,
                             "value": "geteventid()",
                             "param": "6047a7f5887b2000347edc47",
-                            "viewName": "Event ID",
-                            "name": "EVENT_ID",
-                            "type": "string",
-                            "description": null
+                            "name": "EVENT_ID"
                         }
                     ],
-                    "isEnabled": true,
+                    "name": "geteventid",
+                    "timeout": null,
+                    "method": "GetEventDetails",
                     "numParallel": null
                 }
             ],
@@ -66,7 +64,7 @@
                         {
                             "code": true,
                             "value": "printBucketName()",
-                            "param": "6048f42e887b2000348213fc",
+                            "param": "60645b43f55a170034bfe5a7",
                             "viewName": "command",
                             "name": "COMMANDS",
                             "type": "string",
@@ -86,7 +84,7 @@
                         {
                             "code": true,
                             "value": "remediateviaawscli()",
-                            "param": "6048f42e887b2000348213fe",
+                            "param": "60645b43f55a170034bfe5a9",
                             "viewName": "command",
                             "name": "COMMANDS",
                             "type": "string",
@@ -104,7 +102,7 @@
             "uuid": "dbadd34f-dc84-4526-8218-b49c02ffc5f6",
             "coordination": "each",
             "numProcessParallel": null,
-            "name": "Remedite via CLI",
+            "name": "AutoRemediate via CLI",
             "description": "S3 buckets to remediate\n",
             "condition": "checkremediationviacli()",
             "filterAgents": null,
@@ -118,32 +116,28 @@
             "mandatory": null,
             "actions": [
                 {
-                    "name": "informsecurity",
-                    "timeout": null,
                     "retries": 0,
-                    "method": "sendIncomingWebhook",
                     "mandatory": null,
+                    "isEnabled": true,
                     "params": [
                         {
+                            "_id": "60645b43f55a170034bfe5ac",
                             "code": null,
                             "value": "Slack Webhook",
                             "param": "6048b904887b200034816d3f",
-                            "viewName": "Webhook URL",
-                            "name": "webhookUrl",
-                            "type": "vault",
-                            "description": null
+                            "name": "webhookUrl"
                         },
                         {
+                            "_id": "60645b43f55a170034bfe5ad",
                             "code": true,
                             "value": "sendslackmessage()",
                             "param": "6048b904887b200034816d40",
-                            "viewName": "Message (string, object)",
-                            "name": "message",
-                            "type": "string",
-                            "description": null
+                            "name": "message"
                         }
                     ],
-                    "isEnabled": true,
+                    "name": "informsecurity",
+                    "timeout": null,
+                    "method": "sendIncomingWebhook",
                     "numParallel": null
                 }
             ],
@@ -175,36 +169,48 @@
                     "mandatory": null,
                     "params": [
                         {
-                            "code": false,
-                            "value": "AWS Access Key",
-                            "param": "6048f42e887b200034821405",
+                            "code": true,
+                            "value": "getawsaccesskeyfromvaultforremediation()",
+                            "param": "60645b43f55a170034bfe5b0",
                             "viewName": "Access key",
                             "name": "AWS_ACCESS_KEY_ID",
                             "type": "vault",
                             "description": null
                         },
                         {
-                            "code": null,
-                            "value": "AWS Secret Key",
-                            "param": "6048f42e887b200034821406",
+                            "code": true,
+                            "value": "getawssecretkeyfromvaultforremediation()",
+                            "param": "60645b43f55a170034bfe5b1",
                             "viewName": "Secret key",
                             "name": "AWS_SECRET_ACCESS_KEY",
                             "type": "vault",
                             "description": null
                         },
                         {
+                            "code": null,
+                            "value": {
+                                "id": "eu-central-1",
+                                "value": "EU (Frankfurt)"
+                            },
+                            "param": null,
+                            "viewName": "Region",
+                            "name": "REGION",
+                            "type": "autocomplete",
+                            "description": null
+                        },
+                        {
                             "code": true,
                             "value": "remediateviaobject()",
-                            "param": "6048f42e887b200034821408",
+                            "param": "60645b43f55a170034bfe5b2",
                             "viewName": "Bucket name*",
                             "name": "BUCKET_NAME",
                             "type": "string",
                             "description": null
                         },
                         {
-                            "code": false,
-                            "value": "private",
-                            "param": "6048f42e887b200034821409",
+                            "code": true,
+                            "value": "getcannedacltype()",
+                            "param": "60645b43f55a170034bfe5b3",
                             "viewName": "Canned ACL Type",
                             "name": "ACL",
                             "type": "options",
@@ -222,7 +228,7 @@
             "uuid": "a9ba8b89-6d21-49fb-8e5d-979c38dc1af6",
             "coordination": "each",
             "numProcessParallel": null,
-            "name": "Remediate via Object",
+            "name": "AutoRemediate via Object",
             "description": "S3 buckets to remediate",
             "condition": "checkremediationviaobject()",
             "filterAgents": null,
@@ -236,28 +242,32 @@
             "mandatory": null,
             "actions": [
                 {
-                    "retries": 0,
-                    "mandatory": null,
-                    "isEnabled": true,
-                    "params": [
-                        {
-                            "_id": "6048f630887b200034821ac9",
-                            "code": null,
-                            "value": "Slack Webhook",
-                            "param": "6048f42e887b20003482140c",
-                            "name": "webhookUrl"
-                        },
-                        {
-                            "_id": "6048f630887b200034821aca",
-                            "code": true,
-                            "value": "sendslackmessageforignored()",
-                            "param": "6048f42e887b20003482140d",
-                            "name": "message"
-                        }
-                    ],
                     "name": "sendmessageforignored",
                     "timeout": null,
+                    "retries": 0,
                     "method": "sendIncomingWebhook",
+                    "mandatory": null,
+                    "params": [
+                        {
+                            "code": null,
+                            "value": "Slack Webhook",
+                            "param": "6048f630887b200034821ac9",
+                            "viewName": "Webhook URL",
+                            "name": "webhookUrl",
+                            "type": "vault",
+                            "description": null
+                        },
+                        {
+                            "code": true,
+                            "value": "sendslackmessageforignored()",
+                            "param": "6048f630887b200034821aca",
+                            "viewName": "Message (string, object)",
+                            "name": "message",
+                            "type": "string",
+                            "description": null
+                        }
+                    ],
+                    "isEnabled": true,
                     "numParallel": null
                 }
             ],
@@ -270,12 +280,43 @@
             "name": "Ignored",
             "description": "Inform about Ignored buckets.",
             "condition": "checkforignoredslack()",
-            "coordination": "each",
             "filterAgents": null,
             "postRun": "indexIgnored++;",
-            "preRun": null
+            "preRun": null,
+            "coordination": "each"
         },
         {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": null,
+            "mandatory": null,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "60645b43f55a170034bfe5ba",
+                            "code": true,
+                            "value": "getawsaccountid()",
+                            "param": null,
+                            "name": "AWS_ACCOUNT_ID"
+                        },
+                        {
+                            "_id": "60645b43f55a170034bfe5bb",
+                            "code": null,
+                            "value": "AWS_CIS_S3",
+                            "param": null,
+                            "name": "REPORT_TYPE"
+                        }
+                    ],
+                    "name": "getreportdetails",
+                    "timeout": null,
+                    "method": "GetLatestAWSComplianceReportDetails",
+                    "numParallel": null
+                }
+            ],
             "used_plugin": {
                 "name": "lacework",
                 "version": "1.2.0"
@@ -284,58 +325,17 @@
             "numProcessParallel": null,
             "name": "Get report details",
             "description": null,
-            "mandatory": null,
             "condition": "checkconfigurationforreport()",
             "coordination": null,
-            "actions": [
-                {
-                    "name": "getreportdetails",
-                    "timeout": null,
-                    "retries": 0,
-                    "method": "GetLatestAWSComplianceReportDetails",
-                    "mandatory": null,
-                    "params": [
-                        {
-                            "code": true,
-                            "value": "getawsaccountid()",
-                            "param": null,
-                            "viewName": "AWS ACCOUNT ID",
-                            "name": "AWS_ACCOUNT_ID",
-                            "type": "string",
-                            "description": null
-                        },
-                        {
-                            "code": null,
-                            "value": "AWS_CIS_S3",
-                            "param": null,
-                            "viewName": "Report Type",
-                            "name": "REPORT_TYPE",
-                            "type": "options",
-                            "description": null
-                        }
-                    ],
-                    "isEnabled": true,
-                    "numParallel": null
-                }
-            ],
-            "correlateAgents": null,
             "filterAgents": null,
             "postRun": "createBucketListfromReport()",
-            "preRun": null,
-            "actionsExecution": "series"
+            "preRun": null
         },
         {
-            "used_plugin": {
-                "name": "CommandLine",
-                "version": "1.2.0"
-            },
-            "uuid": "27e93261-9713-48b2-858f-a29c4f9abf02",
-            "numProcessParallel": null,
-            "name": "Put Bucket Tags via CLI",
-            "description": null,
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": null,
             "mandatory": null,
-            "condition": "checkputbuckettagsviacli()",
-            "coordination": "each",
             "actions": [
                 {
                     "name": "putbuckettagging",
@@ -347,10 +347,97 @@
                         {
                             "code": true,
                             "value": "putbuckettagging()",
-                            "param": null,
+                            "param": "60645b43f55a170034bfe5be",
                             "viewName": "command",
                             "name": "COMMANDS",
                             "type": "string",
+                            "description": null
+                        }
+                    ],
+                    "isEnabled": true,
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "CommandLine",
+                "version": "1.2.0"
+            },
+            "uuid": "27e93261-9713-48b2-858f-a29c4f9abf02",
+            "numProcessParallel": null,
+            "name": "Put Bucket Tags via CLI",
+            "description": null,
+            "condition": "checkputbuckettagsviacli()",
+            "coordination": "each",
+            "filterAgents": null,
+            "postRun": "indexTag++;",
+            "preRun": null
+        },
+        {
+            "used_plugin": {
+                "name": "AWS-resource-groups-tagging",
+                "version": "1.1.0"
+            },
+            "uuid": "c0cadde7-0799-43c6-848d-b5c043325a25",
+            "coordination": "each",
+            "numProcessParallel": null,
+            "name": "Put Bucket Tags via Object",
+            "description": null,
+            "mandatory": null,
+            "condition": "checkputbuckettagsviaobject()",
+            "actions": [
+                {
+                    "name": "puttag",
+                    "timeout": null,
+                    "retries": 0,
+                    "method": "tagResources",
+                    "mandatory": null,
+                    "params": [
+                        {
+                            "code": true,
+                            "value": "getawsaccesskeyfromvaultfortag()",
+                            "param": null,
+                            "viewName": "Access Key ID",
+                            "name": "accessKeyId",
+                            "type": "string",
+                            "description": null
+                        },
+                        {
+                            "code": true,
+                            "value": "getawssecretkeyfromvaultfortag()",
+                            "param": null,
+                            "viewName": "Secret Access key",
+                            "name": "secretAccesKey",
+                            "type": "vault",
+                            "description": null
+                        },
+                        {
+                            "code": null,
+                            "value": {
+                                "id": "eu-central-1",
+                                "value": "EU (Frankfurt)"
+                            },
+                            "param": null,
+                            "viewName": "Region",
+                            "name": "region",
+                            "type": "autocomplete",
+                            "description": null
+                        },
+                        {
+                            "code": true,
+                            "value": "getbucketnameforobject()",
+                            "param": null,
+                            "viewName": "Resources ARN",
+                            "name": "resourcesArn",
+                            "type": "text",
+                            "description": null
+                        },
+                        {
+                            "code": true,
+                            "value": "getbuckettagsforobject()",
+                            "param": null,
+                            "viewName": "Tags",
+                            "name": "tags",
+                            "type": "text",
                             "description": null
                         }
                     ],
@@ -402,11 +489,6 @@
             "targetId": "a9ba8b89-6d21-49fb-8e5d-979c38dc1af6"
         },
         {
-            "uuid": "e99fa3f0-1b34-4f92-a701-ca704c662218",
-            "sourceId": "78f4596b-2db2-4a03-b4ac-6e88739d0219",
-            "targetId": "8cbc2b7c-28be-4093-826b-ef93b4495ffc"
-        },
-        {
             "uuid": "655f2391-8aa4-41d7-81d3-752a49ea221c",
             "sourceId": "8cbc2b7c-28be-4093-826b-ef93b4495ffc",
             "targetId": "8cbc2b7c-28be-4093-826b-ef93b4495ffc"
@@ -445,9 +527,34 @@
             "uuid": "190e6dee-a96b-4a8f-9565-c12f0f3e2b14",
             "sourceId": "a532664a-7a17-44fb-b4ee-efe647c102a2",
             "targetId": "27e93261-9713-48b2-858f-a29c4f9abf02"
+        },
+        {
+            "uuid": "8f6320b2-6e7f-4e0e-a560-59009c341868",
+            "sourceId": "c0cadde7-0799-43c6-848d-b5c043325a25",
+            "targetId": "c0cadde7-0799-43c6-848d-b5c043325a25"
+        },
+        {
+            "uuid": "6df2045e-24c9-406a-9ed6-3404da0b02fb",
+            "sourceId": "a532664a-7a17-44fb-b4ee-efe647c102a2",
+            "targetId": "c0cadde7-0799-43c6-848d-b5c043325a25"
+        },
+        {
+            "uuid": "e57ada34-b1b0-4daa-a6d7-39129e319405",
+            "sourceId": "519fdb99-9a33-4cdf-bd56-32eef639c101",
+            "targetId": "c0cadde7-0799-43c6-848d-b5c043325a25"
+        },
+        {
+            "uuid": "06e0d6bb-f3c1-4b94-8579-a4e92c5d282b",
+            "sourceId": "a532664a-7a17-44fb-b4ee-efe647c102a2",
+            "targetId": "8cbc2b7c-28be-4093-826b-ef93b4495ffc"
+        },
+        {
+            "uuid": "3edffe82-d14c-4e16-b3ab-0c6f67550f38",
+            "sourceId": "519fdb99-9a33-4cdf-bd56-32eef639c101",
+            "targetId": "8cbc2b7c-28be-4093-826b-ef93b4495ffc"
         }
     ],
-    "content": "{\"cells\":[{\"type\":\"devs.PMStartPoint\",\"size\":{\"width\":40,\"height\":39},\"outPorts\":[\" \"],\"inPorts\":[],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\" \"}}}]},\"position\":{\"x\":50,\"y\":20},\"angle\":0,\"id\":\"e5e4200d-7301-465c-978e-b90e6cf1dfa1\",\"z\":1,\"attrs\":{\"rect\":{\"fill\":\"#2d3236\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":232,\"y\":-150},\"angle\":0,\"id\":\"a532664a-7a17-44fb-b4ee-efe647c102a2\",\"z\":2,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Get event details\"},\".p_id\":{\"text\":\"6023b2e264b1160034fd9b9f\"},\"image\":{\"xlink:href\":\"/plugins/lacework/lacework.png\",\"ref-y\":50},\"text\":{\"text\":\"Get event details\"}}},{\"type\":\"link\",\"source\":{\"id\":\"e5e4200d-7301-465c-978e-b90e6cf1dfa1\",\"port\":\" \"},\"target\":{\"id\":\"a532664a-7a17-44fb-b4ee-efe647c102a2\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"835aef4e-d337-49b5-8789-ffc8edfe8057\",\"z\":3,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":717,\"y\":7},\"angle\":0,\"id\":\"dbadd34f-dc84-4526-8218-b49c02ffc5f6\",\"z\":4,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Remedite via CLI\"},\".p_id\":{\"text\":\"5f92a2f3da3961001ab1a0c4\"},\"image\":{\"xlink:href\":\"/plugins/CommandLine/CommandLine.png\",\"ref-y\":50},\"text\":{\"text\":\"Remedite via CLI\"}}},{\"type\":\"link\",\"source\":{\"id\":\"a532664a-7a17-44fb-b4ee-efe647c102a2\",\"port\":\"  \"},\"target\":{\"id\":\"dbadd34f-dc84-4526-8218-b49c02ffc5f6\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"7ae2c1be-a604-41ed-adf2-798236b81db4\",\"z\":5,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"dbadd34f-dc84-4526-8218-b49c02ffc5f6\",\"port\":\"  \"},\"target\":{\"id\":\"dbadd34f-dc84-4526-8218-b49c02ffc5f6\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"fe9a1103-385d-4078-9250-ac2f081c6f4b\",\"z\":6,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":427,\"y\":292},\"angle\":0,\"id\":\"78f4596b-2db2-4a03-b4ac-6e88739d0219\",\"z\":7,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Remediated\"},\".p_id\":{\"text\":\"5f92a31fda3961001ab1a1a6\"},\"image\":{\"xlink:href\":\"/plugins/Slack/Slack_Icon.png\",\"ref-y\":50},\"text\":{\"text\":\"Remediated\"}}},{\"type\":\"link\",\"source\":{\"id\":\"a532664a-7a17-44fb-b4ee-efe647c102a2\",\"port\":\"  \"},\"target\":{\"id\":\"78f4596b-2db2-4a03-b4ac-6e88739d0219\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"1bb2636a-37b4-47c2-9cdc-6096a4c5f810\",\"z\":8,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"78f4596b-2db2-4a03-b4ac-6e88739d0219\",\"port\":\"  \"},\"target\":{\"id\":\"78f4596b-2db2-4a03-b4ac-6e88739d0219\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"a849f413-f545-4484-8ddc-7e041c56cbdb\",\"z\":9,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":518,\"y\":6},\"angle\":0,\"id\":\"a9ba8b89-6d21-49fb-8e5d-979c38dc1af6\",\"z\":10,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Remediate via Object\"},\".p_id\":{\"text\":\"6047970a887b2000347ea8bd\"},\"image\":{\"xlink:href\":\"/plugins/Amazon-aws-s3/logo.png\",\"ref-y\":50},\"text\":{\"text\":\"Remediate via Object\"}}},{\"type\":\"link\",\"source\":{\"id\":\"a532664a-7a17-44fb-b4ee-efe647c102a2\",\"port\":\"  \"},\"target\":{\"id\":\"a9ba8b89-6d21-49fb-8e5d-979c38dc1af6\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"afa61b76-47da-4f5b-a7ab-352421804890\",\"z\":11,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"a9ba8b89-6d21-49fb-8e5d-979c38dc1af6\",\"port\":\"  \"},\"target\":{\"id\":\"a9ba8b89-6d21-49fb-8e5d-979c38dc1af6\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"384b62c8-3c96-4409-8df6-3333cffddfd2\",\"z\":12,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":729,\"y\":293},\"angle\":0,\"id\":\"8cbc2b7c-28be-4093-826b-ef93b4495ffc\",\"z\":13,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Ignored\"},\".p_id\":{\"text\":\"5f92a31fda3961001ab1a1a6\"},\"image\":{\"xlink:href\":\"/plugins/Slack/Slack_Icon.png\",\"ref-y\":50},\"text\":{\"text\":\"Ignored\"}}},{\"type\":\"link\",\"source\":{\"id\":\"78f4596b-2db2-4a03-b4ac-6e88739d0219\",\"port\":\"  \"},\"target\":{\"id\":\"8cbc2b7c-28be-4093-826b-ef93b4495ffc\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"e99fa3f0-1b34-4f92-a701-ca704c662218\",\"z\":14,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"8cbc2b7c-28be-4093-826b-ef93b4495ffc\",\"port\":\"  \"},\"target\":{\"id\":\"8cbc2b7c-28be-4093-826b-ef93b4495ffc\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"655f2391-8aa4-41d7-81d3-752a49ea221c\",\"z\":15,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":238,\"y\":162},\"angle\":0,\"id\":\"519fdb99-9a33-4cdf-bd56-32eef639c101\",\"z\":16,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Get report details\"},\".p_id\":{\"text\":\"605caee52447cb003445f7f7\"},\"image\":{\"xlink:href\":\"/plugins/lacework/lacework.png\",\"ref-y\":50},\"text\":{\"text\":\"Get report details\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":468,\"y\":-355},\"angle\":0,\"id\":\"27e93261-9713-48b2-858f-a29c4f9abf02\",\"z\":17,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Put Bucket Tags via CLI\"},\".p_id\":{\"text\":\"5f92a2f3da3961001ab1a0c4\"},\"image\":{\"xlink:href\":\"/plugins/CommandLine/CommandLine.png\",\"ref-y\":50},\"text\":{\"text\":\"Put Bucket Tags via CLI\"}}},{\"type\":\"link\",\"source\":{\"id\":\"27e93261-9713-48b2-858f-a29c4f9abf02\",\"port\":\"  \"},\"target\":{\"id\":\"27e93261-9713-48b2-858f-a29c4f9abf02\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"a919d591-26f2-4ba2-b0fb-33111d9529d5\",\"z\":18,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"e5e4200d-7301-465c-978e-b90e6cf1dfa1\",\"port\":\" \"},\"target\":{\"id\":\"519fdb99-9a33-4cdf-bd56-32eef639c101\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"ab4cfcf2-2fc6-40a7-aae8-68e93652b69d\",\"z\":19,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"519fdb99-9a33-4cdf-bd56-32eef639c101\",\"port\":\"  \"},\"target\":{\"id\":\"27e93261-9713-48b2-858f-a29c4f9abf02\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"5c4dcdbb-086b-4d0a-b06e-44e47b892dad\",\"z\":20,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"519fdb99-9a33-4cdf-bd56-32eef639c101\",\"port\":\"  \"},\"target\":{\"id\":\"78f4596b-2db2-4a03-b4ac-6e88739d0219\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"2e39c798-8929-42b2-ae57-e3e72a1fa859\",\"z\":21,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"519fdb99-9a33-4cdf-bd56-32eef639c101\",\"port\":\"  \"},\"target\":{\"id\":\"a9ba8b89-6d21-49fb-8e5d-979c38dc1af6\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"1d1608f7-1c76-43cd-93cb-ac2912ecde86\",\"z\":22,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"519fdb99-9a33-4cdf-bd56-32eef639c101\",\"port\":\"  \"},\"target\":{\"id\":\"dbadd34f-dc84-4526-8218-b49c02ffc5f6\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"9bb19d05-0c07-4b28-8e45-2f070cbf27a8\",\"z\":23,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"519fdb99-9a33-4cdf-bd56-32eef639c101\",\"port\":\"  \"},\"target\":{\"id\":\"27e93261-9713-48b2-858f-a29c4f9abf02\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"d08b76f1-a2f4-4dec-a71c-65d6d1b08ab9\",\"z\":24,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"a532664a-7a17-44fb-b4ee-efe647c102a2\",\"port\":\"  \"},\"target\":{\"id\":\"27e93261-9713-48b2-858f-a29c4f9abf02\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"190e6dee-a96b-4a8f-9565-c12f0f3e2b14\",\"z\":25,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}}]}",
+    "content": "{\"cells\":[{\"type\":\"devs.PMStartPoint\",\"size\":{\"width\":40,\"height\":39},\"outPorts\":[\" \"],\"inPorts\":[],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\" \"}}}]},\"position\":{\"x\":50,\"y\":20},\"angle\":0,\"id\":\"e5e4200d-7301-465c-978e-b90e6cf1dfa1\",\"z\":1,\"attrs\":{\"rect\":{\"fill\":\"#2d3236\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":232,\"y\":-150},\"angle\":0,\"id\":\"a532664a-7a17-44fb-b4ee-efe647c102a2\",\"z\":2,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Get event details\"},\".p_id\":{\"text\":\"6023b2e264b1160034fd9b9f\"},\"image\":{\"xlink:href\":\"/plugins/lacework/lacework.png\",\"ref-y\":50},\"text\":{\"text\":\"Get event details\"}}},{\"type\":\"link\",\"source\":{\"id\":\"e5e4200d-7301-465c-978e-b90e6cf1dfa1\",\"port\":\" \"},\"target\":{\"id\":\"a532664a-7a17-44fb-b4ee-efe647c102a2\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"835aef4e-d337-49b5-8789-ffc8edfe8057\",\"z\":3,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":717,\"y\":7},\"angle\":0,\"id\":\"dbadd34f-dc84-4526-8218-b49c02ffc5f6\",\"z\":4,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"AutoRemediate via CLI\"},\".p_id\":{\"text\":\"5f92a2f3da3961001ab1a0c4\"},\"image\":{\"xlink:href\":\"/plugins/CommandLine/CommandLine.png\",\"ref-y\":50},\"text\":{\"text\":\"AutoRemediate via CLI\"}}},{\"type\":\"link\",\"source\":{\"id\":\"a532664a-7a17-44fb-b4ee-efe647c102a2\",\"port\":\"  \"},\"target\":{\"id\":\"dbadd34f-dc84-4526-8218-b49c02ffc5f6\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"7ae2c1be-a604-41ed-adf2-798236b81db4\",\"z\":5,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"dbadd34f-dc84-4526-8218-b49c02ffc5f6\",\"port\":\"  \"},\"target\":{\"id\":\"dbadd34f-dc84-4526-8218-b49c02ffc5f6\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"fe9a1103-385d-4078-9250-ac2f081c6f4b\",\"z\":6,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":1330,\"y\":13},\"angle\":0,\"id\":\"78f4596b-2db2-4a03-b4ac-6e88739d0219\",\"z\":7,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Remediated\"},\".p_id\":{\"text\":\"5f92a31fda3961001ab1a1a6\"},\"image\":{\"xlink:href\":\"/plugins/Slack/Slack_Icon.png\",\"ref-y\":50},\"text\":{\"text\":\"Remediated\"}}},{\"type\":\"link\",\"source\":{\"id\":\"a532664a-7a17-44fb-b4ee-efe647c102a2\",\"port\":\"  \"},\"target\":{\"id\":\"78f4596b-2db2-4a03-b4ac-6e88739d0219\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"1bb2636a-37b4-47c2-9cdc-6096a4c5f810\",\"z\":8,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"78f4596b-2db2-4a03-b4ac-6e88739d0219\",\"port\":\"  \"},\"target\":{\"id\":\"78f4596b-2db2-4a03-b4ac-6e88739d0219\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"a849f413-f545-4484-8ddc-7e041c56cbdb\",\"z\":9,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":518,\"y\":7},\"angle\":0,\"id\":\"a9ba8b89-6d21-49fb-8e5d-979c38dc1af6\",\"z\":10,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"AutoRemediate via Object\"},\".p_id\":{\"text\":\"6047970a887b2000347ea8bd\"},\"image\":{\"xlink:href\":\"/plugins/Amazon-aws-s3/logo.png\",\"ref-y\":50},\"text\":{\"text\":\"AutoRemediate via Object\"}}},{\"type\":\"link\",\"source\":{\"id\":\"a532664a-7a17-44fb-b4ee-efe647c102a2\",\"port\":\"  \"},\"target\":{\"id\":\"a9ba8b89-6d21-49fb-8e5d-979c38dc1af6\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"afa61b76-47da-4f5b-a7ab-352421804890\",\"z\":11,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"a9ba8b89-6d21-49fb-8e5d-979c38dc1af6\",\"port\":\"  \"},\"target\":{\"id\":\"a9ba8b89-6d21-49fb-8e5d-979c38dc1af6\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"384b62c8-3c96-4409-8df6-3333cffddfd2\",\"z\":12,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":1517,\"y\":5},\"angle\":0,\"id\":\"8cbc2b7c-28be-4093-826b-ef93b4495ffc\",\"z\":13,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Ignored\"},\".p_id\":{\"text\":\"5f92a31fda3961001ab1a1a6\"},\"image\":{\"xlink:href\":\"/plugins/Slack/Slack_Icon.png\",\"ref-y\":50},\"text\":{\"text\":\"Ignored\"}}},{\"type\":\"link\",\"source\":{\"id\":\"8cbc2b7c-28be-4093-826b-ef93b4495ffc\",\"port\":\"  \"},\"target\":{\"id\":\"8cbc2b7c-28be-4093-826b-ef93b4495ffc\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"655f2391-8aa4-41d7-81d3-752a49ea221c\",\"z\":15,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":238,\"y\":162},\"angle\":0,\"id\":\"519fdb99-9a33-4cdf-bd56-32eef639c101\",\"z\":16,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Get report details\"},\".p_id\":{\"text\":\"605caee52447cb003445f7f7\"},\"image\":{\"xlink:href\":\"/plugins/lacework/lacework.png\",\"ref-y\":50},\"text\":{\"text\":\"Get report details\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":1134,\"y\":7},\"angle\":0,\"id\":\"27e93261-9713-48b2-858f-a29c4f9abf02\",\"z\":17,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Put Bucket Tags via CLI\"},\".p_id\":{\"text\":\"5f92a2f3da3961001ab1a0c4\"},\"image\":{\"xlink:href\":\"/plugins/CommandLine/CommandLine.png\",\"ref-y\":50},\"text\":{\"text\":\"Put Bucket Tags via CLI\"}}},{\"type\":\"link\",\"source\":{\"id\":\"27e93261-9713-48b2-858f-a29c4f9abf02\",\"port\":\"  \"},\"target\":{\"id\":\"27e93261-9713-48b2-858f-a29c4f9abf02\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"a919d591-26f2-4ba2-b0fb-33111d9529d5\",\"z\":18,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"e5e4200d-7301-465c-978e-b90e6cf1dfa1\",\"port\":\" \"},\"target\":{\"id\":\"519fdb99-9a33-4cdf-bd56-32eef639c101\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"ab4cfcf2-2fc6-40a7-aae8-68e93652b69d\",\"z\":19,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"519fdb99-9a33-4cdf-bd56-32eef639c101\",\"port\":\"  \"},\"target\":{\"id\":\"27e93261-9713-48b2-858f-a29c4f9abf02\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"5c4dcdbb-086b-4d0a-b06e-44e47b892dad\",\"z\":20,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"519fdb99-9a33-4cdf-bd56-32eef639c101\",\"port\":\"  \"},\"target\":{\"id\":\"78f4596b-2db2-4a03-b4ac-6e88739d0219\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"2e39c798-8929-42b2-ae57-e3e72a1fa859\",\"z\":21,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"519fdb99-9a33-4cdf-bd56-32eef639c101\",\"port\":\"  \"},\"target\":{\"id\":\"a9ba8b89-6d21-49fb-8e5d-979c38dc1af6\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"1d1608f7-1c76-43cd-93cb-ac2912ecde86\",\"z\":22,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"519fdb99-9a33-4cdf-bd56-32eef639c101\",\"port\":\"  \"},\"target\":{\"id\":\"dbadd34f-dc84-4526-8218-b49c02ffc5f6\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"9bb19d05-0c07-4b28-8e45-2f070cbf27a8\",\"z\":23,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"519fdb99-9a33-4cdf-bd56-32eef639c101\",\"port\":\"  \"},\"target\":{\"id\":\"27e93261-9713-48b2-858f-a29c4f9abf02\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"d08b76f1-a2f4-4dec-a71c-65d6d1b08ab9\",\"z\":24,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"a532664a-7a17-44fb-b4ee-efe647c102a2\",\"port\":\"  \"},\"target\":{\"id\":\"27e93261-9713-48b2-858f-a29c4f9abf02\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"190e6dee-a96b-4a8f-9565-c12f0f3e2b14\",\"z\":25,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":931,\"y\":8},\"angle\":0,\"id\":\"c0cadde7-0799-43c6-848d-b5c043325a25\",\"z\":26,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Put Bucket Tags via Object\"},\".p_id\":{\"text\":\"606f7c0bf55a170034daa2a0\"},\"image\":{\"xlink:href\":\"/plugins/AWS-resource-groups-tagging/logo.png\",\"ref-y\":50},\".inPorts circle\":{\"fill\":\"#c8c8c8\"},\".outPorts circle\":{\"fill\":\"#262626\"},\"text\":{\"text\":\"Put Bucket Tags via Object\"}}},{\"type\":\"link\",\"source\":{\"id\":\"c0cadde7-0799-43c6-848d-b5c043325a25\",\"port\":\"  \"},\"target\":{\"id\":\"c0cadde7-0799-43c6-848d-b5c043325a25\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"8f6320b2-6e7f-4e0e-a560-59009c341868\",\"z\":27,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"a532664a-7a17-44fb-b4ee-efe647c102a2\",\"port\":\"  \"},\"target\":{\"id\":\"c0cadde7-0799-43c6-848d-b5c043325a25\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"6df2045e-24c9-406a-9ed6-3404da0b02fb\",\"z\":28,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"519fdb99-9a33-4cdf-bd56-32eef639c101\",\"port\":\"  \"},\"target\":{\"id\":\"c0cadde7-0799-43c6-848d-b5c043325a25\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"e57ada34-b1b0-4daa-a6d7-39129e319405\",\"z\":29,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"a532664a-7a17-44fb-b4ee-efe647c102a2\",\"port\":\"  \"},\"target\":{\"id\":\"8cbc2b7c-28be-4093-826b-ef93b4495ffc\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"06e0d6bb-f3c1-4b94-8579-a4e92c5d282b\",\"z\":30,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"519fdb99-9a33-4cdf-bd56-32eef639c101\",\"port\":\"  \"},\"target\":{\"id\":\"8cbc2b7c-28be-4093-826b-ef93b4495ffc\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"3edffe82-d14c-4e16-b3ab-0c6f67550f38\",\"z\":31,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}}]}",
     "used_plugins": [
         {
             "name": "lacework",
@@ -468,8 +575,16 @@
         {
             "name": "Slack",
             "version": "1.1.0"
+        },
+        {
+            "name": "lacework",
+            "version": "1.2.0"
+        },
+        {
+            "name": "CommandLine",
+            "version": "1.2.0"
         }
     ],
     "__v": 0,
-    "code": "// Default variables for this Map\nvar bucketArr = []; // Array of S3 Buckets that will be used for the Auto Remediation.\nvar indexRemediate = 0; // Index for the S3 Bucket Auto Remediation Lopps of the Map.\nvar indexSlack = 0; // Index of the Slack Loop of the map to send out information about the S3 Buckets that will be used for Auto Remediation.\nvar bucketIgnoredArr = []; // Array of S3 Buckets that are violating but will be ignored based in the bucketIgnoreList list in the configuration.\nvar indexIgnored = 0; //Index of the S3 Buckets for slack loop that are violating but will be ignored.\nvar indexTag = 0; // Index for setting tags for the ignored S3 buckets so they will be suppressed after the next compliance check.\nvar indexFileCreation = 0 // Index for the tag JSON file creation loop\nlet payload = trigger.payload; // The Payload that was send by the Webhook Trigger. Information about the Payload is available at https://support.lacework.com/hc/en-us/articles/360034367393-Webhook\nvar link; // Link used for Slack messages to send out about the event and report.\n\n\n// Object \"Get event details\" functions:\nfunction checkconfigurationforevent() { // Function to check if CLI and Object remediation is enabled and if a Payload is send via the Webhook.\n    if (configuration.dotheremediationviacli == \"true\" && configuration.dotheremediationviaobject == \"true\") {\n        return 0;\n    }\n    else if (payload !== null) // Don't try to get the Events if the payload is not defined.\n    {\n        return 1;\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction createBucketList() { // Function to build the S3 Bucket List that will be used for Auto Remediation.\n    let p = configuration.eventuuid;\n    let laceworkAPIResult = getAction(p);\n    link = payload.event_link;\n    if (laceworkAPIResult.result.result.data[0].ENTITY_MAP.ViolationReason[0].REC_ID == configuration.policyID) {\n        if (configuration.autoremediationonlyfornewviolations == \"true\")\n        {\n            let resourcesArr = laceworkAPIResult.result.result.data[0].ENTITY_MAP.NewViolation;\n            for (let i = 0; i < resourcesArr.length; i++) {\n            if (!configuration.bucketIgnoreList.includes(resourcesArr[i].RESOURCE)) { // The S3 Bucket of the Event will be checked against the configuration list of to ignore S3 buckets.\n                bucketArr.push(resourcesArr[i].RESOURCE); // If the bucket is not on the list it will be pushed into the array.\n            }\n            else {\n                bucketIgnoredArr.push(resourcesArr[i].RESOURCE); // If the bucket is on the list and violating the policy it will be pushed into the second bucket list.\n            }\n        }\n        }\n        else\n        {\n            let resourcesArr = laceworkAPIResult.result.result.data[0].ENTITY_MAP.Resource;\n            for (let i = 0; i < resourcesArr.length; i++) {\n            if (!configuration.bucketIgnoreList.includes(resourcesArr[i].VALUE)) { // The S3 Bucket of the Event will be checked against the configuration list of to ignore S3 buckets.\n                bucketArr.push(resourcesArr[i].VALUE); // If the bucket is not on the list it will be pushed into the array.\n            }\n            else {\n                bucketIgnoredArr.push(resourcesArr[i].VALUE); // If the bucket is on the list and violating the policy it will be pushed into the second bucket list.\n            }\n        }\n        }\n    }\n}\n\nfunction geteventid() { // Function to get the Event ID from the Webhook Payload.\n    return `${payload.event_id}`;\n}\n\n// Object \"Get report details\" functions:\nfunction checkconfigurationforreport() { // Function to check if CLI and Object Auto Remediation is enabled. Also check if it is not triggered via a Webhook with a payload send.\n    if (configuration.dotheremediationviacli == \"true\" && configuration.dotheremediationviaobject == \"true\") {\n        return 0;\n    }\n    else if (payload == null) // Only trigger the Report collection if there is no payload defined.\n    {\n        return 1;\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction createBucketListfromReport() { // Function to build the S3 Bucket List that will be used to Remediate.\n    let p = configuration.reportuuid;\n    let laceworkAPIResult = getAction(p);\n    let findreason = 0;\n    let recommendationsArr = laceworkAPIResult.result.result.data[0].recommendations;\n    for (let i = 0; i < recommendationsArr.length; i++) {\n        if (recommendationsArr[i].REC_ID == configuration.policyID) {\n            link = recommendationsArr[i].INFO_LINK;\n            findreason = i;\n        }\n        else {\n            // Didn't found the right reason\n        }\n    }\n    let resourcesArr = laceworkAPIResult.result.result.data[0].recommendations[findreason].VIOLATIONS;\n    for (let i = 0; i < resourcesArr.length; i++) {\n        if (!configuration.bucketIgnoreList.includes(resourcesArr[i].resource)) { // The S3 Bucket of the Event will be checked against the configuration list of to ignore S3 buckets.\n            bucketArr.push(resourcesArr[i].resource); // If the bucket is not on the list it will be pushed into the array.\n        }\n        else {\n            bucketIgnoredArr.push(resourcesArr[i].resource); // If the bucket is on the list and violating the policy it will be pushed into the second bucket list.\n        }\n    }\n}\n\nfunction getawsaccountid() {\n    return `${configuration.awsaccountid}`;\n}\n\n// Object \"Put Bucket Tags via CLI\" functions:\nfunction checkputbuckettagsviacli() { //Check if AWS Tags should be added to the S3 bucket.\n   if (configuration.putbuckettagging == \"true\") {\n        if (indexTag < bucketIgnoredArr.length) {\n            return 1;\n        }\n        else {\n            return 0;\n        }\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction putbuckettagging(){ // Put the S3 Bucket tags for suppression.\n    let bucket = bucketIgnoredArr[indexTag];\n    let arr = bucket.split(\":::\");\n    return `aws resourcegroupstaggingapi tag-resources --resource-arn-list ${bucketIgnoredArr[indexTag]} --tags ${configuration.tagname}=${configuration.tagvalue}` ; //Using the put-bucket-tagging to create the tags of the S3 buckets\n}\n\n// Object \"AutoRemediate via Object\" functions:\nfunction checkremediationviaobject() //Check if the Remedation should be done via the Object?\n{\n    if (configuration.dotheremediationviaobject == \"true\") {\n        if (indexRemediate < bucketArr.length) {\n            return 1;\n        }\n        else {\n            return 0;\n        }\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction remediateviaobject() { // Remediate the S3 buckets back to private acl.\n    let bucket = bucketArr[indexRemediate];\n    let arr = bucket.split(\":::\");\n    return `${arr[arr.length - 1]}`; //Using the canned acl private.\n}\n\n// Object \"AutoRemediate via CLI\" functions:\nfunction checkremediationviacli() //Check if the Remedation should be done via the CLI?\n{\n    if (configuration.dotheremediationviacli == \"true\") {\n        if (indexRemediate < bucketArr.length) {\n            return 1;\n        }\n        else {\n            return 0;\n        }\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction printBucketName() { // Function to print the S3 buckets that will be remediated.\n    let bucket = bucketArr[indexRemediate]\n    let arr = bucket.split(\":::\")\n    return `echo Compliance Violation ${configuration.policyID} for the S3 bucket ${arr[arr.length - 1]}`;\n}\n\nfunction remediateviaawscli() { // Remediate the S3 buckets back to private acl.\n    let bucket = bucketArr[indexRemediate];\n    let arr = bucket.split(\":::\");\n    return `aws s3api put-bucket-acl --bucket ${arr[arr.length - 1]} --acl private`; //Using the setting --acl private. Feel free to replace it with whatever you think is the right aws cli command to trigger.\n}\n\n// Object \"Remediated\" functions:\nfunction sendslackmessage() { // Function to send out a slack message for every S3 bucket that will be remediated.\n    let bucket = bucketArr[indexSlack];\n    let arr = bucket.split(\":::\");\n    if (configuration.dotheremediationviacli == \"true\") {\n        return `Compliance Violation ${configuration.policyID} The following S3 bucket is auto remediated back to ${configuration.violationdescription}: ${arr[arr.length - 1]}. Using AWS CLI command to do the remediation of the bucket. More information about the event is available at ${link}`;\n    }\n    else if (configuration.dotheremediationviaobject == \"true\") {\n        return `Compliance Violation ${configuration.policyID} The following S3 bucket is auto remediated back to ${configuration.violationdescription}: ${arr[arr.length - 1]}. Using the Kaholo S3 object to do the remediation of the bucket. More information about the event is available at ${link}`;\n    }\n    else {\n        return `Compliance Violation ${configuration.policyID}. Auto Remediation is diabled! The following S3 bucket would be auto remediated back to ${configuration.violationdescription}: ${arr[arr.length - 1]}. Would execute CLI command aws s3api put-bucket-acl --bucket ${arr[arr.length - 1]} --acl private. More information about the event is available at ${link}`;\n    }\n}\n\n// Object \"Ignored\" functions:\nfunction checkforignoredslack() { //Check if you want to also see the ignored buckets via the slack messages.\n    if (indexSlack == bucketArr.length && indexIgnored < bucketIgnoredArr.length && configuration.sendslackmessagesforignored == \"true\") {\n        return 1;\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction sendslackmessageforignored() { // Function to send out a slack message for every S3 bucket that will be ignored but is violating the policy.\n    let bucket = bucketIgnoredArr[indexIgnored];\n    let arr = bucket.split(\":::\");\n    return `Compliance Violation ${configuration.policyID} The following S3 bucket is NOT remediated back to ${configuration.violationdescription}: ${arr[arr.length - 1]}. It is ignored by the configuration of the Map. We recommend using tags in AWS to suppress this S3 bucket from triggering alerts in Lacework. More information about the event is available at ${link}`;\n}\n\n// Help Functions for all Objects.\nfunction getAction(pId) {  // Help function to get the return value of the event.\n    let p = getProcessById(pId)//Get the process. \n    if (!p || !p.length) return;\n    p = p[p.length - 1].actions; //Get all actions \n    let action = p[Object.keys(p)[0]];//get the needed action \n    return action\n}"
+    "code": "// Default variables for this Map\nvar bucketArr = []; // Array of S3 Buckets that will be used for the Auto Remediation.\nvar indexRemediate = 0; // Index for the S3 Bucket Auto Remediation Lopps of the Map.\nvar indexSlack = 0; // Index of the Slack Loop of the map to send out information about the S3 Buckets that will be used for Auto Remediation.\nvar bucketIgnoredArr = []; // Array of S3 Buckets that are violating but will be ignored based in the bucketIgnoreList list in the configuration.\nvar indexIgnored = 0; //Index of the S3 Buckets for slack loop that are violating but will be ignored.\nvar indexTag = 0; // Index for setting tags for the ignored S3 buckets so they will be suppressed after the next compliance check.\nvar indexFileCreation = 0 // Index for the tag JSON file creation loop\nlet payload = trigger.payload; // The Payload that was send by the Webhook Trigger. Information about the Payload is available at https://support.lacework.com/hc/en-us/articles/360034367393-Webhook\nvar link; // Link used for Slack messages to send out about the event and report.\nvar event_aws_accountid; // AWS Account ID for the Event or the Report against it will run the CLI commands or Objects. Will be read out from the Event itself.\nvar event_aws_account_key; // AWS Account Key variable to get the value from the vault.\nvar event_aws_secret_key; // AWS Secret Key variable to get the value from the vault.\n\n// Object \"Get event details\" functions:\nfunction checkconfigurationforevent() { // Function to check if CLI and Object remediation is enabled and if a Payload is send via the Webhook.\n    if (configuration.dotheremediationviacli == \"true\" && configuration.dotheremediationviaobject == \"true\") {\n        return 0;\n    }\n    else if (payload !== null) // Don't try to get the Events if the payload is not defined.\n    {\n        return 1;\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction createBucketList() { // Function to build the S3 Bucket List that will be used for Auto Remediation.\n    let p = configuration.eventuuid;\n    let laceworkAPIResult = getAction(p);\n    link = payload.event_link;\n    if (laceworkAPIResult.result.result.data[0].ENTITY_MAP.ViolationReason[0].REC_ID == configuration.policyID) {\n        event_aws_accountid = laceworkAPIResult.result.result.data[0].ENTITY_MAP.RecId[0].ACCOUNT_ID;\n        event_aws_account_key = event_aws_accountid;\n        event_aws_account_key += \"_aws_access_key_id\";\n        event_aws_secret_key = event_aws_accountid;\n        event_aws_secret_key += \"_aws_secret_access_key\";\n        if (configuration.autoremediationonlyfornewviolations == \"true\")\n        {\n            let resourcesArr = laceworkAPIResult.result.result.data[0].ENTITY_MAP.NewViolation;\n            for (let i = 0; i < resourcesArr.length; i++) {\n            if (!configuration.bucketIgnoreList.includes(resourcesArr[i].RESOURCE)) { // The S3 Bucket of the Event will be checked against the configuration list of to ignore S3 buckets.\n                bucketArr.push(resourcesArr[i].RESOURCE); // If the bucket is not on the list it will be pushed into the array.\n            }\n            else {\n                bucketIgnoredArr.push(resourcesArr[i].RESOURCE); // If the bucket is on the list and violating the policy it will be pushed into the second bucket list.\n            }\n        }\n        }\n        else\n        {\n            let resourcesArr = laceworkAPIResult.result.result.data[0].ENTITY_MAP.Resource;\n            for (let i = 0; i < resourcesArr.length; i++) {\n            if (!configuration.bucketIgnoreList.includes(resourcesArr[i].VALUE)) { // The S3 Bucket of the Event will be checked against the configuration list of to ignore S3 buckets.\n                bucketArr.push(resourcesArr[i].VALUE); // If the bucket is not on the list it will be pushed into the array.\n            }\n            else {\n                bucketIgnoredArr.push(resourcesArr[i].VALUE); // If the bucket is on the list and violating the policy it will be pushed into the second bucket list.\n            }\n        }\n        }\n    }\n}\n\nfunction geteventid() { // Function to get the Event ID from the Webhook Payload.\n    return `${payload.event_id}`;\n}\n\n// Object \"Get report details\" functions:\nfunction checkconfigurationforreport() { // Function to check if CLI and Object Auto Remediation is enabled. Also check if it is not triggered via a Webhook with a payload send.\n    if (configuration.dotheremediationviacli == \"true\" && configuration.dotheremediationviaobject == \"true\") {\n        return 0;\n    }\n    else if (payload == null) // Only trigger the Report collection if there is no payload defined.\n    {\n        return 1;\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction createBucketListfromReport() { // Function to build the S3 Bucket List that will be used to Remediate.\n    let p = configuration.reportuuid;\n    let laceworkAPIResult = getAction(p);\n    let findreason = 0;\n    let recommendationsArr = laceworkAPIResult.result.result.data[0].recommendations;\n    for (let i = 0; i < recommendationsArr.length; i++) {\n        if (recommendationsArr[i].REC_ID == configuration.policyID) {\n            link = recommendationsArr[i].INFO_LINK;\n            findreason = i;\n        }\n        else {\n            // Didn't found the right reason\n        }\n    }\n    let resourcesArr = laceworkAPIResult.result.result.data[0].recommendations[findreason].VIOLATIONS;\n    event_aws_accountid = configuration.awsaccountid;\n    event_aws_account_key = event_aws_accountid;\n    event_aws_account_key += \"_aws_access_key_id\";\n    event_aws_secret_key = event_aws_accountid;\n    event_aws_secret_key += \"_aws_secret_access_key\";\n    for (let i = 0; i < resourcesArr.length; i++) {\n        if (!configuration.bucketIgnoreList.includes(resourcesArr[i].resource)) { // The S3 Bucket of the Event will be checked against the configuration list of to ignore S3 buckets.\n            bucketArr.push(resourcesArr[i].resource); // If the bucket is not on the list it will be pushed into the array.\n        }\n        else {\n            bucketIgnoredArr.push(resourcesArr[i].resource); // If the bucket is on the list and violating the policy it will be pushed into the second bucket list.\n        }\n    }\n}\n\nfunction getawsaccountid() {\n    return `${configuration.awsaccountid}`;\n}\n\nfunction getreporttype() {\n    return `${configuration.reporttype}`;\n}\n\n// Object \"Put Bucket Tags via CLI\" functions:\nfunction checkputbuckettagsviacli() { //Check if AWS Tags should be added to the S3 bucket.\n   if (configuration.putbuckettaggingviacli == \"true\") {\n        if (indexTag < bucketIgnoredArr.length) {\n            return 1;\n        }\n        else {\n            return 0;\n        }\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction putbuckettagging(){ // Put the S3 Bucket tags for suppression.\n    let bucket = bucketIgnoredArr[indexTag];\n    return `aws resourcegroupstaggingapi tag-resources --resource-arn-list ${bucketIgnoredArr[indexTag]} --tags ${configuration.tagname}=${configuration.tagvalue} --profile ${event_aws_accountid}` ; //Using the put-bucket-tagging to create the tags of the S3 buckets\n}\n\n// Object \"Put Bucket Tags via Object\" functions:\nfunction checkputbuckettagsviaobject() { // Check if AWS Tags should be added to the S3 bucket.\n   if (configuration.putbuckettaggingviaobject == \"true\") {\n        if (indexTag < bucketIgnoredArr.length) {\n            return 1;\n        }\n        else {\n            return 0;\n        }\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction getawsaccesskeyfromvaultfortag() { // Get the right AWS Access Key from the Vault\n    let aws_access_key = useKey(event_aws_account_key);\n    return aws_access_key; \n}\n\nfunction getawssecretkeyfromvaultfortag() { // Get the right AWS Secret Key from the Vault\n    let aws_secret_key = useKey(event_aws_secret_key);\n    return aws_secret_key; \n}\n\nfunction getbucketnameforobject() { // Get the S3 Bucket Name for the Tag Resource Object.\n    let bucket = bucketIgnoredArr[indexTag];\n    return `${bucket}`; \n}\n\nfunction getbuckettagsforobject() { // Get the tag and tag value that will be put on the S3 bucket.\n    return `${configuration.tagname}=${configuration.tagvalue}`;\n}\n\n// Object \"AutoRemediate via Object\" functions:\nfunction checkremediationviaobject() //Check if the Remedation should be done via the Object?\n{\n    if (configuration.dotheremediationviaobject == \"true\") {\n        if (indexRemediate < bucketArr.length) {\n            return 1;\n        }\n        else {\n            return 0;\n        }\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction remediateviaobject() { // Remediate the S3 buckets back to private acl.\n    let bucket = bucketArr[indexRemediate];\n    let arr = bucket.split(\":::\");\n    return `${arr[arr.length - 1]}`;\n}\n\nfunction getawsaccesskeyfromvaultforremediation() { // Get the right AWS Access Key from the Vault\n    let aws_access_key = useKey(event_aws_account_key);\n    return aws_access_key; \n}\n\nfunction getawssecretkeyfromvaultforremediation() { // Get the right AWS Secret Key from the Vault\n    let aws_secret_key = useKey(event_aws_secret_key);\n    return aws_secret_key; \n}\n\nfunction getcannedacltype() { // Setting the Canned ACL Type for the S3 bucket.\n    return `private`;\n}\n\n// Object \"AutoRemediate via CLI\" functions:\nfunction checkremediationviacli() //Check if the Remedation should be done via the CLI?\n{\n    if (configuration.dotheremediationviacli == \"true\") {\n        if (indexRemediate < bucketArr.length) {\n            return 1;\n        }\n        else {\n            return 0;\n        }\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction printBucketName() { // Function to print the S3 buckets that will be remediated.\n    let bucket = bucketArr[indexRemediate]\n    let arr = bucket.split(\":::\")\n    return `echo Compliance Violation ${configuration.policyID} for the S3 bucket ${arr[arr.length - 1]}`;\n}\n\nfunction remediateviaawscli() { // Remediate the S3 buckets back to private acl.\n    let bucket = bucketArr[indexRemediate];\n    let arr = bucket.split(\":::\");\n    return `aws s3api put-bucket-acl --bucket ${arr[arr.length - 1]} --acl private --profile ${event_aws_accountid}`; //Using the setting --acl private. Feel free to replace it with whatever you think is the right aws cli command to trigger.\n}\n\n// Object \"Remediated\" functions:\nfunction sendslackmessage() { // Function to send out a slack message for every S3 bucket that will be remediated.\n    let bucket = bucketArr[indexSlack];\n    let arr = bucket.split(\":::\");\n    if (configuration.dotheremediationviacli == \"true\") {\n        return `Compliance Violation ${configuration.policyID} The following S3 bucket is auto remediated back to ${configuration.violationdescription}: ${arr[arr.length - 1]}. Using AWS CLI command to do the remediation of the bucket. More information about the event is available at ${link}`;\n    }\n    else if (configuration.dotheremediationviaobject == \"true\") {\n        return `Compliance Violation ${configuration.policyID} The following S3 bucket is auto remediated back to ${configuration.violationdescription}: ${arr[arr.length - 1]}. Using the Kaholo S3 object to do the remediation of the bucket. More information about the event is available at ${link}`;\n    }\n    else {\n        return `Compliance Violation ${configuration.policyID}. Auto Remediation is diabled! The following S3 bucket would be auto remediated back to ${configuration.violationdescription}: ${arr[arr.length - 1]}. Would execute CLI command aws s3api put-bucket-acl --bucket ${arr[arr.length - 1]} --acl private. More information about the event is available at ${link}`;\n    }\n}\n\n// Object \"Ignored\" functions:\nfunction checkforignoredslack() { //Check if you want to also see the ignored buckets via the slack messages.\n    if (indexIgnored < bucketIgnoredArr.length && configuration.sendslackmessagesforignored == \"true\") {\n        return 1;\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction sendslackmessageforignored() { // Function to send out a slack message for every S3 bucket that will be ignored but is violating the policy.\n    let bucket = bucketIgnoredArr[indexIgnored];\n    let arr = bucket.split(\":::\");\n    return `Compliance Violation ${configuration.policyID} The following S3 bucket is NOT remediated back to ${configuration.violationdescription}: ${arr[arr.length - 1]}. It is ignored by the configuration of the Map. We recommend using tags in AWS to suppress this S3 bucket from triggering alerts in Lacework. More information about the event is available at ${link}`;\n}\n\n// Help Functions for all Objects.\nfunction getAction(pId) {  // Help function to get the return value of the event.\n    let p = getProcessById(pId)//Get the process. \n    if (!p || !p.length) return;\n    p = p[p.length - 1].actions; //Get all actions \n    let action = p[Object.keys(p)[0]];//get the needed action \n    return action\n}\n\nfunction getvault() {\n    return `echo ${vault.test}`;\n}\n\nasync function useKey(key){\n  return vault.getValueByKey(key)\n}\n"
 }
