@@ -33,7 +33,7 @@ it
 
 ## How can i use this Map for Auto Remediation?
 
-We recommend to create a S3 test bucket and configure it to give everyone READ permission. This will generate an event and alert inside Lacework during the next compliance check. By default the compliance check is done once per day (every 24 hours). You can initiate to create a compliance check for CIS Benchmarks via the Lacework GUI or the API. When the compliance check is finished and a new violation of the policy was detected an event will be generated that can then be used to test the Auto Remediation of this Map via Webhook triggers or alerts.
+We recommend to create an S3 test bucket and configure it to give everyone READ permission. This will generate an event and sends an alert inside Lacework during the next compliance check. By default the compliance check is done once per day (every 24 hours). You can initiate to create a compliance check for CIS Benchmarks via the Lacework GUI or the API. When the compliance check is finished and a new violation of the policy was detected an event will be generated that can then be used to test the Auto Remediation of this map via webhook triggers or alerts.
 
 You can use the following AWS CLI command to configure an existing S3 test bucket to give everyone READ permission:
 
@@ -41,7 +41,7 @@ You can use the following AWS CLI command to configure an existing S3 test bucke
 aws s3api put-bucket-acl --bucket <YOURBUCKETNAME> --acl public-read
 ```
 
-**Note:** Make sure you configure the **YOURBUCKETNAME** with the name of the S3 test bucket you would like to use for tests. Don't use any S3 bucket with important data! This is for testing of this map only and it should not have any important data.
+**Note:** Make sure you configure the **YOURBUCKETNAME** with the name of the S3 test bucket you would like to use for tests. Don't use any S3 bucket with important data! This is for the testing of this map only and it should not have any important data.
 
 ## Import the Map
 
@@ -67,7 +67,7 @@ Make sure that the Map Webhook Trigger is configured with the following configur
 
 <img src="LW_S3_1_Trigger.png" width="269" height="608">
 
-1. The Configuration setting needs to be configured with **LaceworkConfig** to make sure the Configuration LaceworkConfig is used when the map is triggered.
+1. The Configuration setting needs to be configured with **LaceworkConfig** to make sure the Configuration **LaceworkConfig** is used when the map is triggered.
 2. The Plugin setting needs to be configured with the Lacework Webhook Plugin **kaholo-trigger-lacework**
 3. For the Method setting you need to select **Lacework Alert**
 4. The Variable **Event type** needs to be configured with Value **Compliance**
@@ -111,19 +111,19 @@ Make sure you configure the following configurations inside the **LaceworkConfig
 
 #### General Settings
 
-1. **eventuuid:** Make sure that the **UUID** used here is the UUID of the **Get event details** object inside the map. Due to the reimport of the Map the **UUID** of the event object could have changed. To check the UUID you can go to the Design of the map, open the **Get event details** building block.
+1. **eventuuid:** Make sure that the **uuid** used here is the uuid of the **Get event details** object inside the map. Due to the reimport of the Map the **uuid** of the event object could have changed. To check the uuid you can go to the Design of the map, open the **Get event details** building block.
 
 ![Get Event](geteventdetails.png "Get Event")
 
-Inside the configuration of the **Get event details** building block you will find the **UUID**:
+Inside the configuration of the **Get event details** building block you will find the **uuid**:
 
 ![Get Event Details](geteventdetails2.png "Get Event")
 
-2. **reportuuid:** Make sure that the **UUID** used here is the UUID of the **Get report details** object inside the map. Due to the reimport of the Map the **UUID** of the event object could have changed. To check the UUID you can go to the Design of the map, open the **Get report details** building block.
+2. **reportuuid:** Make sure that the **uuid** used here is the uuid of the **Get report details** object inside the map. Due to the reimport of the Map the **uuid** of the event object could have changed. To check the uuid you can go to the Design of the map, open the **Get report details** building block.
 
 ![Get Event](getreportdetails.png "Get Event")
 
-Inside the configuration of the **Get report details** building block you will find the **UUID**:
+Inside the configuration of the **Get report details** building block you will find the **uuid**:
 
 ![Get Report Details](getreportdetails2.png "Get Event")
 
@@ -141,7 +141,14 @@ For the command to execute successful it is important that you add the AWS Accou
 
 5. **putbuckettaggingviaobject**: If you configure this settings to **true** it will add the **tagname** and **tagvalue** for each S3 bucket that is ignored via the **bucketIngoreList** by using the [Kaholo AWS Resource Groups tagging Plugin](https://github.com/Kaholo/kaholo-plugin-aws-resource-groups-tagging). This can be helpful to configure the policy to suppress every S3 bucket that is having this **tagname** and **tagvalue** as advanced suppression configured.
 
-6. **reporttype**: You can define the Report Type the Map should run against, you can choose between **AWS_CIS_S3**, **NIST_800-53_Rev4**, **NIST_800-171_Rev2**, **ISO_2700**, **HIPAA**, **SOC**, or **PCI**
+6. **reporttype**: You can define the Report Type the Map should run against, you can choose between:
+  1. **AWS_CIS_S3 (AWS CIS Benchmark and S3 Report)**
+  2. **NIST_800-53_Rev4 (AWS NIST 800-53 Report)**
+  3. **NIST_800-171_Rev2 (AWS NIST 800-171 Report)**
+  4. **ISO_2700 (AWS ISO27001:2013 Report)**
+  5. **HIPAA (AWS HIPAA Report)**
+  6. **SOC (AWS SOC2 Report)**
+  7. **PCI (AWS PCI DSS Report)**
 
 #### Auto Remediation
 
