@@ -78,7 +78,6 @@ Make sure that the Map Webhook Trigger is configured with the following configur
 
 This configuration will make sure that this map is only triggered if the **event_description** of the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) includes the **LW_S3_10** Event ID.
 
-
 ### Configuration of the Map
 
 By default the map is using the **LaceworkConfig** configurations that are imported as part of the map.
@@ -154,7 +153,6 @@ For the command to execute successful it is important that you add the AWS Accou
   * **PCI** (AWS PCI DSS Report)
 
 #### Auto Remediation
-
 
 For the Auto Remediation you need to decide if you would like to Auto Remediate by using the AWS CLI or the Kaholo S3 Bucket Object.
 
