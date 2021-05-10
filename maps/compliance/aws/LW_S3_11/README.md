@@ -339,7 +339,7 @@ You need to define the following least privilege policy inside your AWS IAM conf
 
 ## What features are supported with this Map? Release Notes
 
-The Map Version 1.0 (06th of May 2021) supports the following:
+The Map Version 1.0 (10th of May 2021) supports the following:
 * Auto Remediation via the [AWS Command Line Interface](https://aws.amazon.com/cli/)
 * Auto Remediation via the [Kaholo S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3)
 * Adding S3 Bucket Tags for Advanded Suppression via the [AWS Command Line Interface](https://aws.amazon.com/cli/)
