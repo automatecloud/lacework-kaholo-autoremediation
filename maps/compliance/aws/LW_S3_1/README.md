@@ -60,7 +60,7 @@ The **LW_S3_1** map currently has the following map design:
 * The map will trigger the **Put Bucket Tags via CLI** object if you configured the **putbuckettaggingviacli** of the **LaceworkConfig** equals **true**. It will use the **tagname** and **tagvalue** to put these tags for every bucket that is in violation with the rule and ignored via the **bucketIgnoreList** of the **LaceworkConfig**.
 * The map will send out a Slack message for each S3 bucket that will be remediated to the Webhook you configured by using the **Remediated** Slack object.
 * If you enabled the configuration to send out slack messages for ignored S3 buckets inside the LaceworkConfig of the map to **sendslackmessagesforignored** equals **true** it will send out a slack message for each bucket that is violating the policy and ignored by the configuration to the Webhook you configured via the **Ignored** Slack object.
-* The map will trigger the **Get suppression configuration** if you configured the **configuresuppressiononpolicy** equals **true**. It will read out the current suppression configuration for the **rec_id** and reconfigure it with the object **Configure Suppression via Tags** to the configuration **tagname**, **tagvalue** and **suppressionpolicycomment** if the current tag name is not equal **tagname** and/or the current tag value is not equal **tagvalue**.
+* The map will trigger the **Get current suppression configuration** if you configured the **configuresuppressiononpolicy** equals **true**. It will read out the current suppression configuration for the **rec_id** and reconfigure it with the object **Configure Suppression via Tags** to the configuration **tagname**, **tagvalue** and **suppressionpolicycomment** if the current tag name is not equal **tagname** and/or the current tag value is not equal **tagvalue**.
 
 ### Map trigger
 
@@ -132,7 +132,7 @@ Inside the configuration of the **Get report details** building block you will f
 
 ![Get Report Details](getreportdetails2.png "Get Event")
 
-3. **suppressionuuid:** Make sure that the **uuid** used here is the uuid of the **Get suppression configuration** object inside the map. Due to the reimport of the Map the **uuid** of the event object could have changed. To check the uuid you can go to the Design of the map, open the **Get suppression configuration** building block.
+3. **suppressionuuid:** Make sure that the **uuid** used here is the uuid of the **Get current suppression configuration** object inside the map. Due to the reimport of the Map the **uuid** of the event object could have changed. To check the uuid you can go to the Design of the map, open the **Get current suppression configuration** building block.
 
 ![Get Suppression](getsuppressiondetails.png "Get Event")
 
