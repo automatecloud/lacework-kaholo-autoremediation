@@ -136,7 +136,7 @@ Inside the configuration of the **Get report details** building block you will f
 
 ![Get Suppression](getsuppressiondetails.png "Get Event")
 
-Inside the configuration of the **Get suppression configuration** building block you will find the **uuid**:
+Inside the configuration of the **Get current suppression configuration** building block you will find the **uuid**:
 
 ![Get Suppression Details](getsuppressiondetails2.png "Get Event")
 
