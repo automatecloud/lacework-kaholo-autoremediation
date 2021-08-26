@@ -62,6 +62,7 @@ The **LW_S3_10** map currently has the following map design:
 * The map will trigger the **Put Bucket Tags via CLI** object if you configured the **putbuckettaggingviacli** of the **LaceworkConfig** equals **true**. It will use the **tagname** and **tagvalue** to put these tags for every bucket that is in violation with the rule and ignored via the **bucketIgnoreList** of the **LaceworkConfig**.
 * The map will send out a Slack message for each S3 bucket that will be remediated to the Webhook you configured by using the **Remediated** Slack object.
 * If you enabled the configuration to send out slack messages for ignored S3 buckets inside the LaceworkConfig of the map to **sendslackmessagesforignored** equals **true** it will send out a slack message for each bucket that is violating the policy and ignored by the configuration to the Webhook you configured via the **Ignored** Slack object.
+* The map will trigger the **Get current suppression configuration** if you configured the **configuresuppressiononpolicy** equals **true**. It will read out the current suppression configuration for the **rec_id** and reconfigure it with the object **Configure Suppression via Tags** to the configuration **tagname**, **tagvalue** and **suppressionpolicycomment** if the current tag name is not equal **tagname** and/or the current tag value is not equal **tagvalue**.
 
 ### Map trigger
 
@@ -75,6 +76,7 @@ Make sure that the Map Webhook Trigger is configured with the following configur
 4. The Variable **Event type** needs to be configured with Value **Compliance**
 5. The Variable **Event ID** needs to be configured with Value **LW_S3_10**.
 6. The Variable **Event Severity** needs to be configured with the Value **Any** or **High**
+7. Make sure to enable the Checkbox **Include Higher Severities**.
 
 This configuration will make sure that this map is only triggered if the **event_description** of the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) includes the **LW_S3_10** Event ID.
 
