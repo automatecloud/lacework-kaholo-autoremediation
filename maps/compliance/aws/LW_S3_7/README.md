@@ -78,7 +78,7 @@ Make sure that the Map Webhook Trigger is configured with the following configur
 6. The Variable **Event Severity** needs to be configured with the Value **Any** or **High**
 7. Make sure to enable the Checkbox **Include Higher Severities**.
 
-This configuration will make sure that this map is only triggered if the **event_description** of the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) includes the **LW_S3_7** Event ID.
+This configuration will make sure that this map is only triggered if the **rec_id** of the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) is equal to the **LW_S3_7** Event ID.
 
 ### Configuration of the Map
 
