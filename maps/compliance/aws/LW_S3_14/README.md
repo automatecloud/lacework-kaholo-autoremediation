@@ -86,14 +86,14 @@ By default the map has the following configurations:
 ```
 {
     "name": "LaceworkConfiguration",
-    "policyID": "LW_S3_14",
+    "rec_id": "LW_S3_14",
     "violationdescription": "Ensure all data stored in the S3 bucket is securely encrypted at rest",
     "eventuuid": "ca0b0207-f5a3-4789-a4b9-1797f2dbd5a1",
     "reportuuid": "0ada522a-6887-447a-962d-83b266faa6b4",
     "enablebucketencryptionviacli": "false",
     "enablebucketencryptionviaobject": "false",
-    "sendslackmessagesforignored": "true",
-    "bucketIgnoreList": [
+    "sendslackmessagesforignored": "false",
+    "bucketIgnoreList":[
         "arn:aws:s3:::mybucket01",
         "arn:aws:s3:::mybucket02",
         "arn:aws:s3:::mybucket03"
@@ -104,7 +104,10 @@ By default the map has the following configurations:
     "putbuckettaggingviaobject": "false",
     "tagname": "LW_S3_14",
     "tagvalue": "suppressed",
+    "configuresuppressiononpolicy": "false",
+    "suppressionpolicycomment": "Auto Configured via Kaholo",
     "autoremediationonlyfornewviolations": "false",
+    "suppressionuuid": "1d794038-3910-43ae-a87d-32f51cd2975e",
     "inputfolder": "/usr/src/app/scripts/input/",
     "encryptionconfiguration": {
         "Rules": [
@@ -120,7 +123,6 @@ By default the map has the following configurations:
 Make sure you configure the following configurations inside the **LaceworkConfig** Configuration of the map
 
 #### General Settings
-
 
 1. **eventuuid:** Make sure that the **uuid** used here is the uuid of the **Get event details** object inside the map. Due to the reimport of the Map the **uuid** of the event object could have changed. To check the uuid you can go to the Design of the map, open the **Get event details** building block.
 
@@ -138,9 +140,17 @@ Inside the configuration of the **Get report details** building block you will f
 
 ![Get Report Details](getreportdetails2.png "Get Event")
 
-3. **bucketIgnoreList(Optional):** You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 bucket names that should be ignored within the **bucketIgnoreList** of the **LaceworkConfig**.
+3. **suppressionuuid:** Make sure that the **uuid** used here is the uuid of the **Get current suppression configuration** object inside the map. Due to the reimport of the Map the **uuid** of the event object could have changed. To check the uuid you can go to the Design of the map, open the **Get current suppression configuration** building block.
 
-4. **putbuckettaggingviacli**: If you configure this settings to **true** it will add the **tagname** and **tagvalue** for each S3 bucket that is ignored via the **bucketIngoreList** by using the AWS CLI. This can be helpful to configure the policy to suppress every S3 bucket that is having this **tagname** and **tagvalue** as advanced suppression configured.
+![Get Suppression](getsuppressiondetails.png "Get Event")
+
+Inside the configuration of the **Get current suppression configuration** building block you will find the **uuid**:
+
+![Get Suppression Details](getsuppressiondetails2.png "Get Event")
+
+4. **bucketIgnoreList(Optional):** You can configure the Map to ignore specific S3 buckets from Auto Remediation. Make sure you configured the correct AWS S3 bucket names that should be ignored within the **bucketIgnoreList** of the **LaceworkConfig**.
+
+5. **putbuckettaggingviacli**: If you configure this settings to **true** it will add the **tagname** and **tagvalue** for each S3 bucket that is ignored via the **bucketIngoreList** by using the AWS CLI. This can be helpful to configure the policy to suppress every S3 bucket that is having this **tagname** and **tagvalue** as advanced suppression configured.
 
 If you enabled it the following AWS CLI command will be used to add the tag to the S3 bucket:
 ```
@@ -150,15 +160,17 @@ If you want to know more about the aws resourcegroupstaggingapi tag-resources co
 
 For the command to execute successful it is important that you add the AWS Account ID with the id of the account as a profile to your aws cli.
 
-5. **putbuckettaggingviaobject**: If you configure this settings to **true** it will add the **tagname** and **tagvalue** for each S3 bucket that is ignored via the **bucketIngoreList** by using the [Kaholo AWS Resource Groups tagging Plugin](https://github.com/Kaholo/kaholo-plugin-aws-resource-groups-tagging). This can be helpful to configure the policy to suppress every S3 bucket that is having this **tagname** and **tagvalue** as advanced suppression configured.
+6. **putbuckettaggingviaobject**: If you configure this settings to **true** it will add the **tagname** and **tagvalue** for each S3 bucket that is ignored via the **bucketIngoreList** by using the [Kaholo AWS Resource Groups tagging Plugin](https://github.com/Kaholo/kaholo-plugin-aws-resource-groups-tagging). This can be helpful to configure the policy to suppress every S3 bucket that is having this **tagname** and **tagvalue** as advanced suppression configured.
 
-6. **reporttype**: You can define the Report Type the Map should run against, you can choose between:
+7. **reporttype**: You can define the Report Type the Map should run against, you can choose between:
   * **AWS_CIS_S3** (AWS CIS Benchmark and S3 Report)
   * **NIST_800-53_Rev4** (AWS NIST 800-53 Report)
   * **NIST_800-171_Rev2** (AWS NIST 800-171 Report)
   * **ISO_2700** (AWS ISO27001:2013 Report)
   * **HIPAA** (AWS HIPAA Report)
   * **SOC** (AWS SOC2 Report)
+
+8. **configuresuppressiononpolicy**: If you configure this setting to **true** it will add the **tagname** and **tagvalue** to the **rec_id** of the suppression configuration using the comment **suppressionpolicycomment** if it is not already configured or configured wrong.
 
 #### Auto Remediation
 
@@ -189,7 +201,7 @@ If you want to know more about the aws s3api put-bucket-logging command or want 
 
 #### Configuration of Slack Messages
 
-1. **policyID:** This shouldn't be changed. The Policy ID will be shown as part of the slack output messages. And it will be used as part of the name of the JSON Backups and Input files for the S3 buckets.
+1. **rec_id:** This shouldn't be changed. The Policy ID will be shown as part of the slack output messages. And it will be used as part of the name of the JSON Backups and Input files for the S3 buckets.
 
 2. **violationdescription:** This setting is used to send details about the event inside the slack output message. Feel free to change it for your needs.
 
@@ -235,6 +247,7 @@ export EVENTSEVERITY=1
 export WEBHOOKURL=https://mykaholoinstance.kaholo.io/webhook/lacework/alert
 export LACEWORKINSTANCE=mylaceworkinstance
 export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : LW_S3_14  Ensure all data stored in the S3 bucket is securely encrypted at rest"
+export REC_ID=LW_S3_14
 ```
 
 You need to replace the following before you apply the environment variables:
@@ -246,7 +259,7 @@ You need to replace the following before you apply the environment variables:
 With that you can trigger the webhook inside kaholo by using the following curl command:
 
 ```
-curl -X POST -H 'Content-type: application/json' --data '{"event_title": "'"$EVENTTITLE"'", "event_link": "https://'"$LACEWORKINSTANCE"'.lacework.net/ui/investigation/recents/EventDossier-'"$EVENTID"'", "lacework_account": "'"$LACEWORKINSTANCE"'", "event_source": "'"$EVENTSOURCE"'", "event_description":"'"$EVENTDESCRIPTION"'", "event_timestamp":"'"$EVENTTIMESTAMP"'", "event_type": "Compliance", "event_id": "'"$EVENTID"'", "event_severity": "'"$EVENTSEVERITY"'"}' $WEBHOOKURL
+curl -X POST -H 'Content-type: application/json' --data '{"event_title": "'"$EVENTTITLE"'", "event_link": "https://'"$LACEWORKINSTANCE"'.lacework.net/ui/investigation/recents/EventDossier-'"$EVENTID"'", "lacework_account": "'"$LACEWORKINSTANCE"'", "event_source": "'"$EVENTSOURCE"'", "event_description":"'"$EVENTDESCRIPTION"'", "event_timestamp":"'"$EVENTTIMESTAMP"'", "event_type": "Compliance", "event_id": "'"$EVENTID"'", "event_severity": "'"$EVENTSEVERITY"'", "rec_id": "'"$REC_ID"'"}' $WEBHOOKURL
 ```
 We recommend to check the Execution Results when you give it a try. With that you make sure it will remediate the right S3 buckets before you enable the auto remediation.
 
@@ -297,6 +310,10 @@ You need to define the following least privilege policy inside your AWS IAM conf
 
 ## What features are supported with this Map? Release Notes
 
+The Map Version 1.1 (27th of August 2021) supports the following additional features on top of the Map Version 1.0:
+* Supporting the new Webhook Events that now have a dedicated rec_id field. All variables have been updated to the new rec_id field.
+* Auto Suppression in Lacework by using the Suppression API with check and configure of tag and value based suppressing.
+
 The Map Version 1.0 (10th of May 2021) supports the following:
 * Auto Remediation via the [AWS Command Line Interface](https://aws.amazon.com/cli/)
 * Auto Remediation via the [Kaholo S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3)
@@ -315,7 +332,6 @@ The Map Version 1.0 (10th of May 2021) supports the following:
 
 ## Ideas for future releases
 
-* Adding Advanded Suppression inside Lacework (as soon as the API is available.)
 * Adding Auto Remediation example with Lambda functions
 * Adding Auto Remediation example with terraform
 * Adding Auto Remediation example with pulumi
