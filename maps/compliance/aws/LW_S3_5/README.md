@@ -73,7 +73,7 @@ Make sure that the Map Webhook Trigger is configured with the following configur
 2. The Plugin setting needs to be configured with the Lacework Webhook Plugin **kaholo-trigger-lacework**
 3. For the Method setting you need to select **Lacework Alert**
 4. The Variable **Event type** needs to be configured with Value **Compliance**
-5. The Variable **Event ID** needs to be configured with Value **LW_S3_5**.
+5. The Variable **Recommendation ID** needs to be configured with Value **LW_S3_5**.
 6. The Variable **Event Severity** needs to be configured with the Value **Any** or **High**
 7. Make sure to enable the Checkbox **Include Higher Severities**.
 
