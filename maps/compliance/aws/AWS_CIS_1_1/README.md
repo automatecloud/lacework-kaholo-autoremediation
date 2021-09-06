@@ -1,4 +1,4 @@
-# AutoRemediation for the Lacework Policy LW_S3_1 (under development)
+# AutoRemediation for the Lacework Policy LW_S3_1
 
 ## Description
 The "root" account has unrestricted access to all resources in the AWS account. It is highly recommended that the use of this account be avoided.
