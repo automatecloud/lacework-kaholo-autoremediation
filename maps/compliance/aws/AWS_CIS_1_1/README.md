@@ -115,11 +115,23 @@ Inside the configuration of the **Get current suppression configuration** buildi
 
 #### Auto Remediation
 
-For the Auto Remediation you need to decide if you would like to Auto Remediate by using the AWS CLI or the Kaholo IAM Object.
+For the Auto Remediation the map currently supports the deletion of every access key for the root user account so it will no longer be used via api access. For this you need to enable the **getaccesskeyviacli** to read out the AWS access keys and the **removeaccesskeyviacli** to delete the access keys. In total a AWS rootuser can only have 2 access keys.
+
+1. If you configured **getaccesskeyviacli** equals **true** the map will read out the current access keys information by using the following AWS CLI command:
+
+```
+aws iam list-access-keys --user <ROOTUSERNAME> --profile AWS-ACCOUNTID-FROM-EVENTORREPORT
+```
+
+2. If you configured the **removeaccesskeyviacli** equals **true** you must make sure to also enable the **getaccesskeyviacli** equals **true** to read out the current access keys. After that it will execute the following AWS CLI command against the maximum of two access keys:
+
+```
+aws iam delete-access-key --user <ROOTUSERNAME> --access-key-id ID-FOR-EACH-ACCESS-KEY --profile AWS-ACCOUNTID-FROM-EVENTORREPORT
+```
 
 #### Configuration of Slack Messages
 
-1. **rec_id:** This shouldn't be changed. The Policy ID will be shown as part of the slack output messages and to check if the event or the report has S3 buckets violating this policy ID.
+1. **rec_id:** This shouldn't be changed. The Policy ID will be shown as part of the slack output messages and to check if the event or the report has a root account violating this policy ID.
 
 2. **violationdescription:** This setting is used to send details about the event inside the slack output message. Feel free to change it for your needs.
 
@@ -129,7 +141,9 @@ It will send out a slack message to the configured Webhook. We recommend to conf
 
 If you don't have Slack or don't need Slack messages feel free to simply remove both Slack objects from your map.
 
-4. **sendslackmessagesforignored (Optional):** you can disable within the **LaceworkConfig** via the setting equals **false** to not send out Slack messages for S3 buckets that are violating the policy but are ignored via the **bucketIgnoreList**. By default this is configured to **true**. Reason behind is that it is best practice to suppress S3 buckets that should not be Auto Remediated by using Tags within AWS so you can configure a Suppress rule within Lacework to simply ignore them and not create events and alerts. You can use the setting **putbuckettaggingviacli** or **putbuckettaggingviaobject** to add the **tagname** and **tagvalue** for each S3 bucket that is ignored.
+4. **sendslackmessages (Optional):** you can disable within the **LaceworkConfig** via the setting equals **false** to not send slack Slack messages for a root account that is violating this policy.
+
+5. **sendslackmessagesforignored (Optional):** you can disable within the **LaceworkConfig** via the setting equals **false** to not send out Slack messages for a root account that are violating the policy but are ignored via the **IgnoreList**. By default this is configured to **true**.
 
 ## Build an example curl webhook
 
@@ -173,12 +187,14 @@ The Map supports multiple AWS accounts for events send by Lacework. You need to 
 
 We recommend to use the Map with the principals of least privilege to make sure the Auto Remediation account can only change the S3 Bucket ACL and the Resource Tags.
 
-The Map is using ...
+The Map is using (needs to be updated with least privilege)
 
 ## What features are supported with this Map? Release Notes
 
-The Map Version 1.0 supports the following:
-* Needs to be updated
+The Map Version 1.0 (6th of September 2021) supports the following:
+* Auto Remediation of to delete all access key for the root users
+* Sending Slack messages for the root accounts violating the policy
+* Sending Slack messages if the root account is ignored.
 
 ## Ideas for future releases
 
