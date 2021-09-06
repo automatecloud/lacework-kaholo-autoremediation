@@ -198,6 +198,7 @@ The Map Version 1.0 (6th of September 2021) supports the following:
 
 ## Ideas for future releases
 
+* Adding information about the least privilege role necessary to execute this map.
 * Adding Auto Remediation example with Lambda functions
 * Adding Auto Remediation example with terraform
 * Adding Auto Remediation example with pulumi
