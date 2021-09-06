@@ -42,8 +42,6 @@ The **AWS_CIS_1_1** map currently has the following map design:
 
 <img src="AWS_CIS_1_1.png">
 
-* Needs to be Added
-
 ### Map trigger
 
 Make sure that the Map Webhook Trigger is configured with the following configuration:
@@ -70,7 +68,20 @@ By default the map has the following configurations:
 {
     "name": "LaceworkConfiguration",
     "rec_id": "AWS_CIS_1_1",
-    "violationdescription": "Avod the use of the root account"
+    "violationdescription": "Avoid the use of the root account",
+    "eventuuid": "2a25ae82-c917-4cb4-945a-4408dbe65a43",
+    "reportuuid": "f6906a3a-06b8-4952-b258-c16f3e866e0c",
+    "getaccesskeyuuid": "1f0c7e66-7304-4cf0-8a84-2def08ebd7ee",
+    "getaccesskeyviacli": "false",
+    "removeaccesskeyviacli": "false",
+    "sendslackmessages": "false",
+    "sendslackmessagesforignored": "false",
+    "IgnoreList":[
+        "arn:aws:iam::123456789012:root",
+        "arn:aws:iam::123456789011:root"
+    ],
+    "awsaccountid": "123456789012",
+    "reporttype": "AWS_CIS_S3"
 }
 ```
 
@@ -94,13 +105,13 @@ Inside the configuration of the **Get report details** building block you will f
 
 ![Get Report Details](getreportdetails2.png "Get Event")
 
-3. **suppressionuuid:** Make sure that the **uuid** used here is the uuid of the **Get current suppression configuration** object inside the map. Due to the reimport of the Map the **uuid** of the event object could have changed. To check the uuid you can go to the Design of the map, open the **Get current suppression configuration** building block.
+3. **getaccesskeyuuid:** Make sure that the **uuid** used here is the uuid of the **Get Access Keys** object inside the map. Due to the reimport of the Map the **uuid** of the event object could have changed. To check the uuid you can go to the Design of the map, open the **Get Access Keys** building block.
 
-![Get Suppression](getsuppressiondetails.png "Get Event")
+![Get Suppression](getaccesskeys.png "Get Event")
 
 Inside the configuration of the **Get current suppression configuration** building block you will find the **uuid**:
 
-![Get Suppression Details](getsuppressiondetails2.png "Get Event")
+![Get Suppression Details](getaccesskeysdetails2.png "Get Event")
 
 #### Auto Remediation
 
