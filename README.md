@@ -100,7 +100,7 @@ CMD [ "npm", "start" ]
 aws configure --profile 123456789012
 ```
 
-4. Each Map instructions has a section that describes the necessary permissions, policies and roles, to make sure you can fullfil the requirement of least privelege access rights of the service account used for the Auto Remediation. 
+4. Each Map instructions has a section that describes the necessary permissions, policies and roles, to make sure you can fullfil the requirement of least privelege access rights of the service account used for the Auto Remediation.
 
 5. The Kaholo customer success team will help you to map the necessary config files similar to the following approach described at https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-docker.html.
 
@@ -134,7 +134,7 @@ LW_S3_18 | Ensure the attached S3 bucket policy does not grant global 'Get' perm
 LW_S3_19 | Ensure the attached S3 bucket policy does not grant global 'Delete' permission. | [Implemented](maps/compliance/aws/LW_S3_19/README.md) | yes | yes
 LW_S3_20 | Ensure the attached S3 bucket policy does not grant global 'List' permission. | [Implemented](maps/compliance/aws/LW_S3_20/README.md) | yes | yes
 LW_S3_21 | Ensure the attached S3 bucket policy does not grant global 'Put' permission. | [Implemented](maps/compliance/aws/LW_S3_21/README.md) | yes | yes
-AWS_CIS_1_1 | Avoid the use of the "root" account | [not implemented](maps/compliance/aws/AWS_CIS_1_1/README.md) | no | no
+AWS_CIS_1_1 | Avoid the use of the "root" account | [under development](maps/compliance/aws/AWS_CIS_1_1/README.md) | no | no
 AWS_CIS_1_2 | Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password | [not implemented](maps/compliance/aws/AWS_CIS_1_2/README.md) | no | no
 AWS_CIS_1_3 | Ensure credentials unused for 90 days or greater are disabled | [not implemented](maps/compliance/aws/AWS_CIS_1_3/README.md) | no | no
 AWS_CIS_1_4 | Ensure access keys are rotated every 90 days or less | [not implemented](maps/compliance/aws/AWS_CIS_1_4/README.md) | no | no
