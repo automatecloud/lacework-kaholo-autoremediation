@@ -73,6 +73,7 @@ By default the map has the following configurations:
     "reportuuid": "f6906a3a-06b8-4952-b258-c16f3e866e0c",
     "getaccesskeyuuid": "1f0c7e66-7304-4cf0-8a84-2def08ebd7ee",
     "getaccesskeyviacli": "false",
+    "makeaccesskeyinactiveviacli": "false",
     "removeaccesskeyviacli": "false",
     "sendslackmessages": "false",
     "sendslackmessagesforignored": "false",
@@ -115,7 +116,7 @@ Inside the configuration of the **Get current suppression configuration** buildi
 
 #### Auto Remediation
 
-For the Auto Remediation the map currently supports the deletion of every access key for the root user account so it will no longer be used via api access. For this you need to enable the **getaccesskeyviacli** to read out the AWS access keys and the **removeaccesskeyviacli** to delete the access keys. In total a AWS rootuser can only have 2 access keys.
+For the Auto Remediation the map currently supports the deletion of every access key for the root user account or to make all the access keys inactive so it will no longer be used via api access. For this you need to enable the **getaccesskeyviacli** to read out the AWS access keys and the **removeaccesskeyviacli** to delete the access keys or the **makeaccesskeyinactiveviacli** to make them inactive In total a AWS rootuser can only have 2 access keys.
 
 1. If you configured **getaccesskeyviacli** equals **true** the map will read out the current access keys information by using the following AWS CLI command:
 
@@ -127,6 +128,11 @@ aws iam list-access-keys --user <ROOTUSERNAME> --profile AWS-ACCOUNTID-FROM-EVEN
 
 ```
 aws iam delete-access-key --user <ROOTUSERNAME> --access-key-id ID-FOR-EACH-ACCESS-KEY --profile AWS-ACCOUNTID-FROM-EVENTORREPORT
+```
+
+3. If you configured the **makeaccesskeyinactiveviacli** equals **true** you must make sure to also enable the **getaccesskeyviacli** equals **true** to read out the current access keys. After that it will execute the following AWS CLI command against the maximum of two access keys:
+```
+aws iam update-access-key --user-name <ROOTUSERNAME> --access-key-id ID-FOR-EACH-ACCESS-KEY --status Inactive --profile AWS-ACCOUNTID-FROM-EVENTORREPORT
 ```
 
 #### Configuration of Slack Messages
@@ -190,6 +196,9 @@ We recommend to use the Map with the principals of least privilege to make sure 
 The Map is using (needs to be updated with least privilege)
 
 ## What features are supported with this Map? Release Notes
+
+Tha Map Version 1.1 (7th of September 2021) supports also now:
+* Making the access keys of the root user account inactive.
 
 The Map Version 1.0 (6th of September 2021) supports the following:
 * Auto Remediation of to delete all access key for the root users
