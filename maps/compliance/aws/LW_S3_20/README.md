@@ -84,7 +84,7 @@ The **LW_S3_20** map currently has the following map design:
 
 Make sure that the Map Webhook Trigger is configured with the following configuration:
 
-<img src="LW_S3_21_Trigger.png" width="361" height="810">
+<img src="LW_S3_20_Trigger.png" width="361" height="810">
 
 1. The Configuration setting needs to be configured with **LaceworkConfig** to make sure the Configuration **LaceworkConfig** is used when the map is triggered.
 2. The Plugin setting needs to be configured with the Lacework Webhook Plugin **kaholo-trigger-lacework**
