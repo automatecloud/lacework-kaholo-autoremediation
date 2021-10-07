@@ -51,10 +51,9 @@ The **LW_S3_13** map currently has the following map design:
 
 * The map will start with the **Get event details** object when it was triggered by the [Lacework Trigger](https://github.com/Kaholo/kaholo-trigger-lacework). It will use the **event_id** send by the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook), using the **Lacework API Access Key(s)** and  **Lacework Secret Key(s)** from the Kaholo vault that you used to configure the [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) to connect to the API. The Method **Get event details** will create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the [Lacework API](https://lwcs.lacework.net/api/v1/external/docs) via the API call **/api/v1/external/events/GetEventDetails** of the configured [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) host instance. The return value of this API call is the complete Event Payload you can use within the Map.
 * The map will start with the **Get report details** object when the map was manually started by a user of the map. It will use the **Lacework API Access Key(s)** and  **Lacework Secret Key(s)** from the Kaholo vault that you used to configure the [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework). The Method **GetLatestAWSComplianceReportDetails** will create a [temporary API token](https://support.lacework.com/hc/en-us/articles/360011403853-Generate-API-Access-Keys-and-Tokens). This token is used to query the [Lacework API](https://lwcs.lacework.net/api/v1/external/docs) via the API call **/api/v1/external/compliance/aws/GetLatestComplianceReport** for the **reporttype** of the **LaceworkConfig**  configured [Lacework Plugin](https://github.com/Kaholo/kaholo-plugin-lacework) host instance that is using the **aws_account_id** of the **LaceworkConfig** as a parameter.
-* The map will trigger the **Delete Bucket Policy via CLI** CommandLine object If you enabled the Auto Remediation inside the LaceworkConfig of the map by using the **"dothedeletebucketpolicyremediationviacli": "true"** setting. It will print out the name of the S3 buckets that will be remediated, creates a backup of the current bucket policy of each S3 bucket inside the folder **backupfolder** of the LaceworkConfig and uses the AWS CLI to delete the Bucket Policy of the S3 buckets affected.
-* The map will trigger the **Create Backup via CLI**, **Create the news JSON file** and  **Replace Bucket Policy via CLI** CommandLine object If you enabled the Auto Remediation inside the LaceworkConfig of the map by using the **"dothereplacebucketpolicyremediationviacli": "true"** setting. It will print out the name of the S3 buckets that will be remediated, creates a backup of the current bucket policy of each S3 bucket inside the folder **backupfolder** of the LaceworkConfig, uses the Kaholo TextEditor Object to create a new Bucket Policy inside the **inputfolder** of the LaceworkConfig and uses the AWS CLI to put the new bucket policy of the JSON file to the S3 buckets affected.
-* The map will trigger the **Backup Bucket Policy via Object** and **Delete Bucket Policy via Object option** Amazon-aws-s3 object If you enabled the Auto Remediation inside the LaceworkConfig of the map by using the **"dothedeletebucketpolicyremediationviaobject": "true"** setting. It will remediate all S3 buckets by first creating a Backup of the Bucket Policy using the Method **"Get Bucket Policy"** from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3). After that it will delete the bucket policy of the S3 bucket by using the Method **"Delete Bucket Policy"** from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3).
-* The map will trigger the **Backup Bucket Policy via Object**, **Create the new JSON** and **Replace Bucket Policy via Object option** Amazon-aws-s3 object If you enabled the Auto Remediation inside the LaceworkConfig of the map by using the **"dothereplacebucketpolicyremediationviaobject": "true"** setting. It will remediate all S3 buckets by first creating a Backup of the Bucket Policy using the Method **"Get Bucket Policy"** from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3). After that it will create a new Bucket Policy JOSN file for documentation by using the [Text Editor plugin](https://github.com/Kaholo/kaholo-plugin-textEditor) The last object will delete the bucket policy of the S3 bucket by using the Method **"Delete Bucket Policy"** from the [S3 bucket plugin](https://github.com/Kaholo/kaholo-plugin-amazon-s3).
+* The map will trigger the **Print Target Bucket Name** CommandLine object If you enabled the Auto Remediation inside the LaceworkConfig of the map by using the **"dothedeletebucketpolicyremediationviacli": "true"** setting. It will print out the name of the S3 buckets that will be remediated, creates a backup of the current bucket policy of each S3 bucket inside the folder **backupfolder** of the LaceworkConfig and uses the AWS CLI to delete the Bucket Policy of the S3 buckets affected.
+* The map will trigger the **Enable Bucket Logging via CLI**, **Create Logging JSON** and  **Apply logging configuration** CommandLine object If you enabled the Auto Remediation inside the LaceworkConfig of the map by using the **"dothereplacebucketpolicyremediationviacli": "true"** setting. It will print out the name of the S3 buckets that will be remediated, creates a backup of the current bucket policy of each S3 bucket inside the folder **backupfolder** of the LaceworkConfig, uses the Kaholo TextEditor Object to create a new Bucket Policy inside the **inputfolder** of the LaceworkConfig and uses the AWS CLI to put the new bucket policy of the JSON file to the S3 buckets affected.
+* The map will trigger the **Change Target Bucket ACL via Object** and **Apply logging configuration** Amazon-aws-s3 object If you enabled the Auto Remediation inside the LaceworkConfig of the map by using the **"dothedeletebucketpolicyremediationviaobject": "true"** setting.
 * The map will trigger the **Put Bucket Tags via Object** object if you configured the **putbuckettaggingviaobject** of the **LaceworkConfig** equals **true**. It will use the **tagname** and **tagvalue** to put these tags for every bucket that is in violation with the rule and ignored via the **bucketIgnoreList** of the **LaceworkConfig**.
 * The map will trigger the **Put Bucket Tags via CLI** object if you configured the **putbuckettaggingviacli** of the **LaceworkConfig** equals **true**. It will use the **tagname** and **tagvalue** to put these tags for every bucket that is in violation with the rule and ignored via the **bucketIgnoreList** of the **LaceworkConfig**.
 * The map will send out a Slack message for each S3 bucket that will be remediated to the Webhook you configured by using the **Remediated** Slack object.
@@ -92,13 +91,15 @@ By default the map has the following configurations:
     "reportuuid": "a6d14793-6dd4-4d22-8cc8-9d49edd6fd2a",
     "enablebucketloggingviacli": "false",
     "enablebucketloggingviaobject": "false",
+    "sendslackmessagesforremediation": "false",
     "sendslackmessagesforignored": "false",
-    "bucketIgnoreList":[
+    "sendslackstatistics": "false",
+    "bucketIgnoreList": [
         "arn:aws:s3:::mybucket01",
         "arn:aws:s3:::mybucket02",
         "arn:aws:s3:::mybucket03"
     ],
-    "awsaccountid": "123456789012",
+    "awsaccountid": "12345678912",
     "reporttype": "AWS_CIS_S3",
     "putbuckettaggingviacli": "false",
     "putbuckettaggingviaobject": "false",
@@ -111,7 +112,7 @@ By default the map has the following configurations:
     "inputfolder": "/usr/src/app/scripts/input/",
     "loggingconfiguration": {
         "LoggingEnabled": {
-            "TargetBucket": "myBucket",
+            "TargetBucket": "mytargetbucketforlogging",
             "TargetPrefix": "MyBucketLogs/",
             "TargetGrants": [
                 {
@@ -233,7 +234,9 @@ If you don't have Slack or don't need Slack messages feel free to simply remove 
 
 4. **sendslackmessagesforignored (Optional):** you can disable within the LaceworkConfig via **"sendslackmessagesforignored": "false"** to not send out Slack messages for S3 buckets that are violating the policy but are ignored via the **bucketIgnoreList**. By default this is configured to **true**. Reason behind is that it is best practice to suppress S3 buckets that should not be Auto Remediated by using Tags within AWS so you can configure a Suppress rule within Lacework to simply ignore them and not create events and alerts.
 
-5. If you configure the **autoremediationonlyfornewviolations** equals true the Auto Remediation will only be done for new Resource Violations on S3 buckets within new Events. With that you avoid that the AutoRemedation is doing it for all (new and already existing violations) of S3 buckets. This doesn't have any effect if you do the AutoRemedation via Reports, as reports have no differences between new and already existing violating resources. By default this setting is configured equals **false**.
+5. If you configure the **autoremediationonlyfornewviolations** equals **true** the Auto Remediation will only be done for new Resource Violations on S3 buckets within new Events. With that you avoid that the AutoRemedation is doing it for all (new and already existing violations) of S3 buckets. This doesn't have any effect if you do the AutoRemedation via Reports, as reports have no differences between new and already existing violating resources. By default this setting is configured equals **false**.
+
+6. If you configure the **sendslackstatistics** equals **true** it will send out some statistics about number of S3 buckets violating the policy, number of S3 buckets that will be remediated, number of S3 buckets that will be ignored and the total number of S3 buckets that are configured to be ignored if they are a resource of this event.
 
 #### Configuration of Slack Messages
 
@@ -334,6 +337,10 @@ You need to define the following least privilege policy inside your AWS IAM conf
 ```
 
 ## What features are supported with this Map? Release Notes
+The Map Version 1.2 (7th of October 2021) supports the following additional features on top of the Map Version  1.1:
+* using single actions objects and new loops with simplified code.
+* allowing to optional disable slack messages also for resources that need to be remediated.
+* allowing to send slack statistic messages about number of S3 buckets in total, remediated and ignored.
 
 The Map Version 1.1 (27th of August 2021) supports the following additional features on top of the Map Version 1.0:
 * Supporting the new Webhook Events that now have a dedicated rec_id field. All variables have been updated to the new rec_id field.
