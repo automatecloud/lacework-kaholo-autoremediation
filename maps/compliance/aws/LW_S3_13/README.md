@@ -59,6 +59,7 @@ The **LW_S3_13** map currently has the following map design:
 * The map will send out a Slack message for each S3 bucket that will be remediated to the Webhook you configured by using the **Remediated** Slack object.
 * If you enabled the configuration to send out slack messages for ignored S3 buckets inside the LaceworkConfig of the map to **"sendslackmessagesforignored": "true"** it will send out a slack message for each bucket that is violating the policy and ignored by the configuration to the Webhook you configured for the **Ignored** Slack object.
 * The map will trigger the **Get current suppression configuration** if you configured the **configuresuppressiononpolicy** equals **true**. It will read out the current suppression configuration for the **rec_id** and reconfigure it with the object **Configure Suppression via Tags** to the configuration **tagname**, **tagvalue** and **suppressionpolicycomment** if the current tag name is not equal **tagname** and/or the current tag value is not equal **tagvalue**.
+* The map will trigger the **Send Statistics** if you configured the **sendslackstatistics** equals **true** it will send out some statistics about number of S3 buckets violating the policy, number of S3 buckets that will be remediated, number of S3 buckets that will be ignored and the total number of S3 buckets that are configured to be ignored if they are a resource of this event.
 
 ### Map trigger
 
