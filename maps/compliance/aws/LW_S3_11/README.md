@@ -114,6 +114,7 @@ By default the map has the following configurations:
     "dothedeletebucketpolicyremediationviaobject": "false",
     "dothereplacebucketpolicyremediationviacli": "false",
     "dothereplacebucketpolicyremediationviaobject": "false",
+    "sendslackmessagesforremediation": "false",
     "sendslackmessagesforignored": "false",
     "bucketIgnoreList":[
         "arn:aws:s3:::mybucket01",
