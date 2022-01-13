@@ -104,8 +104,6 @@ By default the map has the following configurations:
     ],
     "awsaccountid": "950194951070",
     "reporttype": "AWS_CIS_S3",
-    "awsaccountid": "950194951070",
-    "reporttype": "AWS_CIS_S3",
     "putbuckettaggingviacli": "false",
     "putbuckettaggingviaobject": "false",
     "tagname": "AWS_CIS_1_2",
