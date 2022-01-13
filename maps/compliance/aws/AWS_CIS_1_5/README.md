@@ -1,7 +1,7 @@
 # AutoRemediation for the Lacework Policy AWS_CIS_1_5
 
 ## Description
-Ensure IAM password policy requires at least one uppercase letter
+Ensure IAM password policy requires at least one uppercase letter (Scored)
 
 Password policies are, in part, used to enforce password complexity requirements. IAM
 password policies can be used to ensure password are comprised of different character
