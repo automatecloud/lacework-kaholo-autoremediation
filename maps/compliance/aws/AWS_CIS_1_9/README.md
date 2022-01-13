@@ -37,7 +37,7 @@ combined into a single command.
 
 # How can i use this Map for Auto Remediation?
 
-This map can be used to tigger a auto remediation for each affected user account.
+This map can be used to trigger a auto remediation for the password policy.
 
 ## Import the Map
 
@@ -109,7 +109,7 @@ Inside the configuration of the **Get report details** building block you will f
 
 For the Auto Remediation the map currently has a single Command Line object that can be used and extended to define Auto Remediation for this map. This can be enabled by configuring **autoremediation** to **true** inside the configuration of the map. For now the map will only echo the change of the password policy. You can change it to be enabled if you remove the echo command in front of the aws cli trigger
 ```
-echo iam update-account-password-policy  --minimum-password-length 14
+echo aws iam update-account-password-policy  --minimum-password-length 14
 ```
 
 #### Configuration of Slack Messages

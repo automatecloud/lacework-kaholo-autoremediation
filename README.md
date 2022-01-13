@@ -141,7 +141,7 @@ AWS_CIS_1_5 | Ensure IAM password policy requires at least one uppercase letter 
 AWS_CIS_1_6 | Ensure IAM password policy require at least one lowercase letter | [implemented](maps/compliance/aws/AWS_CIS_1_6/README.md) | yes | no
 AWS_CIS_1_7 | Ensure IAM password policy require at least one symbol | [implemented](maps/compliance/aws/AWS_CIS_1_7/README.md) | yes | no
 AWS_CIS_1_8 | Ensure IAM password policy require at least one number | [implemented](maps/compliance/aws/AWS_CIS_1_8/README.md) | yes | no
-AWS_CIS_1_9 | Ensure IAM password policy requires minimum length of 14 or greater | [not implemented](maps/compliance/aws/AWS_CIS_1_9/README.md) | no | no
+AWS_CIS_1_9 | Ensure IAM password policy requires minimum length of 14 or greater | [implemented](maps/compliance/aws/AWS_CIS_1_9/README.md) | yes | no
 AWS_CIS_1_10 | Ensure IAM password policy prevents password reuse | [not implemented](maps/compliance/aws/AWS_CIS_1_10/README.md) | no | no
 AWS_CIS_1_11 | Ensure IAM password policy expires passwords within 90 days or less | [not implemented](maps/compliance/aws/AWS_CIS_1_11/README.md) | no | no
 AWS_CIS_1_12 | Ensure no root account access key exists | [not implemented](maps/compliance/aws/AWS_CIS_1_12/README.md) | no | no

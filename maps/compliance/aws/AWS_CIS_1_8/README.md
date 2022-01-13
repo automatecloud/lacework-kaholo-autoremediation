@@ -36,7 +36,7 @@ combined into a single command.
 
 # How can i use this Map for Auto Remediation?
 
-This map can be used to tigger a auto remediation for each affected user account.
+This map can be used to trigger a auto remediation for the password policy.
 
 ## Import the Map
 
