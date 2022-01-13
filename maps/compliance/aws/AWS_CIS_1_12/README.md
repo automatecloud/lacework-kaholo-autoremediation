@@ -10,7 +10,7 @@ The "root" account is the most privileged AWS account. Minimizing the use of thi
 Critical
 
 ### Control ID
-AWS_CIS_1_1
+AWS_CIS_1_12
 
 ### Remediation Steps to manually fix this
 
@@ -38,25 +38,25 @@ We recommend to make sure you do not need the access keys used by the root accou
 The Map needs to be imported inside an existing or new Kaholo Project.
 
 ### Map Design and workflow
-The **AWS_CIS_1_1** map currently has the following map design:
+The **AWS_CIS_1_12** map currently has the following map design:
 
-<img src="AWS_CIS_1_1.png">
+<img src="AWS_CIS_1_12.png">
 
 ### Map trigger
 
 Make sure that the Map Webhook Trigger is configured with the following configuration:
 
-<img src="AWS_CIS_1_1_Trigger.png" width="269" height="608">
+<img src="AWS_CIS_1_12_Trigger.png" width="269" height="608">
 
 1. The Configuration setting needs to be configured with **LaceworkConfig** to make sure the Configuration **LaceworkConfig** is used when the map is triggered.
 2. The Plugin setting needs to be configured with the Lacework Webhook Plugin **kaholo-trigger-lacework**
 3. For the Method setting you need to select **Lacework Alert**
 4. The Variable **Event type** needs to be configured with Value **Compliance**
-5. The Variable **Recommendation ID** needs to be configured with Value **AWS_CIS_1_1**.
+5. The Variable **Recommendation ID** needs to be configured with Value **AWS_CIS_1_12**.
 6. The Variable **Event Severity** needs to be configured with the Value **Any** or **High**
 7. Make sure to enable the Checkbox **Include Higher Severities**.
 
-This configuration will make sure that this map is only triggered if the **rec_id** of the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) is equal to the **AWS_CIS_1_1** Event ID.
+This configuration will make sure that this map is only triggered if the **rec_id** of the [Webhook payload](https://support.lacework.com/hc/en-us/articles/360034367393-Webhook) is equal to the **AWS_CIS_1_12** Event ID.
 
 ### Configuration of the Map
 
@@ -67,7 +67,7 @@ By default the map has the following configurations:
 ```
 {
     "name": "LaceworkConfiguration",
-    "rec_id": "AWS_CIS_1_1",
+    "rec_id": "AWS_CIS_1_12",
     "violationdescription": "Avoid the use of the root account",
     "eventuuid": "2a25ae82-c917-4cb4-945a-4408dbe65a43",
     "reportuuid": "f6906a3a-06b8-4952-b258-c16f3e866e0c",
@@ -168,8 +168,8 @@ export EVENTID=11
 export EVENTSEVERITY=1
 export WEBHOOKURL=https://mykaholoinstance.kaholo.io/webhook/lacework/alert
 export LACEWORKINSTANCE=mylaceworkinstance
-export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : AWS_CIS_1_1 Avoid the use of the 'root' account"
-export REC_ID=AWS_CIS_1_1
+export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : AWS_CIS_1_12 Avoid the use of the 'root' account"
+export REC_ID=AWS_CIS_1_12
 ```
 You need to replace the following before you apply the environment variables:
 1. **EVENTID** with the EventID that was generated inside the Lacework environment.
