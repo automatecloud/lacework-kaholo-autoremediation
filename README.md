@@ -10,7 +10,6 @@ We live in a complex world of multi cloud environments. The cloud itself isn't a
 Auto remediation means to automate the necessary steps of alert events detected by Lacework without any human interaction. Remediation can be partially or fully automated in order to help fix specific alerts.
 Simply said: "The more is automated, the faster you can react to alerts and the more time you safe for doing any manual interactions". Time is money and in security it means a risk you take while the alert is not solved. The **MTTR** (**M**ean **T**ime to **R**ecover or **R**estore) should be as fast as possible to not take any risks for a long time in case of an alert. A misconfiguration or bad behaviour of your application(s) can lead to outages, stolen customer data and a headline story of your company in the newspaper.
 
-
 ## Why Lacework and Kaholo?
 Lacework and Kaholo is a perfect match!
 
@@ -138,7 +137,7 @@ AWS_CIS_1_1 | Avoid the use of the "root" account | [Implemented](maps/complianc
 AWS_CIS_1_2 | Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password | [Implemented](maps/compliance/aws/AWS_CIS_1_2/README.md) | yes | no
 AWS_CIS_1_3 | Ensure credentials unused for 90 days or greater are disabled | [implemented](maps/compliance/aws/AWS_CIS_1_3/README.md) | yes | no
 AWS_CIS_1_4 | Ensure access keys are rotated every 90 days or less | [implemented](maps/compliance/aws/AWS_CIS_1_4/README.md) | yes | no
-AWS_CIS_1_5 | Ensure IAM password policy requires at least one uppercase letter | [not implemented](maps/compliance/aws/AWS_CIS_1_5/README.md) | no | no
+AWS_CIS_1_5 | Ensure IAM password policy requires at least one uppercase letter | [implemented](maps/compliance/aws/AWS_CIS_1_5/README.md) | yes | no
 AWS_CIS_1_6 | Ensure IAM password policy require at least one lowercase letter | [not implemented](maps/compliance/aws/AWS_CIS_1_6/README.md) | no | no
 AWS_CIS_1_7 | Ensure IAM password policy require at least one symbol | [not implemented](maps/compliance/aws/AWS_CIS_1_7/README.md) | no | no
 AWS_CIS_1_8 | Ensure IAM password policy require at least one number | [not implemented](maps/compliance/aws/AWS_CIS_1_8/README.md) | no | no
