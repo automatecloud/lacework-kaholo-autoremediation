@@ -136,7 +136,7 @@ LW_S3_20 | Ensure the attached S3 bucket policy does not grant global 'List' per
 LW_S3_21 | Ensure the attached S3 bucket policy does not grant global 'Put' permission. | [Implemented](maps/compliance/aws/LW_S3_21/README.md) | yes | yes
 AWS_CIS_1_1 | Avoid the use of the "root" account | [Implemented](maps/compliance/aws/AWS_CIS_1_1/README.md) | yes | no
 AWS_CIS_1_2 | Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password | [Implemented](maps/compliance/aws/AWS_CIS_1_2/README.md) | yes | no
-AWS_CIS_1_3 | Ensure credentials unused for 90 days or greater are disabled | [not implemented](maps/compliance/aws/AWS_CIS_1_3/README.md) | no | no
+AWS_CIS_1_3 | Ensure credentials unused for 90 days or greater are disabled | [implemented](maps/compliance/aws/AWS_CIS_1_3/README.md) | yes | no
 AWS_CIS_1_4 | Ensure access keys are rotated every 90 days or less | [not implemented](maps/compliance/aws/AWS_CIS_1_4/README.md) | no | no
 AWS_CIS_1_5 | Ensure IAM password policy requires at least one uppercase letter | [not implemented](maps/compliance/aws/AWS_CIS_1_5/README.md) | no | no
 AWS_CIS_1_6 | Ensure IAM password policy require at least one lowercase letter | [not implemented](maps/compliance/aws/AWS_CIS_1_6/README.md) | no | no
