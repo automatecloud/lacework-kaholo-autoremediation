@@ -160,7 +160,7 @@ If you don't have Slack or don't need Slack messages feel free to simply remove 
 
 ## Suppression api
 
-This map supports the definition of Advanced Suppression rules in Lacework based on Tags by configuring the **configuresuppressiononpolicy equals** **true** . However, the current version of Lacework does not allow the usage of suppression rules.
+This map supports the definition of Advanced Suppression rules in Lacework based on Tags by configuring the **configuresuppressiononpolicy** equals **true** . However, the current version of Lacework does not allow the usage of suppression rules.
 
 ## Build an example curl webhook
 
