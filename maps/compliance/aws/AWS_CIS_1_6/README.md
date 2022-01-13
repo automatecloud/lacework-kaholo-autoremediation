@@ -74,7 +74,7 @@ By default the map has the following configurations:
 {
     "name": "LaceworkConfiguration",
     "rec_id": "AWS_CIS_1_6",
-    "violationdescription": "Ensure IAM password policy requires at least one uppercase letter",
+    "violationdescription": "Ensure IAM password policy require at least one lowercase letter",
     "eventuuid": "1268288c-a0b9-47c9-814f-f4195514f4e4",
     "reportuuid": "44f37362-f1fb-447b-8723-941943b28d26",
     "autoremediationviacli": "true",
@@ -142,7 +142,7 @@ export EVENTID=11
 export EVENTSEVERITY=1
 export WEBHOOKURL=https://mykaholoinstance.kaholo.io/webhook/lacework/alert
 export LACEWORKINSTANCE=mylaceworkinstance
-export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : AWS_CIS_1_6 Ensure IAM password policy requires at least one uppercase letter
+export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : AWS_CIS_1_6 Ensure IAM password policy require at least one lowercase letter
 export REC_ID=AWS_CIS_1_6
 ```
 You need to replace the following before you apply the environment variables:
