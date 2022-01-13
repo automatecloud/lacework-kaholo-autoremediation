@@ -144,7 +144,7 @@ AWS_CIS_1_8 | Ensure IAM password policy require at least one number | [implemen
 AWS_CIS_1_9 | Ensure IAM password policy requires minimum length of 14 or greater | [implemented](maps/compliance/aws/AWS_CIS_1_9/README.md) | yes | no
 AWS_CIS_1_10 | Ensure IAM password policy prevents password reuse | [implemented](maps/compliance/aws/AWS_CIS_1_10/README.md) | yes | no
 AWS_CIS_1_11 | Ensure IAM password policy expires passwords within 90 days or less | [implemented](maps/compliance/aws/AWS_CIS_1_11/README.md) | yes | no
-AWS_CIS_1_12 | Ensure no root account access key exists | [not implemented](maps/compliance/aws/AWS_CIS_1_12/README.md) | no | no
+AWS_CIS_1_12 | Ensure no root account access key exists | [implemented](maps/compliance/aws/AWS_CIS_1_12/README.md) | yes | no
 AWS_CIS_1_13 | Ensure MFA is enabled for the "root" account | [not implemented](maps/compliance/aws/AWS_CIS_1_13/README.md) | no | no
 AWS_CIS_1_14 | Ensure hardware MFA is enabled for the "root" account | [not implemented](maps/compliance/aws/AWS_CIS_1_14/README.md) | no | no
 AWS_CIS_1_15 | Ensure security questions are registered in the AWS account | [not implemented](maps/compliance/aws/AWS_CIS_1_15/README.md) | no | no
