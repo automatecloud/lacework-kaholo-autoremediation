@@ -37,9 +37,11 @@ used in 90 Days
 8. Click on Create Access Key
 9. Update programmatic call with new Access Key credentials
 Via CLI
+```
 aws iam update-access-key
 aws iam create-access-key
 aws iam delete-access-key
+```
 
 ## How can i use this Map for Auto Remediation?
 

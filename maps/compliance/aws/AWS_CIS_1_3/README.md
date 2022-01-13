@@ -12,7 +12,7 @@ Disabling or removing unnecessary credentials will reduce the window of opportun
 credentials associated with a compromised or abandoned account to be used.
 
 ### Severity
-Critical
+High
 
 ### Control ID
 AWS_CIS_1_3
