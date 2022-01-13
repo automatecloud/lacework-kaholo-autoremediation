@@ -1,6 +1,8 @@
-# AutoRemediation for the Lacework Policy LW_S3_1
+# AutoRemediation for the Lacework Policy AWS_CIS_1_2
 
 ## Description
+Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password
+
 Multi-Factor Authentication (MFA) adds an extra layer of protection on top of a user name
 and password. With MFA enabled, when a user signs in to an AWS website, they will be
 prompted for their user name and password as well as for an authentication code from
@@ -135,7 +137,7 @@ Inside the configuration of the **Get report details** building block you will f
 
 #### Auto Remediation
 
-For the Auto Remediation the map currently has a single Command Line object that can be used and extended to define Auto Remediation for this map. This can be enabled by configuring **autoremediation** inside the configuration of the map. For now the map will only echo the number of ressources that are violating the rule if it is enabled with true:
+For the Auto Remediation the map currently has a single Command Line object that can be used and extended to define Auto Remediation for this map. This can be enabled by configuring **autoremediation** to **true** inside the configuration of the map. For now the map will only echo the number of ressources that are violating the rule if it is enabled with true:
 ```
 echo doing autoremediation for resource ${arr2[arr2.length - 1]}
 ```
