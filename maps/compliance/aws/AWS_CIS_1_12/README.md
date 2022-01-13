@@ -1,10 +1,16 @@
 # AutoRemediation for the Lacework Policy AWS_CIS_1_12
 
 ## Description
-The "root" account has unrestricted access to all resources in the AWS account. It is highly recommended that the use of this account be avoided.
+Ensure no root account access key exists (Scored)
+
+The root account is the most privileged user in an AWS account. AWS Access Keys provide
+programmatic access to a given AWS account. It is recommended that all access keys
+associated with the root account be removed.
 
 **Rationale:**
-The "root" account is the most privileged AWS account. Minimizing the use of this account and adopting the principle of least privilege for access management will reduce the risk of accidental changes and unintended disclosure of highly privileged credentials
+Removing access keys associated with the root account limits vectors by which the account
+can be compromised. Additionally, removing the root access keys encourages the creation
+and use of role based accounts that are least privileged.
 
 ### Severity
 Critical
@@ -14,10 +20,7 @@ AWS_CIS_1_12
 
 ### Remediation Steps to manually fix this
 
-Make sure that the root account is not used at all via Console Login or API Login. One possible manual remediation could be to remove access keys for the root account.
-
-Perform the following to delete or disable active root access keys being attached to the root account.
-
+Perform the following to delete or disable active root access keys being
 Via the AWS Console
 1. Sign in to the AWS Management Console as Root and open the IAM console at
 https://console.aws.amazon.com/iam/.
@@ -68,7 +71,7 @@ By default the map has the following configurations:
 {
     "name": "LaceworkConfiguration",
     "rec_id": "AWS_CIS_1_12",
-    "violationdescription": "Avoid the use of the root account",
+    "violationdescription": "Ensure no root account access key exists",
     "eventuuid": "2a25ae82-c917-4cb4-945a-4408dbe65a43",
     "reportuuid": "f6906a3a-06b8-4952-b258-c16f3e866e0c",
     "getaccesskeyuuid": "1f0c7e66-7304-4cf0-8a84-2def08ebd7ee",
@@ -168,7 +171,7 @@ export EVENTID=11
 export EVENTSEVERITY=1
 export WEBHOOKURL=https://mykaholoinstance.kaholo.io/webhook/lacework/alert
 export LACEWORKINSTANCE=mylaceworkinstance
-export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : AWS_CIS_1_12 Avoid the use of the 'root' account"
+export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : AWS_CIS_1_12 Ensure no root account access key exists
 export REC_ID=AWS_CIS_1_12
 ```
 You need to replace the following before you apply the environment variables:
