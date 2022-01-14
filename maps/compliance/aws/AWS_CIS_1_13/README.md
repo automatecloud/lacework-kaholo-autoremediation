@@ -20,7 +20,7 @@ authenticating principal to possess a device that emits a time-sensitive key and
 knowledge of a credential.
 
 ### Severity
-High
+Critical
 
 ### Control ID
 AWS_CIS_1_13
@@ -98,7 +98,7 @@ By default the map has the following configurations:
 {
     "name": "LaceworkConfiguration",
     "rec_id": "AWS_CIS_1_13",
-    "violationdescription": "Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password",
+    "violationdescription": "Ensure MFA is enabled for the root account (Scored)",
     "eventuuid": "1268288c-a0b9-47c9-814f-f4195514f4e4",
     "reportuuid": "44f37362-f1fb-447b-8723-941943b28d26",
     "autoremediationviacli": "false",
@@ -183,7 +183,7 @@ export EVENTID=11
 export EVENTSEVERITY=1
 export WEBHOOKURL=https://mykaholoinstance.kaholo.io/webhook/lacework/alert
 export LACEWORKINSTANCE=mylaceworkinstance
-export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : AWS_CIS_1_13 Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password
+export EVENTDESCRIPTION="AWS Account 112233445566 (lacework-test) : AWS_CIS_1_13 Ensure MFA is enabled for the root account (Scored)
 export REC_ID=AWS_CIS_1_13
 ```
 You need to replace the following before you apply the environment variables:
