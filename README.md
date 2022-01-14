@@ -151,7 +151,7 @@ AWS_CIS_1_15 | Ensure security questions are registered in the AWS account | [im
 AWS_CIS_1_16 | Ensure IAM policies are attached only to groups or roles | [implemented](maps/compliance/aws/AWS_CIS_1_16/README.md) | yes | no
 AWS_CIS_1_17 | Enable detailed billing | [implemented](maps/compliance/aws/AWS_CIS_1_17/README.md) | yes | no
 AWS_CIS_1_19 | Maintain current contact details | [implemented](maps/compliance/aws/AWS_CIS_1_19/README.md) | yes | no
-AWS_CIS_1_20 | Ensure security contact information is registered | [not implemented](maps/compliance/aws/AWS_CIS_1_20/README.md) | no | no
+AWS_CIS_1_20 | Ensure security contact information is registered | [implemented](maps/compliance/aws/AWS_CIS_1_20/README.md) | yes | no
 AWS_CIS_1_21 | Ensure IAM instance roles are used for AWS resource access from instances | [not implemented](maps/compliance/aws/AWS_CIS_1_21/README.md) | no | no
 AWS_CIS_1_22 | Ensure a support role has been created to manage incidents with AWS Support | [not implemented](maps/compliance/aws/AWS_CIS_1_22/README.md) | no | no
 AWS_CIS_1_23 | Do not setup access keys during initial user setup for all IAM users that have a console password | [not implemented](maps/compliance/aws/AWS_CIS_1_23/README.md) | no | no

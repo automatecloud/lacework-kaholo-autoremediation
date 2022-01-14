@@ -21,7 +21,7 @@ serve as a starting point in identifying which part of the environment, or organ
 anomalous activity is occurring in.
 
 ### Severity
-Medium
+Low
 
 ### Control ID
 AWS_CIS_1_17
