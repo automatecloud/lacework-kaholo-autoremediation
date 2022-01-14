@@ -1,0 +1,250 @@
+{
+    "configurations": [
+        {
+            "_id": "61e14040c3ce030039e596d3",
+            "name": "LaceworkConfig",
+            "value": "{\n    \"name\": \"LaceworkConfiguration\",\n    \"rec_id\": \"AWS_CIS_1_11\",\n    \"violationdescription\": \"Ensure security questions are registered in the AWS account\",\n    \"eventuuid\": \"1268288c-a0b9-47c9-814f-f4195514f4e4\",\n    \"reportuuid\": \"44f37362-f1fb-447b-8723-941943b28d26\",\n    \"autoremediationviacli\": \"false\",\n    \"sendslackmessagesforremediation\": \"true\",\n    \"awsaccountid\": \"950194951070\",\n    \"reporttype\": \"AWS_CIS_S3\"\n}",
+            "mapRevision": "61e14040c3ce030039e596bc",
+            "__v": 0
+        }
+    ],
+    "processes": [
+        {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": false,
+            "mandatory": false,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "61e01b35c3ce030039e2cdc9",
+                            "code": true,
+                            "value": "geteventid()",
+                            "param": "61df0175f0c36400392266fb",
+                            "name": "EVENT_ID"
+                        }
+                    ],
+                    "name": "geteventid",
+                    "timeout": null,
+                    "method": "GetEventDetails",
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "lacework",
+                "version": "1.2.3"
+            },
+            "uuid": "1268288c-a0b9-47c9-814f-f4195514f4e4",
+            "numProcessParallel": null,
+            "name": "Get event details",
+            "description": null,
+            "condition": "checkconfigurationforevent()",
+            "coordination": null,
+            "filterAgents": null,
+            "postRun": "",
+            "preRun": null
+        },
+        {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": false,
+            "mandatory": false,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "61e01b35c3ce030039e2cdcc",
+                            "code": true,
+                            "value": "getawsaccountid()",
+                            "param": "61dff6d6c3ce030039e26cb4",
+                            "name": "AWS_ACCOUNT_ID"
+                        },
+                        {
+                            "_id": "61e01b35c3ce030039e2cdcd",
+                            "code": true,
+                            "value": "getreporttype()",
+                            "param": "61dff6d6c3ce030039e26cb5",
+                            "name": "REPORT_TYPE"
+                        }
+                    ],
+                    "name": "getreportdetails",
+                    "timeout": null,
+                    "method": "GetLatestAWSComplianceReportDetails",
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "lacework",
+                "version": "1.2.3"
+            },
+            "uuid": "44f37362-f1fb-447b-8723-941943b28d26",
+            "numProcessParallel": null,
+            "name": "Get report details",
+            "description": null,
+            "condition": "checkconfigurationforreport()",
+            "coordination": null,
+            "filterAgents": null,
+            "postRun": "",
+            "preRun": null
+        },
+        {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": null,
+            "mandatory": null,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "61e027c1c3ce030039e2ee2a",
+                            "code": null,
+                            "value": null,
+                            "param": "61df0e39f0c3640039228997",
+                            "name": "workingDir"
+                        },
+                        {
+                            "_id": "61e027c1c3ce030039e2ee2b",
+                            "code": true,
+                            "value": "autoremediation()",
+                            "param": "61df0e39f0c3640039228998",
+                            "name": "COMMANDS"
+                        },
+                        {
+                            "_id": "61e027c1c3ce030039e2ee2c",
+                            "code": null,
+                            "value": null,
+                            "param": "61df0e39f0c3640039228999",
+                            "name": "exitOnClose"
+                        }
+                    ],
+                    "name": "autoremediation",
+                    "timeout": null,
+                    "method": "execute",
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "CommandLine",
+                "version": "2.0.1"
+            },
+            "uuid": "ce827cba-1071-4797-b461-88e984fce10a",
+            "numProcessParallel": null,
+            "name": "AutoRemediation",
+            "description": null,
+            "condition": "checkautoremediationviacli()",
+            "coordination": "race",
+            "filterAgents": null,
+            "postRun": "indexRemediate++;",
+            "preRun": null
+        },
+        {
+            "flowControl": "each",
+            "actionsExecution": "series",
+            "correlateAgents": null,
+            "mandatory": null,
+            "actions": [
+                {
+                    "retries": 0,
+                    "mandatory": null,
+                    "isEnabled": true,
+                    "params": [
+                        {
+                            "_id": "61e027c1c3ce030039e2ee2f",
+                            "code": null,
+                            "value": "Slack Webhook",
+                            "param": "61df0175f0c3640039226704",
+                            "name": "webhookUrl"
+                        },
+                        {
+                            "_id": "61e027c1c3ce030039e2ee30",
+                            "code": true,
+                            "value": "sendslackmessage()",
+                            "param": "61df0175f0c3640039226705",
+                            "name": "message"
+                        }
+                    ],
+                    "name": "informsecurity",
+                    "timeout": null,
+                    "method": "sendIncomingWebhook",
+                    "numParallel": null
+                }
+            ],
+            "used_plugin": {
+                "name": "Slack",
+                "version": "1.1.0"
+            },
+            "uuid": "322e7011-ce17-4e77-8e3e-d2f87ac40fad",
+            "coordination": "race",
+            "numProcessParallel": null,
+            "name": "Remediated",
+            "description": null,
+            "condition": "checkforslack()",
+            "filterAgents": null,
+            "postRun": "",
+            "preRun": null
+        }
+    ],
+    "links": [
+        {
+            "uuid": "7bc1cb13-97bd-482f-aefe-bc68310469de",
+            "sourceId": "572d7779-4f24-4bd1-b5d5-7b0bc232a10b",
+            "targetId": "1268288c-a0b9-47c9-814f-f4195514f4e4"
+        },
+        {
+            "uuid": "de1ee796-843c-43b7-8b9d-e7cb071107d7",
+            "sourceId": "572d7779-4f24-4bd1-b5d5-7b0bc232a10b",
+            "targetId": "44f37362-f1fb-447b-8723-941943b28d26"
+        },
+        {
+            "uuid": "4c16f7de-a2c3-409b-aea4-eb59401336cb",
+            "sourceId": "1268288c-a0b9-47c9-814f-f4195514f4e4",
+            "targetId": "ce827cba-1071-4797-b461-88e984fce10a"
+        },
+        {
+            "uuid": "adb975e3-bc83-4344-a930-9728bc7173b7",
+            "sourceId": "44f37362-f1fb-447b-8723-941943b28d26",
+            "targetId": "ce827cba-1071-4797-b461-88e984fce10a"
+        },
+        {
+            "uuid": "c018995d-0922-41d4-9c10-edf7bc1ba13d",
+            "sourceId": "1268288c-a0b9-47c9-814f-f4195514f4e4",
+            "targetId": "322e7011-ce17-4e77-8e3e-d2f87ac40fad"
+        },
+        {
+            "uuid": "fe65c85c-a4ac-442b-b410-a5eeac0907b5",
+            "sourceId": "44f37362-f1fb-447b-8723-941943b28d26",
+            "targetId": "322e7011-ce17-4e77-8e3e-d2f87ac40fad"
+        }
+    ],
+    "content": "{\"cells\":[{\"type\":\"devs.PMStartPoint\",\"size\":{\"width\":40,\"height\":39},\"outPorts\":[\" \"],\"inPorts\":[],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\" \"}}}]},\"position\":{\"x\":68,\"y\":73},\"angle\":0,\"id\":\"572d7779-4f24-4bd1-b5d5-7b0bc232a10b\",\"z\":1,\"attrs\":{\"rect\":{\"fill\":\"#2d3236\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":239,\"y\":-17},\"angle\":0,\"id\":\"1268288c-a0b9-47c9-814f-f4195514f4e4\",\"z\":2,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Get event details\"},\".p_id\":{\"text\":\"60ec2ebeacb7e500f63e9f36\"},\"image\":{\"xlink:href\":\"/plugins/lacework/lacework.png\",\"ref-y\":50},\"text\":{\"text\":\"Get event details\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":246,\"y\":147},\"angle\":0,\"id\":\"44f37362-f1fb-447b-8723-941943b28d26\",\"z\":3,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Get report details\"},\".p_id\":{\"text\":\"60ec2ebeacb7e500f63e9f36\"},\"image\":{\"xlink:href\":\"/plugins/lacework/lacework.png\",\"ref-y\":50},\"text\":{\"text\":\"Get report details\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":606,\"y\":63},\"angle\":0,\"id\":\"ce827cba-1071-4797-b461-88e984fce10a\",\"z\":4,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"AutoRemediation\"},\".p_id\":{\"text\":\"60ec31a0acb7e500f63ea119\"},\"image\":{\"xlink:href\":\"/plugins/CommandLine/CommandLine.png\",\"ref-y\":50},\"text\":{\"text\":\"AutoRemediation\"}}},{\"type\":\"link\",\"source\":{\"id\":\"572d7779-4f24-4bd1-b5d5-7b0bc232a10b\",\"port\":\" \"},\"target\":{\"id\":\"1268288c-a0b9-47c9-814f-f4195514f4e4\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"7bc1cb13-97bd-482f-aefe-bc68310469de\",\"z\":5,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"572d7779-4f24-4bd1-b5d5-7b0bc232a10b\",\"port\":\" \"},\"target\":{\"id\":\"44f37362-f1fb-447b-8723-941943b28d26\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"de1ee796-843c-43b7-8b9d-e7cb071107d7\",\"z\":6,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"devs.MyImageModel\",\"size\":{\"width\":100,\"height\":73},\"inPorts\":[\" \"],\"outPorts\":[\"  \"],\"ports\":{\"groups\":{\"in\":{\"position\":{\"name\":\"left\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"left\",\"args\":{\"y\":10}}}},\"out\":{\"position\":{\"name\":\"right\"},\"attrs\":{\".port-label\":{\"fill\":\"#000\"},\".port-body\":{\"fill\":\"#fff\",\"stroke\":\"#000\",\"r\":10,\"magnet\":true}},\"label\":{\"position\":{\"name\":\"right\",\"args\":{\"y\":10}}}}},\"items\":[{\"id\":\" \",\"group\":\"in\",\"attrs\":{\".port-label\":{\"text\":\" \"}}},{\"id\":\"  \",\"group\":\"out\",\"attrs\":{\".port-label\":{\"text\":\"  \"}}}]},\"position\":{\"x\":440,\"y\":65},\"angle\":0,\"id\":\"322e7011-ce17-4e77-8e3e-d2f87ac40fad\",\"z\":7,\"attrs\":{\"rect\":{\"stroke-width\":1,\"fill\":\"#2d3236\"},\".label\":{\"text\":\"Remediated\"},\".p_id\":{\"text\":\"60ec2f8facb7e500f63e9f9b\"},\"image\":{\"xlink:href\":\"/plugins/Slack/Slack_Icon.png\",\"ref-y\":50},\"text\":{\"text\":\"Remediated\"}}},{\"type\":\"link\",\"source\":{\"id\":\"1268288c-a0b9-47c9-814f-f4195514f4e4\",\"port\":\"  \"},\"target\":{\"id\":\"ce827cba-1071-4797-b461-88e984fce10a\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"4c16f7de-a2c3-409b-aea4-eb59401336cb\",\"z\":9,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"44f37362-f1fb-447b-8723-941943b28d26\",\"port\":\"  \"},\"target\":{\"id\":\"ce827cba-1071-4797-b461-88e984fce10a\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"adb975e3-bc83-4344-a930-9728bc7173b7\",\"z\":10,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"1268288c-a0b9-47c9-814f-f4195514f4e4\",\"port\":\"  \"},\"target\":{\"id\":\"322e7011-ce17-4e77-8e3e-d2f87ac40fad\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"c018995d-0922-41d4-9c10-edf7bc1ba13d\",\"z\":11,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}},{\"type\":\"link\",\"source\":{\"id\":\"44f37362-f1fb-447b-8723-941943b28d26\",\"port\":\"  \"},\"target\":{\"id\":\"322e7011-ce17-4e77-8e3e-d2f87ac40fad\",\"port\":\" \"},\"router\":{\"name\":\"manhattan\"},\"connector\":{\"name\":\"rounded\"},\"id\":\"fe65c85c-a4ac-442b-b410-a5eeac0907b5\",\"z\":12,\"attrs\":{\".connection\":{\"stroke\":\"#87939A\",\"stroke-width\":3},\".marker-target\":{\"fill\":\"#87939A\",\"d\":\"M 10 0 L 0 5 L 10 10 z\"}}}]}",
+    "used_plugins": [
+        {
+            "name": "lacework",
+            "version": "1.2.3"
+        },
+        {
+            "name": "lacework",
+            "version": "1.2.3"
+        },
+        {
+            "name": "CommandLine",
+            "version": "2.0.1"
+        },
+        {
+            "name": "Slack",
+            "version": "1.1.0"
+        }
+    ],
+    "__v": 0,
+    "code": "// Default variables for this Map\nvar ressourcesArr = []; // Array of Resources that will be used for the Auto Remediation.\nvar indexSlack = 0; // Index of the Slack Loop of the map to send out information about the Resources that will be used for Auto Remediation.\nvar indexAccessKey = 0;\nvar ressourcesIgnoredArr = []; // Array of Resources that are violating but will be ignored based in the IgnoreList list in the configuration.\nvar indexIgnored = 0; //Index of the Resources for slack loop that are violating but will be ignored.\nlet payload = trigger.payload; // The Payload that was send by the Webhook Trigger. Information about the Payload is available at https://support.lacework.com/hc/en-us/articles/360034367393-Webhook\nvar event_aws_accountid; // AWS Account ID for the Event or the Report against it will run the CLI commands or Objects. Will be read out from the Event itself.\nvar event_aws_account_key; // AWS Account Key variable to get the value from the vault.\nvar event_aws_secret_key; // AWS Secret Key variable to get the value from the vault.\nvar accesskeysforuser; //Variable to save all the access keys for a specific user.\n\n// Object \"Get event details\" functions:\nfunction checkconfigurationforevent() { // Function to check if CLI and Object remediation is enabled and if a Payload is send via the Webhook.\n    if (payload !== null) // Don't try to get the Events if the payload is not defined.\n    {\n        return 1;\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction geteventid() { // Function to get the Event ID from the Webhook Payload.\n    return `${payload.event_id}`;\n}\n\n// Object \"Get report details\" functions:\nfunction checkconfigurationforreport() { // Function to check if CLI and Object Auto Remediation is enabled. Also check if it is not triggered via a Webhook with a payload send.\n    if (configuration.dotheremediationviacli == \"true\" && configuration.dotheremediationviaobject == \"true\") {\n        return 0;\n    }\n    else if (payload == null) // Only trigger the Report collection if there is no payload defined.\n    {\n        return 1;\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction getawsaccountid() {\n    return `${configuration.awsaccountid}`;\n}\n\nfunction getreporttype() {\n    return `${configuration.reporttype}`;\n}\n\n// Object \"AutoRemediation\"\nfunction checkautoremediationviacli() { //\n    if (configuration.autoremediationviacli == \"true\") {\n        return 1;\n    }\n    else {\n        return 0;\n    }\n}\n\nfunction autoremediation() { \n    return `echo aws adding security questions` ; //Adding some security questions. Not sure if that can be done with AWS CLI.\n}\n\n// Object \"Remediated\" functions:\nfunction checkforslack() { //Check if you want to also see the resources via the slack messages.\n    if (configuration.sendslackmessagesforremediation == \"true\") {\n        return 1;\n    }\n    else {\n        return 0;\n    }\n}\n\n\nfunction sendslackmessage() { // Function to send out a slack message for every IAM account that will be remediated.\n    if (configuration.autoremediationviacli == \"true\") {\n        return `Compliance Violation ${configuration.rec_id} with description ${configuration.violationdescription}. The Security questions will be added using the AWS CLI.`;\n    }\n    else {\n        return `Compliance Violation ${configuration.rec_id} with description ${configuration.violationdescription}. Auto Remediation is disabled! Will not add the security questions using the AWS CLI.`;\n    }\n}\n\n// Help Functions for all Objects.\nfunction getAction(pId) {  // Help function to get the return value of the event.\n    let p = getProcessById(pId)//Get the process. \n    if (!p || !p.length) return;\n    p = p[p.length - 1].actions; //Get all actions \n    let action = p[Object.keys(p)[0]];//get the needed action \n    return action\n}\n\nfunction getvault() {\n    return `echo ${vault.test}`;\n}\n\nasync function useKey(key){\n  return vault.getValueByKey(key)\n}"
+}

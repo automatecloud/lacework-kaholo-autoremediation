@@ -147,7 +147,7 @@ AWS_CIS_1_11 | Ensure IAM password policy expires passwords within 90 days or le
 AWS_CIS_1_12 | Ensure no root account access key exists | [implemented](maps/compliance/aws/AWS_CIS_1_12/README.md) | yes | no
 AWS_CIS_1_13 | Ensure MFA is enabled for the "root" account | [implemented](maps/compliance/aws/AWS_CIS_1_13/README.md) | yes | no
 AWS_CIS_1_14 | Ensure hardware MFA is enabled for the "root" account | [implemented](maps/compliance/aws/AWS_CIS_1_14/README.md) | yes | no
-AWS_CIS_1_15 | Ensure security questions are registered in the AWS account | [not implemented](maps/compliance/aws/AWS_CIS_1_15/README.md) | no | no
+AWS_CIS_1_15 | Ensure security questions are registered in the AWS account | [implemented](maps/compliance/aws/AWS_CIS_1_15/README.md) | yes | no
 AWS_CIS_1_16 | Ensure IAM policies are attached only to groups or roles | [not implemented](maps/compliance/aws/AWS_CIS_1_16/README.md) | no | no
 AWS_CIS_1_17 | Enable detailed billing | [not implemented](maps/compliance/aws/AWS_CIS_1_17/README.md) | no | no
 AWS_CIS_1_19 | Maintain current contact details | [not implemented](maps/compliance/aws/AWS_CIS_1_19/README.md) | no | no
