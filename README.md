@@ -153,7 +153,7 @@ AWS_CIS_1_17 | Enable detailed billing | [implemented](maps/compliance/aws/AWS_C
 AWS_CIS_1_19 | Maintain current contact details | [implemented](maps/compliance/aws/AWS_CIS_1_19/README.md) | yes | no
 AWS_CIS_1_20 | Ensure security contact information is registered | [implemented](maps/compliance/aws/AWS_CIS_1_20/README.md) | yes | no
 AWS_CIS_1_21 | Ensure IAM instance roles are used for AWS resource access from instances | [implemented](maps/compliance/aws/AWS_CIS_1_21/README.md) | yes | no
-AWS_CIS_1_22 | Ensure a support role has been created to manage incidents with AWS Support | [not implemented](maps/compliance/aws/AWS_CIS_1_22/README.md) | no | no
+AWS_CIS_1_22 | Ensure a support role has been created to manage incidents with AWS Support | [implemented](maps/compliance/aws/AWS_CIS_1_22/README.md) | yes | no
 AWS_CIS_1_23 | Do not setup access keys during initial user setup for all IAM users that have a console password | [not implemented](maps/compliance/aws/AWS_CIS_1_23/README.md) | no | no
 AWS_CIS_1_24 | Ensure IAM policies that allow full "*:*" administrative privileges are not created | [not implemented](maps/compliance/aws/AWS_CIS_1_24/README.md) | no | no
 LW_AWS_IAM_1 | Ensure access keys are rotated every 30 days or less | [not implemented](maps/compliance/aws/LW_AWS_IAM_1/README.md) | no | no
