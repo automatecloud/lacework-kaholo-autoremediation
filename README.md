@@ -204,7 +204,7 @@ LW_AWS_MONGODB_4 | Security group attached to Elastic Load Balancer instance sho
 LW_AWS_MONGODB_5 | Security group attached to Application Load Balancer instance should not allow inbound traffic from all to TCP port 27017 (MongoDB) | [not implemented](maps/compliance/aws/LW_AWS_MONGODB_5/README.md) | no | no
 LW_AWS_MONGODB_6 | Security group attached to Application Load Balancer instance should not allow inbound traffic from all to TCP port 27018 (MongoDB) | [not implemented](maps/compliance/aws/LW_AWS_MONGODB_6/README.md) | no | no
 LW_AWS_NETWORKING_1 | Security groups are not attached to the EC2 instance | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_1/README.md) | no | no
-LW_AWS_NETWORKING_2 | Network ACLs do not allow unrestricted inbound traffic | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_2/README.md) | no | no
+LW_AWS_NETWORKING_2 | Network ACLs do not allow unrestricted inbound traffic | [implemented](maps/compliance/aws/LW_AWS_NETWORKING_2/README.md) | yes | no
 LW_AWS_NETWORKING_3 | Network ACLs do not allow unrestricted outbound traffic | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_3/README.md) | no | no
 LW_AWS_NETWORKING_4 | AWS VPC endpoints should not be exposed | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_4/README.md) | no | no
 LW_AWS_NETWORKING_5 | Security Group should not be open to all(unrestricted) | [not implemented](maps/compliance/aws/LW_AWS_NETWORKING_5/README.md) | no | no
